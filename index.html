@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="noche">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Английский B1 → B2</title>
+<script>try{document.documentElement.dataset.theme = localStorage.getItem('english_theme') || 'noche';}catch(e){}</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Great+Vibes&family=Nunito:wght@400;600;700;800&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Comfortaa:wght@500;600;700&family=Pacifico&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap');
+
+  /* ===================== ТЕМЫ ===================== */
+  html[data-theme="noche"]{
+    --font-body:'Inter',sans-serif; --font-display:'Oswald',sans-serif; --font-script:'Great Vibes',cursive;
+    --bg:#211d1a; --surface:#2a2521; --surface-2:#332d27; --surface-3:#3b342d;
+    --border:#3a332c; --border-strong:#584a38;
+    --text:#f3ead9; --muted:#a4937c;
+    --accent:#e0a93c; --accent-2:#f0c065; --accent-bright:#f5cf7d;
+    --good:#8fbf78; --bad:#e2574c;
+    --btn-text:#2a2118;
+    --accent-grad:linear-gradient(135deg,#c8912b,#eab94e);
+    --word-grad:linear-gradient(135deg,#f3ead9,#f0c065);
+    --hero-bg:radial-gradient(circle at 30% 25%,#37302a 0%,#241f1b 70%);
+    --hero-text:#f7efdd; --hero-muted:#b8a689; --hero-title-color:#f7efdd;
+    --hero-sub-grad:linear-gradient(90deg,#f0c065,#f7e3ae);
+    --hero-card-bg:rgba(42,37,33,.72); --hero-card-text:#cfc0a6;
+  }
+  html[data-theme="noche"] .hero-deco::before{content:'🌙'}
+  html[data-theme="noche"] .hero-deco::after{content:'⭐'}
+  html[data-theme="noche"] .hero-title .sub{font-style:normal;font-weight:400;padding-bottom:18px}
+  html[data-theme="noche"] .hero-bg{display:block}
+
+  html[data-theme="panaderia"]{
+    --font-body:'Nunito',sans-serif; --font-display:'Fraunces',serif; --font-script:'Fraunces',serif;
+    --bg:#f3ecdf; --surface:#fffdf7; --surface-2:#f6efe0; --surface-3:#fffdf7;
+    --border:#e9dfcc; --border-strong:#d9c8aa;
+    --text:#3c2a1e; --muted:#a08a6c;
+    --accent:#8a5a3b; --accent-2:#c08b5a; --accent-bright:#6f4526;
+    --good:#3e7d4f; --bad:#c14a3a;
+    --btn-text:#fff;
+    --accent-grad:linear-gradient(135deg,#8a5a3b,#b07a4e);
+    --word-grad:linear-gradient(135deg,#6f4526,#a5714a);
+    --hero-bg:linear-gradient(160deg,#faf3e5 0%,#f2e3ca 55%,#ead4b2 100%);
+    --hero-text:#3c2a1e; --hero-muted:#8a7357; --hero-title-color:#4a3220;
+    --hero-sub-grad:linear-gradient(90deg,#8a5a3b,#c08b5a);
+    --hero-card-bg:rgba(255,253,247,.78); --hero-card-text:#5b4632;
+  }
+  html[data-theme="panaderia"] .hero-deco::before{content:'☕'}
+  html[data-theme="panaderia"] .hero-deco::after{content:'🌻'}
+
+  html[data-theme="soleado"]{
+    --font-body:'Nunito',sans-serif; --font-display:'Baloo 2',cursive; --font-script:'Baloo 2',cursive;
+    --bg:#fff8e1; --surface:#fffdf4; --surface-2:#fff3c9; --surface-3:#fffdf4;
+    --border:#f3e3ab; --border-strong:#e8cd79;
+    --text:#4a2c12; --muted:#b3894a;
+    --accent:#f59e0b; --accent-2:#f97316; --accent-bright:#c2410c;
+    --good:#5b9e46; --bad:#d63f3f;
+    --btn-text:#43290e;
+    --accent-grad:linear-gradient(135deg,#fbbf24,#f59e0b);
+    --word-grad:linear-gradient(135deg,#c2410c,#f59e0b);
+    --hero-bg:linear-gradient(160deg,#ffd94f 0%,#ffc93c 55%,#ffe27a 100%);
+    --hero-text:#4a2c12; --hero-muted:#7c531f; --hero-title-color:#4a2c12;
+    --hero-sub-grad:linear-gradient(90deg,#d84315,#b45309);
+    --hero-card-bg:rgba(255,253,244,.75); --hero-card-text:#6b4a20;
+  }
+  html[data-theme="soleado"] .hero-deco::before{content:'🍋'}
+  html[data-theme="soleado"] .hero-deco::after{content:'🍓'}
+  html[data-theme="soleado"] .hero-title .sub{font-style:normal}
+
+  html[data-theme="pastel"]{
+    --font-body:'Quicksand',sans-serif; --font-display:'Comfortaa',cursive; --font-script:'Pacifico',cursive;
+    --bg:#edf0e4; --surface:#fdfaf0; --surface-2:#f2efe0; --surface-3:#fdfaf0;
+    --border:#dde2cd; --border-strong:#c2cdb0;
+    --text:#414a39; --muted:#8d977f;
+    --accent:#e07a5f; --accent-2:#eda58c; --accent-bright:#c2543a;
+    --good:#649a68; --bad:#c14a5a;
+    --btn-text:#fff;
+    --accent-grad:linear-gradient(135deg,#e07a5f,#eda58c);
+    --word-grad:linear-gradient(135deg,#c2543a,#e07a5f);
+    --hero-bg:linear-gradient(160deg,#bccbaf 0%,#a9bd9d 60%,#c5d2ba 100%);
+    --hero-text:#fdf8ec; --hero-muted:#e4ead6; --hero-title-color:#fdf8ec;
+    --hero-sub-grad:linear-gradient(90deg,#ffd9c9,#fdf3e3);
+    --hero-card-bg:rgba(253,250,240,.82); --hero-card-text:#5d6652;
+    --hero-card-strong:#414a39;
+  }
+  html[data-theme="pastel"] .hero-deco::before{content:'🌸'}
+  html[data-theme="pastel"] .hero-deco::after{content:'🍦'}
+  html[data-theme="pastel"] .hero-title .sub{font-style:normal;font-weight:400;padding-bottom:18px}
+
+  html[data-theme="te"]{
+    --font-body:'Lora',serif; --font-display:'Cormorant Garamond',serif; --font-script:'Cormorant Garamond',serif;
+    --bg:#f5f1e8; --surface:#fbf8f1; --surface-2:#f0ead9; --surface-3:#fbf8f1;
+    --border:#e5decb; --border-strong:#cec2a6;
+    --text:#3d332a; --muted:#95897a;
+    --accent:#a8452e; --accent-2:#c5764f; --accent-bright:#8e2f22;
+    --good:#5f7d54; --bad:#b23a3a;
+    --btn-text:#fff;
+    --accent-grad:linear-gradient(135deg,#a8452e,#c5764f);
+    --word-grad:linear-gradient(135deg,#8e2f22,#b96a45);
+    --hero-bg:linear-gradient(165deg,#f2ecdd 0%,#e6dbc4 100%);
+    --hero-text:#3d332a; --hero-muted:#83765f; --hero-title-color:#43362a;
+    --hero-sub-grad:linear-gradient(90deg,#a8452e,#c5764f);
+    --hero-card-bg:rgba(251,248,241,.82); --hero-card-text:#5c5142;
+  }
+  html[data-theme="te"] .hero-deco::before{content:'🍵'}
+  html[data-theme="te"] .hero-deco::after{content:'🏮'}
+
+  /* ===================== ОБЩЕЕ ===================== */
+  html{
+    --radius:16px;
+    --btn-text:#fff;
+    --glow-accent:color-mix(in srgb,var(--accent) 30%,transparent);
+    --glow-good:color-mix(in srgb,var(--good) 30%,transparent);
+    --glow-bad:color-mix(in srgb,var(--bad) 30%,transparent);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--font-body);
+    line-height:1.6;min-height:100vh;padding:36px clamp(16px,4vw,64px) 80px;
+    background-image:radial-gradient(color-mix(in srgb,var(--accent) 6%,transparent) 1px,transparent 1px);
+    background-size:26px 26px;
+    transition:background-color .3s;
+  }
+  body::before{content:'';position:fixed;top:-200px;left:-200px;width:600px;height:600px;
+    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 10%,transparent) 0%,transparent 70%);
+    pointer-events:none;z-index:0}
+  body::after{content:'';position:fixed;bottom:-200px;right:-200px;width:500px;height:500px;
+    background:radial-gradient(circle,color-mix(in srgb,var(--accent-2) 10%,transparent) 0%,transparent 70%);
+    pointer-events:none;z-index:0}
+  .wrap{max-width:1400px;margin:0 auto;position:relative;z-index:1}
+
+  /* HERO */
+  .hero{position:relative;margin-bottom:18px;border-radius:22px;overflow:hidden;
+    border:1px solid var(--border-strong);background:var(--hero-bg);
+    box-shadow:0 0 50px color-mix(in srgb,var(--accent) 12%,transparent),0 20px 60px rgba(0,0,0,.08);
+    min-height:clamp(330px,42vh,470px);display:flex;flex-direction:column;justify-content:flex-end}
+  .hero-bg{display:none;position:absolute;inset:0;z-index:0;
+    background-image:url('data:image/jpeg;base64,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');
+    background-size:cover;background-position:center 35%;
+    filter:saturate(1.05) sepia(.18) brightness(.92)}
+  .hero-bg::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(33,29,26,.62) 0%,rgba(33,29,26,.28) 35%,rgba(33,29,26,.92) 100%),
+               linear-gradient(90deg,rgba(33,29,26,.55) 0%,transparent 55%)}
+  .hero-deco{position:absolute;inset:0;pointer-events:none;z-index:1}
+  .hero-deco::before,.hero-deco::after{position:absolute;opacity:.92;filter:drop-shadow(0 6px 14px rgba(0,0,0,.14))}
+  .hero-deco::before{top:26px;right:22%;font-size:54px;transform:rotate(-10deg)}
+  .hero-deco::after{bottom:26%;right:6%;font-size:66px;transform:rotate(8deg)}
+  .hero-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;
+    padding:24px 28px 0;gap:14px;flex-wrap:wrap}
+  .hero-top .meta-left{font-size:12px;color:var(--hero-muted);letter-spacing:.3px;line-height:1.7}
+  .hero-top .meta-left b{color:var(--hero-text);font-weight:700}
+  .hero-top .meta-right{font-size:12px;color:var(--hero-muted);text-align:right;line-height:1.9;letter-spacing:.3px}
+  .hero-top .meta-right span{display:block}
+  .hero-top .meta-right .dash{color:var(--accent)}
+  .hero-title-wrap{position:relative;z-index:2;padding:0 28px;margin-top:auto;line-height:.85}
+  .hero-title{font-family:var(--font-display);font-weight:700;font-size:clamp(62px,15vw,150px);
+    letter-spacing:-2px;color:var(--hero-title-color);margin:0;text-shadow:0 3px 24px rgba(0,0,0,.08)}
+  .hero-title .sub{display:block;font-family:var(--font-script);font-style:italic;font-weight:500;
+    font-size:clamp(32px,7vw,72px);letter-spacing:0;background:var(--hero-sub-grad);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    margin-top:2px;margin-left:6px;padding-bottom:10px}
+  .hero-bottom{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;
+    gap:20px;flex-wrap:wrap;padding:16px 28px 26px}
+  .hero-card{background:var(--hero-card-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:14px;padding:14px 18px;
+    font-size:12.5px;line-height:1.7;color:var(--hero-card-text);
+    box-shadow:0 6px 24px color-mix(in srgb,var(--accent) 12%,transparent);max-width:340px}
+  .hero-card b{color:var(--hero-card-strong,var(--hero-text));font-weight:700}
+  .hero-desc{font-size:13px;color:var(--hero-muted);line-height:1.6;max-width:300px;text-align:right;margin-left:auto}
+  .hero .tag{display:inline-block;background:color-mix(in srgb,var(--accent) 14%,transparent);
+    border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent-bright);
+    font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:4px 10px;border-radius:6px}
+  html[data-theme="noche"] .hero .tag{color:#f5cf7d}
+
+  /* BAR / TABS */
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:22px 0 12px}
+  .daynav{display:flex;align-items:center;gap:10px}
+  .daynav button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);
+    width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:18px;transition:.2s}
+  .daynav button:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 12px var(--glow-accent);color:var(--accent-bright)}
+  .daynav button:disabled{opacity:.3;cursor:default}
+  .daynav .label{font-size:14px;color:var(--muted);min-width:120px;text-align:center;
+    background:var(--surface-2);border:1px solid var(--border);padding:6px 14px;border-radius:10px}
+  .daynav .label b{color:var(--accent-bright);font-family:var(--font-display)}
+  .daynav .label .sublabel{display:block;font-size:11px;line-height:1.4}
+  .streak{font-size:14px;font-weight:700;color:var(--accent-bright);background:var(--surface-2);
+    border:1px solid var(--border);border-radius:10px;padding:8px 12px;white-space:nowrap}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tabs button{background:var(--surface-2);border:1px solid var(--border);color:var(--muted);
+    padding:8px 16px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s;
+    letter-spacing:.2px;font-family:var(--font-body)}
+  .tabs button:hover{border-color:var(--border-strong);color:var(--text)}
+  .tabs button.active{background:var(--accent-grad);border-color:transparent;color:var(--btn-text);
+    box-shadow:0 0 20px var(--glow-accent),0 2px 8px rgba(0,0,0,.15)}
+  .subtabs{display:none;gap:6px;flex-wrap:wrap;margin:0 0 14px;justify-content:center}
+  .subtabs button{background:transparent;border:1px solid var(--border);color:var(--muted);
+    padding:6px 14px;border-radius:999px;cursor:pointer;font-size:12.5px;font-weight:600;transition:.2s;font-family:var(--font-body)}
+  .subtabs button:hover{border-color:var(--accent);color:var(--text)}
+  .subtabs button.active{border-color:var(--accent);color:var(--accent-bright);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+  .badge{display:inline-block;background:var(--bad);color:#fff;font-size:10px;font-weight:700;
+    border-radius:999px;padding:1px 7px;margin-left:5px;vertical-align:1px}
+  .badge:empty{display:none}
+  .themes{display:flex;gap:8px;align-items:center}
+  .theme-dot{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid var(--border-strong);
+    padding:0;transition:.2s}
+  .theme-dot:hover{transform:scale(1.12)}
+  .theme-dot.active{border-color:var(--accent-bright);box-shadow:0 0 10px var(--glow-accent);transform:scale(1.15)}
+
+  .progress{height:4px;background:var(--surface-2);border-radius:999px;overflow:hidden;margin-bottom:20px;border:1px solid var(--border)}
+  .progress > div{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));
+    width:0;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px var(--glow-good)}
+
+  /* TABLE */
+  table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);
+    border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;
+    box-shadow:0 0 30px color-mix(in srgb,var(--accent) 8%,transparent)}
+  th,td{padding:13px 18px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+  th{color:var(--muted);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;background:var(--surface-2)}
+  tr:last-child td{border-bottom:none}
+  tr{transition:background .15s}
+  tr:hover td{background:color-mix(in srgb,var(--accent) 5%,transparent)}
+  td.en{font-weight:700;cursor:pointer;position:relative;font-family:var(--font-display);font-size:15px;
+    color:var(--text);transition:color .15s}
+  td.en:hover{color:var(--accent-bright)}
+  td.ipa{color:var(--muted);font-style:italic;white-space:nowrap;font-size:13px}
+  .num{color:var(--border-strong);width:38px;font-size:12px;font-weight:600}
+  .chk{width:46px;text-align:center}
+  .chk input{width:17px;height:17px;accent-color:var(--good);cursor:pointer}
+  tr.learned td.en{color:var(--good)}
+  tr.learned{background:color-mix(in srgb,var(--good) 5%,transparent)}
+
+  /* POPUP */
+  .word-popup{position:fixed;z-index:1000;background:var(--surface-3);border:1px solid var(--accent);
+    border-radius:14px;padding:14px 18px;min-width:230px;max-width:300px;
+    box-shadow:0 0 30px var(--glow-accent),0 12px 40px rgba(0,0,0,.25);
+    pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s}
+  .word-popup.show{opacity:1;transform:translateY(0)}
+  .word-popup .pop-en{font-size:20px;font-weight:700;font-family:var(--font-display);
+    background:var(--word-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .word-popup .pop-ipa{font-size:12px;color:var(--muted);font-style:italic;margin:3px 0 7px}
+  .word-popup .pop-ru{font-size:15px;color:var(--text)}
+
+  /* CARD */
+  .card{background:var(--surface);border:1px solid var(--border-strong);border-radius:20px;
+    padding:36px 28px;text-align:center;box-shadow:0 0 40px color-mix(in srgb,var(--accent) 10%,transparent)}
+  .card .dir{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
+  .card .word{font-family:var(--font-display);font-size:36px;font-weight:700;margin:16px 0 4px;
+    background:var(--word-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .card .hint{color:var(--muted);font-size:14px;margin-bottom:18px}
+  .card input[type=text]{width:100%;max-width:380px;background:var(--surface-2);border:1px solid var(--border-strong);
+    color:var(--text);padding:13px 16px;border-radius:12px;font-size:16px;text-align:center;outline:none;
+    transition:.2s;font-family:var(--font-body)}
+  .card input[type=text]:focus{border-color:var(--accent);box-shadow:0 0 20px var(--glow-accent)}
+  .card .actions{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .charbar{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:12px auto 0;max-width:420px}
+  .charbar button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--accent-bright);
+    width:34px;height:34px;border-radius:8px;font-size:16px;cursor:pointer;transition:.15s;font-family:var(--font-body)}
+  .charbar button:hover{border-color:var(--accent);box-shadow:0 0 8px var(--glow-accent)}
+
+  .btn{background:var(--accent-grad);border:none;color:var(--btn-text);padding:12px 26px;border-radius:12px;
+    font-size:14px;font-weight:700;cursor:pointer;transition:.2s;box-shadow:0 0 16px var(--glow-accent);font-family:var(--font-body)}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 0 28px var(--glow-accent),0 4px 12px rgba(0,0,0,.15)}
+  .btn:active{transform:translateY(0)}
+  .btn.ghost{background:transparent;border:1px solid var(--border-strong);color:var(--muted);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--text);box-shadow:0 0 12px var(--glow-accent)}
+
+  .feedback{margin-top:18px;font-size:16px;min-height:24px;font-weight:700}
+  .feedback.good{color:var(--good)}
+  .feedback.bad{color:var(--bad)}
+  .counter{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .result{text-align:center;padding:30px}
+  .result .score{font-family:var(--font-display);font-size:52px;font-weight:700;margin:12px 0;
+    background:linear-gradient(135deg,var(--accent-bright),var(--good));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+  /* FLASHCARDS */
+  #flashcards{display:none}
+  .fc-wrap{perspective:1200px;width:100%;max-width:500px;margin:0 auto 24px}
+  .fc-card{width:100%;height:230px;position:relative;transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer}
+  .fc-card.flipped{transform:rotateY(180deg)}
+  .fc-front,.fc-back{position:absolute;inset:0;background:var(--surface);border:1px solid var(--border-strong);
+    border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;
+    box-shadow:0 0 30px color-mix(in srgb,var(--accent) 10%,transparent);transition:box-shadow .3s}
+  .fc-card:hover .fc-front{box-shadow:0 0 50px var(--glow-accent)}
+  .fc-back{transform:rotateY(180deg);
+    background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,transparent),var(--surface));
+    border-color:var(--accent);box-shadow:0 0 40px var(--glow-accent)}
+  .fc-front .fc-label,.fc-back .fc-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;font-weight:700}
+  .fc-front .fc-label{color:var(--muted)}
+  .fc-back .fc-label{color:var(--accent)}
+  .fc-front .fc-word{font-family:var(--font-display);font-size:34px;font-weight:700;
+    background:var(--word-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .fc-front .fc-ipa{color:var(--muted);font-style:italic;font-size:14px;margin-top:8px}
+  .fc-back .fc-ru{font-size:24px;font-weight:700;color:var(--accent-bright)}
+  .fc-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px;margin-top:20px}
+  .fc-nav button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);
+    width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:20px;transition:.2s}
+  .fc-nav button:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 14px var(--glow-accent);color:var(--accent-bright)}
+  .fc-nav button:disabled{opacity:.3;cursor:default}
+  .fc-counter{color:var(--muted);font-size:13px;min-width:64px;text-align:center;font-family:var(--font-display);font-weight:500}
+  .fc-hint{color:var(--muted);font-size:12px;text-align:center;letter-spacing:.3px}
+  .fc-progress-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+  .fc-progress-row button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--muted);
+    padding:9px 20px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:var(--font-body)}
+  .fc-progress-row button:hover{border-color:var(--accent);color:var(--text);box-shadow:0 0 12px var(--glow-accent)}
+
+  /* MATCH */
+  #match{display:none}
+  .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+  .match-btn{background:var(--surface);border:1px solid var(--border-strong);color:var(--text);
+    padding:14px 10px;border-radius:14px;cursor:pointer;font-size:13px;font-weight:500;transition:.2s;
+    text-align:center;line-height:1.4;font-family:var(--font-body)}
+  .match-btn:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 16px var(--glow-accent);color:var(--accent-bright)}
+  .match-btn.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);
+    box-shadow:0 0 20px var(--glow-accent);color:var(--accent-bright)}
+  .match-btn.correct{border-color:var(--good);background:color-mix(in srgb,var(--good) 10%,transparent);
+    color:var(--good);cursor:default;box-shadow:0 0 16px var(--glow-good)}
+  .match-btn.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent);box-shadow:0 0 16px var(--glow-bad)}
+  .match-btn:disabled{cursor:default}
+  .match-score{color:var(--muted);font-size:13px;text-align:center;margin-bottom:14px;font-family:var(--font-display);font-weight:500}
+  .match-result{text-align:center;padding:28px 16px}
+  .match-result .big{font-size:48px;margin-bottom:8px}
+  .match-result p{color:var(--muted);font-size:15px;margin-bottom:22px}
+
+  #test{display:none}
+  #review{display:none}
+
+  /* STATS */
+  .stat-card{background:var(--surface);border:1px solid var(--border-strong);border-radius:16px;padding:22px;
+    text-align:center;box-shadow:0 0 24px color-mix(in srgb,var(--accent) 8%,transparent)}
+  .stat-card .k{color:var(--muted);font-size:12px;letter-spacing:.8px;margin-bottom:10px;text-transform:uppercase}
+  .stat-card .v{font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--accent-bright)}
+  .stat-card .s{color:var(--muted);font-size:12px;margin-top:6px}
+  .stat-block{background:var(--surface);border:1px solid var(--border-strong);border-radius:16px;padding:24px;
+    box-shadow:0 0 30px color-mix(in srgb,var(--accent) 8%,transparent);margin-bottom:22px}
+  .stat-block h3{font-family:var(--font-display);margin-bottom:16px;font-size:16px}
+  .heatmap{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);gap:3px;justify-content:start;overflow-x:auto;padding-bottom:4px}
+  .hm{width:13px;height:13px;border-radius:3px;background:var(--surface-2)}
+  .hm1{background:color-mix(in srgb,var(--accent) 30%,var(--surface-2))}
+  .hm2{background:color-mix(in srgb,var(--accent) 60%,var(--surface-2))}
+  .hm3{background:var(--accent)}
+  .hist-bar{height:10px;border-radius:5px;background:linear-gradient(90deg,var(--accent),var(--good))}
+
+  footer{color:var(--muted);font-size:12px;text-align:center;margin-top:36px;line-height:1.8;letter-spacing:.2px}
+
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:3px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+  /* CONFETTI */
+  .conf{position:fixed;top:-16px;width:8px;height:14px;z-index:2000;border-radius:2px;
+    animation:confFall 2.6s ease-in forwards;pointer-events:none}
+  @keyframes confFall{to{transform:translateY(105vh) rotate(720deg)}}
+
+  @media(max-width:560px){
+    .hero-top{padding:18px 18px 0}
+    .hero-title-wrap{padding:0 18px}
+    .hero-bottom{padding:14px 18px 20px}
+    .hero-deco::before{font-size:36px;right:14%}
+    .hero-deco::after{font-size:44px}
+    th,td{padding:10px 10px;font-size:13px}
+    td.ipa,th.ipa{display:none}
+    .fc-front .fc-word{font-size:26px}
+    .fc-back .fc-ru{font-size:18px}
+    .tabs button{padding:7px 11px;font-size:12px}
+    .card{padding:24px 16px}
+    .card .word{font-size:28px}
+  }
+
+  @keyframes slideIn{from{opacity:0;transform:translateY(16px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes slideOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-12px) scale(.99)}}
+  .slide-in{animation:slideIn .38s cubic-bezier(.22,.61,.36,1) both}
+  .slide-out{animation:slideOut .22s cubic-bezier(.4,0,1,1) both}
+  @keyframes rowIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+  #rows tr{animation:rowIn .35s ease both}
+  @media (prefers-reduced-motion: reduce){.slide-in,.slide-out,#rows tr,.conf{animation:none !important}}
+
+  @media (min-width:1000px){
+    .hero-title{font-size:clamp(110px,12vw,190px)}
+    .hero-title .sub{font-size:clamp(56px,6vw,100px)}
+    th,td{padding:15px 24px;font-size:15px}
+    td.en{font-size:16px}
+    .fc-wrap{max-width:640px}
+    .fc-card{height:300px}
+    .fc-front .fc-word{font-size:44px}
+    .fc-back .fc-ru{font-size:30px}
+    .match-grid{max-width:900px;margin-left:auto;margin-right:auto;gap:14px}
+    .match-btn{padding:18px 14px;font-size:15px}
+    #test .card,#review .card{max-width:640px;margin:0 auto}
+  }
+  @media (min-width:1500px){.wrap{max-width:1500px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-deco"></div>
+    <div class="hero-top">
+      <div class="meta-left">
+        <div class="tag">English · B1–B2</div>
+        <div style="margin-top:10px">Английский словарь<br><b>20 слов в день</b></div>
+      </div>
+      <div class="meta-right">
+        <span>2026</span>
+        <span>Английский B1 → B2</span>
+        <span style="margin-top:8px"><span class="dash">—</span> Карточки</span>
+        <span><span class="dash">—</span> Умное повторение</span>
+        <span><span class="dash">—</span> Тесты</span>
+      </div>
+    </div>
+    <div class="hero-title-wrap">
+      <h1 class="hero-title">HELLO<span class="sub">english</span></h1>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-card">
+        <b>Английский B1 → B2</b><br>
+        Каждый день — 20 новых английских слов с транскрипцией и переводом.<br>
+        Прогресс сохраняется автоматически.
+      </div>
+      <div class="hero-desc">
+        Учи таблицу, переворачивай карточки, сопоставляй пары и проверяй себя в тесте.
+      </div>
+    </div>
+  </header>
+
+  <div class="bar">
+    <div class="daynav">
+      <button id="prev">‹</button>
+      <span class="label">День <b id="dayNum">1</b><span class="sublabel" id="daySub"></span></span>
+      <button id="next">›</button>
+      <span class="streak" id="streakEl">🔥 0</span>
+    </div>
+    <div class="tabs" id="mainTabs">
+      <button data-tab="learn">Учить</button>
+      <button data-tab="practice">Практика</button>
+      <button data-tab="test">Тест</button>
+      <button data-tab="review">Повторить<span class="badge" id="srsBadge"></span></button>
+      <button data-tab="stats">Прогресс</button>
+    </div>
+    <div class="themes" id="themeDots"></div>
+  </div>
+
+  <div class="subtabs" id="subTabs">
+    <button data-mode="flashcards">Карточки</button>
+    <button data-mode="match">Пары</button>
+    <button data-mode="phrases">Фразы</button>
+  </div>
+
+  <div class="progress"><div id="progBar"></div></div>
+
+  <!-- LEARN -->
+  <div id="learn">
+    <table>
+      <thead>
+        <tr>
+          <th class="num">№</th>
+          <th>English</th>
+          <th class="ipa">Транскрипция</th>
+          <th>Перевод</th>
+          <th class="chk">✓</th>
+        </tr>
+      </thead>
+      <tbody id="rows"><tr><td class="num">1</td><td class="en" data-i="0">accomplish</td><td class="ipa">/əˈkʌmplɪʃ/</td><td>достигать, выполнять</td><td class="chk"><input type="checkbox" data-i="0"></td></tr><tr><td class="num">2</td><td class="en" data-i="1">adequate</td><td class="ipa">/ˈædɪkwət/</td><td>достаточный, адекватный</td><td class="chk"><input type="checkbox" data-i="1"></td></tr><tr><td class="num">3</td><td class="en" data-i="2">anticipate</td><td class="ipa">/ænˈtɪsɪpeɪt/</td><td>предвидеть, ожидать</td><td class="chk"><input type="checkbox" data-i="2"></td></tr><tr><td class="num">4</td><td class="en" data-i="3">assess</td><td class="ipa">/əˈses/</td><td>оценивать</td><td class="chk"><input type="checkbox" data-i="3"></td></tr><tr><td class="num">5</td><td class="en" data-i="4">boost</td><td class="ipa">/buːst/</td><td>повышать, усиливать</td><td class="chk"><input type="checkbox" data-i="4"></td></tr><tr><td class="num">6</td><td class="en" data-i="5">comprehensive</td><td class="ipa">/ˌkɒmprɪˈhensɪv/</td><td>всесторонний, полный</td><td class="chk"><input type="checkbox" data-i="5"></td></tr><tr><td class="num">7</td><td class="en" data-i="6">conventional</td><td class="ipa">/kənˈvenʃənl/</td><td>традиционный, обычный</td><td class="chk"><input type="checkbox" data-i="6"></td></tr><tr><td class="num">8</td><td class="en" data-i="7">crucial</td><td class="ipa">/ˈkruːʃl/</td><td>решающий, критически важный</td><td class="chk"><input type="checkbox" data-i="7"></td></tr><tr><td class="num">9</td><td class="en" data-i="8">demonstrate</td><td class="ipa">/ˈdemənstreɪt/</td><td>демонстрировать, показывать</td><td class="chk"><input type="checkbox" data-i="8"></td></tr><tr><td class="num">10</td><td class="en" data-i="9">eventually</td><td class="ipa">/ɪˈventʃuəli/</td><td>в конце концов</td><td class="chk"><input type="checkbox" data-i="9"></td></tr><tr><td class="num">11</td><td class="en" data-i="10">evident</td><td class="ipa">/ˈevɪdənt/</td><td>очевидный</td><td class="chk"><input type="checkbox" data-i="10"></td></tr><tr><td class="num">12</td><td class="en" data-i="11">fluctuate</td><td class="ipa">/ˈflʌktʃueɪt/</td><td>колебаться</td><td class="chk"><input type="checkbox" data-i="11"></td></tr><tr><td class="num">13</td><td class="en" data-i="12">genuine</td><td class="ipa">/ˈdʒenjuɪn/</td><td>подлинный, искренний</td><td class="chk"><input type="checkbox" data-i="12"></td></tr><tr><td class="num">14</td><td class="en" data-i="13">implement</td><td class="ipa">/ˈɪmplɪment/</td><td>внедрять, осуществлять</td><td class="chk"><input type="checkbox" data-i="13"></td></tr><tr><td class="num">15</td><td class="en" data-i="14">inevitable</td><td class="ipa">/ɪnˈevɪtəbl/</td><td>неизбежный</td><td class="chk"><input type="checkbox" data-i="14"></td></tr><tr><td class="num">16</td><td class="en" data-i="15">maintain</td><td class="ipa">/meɪnˈteɪn/</td><td>поддерживать, сохранять</td><td class="chk"><input type="checkbox" data-i="15"></td></tr><tr><td class="num">17</td><td class="en" data-i="16">notion</td><td class="ipa">/ˈnəʊʃn/</td><td>понятие, представление</td><td class="chk"><input type="checkbox" data-i="16"></td></tr><tr><td class="num">18</td><td class="en" data-i="17">reluctant</td><td class="ipa">/rɪˈlʌktənt/</td><td>неохотный, нежелающий</td><td class="chk"><input type="checkbox" data-i="17"></td></tr><tr><td class="num">19</td><td class="en" data-i="18">significant</td><td class="ipa">/sɪɡˈnɪfɪkənt/</td><td>значительный</td><td class="chk"><input type="checkbox" data-i="18"></td></tr><tr><td class="num">20</td><td class="en" data-i="19">thorough</td><td class="ipa">/ˈθʌrə/</td><td>тщательный</td><td class="chk"><input type="checkbox" data-i="19"></td></tr></tbody>
+    </table>
+    <p style="color:var(--muted);font-size:13px;margin-top:10px;text-align:center">💡 Нажми на любое слово, чтобы увидеть подсказку</p>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="flashcards">
+    <div class="fc-wrap">
+      <div class="fc-card" id="fcCard">
+        <div class="fc-front">
+          <div class="fc-label">Английское слово</div>
+          <div class="fc-word" id="fcWord"></div>
+          <div class="fc-ipa" id="fcIpa"></div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label">Перевод</div>
+          <div class="fc-ru" id="fcRu"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-hint">Нажми на карточку, чтобы перевернуть</div>
+    <div class="fc-nav">
+      <button id="fcPrev">‹</button>
+      <span class="fc-counter" id="fcCounter">1 / 20</span>
+      <button id="fcNext">›</button>
+    </div>
+    <div class="fc-progress-row">
+      <button onclick="markCard('know')">✓ Знаю</button>
+      <button onclick="markCard('skip')">✗ Не знаю</button>
+      <button onclick="shuffleFlash()">⇄ Перемешать</button>
+    </div>
+    <div id="fcStatus" style="color:var(--muted);font-size:13px;text-align:center;margin-top:12px"></div>
+  </div>
+
+  <!-- MATCH -->
+  <div id="match">
+    <div class="match-score" id="matchScore"></div>
+    <div class="match-grid" id="matchGrid"></div>
+    <div style="text-align:center" id="matchCtl">
+      <button class="btn ghost" onclick="startMatch()">↺ Новый раунд</button>
+    </div>
+  </div>
+
+  <!-- TEST -->
+  <div id="test"></div>
+
+  <!-- REVIEW (SRS) -->
+  <div id="review"></div>
+
+  <!-- PHRASES -->
+  <div id="phrases" style="display:none">
+    <div class="card" style="max-width:640px;margin:0 auto">
+      <div class="counter" id="phrCounter"></div>
+      <div class="dir">Вставь нужное слово во фразу</div>
+      <div id="phrSentence" style="font-size:22px;line-height:1.6;margin:18px 0 8px;font-family:var(--font-display)"></div>
+      <div class="hint" id="phrTranslation"></div>
+      <input type="text" id="phrInput" autocomplete="off" autocapitalize="off" placeholder="Твой ответ...">
+      <div class="charbar" id="phrChars"></div>
+      <div class="actions">
+        <button class="btn" id="phrCheck">Проверить</button>
+        <button class="btn ghost" id="phrSkip">Не знаю</button>
+      </div>
+      <div class="feedback" id="phrFb"></div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div id="stats" style="display:none">
+    <div style="max-width:940px;margin:0 auto">
+      <h2 style="font-family:var(--font-display);font-size:24px;margin-bottom:18px;text-align:center">Твой прогресс</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:22px" id="statCards"></div>
+      <div class="stat-block">
+        <h3>Календарь занятий · последние 12 недель</h3>
+        <div id="heatmapBox"></div>
+      </div>
+      <div class="stat-block">
+        <h3>Результаты тестов</h3>
+        <div id="histBox"></div>
+      </div>
+      <div class="stat-block">
+        <h3>Слова текущего дня</h3>
+        <div id="topWords" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
+        <button class="btn ghost" onclick="exportProgress()">⬇ Скачать прогресс</button>
+        <label class="btn ghost" style="cursor:pointer">⬆ Загрузить прогресс<input type="file" id="impFile" accept=".json" style="display:none"></label>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Английский B1 → B2 · 300 слов · прогресс сохраняется в этом браузере автоматически.
+  </footer>
+</div>
+
+<!-- WORD POPUP -->
+<div class="word-popup" id="wordPopup">
+  <div class="pop-en" id="popEn"></div>
+  <div class="pop-ipa" id="popIpa"></div>
+  <div class="pop-ru" id="popRu"></div>
+</div>
+
+<script id="vocab" type="application/json">
+{"lessons":[{"topic":"Академическое ядро I","words":[{"en":"accomplish","ipa":"/əˈkʌmplɪʃ/","ru":"достигать, выполнять","sentence":"The team worked hard to accomplish all their goals this year.","strans":"Команда упорно работала, чтобы достичь всех своих целей в этом году."},{"en":"adequate","ipa":"/ˈædɪkwət/","ru":"достаточный, адекватный","sentence":"The salary was adequate to cover her monthly expenses.","strans":"Зарплаты было достаточно, чтобы покрыть её ежемесячные расходы."},{"en":"anticipate","ipa":"/ænˈtɪsɪpeɪt/","ru":"предвидеть, ожидать","sentence":"We anticipate a rise in prices during the holiday season.","strans":"Мы предвидим рост цен в праздничный сезон."},{"en":"assess","ipa":"/əˈses/","ru":"оценивать","sentence":"The doctor will assess your condition before the treatment.","strans":"Врач оценит ваше состояние перед лечением."},{"en":"boost","ipa":"/buːst/","ru":"повышать, усиливать","sentence":"A good night's sleep can boost your concentration.","strans":"Хороший ночной сон может повысить вашу концентрацию."},{"en":"comprehensive","ipa":"/ˌkɒmprɪˈhensɪv/","ru":"всесторонний, полный","sentence":"The report gives a comprehensive overview of the market.","strans":"Отчёт даёт всесторонний обзор рынка."},{"en":"conventional","ipa":"/kənˈvenʃənl/","ru":"традиционный, обычный","sentence":"She prefers conventional methods over modern technology.","strans":"Она предпочитает традиционные методы современным технологиям."},{"en":"crucial","ipa":"/ˈkruːʃl/","ru":"решающий, критически важный","sentence":"Trust is crucial in any long-term relationship.","strans":"Доверие критически важно в любых долгосрочных отношениях."},{"en":"demonstrate","ipa":"/ˈdemənstreɪt/","ru":"демонстрировать, показывать","sentence":"Let me demonstrate how this machine works.","strans":"Позвольте мне показать, как работает эта машина."},{"en":"eventually","ipa":"/ɪˈventʃuəli/","ru":"в конце концов","sentence":"After many attempts, he eventually passed the exam.","strans":"После многих попыток он в конце концов сдал экзамен."},{"en":"evident","ipa":"/ˈevɪdənt/","ru":"очевидный","sentence":"It was evident that she had practiced for hours.","strans":"Было очевидно, что она тренировалась часами."},{"en":"fluctuate","ipa":"/ˈflʌktʃueɪt/","ru":"колебаться","sentence":"Temperatures fluctuate a lot between day and night here.","strans":"Здесь температура сильно колеблется между днём и ночью."},{"en":"genuine","ipa":"/ˈdʒenjuɪn/","ru":"подлинный, искренний","sentence":"Her smile was warm and genuine.","strans":"Её улыбка была тёплой и искренней."},{"en":"implement","ipa":"/ˈɪmplɪment/","ru":"внедрять, осуществлять","sentence":"The company plans to implement new safety rules.","strans":"Компания планирует внедрить новые правила безопасности."},{"en":"inevitable","ipa":"/ɪnˈevɪtəbl/","ru":"неизбежный","sentence":"With such poor planning, failure was inevitable.","strans":"При таком плохом планировании провал был неизбежен."},{"en":"maintain","ipa":"/meɪnˈteɪn/","ru":"поддерживать, сохранять","sentence":"It is hard to maintain a healthy diet while traveling.","strans":"Трудно поддерживать здоровое питание во время путешествий."},{"en":"notion","ipa":"/ˈnəʊʃn/","ru":"понятие, представление","sentence":"I had no notion of how difficult the task would be.","strans":"Я не имел представления, насколько сложной будет задача."},{"en":"reluctant","ipa":"/rɪˈlʌktənt/","ru":"неохотный, нежелающий","sentence":"He was reluctant to share his personal opinion.","strans":"Он неохотно делился своим личным мнением."},{"en":"significant","ipa":"/sɪɡˈnɪfɪkənt/","ru":"значительный","sentence":"There was a significant improvement in her grades.","strans":"В её оценках произошло значительное улучшение."},{"en":"thorough","ipa":"/ˈθʌrə/","ru":"тщательный","sentence":"The detective made a thorough search of the room.","strans":"Детектив провёл тщательный обыск комнаты."}]},{"topic":"Академическое ядро II","words":[{"en":"ambiguous","ipa":"/æmˈbɪɡjuəs/","ru":"неоднозначный","sentence":"His answer was ambiguous, so nobody understood his real plan.","strans":"Его ответ был неоднозначным, поэтому никто не понял его настоящий план."},{"en":"concise","ipa":"/kənˈsaɪs/","ru":"краткий, лаконичный","sentence":"Please keep your report concise and clear.","strans":"Пожалуйста, сделайте отчёт кратким и ясным."},{"en":"persistence","ipa":"/pəˈsɪstəns/","ru":"настойчивость","sentence":"Her persistence finally helped her win the competition.","strans":"Её настойчивость в итоге помогла ей выиграть соревнование."},{"en":"reluctant","ipa":"/rɪˈlʌktənt/","ru":"неохотный, нежелающий","sentence":"He was reluctant to share his personal opinion.","strans":"Он неохотно делился своим личным мнением."},{"en":"inevitable","ipa":"/ɪnˈevɪtəbl/","ru":"неизбежный","sentence":"With such poor planning, failure was inevitable.","strans":"При таком плохом планировании провал был неизбежен."},{"en":"adequate","ipa":"/ˈædɪkwət/","ru":"достаточный, подходящий","sentence":"The salary was adequate to cover her monthly expenses.","strans":"Зарплаты было достаточно, чтобы покрыть её ежемесячные расходы."},{"en":"negotiate","ipa":"/nɪˈɡəʊʃieɪt/","ru":"вести переговоры","sentence":"They tried to negotiate a better price for the car.","strans":"Они пытались договориться о более выгодной цене за машину."},{"en":"substantial","ipa":"/səbˈstænʃl/","ru":"значительный, существенный","sentence":"He received a substantial bonus at the end of the year.","strans":"Он получил значительный бонус в конце года."},{"en":"undermine","ipa":"/ˌʌndəˈmaɪn/","ru":"подрывать","sentence":"Constant criticism can undermine a child's confidence.","strans":"Постоянная критика может подорвать уверенность ребёнка."},{"en":"acknowledge","ipa":"/əkˈnɒlɪdʒ/","ru":"признавать","sentence":"She refused to acknowledge her own mistake.","strans":"Она отказывалась признавать свою ошибку."},{"en":"tendency","ipa":"/ˈtendənsi/","ru":"тенденция, склонность","sentence":"He has a tendency to arrive late for meetings.","strans":"У него есть склонность опаздывать на встречи."},{"en":"prominent","ipa":"/ˈprɒmɪnənt/","ru":"известный, выдающийся","sentence":"She is a prominent scientist in the field of biology.","strans":"Она — выдающийся учёный в области биологии."},{"en":"hesitate","ipa":"/ˈhezɪteɪt/","ru":"сомневаться","sentence":"Don't hesitate to ask if you need any help.","strans":"Не стесняйтесь спрашивать, если вам нужна помощь."},{"en":"feasible","ipa":"/ˈfiːzəbl/","ru":"осуществимый, реальный","sentence":"Building the bridge in one year is not feasible.","strans":"Построить мост за один год нереально."},{"en":"dedicated","ipa":"/ˈdedɪkeɪtɪd/","ru":"преданный, целеустремлённый","sentence":"She is a dedicated teacher who loves her students.","strans":"Она — преданный учитель, который любит своих учеников."},{"en":"constraint","ipa":"/kənˈstreɪnt/","ru":"ограничение","sentence":"Time was the main constraint on the whole project.","strans":"Время было главным ограничением для всего проекта."},{"en":"pursue","ipa":"/pəˈsjuː/","ru":"преследовать, добиваться","sentence":"He decided to pursue a career in medicine.","strans":"Он решил продолжить карьеру в медицине."},{"en":"leverage","ipa":"/ˈliːvərɪdʒ/","ru":"использовать в своих интересах","sentence":"The company used social media to leverage its brand.","strans":"Компания использовала соцсети, чтобы продвинуть свой бренд."},{"en":"overwhelm","ipa":"/ˌəʊvəˈwelm/","ru":"захлёстывать, перегружать","sentence":"Too many tasks at once can overwhelm anyone.","strans":"Слишком много задач сразу может захлестнуть любого."},{"en":"transparent","ipa":"/trænsˈpærənt/","ru":"прозрачный, открытый","sentence":"The government promised a transparent investigation.","strans":"Правительство пообещало прозрачное расследование."}]},{"topic":"Академическое ядро III","words":[{"en":"abundant","ipa":"/əˈbʌndənt/","ru":"обильный, изобилующий","sentence":"The region is abundant in natural resources like oil and gas.","strans":"Регион изобилует природными ресурсами, такими как нефть и газ."},{"en":"coherent","ipa":"/kəʊˈhɪərənt/","ru":"связный, логичный","sentence":"She gave a clear and coherent explanation of the problem.","strans":"Она дала ясное и связное объяснение проблемы."},{"en":"deliberate","ipa":"/dɪˈlɪbərət/","ru":"намеренный, обдуманный","sentence":"His silence was a deliberate attempt to avoid the question.","strans":"Его молчание было намеренной попыткой избежать вопроса."},{"en":"diminish","ipa":"/dɪˈmɪnɪʃ/","ru":"уменьшать(ся), ослабевать","sentence":"The pain will gradually diminish over the next few days.","strans":"Боль будет постепенно уменьшаться в течение следующих нескольких дней."},{"en":"elaborate","ipa":"/ɪˈlæbərət/","ru":"подробный, тщательно продуманный","sentence":"They prepared an elaborate plan for the surprise party.","strans":"Они подготовили подробный план для вечеринки-сюрприза."},{"en":"endeavor","ipa":"/ɪnˈdevə/","ru":"стремление, попытка","sentence":"Learning a new language is a worthwhile endeavor.","strans":"Изучение нового языка — это стоящее начинание."},{"en":"feasibility","ipa":"/ˌfiːzəˈbɪləti/","ru":"осуществимость","sentence":"Engineers studied the feasibility of the new bridge.","strans":"Инженеры изучили осуществимость строительства нового моста."},{"en":"hinder","ipa":"/ˈhɪndə/","ru":"мешать, препятствовать","sentence":"Bad weather may hinder the rescue operation.","strans":"Плохая погода может помешать спасательной операции."},{"en":"imply","ipa":"/ɪmˈplaɪ/","ru":"подразумевать, намекать","sentence":"Her tone seemed to imply that she disagreed.","strans":"Её тон, казалось, намекал, что она не согласна."},{"en":"intricate","ipa":"/ˈɪntrɪkət/","ru":"замысловатый, сложный","sentence":"The watch has an intricate mechanism inside.","strans":"У часов внутри замысловатый механизм."},{"en":"justify","ipa":"/ˈdʒʌstɪfaɪ/","ru":"оправдывать, обосновывать","sentence":"Nothing can justify such rude behavior.","strans":"Ничто не может оправдать такое грубое поведение."},{"en":"legitimate","ipa":"/lɪˈdʒɪtɪmət/","ru":"законный, обоснованный","sentence":"He had a legitimate reason for being late.","strans":"У него была обоснованная причина для опоздания."},{"en":"mitigate","ipa":"/ˈmɪtɪɡeɪt/","ru":"смягчать, уменьшать","sentence":"The government took steps to mitigate the effects of the crisis.","strans":"Правительство приняло меры, чтобы смягчить последствия кризиса."},{"en":"obstacle","ipa":"/ˈɒbstəkl/","ru":"препятствие, преграда","sentence":"Lack of money was the biggest obstacle to his studies.","strans":"Нехватка денег была самым большим препятствием для его учёбы."},{"en":"prevail","ipa":"/prɪˈveɪl/","ru":"преобладать, восторжествовать","sentence":"In the end, common sense will prevail.","strans":"В конце концов здравый смысл восторжествует."},{"en":"reinforce","ipa":"/ˌriːɪnˈfɔːs/","ru":"укреплять, усиливать","sentence":"These results reinforce our earlier conclusions.","strans":"Эти результаты укрепляют наши прежние выводы."},{"en":"scrutiny","ipa":"/ˈskruːtəni/","ru":"тщательное изучение, проверка","sentence":"The company's finances came under close scrutiny.","strans":"Финансы компании подверглись тщательной проверке."},{"en":"subtle","ipa":"/ˈsʌtl/","ru":"тонкий, неуловимый","sentence":"There is a subtle difference between the two colors.","strans":"Между двумя цветами есть тонкое различие."},{"en":"versatile","ipa":"/ˈvɜːsətaɪl/","ru":"универсальный, многосторонний","sentence":"A smartphone is a versatile tool for work and fun.","strans":"Смартфон — универсальный инструмент для работы и развлечений."},{"en":"widespread","ipa":"/ˈwaɪdspred/","ru":"широко распространённый","sentence":"There is widespread support for the new policy.","strans":"Существует широко распространённая поддержка новой политики."}]},{"topic":"Работа и карьера","words":[{"en":"apply","ipa":"/əˈplaɪ/","ru":"подавать заявку; применять","sentence":"She decided to apply for a job at a marketing agency.","strans":"Она решила подать заявку на работу в маркетинговое агентство."},{"en":"promotion","ipa":"/prəˈməʊʃn/","ru":"повышение (в должности)","sentence":"After five years he finally got a promotion.","strans":"После пяти лет он наконец получил повышение."},{"en":"colleague","ipa":"/ˈkɒliːɡ/","ru":"коллега","sentence":"My colleagues are always ready to help.","strans":"Мои коллеги всегда готовы помочь."},{"en":"deadline","ipa":"/ˈdedlaɪn/","ru":"крайний срок","sentence":"We must meet the deadline by Friday.","strans":"Мы должны уложиться в срок к пятнице."},{"en":"employee","ipa":"/ɪmˈplɔɪiː/","ru":"сотрудник, работник","sentence":"The company hired ten new employees.","strans":"Компания наняла десять новых сотрудников."},{"en":"employer","ipa":"/ɪmˈplɔɪə/","ru":"работодатель","sentence":"A good employer values their staff.","strans":"Хороший работодатель ценит своих сотрудников."},{"en":"skill","ipa":"/skɪl/","ru":"навык, умение","sentence":"Communication is a key skill at work.","strans":"Общение — ключевой навык на работе."},{"en":"experience","ipa":"/ɪkˈspɪəriəns/","ru":"опыт","sentence":"This role requires three years of experience.","strans":"Эта должность требует трёх лет опыта."},{"en":"salary","ipa":"/ˈsæləri/","ru":"зарплата (оклад)","sentence":"They offered him a higher salary.","strans":"Они предложили ему более высокую зарплату."},{"en":"interview","ipa":"/ˈɪntəvjuː/","ru":"собеседование","sentence":"I have a job interview tomorrow morning.","strans":"У меня завтра утром собеседование."},{"en":"resign","ipa":"/rɪˈzaɪn/","ru":"увольняться, уходить","sentence":"She chose to resign after the merger.","strans":"Она решила уволиться после слияния."},{"en":"workload","ipa":"/ˈwɜːkləʊd/","ru":"объём работы, нагрузка","sentence":"My workload has increased this month.","strans":"Моя нагрузка увеличилась в этом месяце."},{"en":"responsibility","ipa":"/rɪˌspɒnsəˈbɪləti/","ru":"ответственность, обязанность","sentence":"Managing the budget is my responsibility.","strans":"Управление бюджетом — моя обязанность."},{"en":"achieve","ipa":"/əˈtʃiːv/","ru":"достигать","sentence":"He worked hard to achieve his goals.","strans":"Он усердно работал, чтобы достичь своих целей."},{"en":"colleague-friendly","ipa":"/ˈkɒliːɡ ˈfrendli/","ru":"дружелюбный к коллегам","sentence":"Our office has a colleague-friendly culture.","strans":"В нашем офисе дружелюбная к коллегам культура."},{"en":"promote","ipa":"/prəˈməʊt/","ru":"продвигать; повышать","sentence":"They plan to promote her to manager.","strans":"Они планируют повысить её до менеджера."},{"en":"qualify","ipa":"/ˈkwɒlɪfaɪ/","ru":"получать квалификацию, подходить","sentence":"You need a degree to qualify for this post.","strans":"Чтобы претендовать на эту должность, нужна степень."},{"en":"shift","ipa":"/ʃɪft/","ru":"смена (рабочая); сдвиг","sentence":"Nurses often work the night shift.","strans":"Медсёстры часто работают в ночную смену."},{"en":"supervise","ipa":"/ˈsuːpəvaɪz/","ru":"руководить, контролировать","sentence":"She supervises a team of six people.","strans":"Она руководит командой из шести человек."},{"en":"commute","ipa":"/kəˈmjuːt/","ru":"ездить на работу","sentence":"I commute to the city centre every day.","strans":"Я каждый день езжу в центр города на работу."}]},{"topic":"Деньги и экономика","words":[{"en":"afford","ipa":"/əˈfɔːd/","ru":"позволить себе (по средствам)","sentence":"We can't afford a new car right now.","strans":"Сейчас мы не можем позволить себе новую машину."},{"en":"budget","ipa":"/ˈbʌdʒɪt/","ru":"бюджет","sentence":"The family lives on a tight budget.","strans":"Семья живёт на ограниченный бюджет."},{"en":"expense","ipa":"/ɪkˈspens/","ru":"расход, затрата","sentence":"Rent is our biggest monthly expense.","strans":"Аренда — наш самый большой ежемесячный расход."},{"en":"income","ipa":"/ˈɪnkʌm/","ru":"доход","sentence":"Their household income has risen.","strans":"Доход их семьи вырос."},{"en":"invest","ipa":"/ɪnˈvest/","ru":"вкладывать, инвестировать","sentence":"She decided to invest in property.","strans":"Она решила вложить деньги в недвижимость."},{"en":"loan","ipa":"/ləʊn/","ru":"заём, кредит","sentence":"He took out a loan to start a business.","strans":"Он взял кредит, чтобы начать бизнес."},{"en":"debt","ipa":"/det/","ru":"долг","sentence":"They finally paid off all their debt.","strans":"Они наконец выплатили все свои долги."},{"en":"profit","ipa":"/ˈprɒfɪt/","ru":"прибыль","sentence":"The store made a small profit last year.","strans":"В прошлом году магазин получил небольшую прибыль."},{"en":"wealthy","ipa":"/ˈwelθi/","ru":"богатый, состоятельный","sentence":"He comes from a wealthy family.","strans":"Он из состоятельной семьи."},{"en":"currency","ipa":"/ˈkʌrənsi/","ru":"валюта","sentence":"The local currency lost value quickly.","strans":"Местная валюта быстро обесценилась."},{"en":"inflation","ipa":"/ɪnˈfleɪʃn/","ru":"инфляция","sentence":"Rising inflation worries many people.","strans":"Растущая инфляция беспокоит многих людей."},{"en":"bargain","ipa":"/ˈbɑːɡɪn/","ru":"выгодная покупка; торговаться","sentence":"This jacket was a real bargain.","strans":"Эта куртка была настоящей выгодной покупкой."},{"en":"refund","ipa":"/ˈriːfʌnd/","ru":"возврат денег","sentence":"I asked the shop for a full refund.","strans":"Я попросил в магазине полный возврат денег."},{"en":"purchase","ipa":"/ˈpɜːtʃəs/","ru":"покупка; покупать","sentence":"Keep the receipt for your purchase.","strans":"Сохраните чек за вашу покупку."},{"en":"estimate","ipa":"/ˈestɪmət/","ru":"оценка; оценивать","sentence":"The builder gave us a rough estimate.","strans":"Строитель дал нам примерную оценку."},{"en":"valuable","ipa":"/ˈvæljuəbl/","ru":"ценный","sentence":"This painting is extremely valuable.","strans":"Эта картина чрезвычайно ценная."},{"en":"owe","ipa":"/əʊ/","ru":"быть должным","sentence":"I still owe my friend fifty pounds.","strans":"Я всё ещё должен другу пятьдесят фунтов."},{"en":"save","ipa":"/seɪv/","ru":"копить, экономить","sentence":"They save money for their retirement.","strans":"Они копят деньги на пенсию."},{"en":"worth","ipa":"/wɜːθ/","ru":"стоящий; стоимость","sentence":"The house is worth a fortune now.","strans":"Сейчас дом стоит целое состояние."},{"en":"economy","ipa":"/ɪˈkɒnəmi/","ru":"экономика","sentence":"The economy is slowly recovering.","strans":"Экономика медленно восстанавливается."}]},{"topic":"Чувства и характер","words":[{"en":"confident","ipa":"/ˈkɒnfɪdənt/","ru":"уверенный","sentence":"She felt confident before the exam.","strans":"Она чувствовала себя уверенно перед экзаменом."},{"en":"anxious","ipa":"/ˈæŋkʃəs/","ru":"тревожный, обеспокоенный","sentence":"He was anxious about the results.","strans":"Он тревожился из-за результатов."},{"en":"generous","ipa":"/ˈdʒenərəs/","ru":"щедрый","sentence":"My grandmother was very generous.","strans":"Моя бабушка была очень щедрой."},{"en":"stubborn","ipa":"/ˈstʌbən/","ru":"упрямый","sentence":"He is too stubborn to admit mistakes.","strans":"Он слишком упрям, чтобы признавать ошибки."},{"en":"ambitious","ipa":"/æmˈbɪʃəs/","ru":"амбициозный","sentence":"She is an ambitious young lawyer.","strans":"Она амбициозный молодой юрист."},{"en":"reliable","ipa":"/rɪˈlaɪəbl/","ru":"надёжный","sentence":"He is the most reliable person I know.","strans":"Он самый надёжный человек, которого я знаю."},{"en":"sensitive","ipa":"/ˈsensətɪv/","ru":"чувствительный, ранимый","sentence":"She is sensitive to criticism.","strans":"Она болезненно воспринимает критику."},{"en":"cheerful","ipa":"/ˈtʃɪəfl/","ru":"жизнерадостный, весёлый","sentence":"He greeted us with a cheerful smile.","strans":"Он встретил нас жизнерадостной улыбкой."},{"en":"mood","ipa":"/muːd/","ru":"настроение","sentence":"Her mood improved after the walk.","strans":"Её настроение улучшилось после прогулки."},{"en":"proud","ipa":"/praʊd/","ru":"гордый","sentence":"They were proud of their daughter.","strans":"Они гордились своей дочерью."},{"en":"guilty","ipa":"/ˈɡɪlti/","ru":"виноватый","sentence":"I felt guilty about forgetting his birthday.","strans":"Я чувствовал вину за то, что забыл его день рождения."},{"en":"jealous","ipa":"/ˈdʒeləs/","ru":"ревнивый, завистливый","sentence":"He gets jealous very easily.","strans":"Он очень легко ревнует."},{"en":"patient","ipa":"/ˈpeɪʃnt/","ru":"терпеливый","sentence":"You must be patient with children.","strans":"С детьми нужно быть терпеливым."},{"en":"honest","ipa":"/ˈɒnɪst/","ru":"честный","sentence":"Please give me an honest answer.","strans":"Пожалуйста, дай мне честный ответ."},{"en":"selfish","ipa":"/ˈselfɪʃ/","ru":"эгоистичный","sentence":"It was selfish of him to leave.","strans":"С его стороны было эгоистично уйти."},{"en":"brave","ipa":"/breɪv/","ru":"смелый, храбрый","sentence":"The brave firefighter saved the child.","strans":"Храбрый пожарный спас ребёнка."},{"en":"curious","ipa":"/ˈkjʊəriəs/","ru":"любопытный","sentence":"Children are naturally curious.","strans":"Дети от природы любопытны."},{"en":"frustrated","ipa":"/frʌˈstreɪtɪd/","ru":"раздосадованный, разочарованный","sentence":"She felt frustrated by the delays.","strans":"Она была раздосадована задержками."},{"en":"mature","ipa":"/məˈtʃʊə/","ru":"зрелый, взрослый","sentence":"He is very mature for his age.","strans":"Он очень зрелый для своего возраста."},{"en":"temper","ipa":"/ˈtempə/","ru":"нрав, вспыльчивость","sentence":"He has a quick temper.","strans":"У него вспыльчивый нрав."}]},{"topic":"Общение и мнения","words":[{"en":"argue","ipa":"/ˈɑːɡjuː/","ru":"спорить, доказывать","sentence":"They often argue about politics.","strans":"Они часто спорят о политике."},{"en":"suggest","ipa":"/səˈdʒest/","ru":"предлагать, советовать","sentence":"I suggest we take a short break.","strans":"Я предлагаю сделать короткий перерыв."},{"en":"admit","ipa":"/ədˈmɪt/","ru":"признавать","sentence":"He admitted that he was wrong.","strans":"Он признал, что был неправ."},{"en":"complain","ipa":"/kəmˈpleɪn/","ru":"жаловаться","sentence":"Customers complain about slow service.","strans":"Клиенты жалуются на медленное обслуживание."},{"en":"persuade","ipa":"/pəˈsweɪd/","ru":"убеждать","sentence":"She persuaded me to join the club.","strans":"Она убедила меня вступить в клуб."},{"en":"mention","ipa":"/ˈmenʃn/","ru":"упоминать","sentence":"He didn't mention the meeting.","strans":"Он не упомянул о встрече."},{"en":"emphasise","ipa":"/ˈemfəsaɪz/","ru":"подчёркивать, акцентировать","sentence":"The teacher emphasised the main idea.","strans":"Учитель подчеркнул главную мысль."},{"en":"apologise","ipa":"/əˈpɒlədʒaɪz/","ru":"извиняться","sentence":"I want to apologise for being late.","strans":"Я хочу извиниться за опоздание."},{"en":"acknowledge","ipa":"/əkˈnɒlɪdʒ/","ru":"признавать, подтверждать","sentence":"Please acknowledge receipt of this email.","strans":"Пожалуйста, подтвердите получение этого письма."},{"en":"insist","ipa":"/ɪnˈsɪst/","ru":"настаивать","sentence":"She insisted on paying the bill.","strans":"Она настояла на том, чтобы оплатить счёт."},{"en":"express","ipa":"/ɪkˈspres/","ru":"выражать","sentence":"It's hard to express my feelings.","strans":"Мне трудно выразить свои чувства."},{"en":"debate","ipa":"/dɪˈbeɪt/","ru":"дебаты; обсуждать","sentence":"The debate lasted for two hours.","strans":"Дебаты длились два часа."},{"en":"opinion","ipa":"/əˈpɪnjən/","ru":"мнение","sentence":"In my opinion, the plan is risky.","strans":"По моему мнению, план рискованный."},{"en":"claim","ipa":"/kleɪm/","ru":"утверждать; заявлять","sentence":"He claims that he saw the accident.","strans":"Он утверждает, что видел аварию."},{"en":"point out","ipa":"/ˌpɔɪnt ˈaʊt/","ru":"указывать, отмечать","sentence":"She pointed out a mistake in my report.","strans":"Она указала на ошибку в моём отчёте."},{"en":"whisper","ipa":"/ˈwɪspə/","ru":"шептать","sentence":"He whispered the answer to his friend.","strans":"Он прошептал ответ своему другу."},{"en":"gossip","ipa":"/ˈɡɒsɪp/","ru":"сплетни; сплетничать","sentence":"They love to gossip about neighbours.","strans":"Они обожают сплетничать о соседях."},{"en":"remark","ipa":"/rɪˈmɑːk/","ru":"замечание; замечать","sentence":"She made a rude remark.","strans":"Она сделала грубое замечание."},{"en":"misunderstand","ipa":"/ˌmɪsʌndəˈstænd/","ru":"неправильно понимать","sentence":"I think you misunderstand me.","strans":"Думаю, ты меня неправильно понимаешь."},{"en":"declare","ipa":"/dɪˈkleə/","ru":"объявлять, заявлять","sentence":"The government declared a holiday.","strans":"Правительство объявило выходной день."}]},{"topic":"Общество и перемены","words":[{"en":"society","ipa":"/səˈsaɪəti/","ru":"общество","sentence":"Technology has changed modern society.","strans":"Технологии изменили современное общество."},{"en":"community","ipa":"/kəˈmjuːnəti/","ru":"сообщество, община","sentence":"The local community organised the event.","strans":"Местное сообщество организовало мероприятие."},{"en":"government","ipa":"/ˈɡʌvənmənt/","ru":"правительство","sentence":"The government announced new rules.","strans":"Правительство объявило новые правила."},{"en":"citizen","ipa":"/ˈsɪtɪzn/","ru":"гражданин","sentence":"Every citizen has the right to vote.","strans":"Каждый гражданин имеет право голосовать."},{"en":"law","ipa":"/lɔː/","ru":"закон","sentence":"Everyone must obey the law.","strans":"Все должны соблюдать закон."},{"en":"crime","ipa":"/kraɪm/","ru":"преступление","sentence":"Crime has fallen in recent years.","strans":"Преступность снизилась за последние годы."},{"en":"equality","ipa":"/ɪˈkwɒləti/","ru":"равенство","sentence":"They fought for equality and justice.","strans":"Они боролись за равенство и справедливость."},{"en":"poverty","ipa":"/ˈpɒvəti/","ru":"бедность","sentence":"Millions still live in poverty.","strans":"Миллионы всё ещё живут в бедности."},{"en":"population","ipa":"/ˌpɒpjuˈleɪʃn/","ru":"население","sentence":"The population of the city is growing.","strans":"Население города растёт."},{"en":"generation","ipa":"/ˌdʒenəˈreɪʃn/","ru":"поколение","sentence":"The younger generation thinks differently.","strans":"Молодое поколение мыслит иначе."},{"en":"influence","ipa":"/ˈɪnfluəns/","ru":"влияние; влиять","sentence":"Media has a huge influence on us.","strans":"СМИ оказывают на нас огромное влияние."},{"en":"protest","ipa":"/prəˈtest/","ru":"протест; протестовать","sentence":"Thousands gathered to protest peacefully.","strans":"Тысячи собрались, чтобы мирно протестовать."},{"en":"reform","ipa":"/rɪˈfɔːm/","ru":"реформа; реформировать","sentence":"The new reform improved education.","strans":"Новая реформа улучшила образование."},{"en":"rights","ipa":"/raɪts/","ru":"права","sentence":"Human rights must be protected.","strans":"Права человека должны быть защищены."},{"en":"welfare","ipa":"/ˈwelfeə/","ru":"благополучие; соцобеспечение","sentence":"The state supports child welfare.","strans":"Государство поддерживает благополучие детей."},{"en":"immigrant","ipa":"/ˈɪmɪɡrənt/","ru":"иммигрант","sentence":"Many immigrants found work in the city.","strans":"Многие иммигранты нашли работу в городе."},{"en":"tradition","ipa":"/trəˈdɪʃn/","ru":"традиция","sentence":"This festival is an old tradition.","strans":"Этот праздник — старинная традиция."},{"en":"diverse","ipa":"/daɪˈvɜːs/","ru":"разнообразный, многообразный","sentence":"London is a very diverse city.","strans":"Лондон — очень многообразный город."},{"en":"prejudice","ipa":"/ˈpredʒudɪs/","ru":"предрассудок, предубеждение","sentence":"We must fight against prejudice.","strans":"Мы должны бороться с предрассудками."},{"en":"charity","ipa":"/ˈtʃærəti/","ru":"благотворительность","sentence":"She donates to charity every month.","strans":"Она жертвует на благотворительность каждый месяц."}]},{"topic":"Наука и технологии","words":[{"en":"research","ipa":"/rɪˈsɜːtʃ/","ru":"исследование","sentence":"Scientists conduct research on the virus.","strans":"Учёные проводят исследование вируса."},{"en":"device","ipa":"/dɪˈvaɪs/","ru":"устройство","sentence":"This device measures your heart rate.","strans":"Это устройство измеряет ваш пульс."},{"en":"data","ipa":"/ˈdeɪtə/","ru":"данные","sentence":"The system collects a lot of data.","strans":"Система собирает много данных."},{"en":"develop","ipa":"/dɪˈveləp/","ru":"разрабатывать, развивать","sentence":"They develop software for hospitals.","strans":"Они разрабатывают программы для больниц."},{"en":"invention","ipa":"/ɪnˈvenʃn/","ru":"изобретение","sentence":"The wheel was a brilliant invention.","strans":"Колесо было гениальным изобретением."},{"en":"experiment","ipa":"/ɪkˈsperɪmənt/","ru":"эксперимент","sentence":"The experiment produced clear results.","strans":"Эксперимент дал ясные результаты."},{"en":"discovery","ipa":"/dɪˈskʌvəri/","ru":"открытие","sentence":"This discovery changed medicine.","strans":"Это открытие изменило медицину."},{"en":"engine","ipa":"/ˈendʒɪn/","ru":"двигатель, мотор","sentence":"The electric engine is very quiet.","strans":"Электрический двигатель очень тихий."},{"en":"software","ipa":"/ˈsɒftweə/","ru":"программное обеспечение","sentence":"We updated the software last night.","strans":"Мы обновили программное обеспечение вчера ночью."},{"en":"artificial","ipa":"/ˌɑːtɪˈfɪʃl/","ru":"искусственный","sentence":"Artificial intelligence is developing fast.","strans":"Искусственный интеллект развивается быстро."},{"en":"update","ipa":"/ˌʌpˈdeɪt/","ru":"обновлять; обновление","sentence":"Remember to update your phone.","strans":"Не забудь обновить свой телефон."},{"en":"connect","ipa":"/kəˈnekt/","ru":"соединять, подключать","sentence":"The app connects users worldwide.","strans":"Приложение соединяет пользователей по всему миру."},{"en":"network","ipa":"/ˈnetwɜːk/","ru":"сеть","sentence":"The office network is very fast.","strans":"Офисная сеть очень быстрая."},{"en":"battery","ipa":"/ˈbætəri/","ru":"батарея, аккумулятор","sentence":"My laptop battery lasts all day.","strans":"Батарея моего ноутбука держит весь день."},{"en":"screen","ipa":"/skriːn/","ru":"экран","sentence":"The new screen is much brighter.","strans":"Новый экран гораздо ярче."},{"en":"innovation","ipa":"/ˌɪnəˈveɪʃn/","ru":"инновация, нововведение","sentence":"Innovation drives the whole industry.","strans":"Инновации двигают всю отрасль."},{"en":"efficient","ipa":"/ɪˈfɪʃnt/","ru":"эффективный","sentence":"Solar panels are more efficient now.","strans":"Солнечные панели теперь более эффективны."},{"en":"upgrade","ipa":"/ˌʌpˈɡreɪd/","ru":"улучшать, модернизировать","sentence":"We plan to upgrade the servers.","strans":"Мы планируем модернизировать серверы."},{"en":"virtual","ipa":"/ˈvɜːtʃuəl/","ru":"виртуальный","sentence":"We held a virtual meeting online.","strans":"Мы провели виртуальную встречу онлайн."},{"en":"automatic","ipa":"/ˌɔːtəˈmætɪk/","ru":"автоматический","sentence":"The doors open automatically.","strans":"Двери открываются автоматически."}]},{"topic":"Здоровье и самочувствие","words":[{"en":"recover","ipa":"/rɪˈkʌvə/","ru":"выздоравливать, восстанавливаться","sentence":"It took weeks to recover from the flu.","strans":"На восстановление после гриппа ушли недели."},{"en":"treatment","ipa":"/ˈtriːtmənt/","ru":"лечение","sentence":"The new treatment is very effective.","strans":"Новое лечение очень эффективно."},{"en":"prevent","ipa":"/prɪˈvent/","ru":"предотвращать","sentence":"Exercise can prevent many diseases.","strans":"Физические упражнения могут предотвратить многие болезни."},{"en":"symptom","ipa":"/ˈsɪmptəm/","ru":"симптом","sentence":"A high fever is a common symptom.","strans":"Высокая температура — распространённый симптом."},{"en":"diet","ipa":"/ˈdaɪət/","ru":"диета, питание","sentence":"She follows a healthy diet.","strans":"Она придерживается здорового питания."},{"en":"injury","ipa":"/ˈɪndʒəri/","ru":"травма","sentence":"He recovered slowly from his injury.","strans":"Он медленно восстанавливался после травмы."},{"en":"cure","ipa":"/kjʊə/","ru":"лекарство; излечивать","sentence":"There is still no cure for the disease.","strans":"Лекарства от этой болезни всё ещё нет."},{"en":"mental","ipa":"/ˈmentl/","ru":"психический, умственный","sentence":"Mental health matters as much as physical.","strans":"Психическое здоровье важно так же, как физическое."},{"en":"fitness","ipa":"/ˈfɪtnəs/","ru":"физическая форма","sentence":"Regular training improves your fitness.","strans":"Регулярные тренировки улучшают физическую форму."},{"en":"breathe","ipa":"/briːð/","ru":"дышать","sentence":"Try to breathe slowly and relax.","strans":"Постарайся дышать медленно и расслабиться."},{"en":"pain","ipa":"/peɪn/","ru":"боль","sentence":"She felt a sharp pain in her knee.","strans":"Она почувствовала резкую боль в колене."},{"en":"healthy","ipa":"/ˈhelθi/","ru":"здоровый","sentence":"Eating vegetables keeps you healthy.","strans":"Употребление овощей поддерживает здоровье."},{"en":"stress","ipa":"/stres/","ru":"стресс","sentence":"Too much stress harms your body.","strans":"Слишком сильный стресс вредит организму."},{"en":"infection","ipa":"/ɪnˈfekʃn/","ru":"инфекция","sentence":"Doctors treated the infection quickly.","strans":"Врачи быстро вылечили инфекцию."},{"en":"nutrition","ipa":"/njuˈtrɪʃn/","ru":"питание (наука)","sentence":"Good nutrition is vital for children.","strans":"Правильное питание жизненно важно для детей."},{"en":"wound","ipa":"/wuːnd/","ru":"рана","sentence":"The nurse cleaned the wound carefully.","strans":"Медсестра аккуратно обработала рану."},{"en":"relieve","ipa":"/rɪˈliːv/","ru":"облегчать (боль)","sentence":"This medicine relieves the pain.","strans":"Это лекарство облегчает боль."},{"en":"immune","ipa":"/ɪˈmjuːn/","ru":"иммунный","sentence":"Sleep strengthens your immune system.","strans":"Сон укрепляет вашу иммунную систему."},{"en":"addiction","ipa":"/əˈdɪkʃn/","ru":"зависимость","sentence":"He struggled with a serious addiction.","strans":"Он боролся с серьёзной зависимостью."},{"en":"wellbeing","ipa":"/ˌwelˈbiːɪŋ/","ru":"благополучие, самочувствие","sentence":"The company cares about staff wellbeing.","strans":"Компания заботится о самочувствии сотрудников."}]},{"topic":"Природа и окружающая среда","words":[{"en":"environment","ipa":"/ɪnˈvaɪrənmənt/","ru":"окружающая среда","sentence":"We must protect the environment.","strans":"Мы должны защищать окружающую среду."},{"en":"pollution","ipa":"/pəˈluːʃn/","ru":"загрязнение","sentence":"Air pollution is a serious problem.","strans":"Загрязнение воздуха — серьёзная проблема."},{"en":"climate","ipa":"/ˈklaɪmət/","ru":"климат","sentence":"Climate change affects the whole planet.","strans":"Изменение климата влияет на всю планету."},{"en":"recycle","ipa":"/ˌriːˈsaɪkl/","ru":"перерабатывать","sentence":"We recycle paper, glass and plastic.","strans":"Мы перерабатываем бумагу, стекло и пластик."},{"en":"waste","ipa":"/weɪst/","ru":"отходы; тратить впустую","sentence":"The city produces tonnes of waste.","strans":"Город производит тонны отходов."},{"en":"energy","ipa":"/ˈenədʒi/","ru":"энергия","sentence":"Wind provides clean energy.","strans":"Ветер даёт чистую энергию."},{"en":"species","ipa":"/ˈspiːʃiːz/","ru":"вид (биологический)","sentence":"Many species are close to extinction.","strans":"Многие виды близки к вымиранию."},{"en":"forest","ipa":"/ˈfɒrɪst/","ru":"лес","sentence":"The forest is home to rare animals.","strans":"Лес — дом для редких животных."},{"en":"wildlife","ipa":"/ˈwaɪldlaɪf/","ru":"дикая природа","sentence":"Pollution threatens local wildlife.","strans":"Загрязнение угрожает местной дикой природе."},{"en":"drought","ipa":"/draʊt/","ru":"засуха","sentence":"The long drought destroyed the crops.","strans":"Долгая засуха погубила урожай."},{"en":"flood","ipa":"/flʌd/","ru":"наводнение","sentence":"Heavy rain caused a severe flood.","strans":"Сильный дождь вызвал серьёзное наводнение."},{"en":"resource","ipa":"/rɪˈsɔːs/","ru":"ресурс","sentence":"Water is a precious natural resource.","strans":"Вода — драгоценный природный ресурс."},{"en":"sustainable","ipa":"/səˈsteɪnəbl/","ru":"устойчивый, экологичный","sentence":"We need sustainable farming methods.","strans":"Нам нужны устойчивые методы земледелия."},{"en":"emission","ipa":"/ɪˈmɪʃn/","ru":"выброс (газов)","sentence":"Cars produce harmful emissions.","strans":"Машины производят вредные выбросы."},{"en":"preserve","ipa":"/prɪˈzɜːv/","ru":"сохранять, беречь","sentence":"National parks preserve nature.","strans":"Национальные парки сохраняют природу."},{"en":"global","ipa":"/ˈɡləʊbl/","ru":"глобальный, мировой","sentence":"Global warming is speeding up.","strans":"Глобальное потепление ускоряется."},{"en":"landscape","ipa":"/ˈlændskeɪp/","ru":"пейзаж, ландшафт","sentence":"The mountain landscape was stunning.","strans":"Горный пейзаж был потрясающим."},{"en":"shortage","ipa":"/ˈʃɔːtɪdʒ/","ru":"нехватка, дефицит","sentence":"There is a water shortage this summer.","strans":"Этим летом наблюдается нехватка воды."},{"en":"renewable","ipa":"/rɪˈnjuːəbl/","ru":"возобновляемый","sentence":"Solar power is a renewable source.","strans":"Солнечная энергия — возобновляемый источник."},{"en":"survive","ipa":"/səˈvaɪv/","ru":"выживать","sentence":"Few plants survive in the desert.","strans":"В пустыне выживает мало растений."}]},{"topic":"Путешествия и впечатления","words":[{"en":"journey","ipa":"/ˈdʒɜːni/","ru":"поездка, путешествие","sentence":"The journey took over ten hours.","strans":"Поездка заняла больше десяти часов."},{"en":"destination","ipa":"/ˌdestɪˈneɪʃn/","ru":"пункт назначения","sentence":"Rome is a popular tourist destination.","strans":"Рим — популярное туристическое направление."},{"en":"abroad","ipa":"/əˈbrɔːd/","ru":"за границей, за границу","sentence":"They travel abroad every summer.","strans":"Они каждое лето ездят за границу."},{"en":"luggage","ipa":"/ˈlʌɡɪdʒ/","ru":"багаж","sentence":"My luggage was lost at the airport.","strans":"Мой багаж потеряли в аэропорту."},{"en":"accommodation","ipa":"/əˌkɒməˈdeɪʃn/","ru":"жильё, размещение","sentence":"We booked accommodation near the beach.","strans":"Мы забронировали жильё рядом с пляжем."},{"en":"explore","ipa":"/ɪkˈsplɔː/","ru":"исследовать, изучать","sentence":"We spent the day exploring the old town.","strans":"Мы провели день, исследуя старый город."},{"en":"scenery","ipa":"/ˈsiːnəri/","ru":"пейзаж, виды","sentence":"The mountain scenery was breathtaking.","strans":"Горные виды захватывали дух."},{"en":"adventure","ipa":"/ədˈventʃə/","ru":"приключение","sentence":"The trip turned into a real adventure.","strans":"Поездка превратилась в настоящее приключение."},{"en":"delay","ipa":"/dɪˈleɪ/","ru":"задержка; задерживать","sentence":"The flight was delayed by two hours.","strans":"Рейс задержали на два часа."},{"en":"passport","ipa":"/ˈpɑːspɔːt/","ru":"паспорт","sentence":"Don't forget to bring your passport.","strans":"Не забудь взять паспорт."},{"en":"currency","ipa":"/ˈkʌrənsi/","ru":"валюта","sentence":"I exchanged some currency at the airport.","strans":"Я обменял немного валюты в аэропорту."},{"en":"guide","ipa":"/ɡaɪd/","ru":"гид; путеводитель","sentence":"A local guide showed us the ruins.","strans":"Местный гид показал нам руины."},{"en":"souvenir","ipa":"/ˌsuːvəˈnɪə/","ru":"сувенир","sentence":"She bought a souvenir for her mother.","strans":"Она купила сувенир для мамы."},{"en":"reserve","ipa":"/rɪˈzɜːv/","ru":"бронировать","sentence":"We reserved a table for dinner.","strans":"Мы забронировали столик на ужин."},{"en":"crowded","ipa":"/ˈkraʊdɪd/","ru":"переполненный, людный","sentence":"The beach was crowded in August.","strans":"В августе пляж был переполнен."},{"en":"depart","ipa":"/dɪˈpɑːt/","ru":"отправляться, отбывать","sentence":"The train departs at nine o'clock.","strans":"Поезд отправляется в девять часов."},{"en":"landmark","ipa":"/ˈlændmɑːk/","ru":"достопримечательность","sentence":"Big Ben is a famous landmark.","strans":"Биг-Бен — знаменитая достопримечательность."},{"en":"itinerary","ipa":"/aɪˈtɪnərəri/","ru":"маршрут (плана поездки)","sentence":"Our itinerary included three cities.","strans":"Наш маршрут включал три города."},{"en":"wander","ipa":"/ˈwɒndə/","ru":"бродить, гулять","sentence":"We loved to wander through the markets.","strans":"Нам нравилось бродить по рынкам."},{"en":"memorable","ipa":"/ˈmemərəbl/","ru":"запоминающийся","sentence":"It was a truly memorable holiday.","strans":"Это был по-настоящему запоминающийся отпуск."}]},{"topic":"Учёба и образование","words":[{"en":"knowledge","ipa":"/ˈnɒlɪdʒ/","ru":"знание, знания","sentence":"Reading widens your knowledge.","strans":"Чтение расширяет ваши знания."},{"en":"degree","ipa":"/dɪˈɡriː/","ru":"степень (учёная)","sentence":"She earned a degree in biology.","strans":"Она получила степень по биологии."},{"en":"assignment","ipa":"/əˈsaɪnmənt/","ru":"задание","sentence":"The assignment is due next week.","strans":"Задание нужно сдать на следующей неделе."},{"en":"lecture","ipa":"/ˈlektʃə/","ru":"лекция","sentence":"The lecture on history was fascinating.","strans":"Лекция по истории была увлекательной."},{"en":"revise","ipa":"/rɪˈvaɪz/","ru":"повторять (материал)","sentence":"I need to revise before the test.","strans":"Мне нужно повторить материал перед тестом."},{"en":"concentrate","ipa":"/ˈkɒnsntreɪt/","ru":"сосредотачиваться","sentence":"It's hard to concentrate with noise.","strans":"Трудно сосредоточиться при шуме."},{"en":"graduate","ipa":"/ˈɡrædʒuət/","ru":"выпускник; окончить вуз","sentence":"He hopes to graduate next June.","strans":"Он надеется окончить вуз в июне."},{"en":"scholarship","ipa":"/ˈskɒləʃɪp/","ru":"стипендия (грант)","sentence":"She won a scholarship to study abroad.","strans":"Она выиграла стипендию для учёбы за границей."},{"en":"subject","ipa":"/ˈsʌbdʒɪkt/","ru":"предмет (учебный)","sentence":"Maths is my favourite subject.","strans":"Математика — мой любимый предмет."},{"en":"curriculum","ipa":"/kəˈrɪkjələm/","ru":"учебная программа","sentence":"The curriculum covers many topics.","strans":"Учебная программа охватывает множество тем."},{"en":"motivate","ipa":"/ˈməʊtɪveɪt/","ru":"мотивировать","sentence":"A good teacher can motivate students.","strans":"Хороший учитель может мотивировать учеников."},{"en":"achievement","ipa":"/əˈtʃiːvmənt/","ru":"достижение","sentence":"Passing the exam was a big achievement.","strans":"Сдача экзамена стала большим достижением."},{"en":"skilful","ipa":"/ˈskɪlfl/","ru":"умелый, искусный","sentence":"She is a skilful and patient tutor.","strans":"Она умелый и терпеливый преподаватель."},{"en":"attend","ipa":"/əˈtend/","ru":"посещать (занятия)","sentence":"Students must attend every lesson.","strans":"Студенты должны посещать каждое занятие."},{"en":"progress","ipa":"/ˈprəʊɡres/","ru":"прогресс, успехи","sentence":"She made rapid progress in French.","strans":"Она сделала быстрые успехи во французском."},{"en":"challenge","ipa":"/ˈtʃælɪndʒ/","ru":"испытание, вызов","sentence":"Learning a language is a real challenge.","strans":"Изучение языка — настоящее испытание."},{"en":"qualification","ipa":"/ˌkwɒlɪfɪˈkeɪʃn/","ru":"квалификация; диплом","sentence":"This job requires a formal qualification.","strans":"Эта работа требует официальной квалификации."},{"en":"tutor","ipa":"/ˈtjuːtə/","ru":"репетитор, преподаватель","sentence":"A private tutor helped him improve.","strans":"Частный репетитор помог ему улучшить результаты."},{"en":"distraction","ipa":"/dɪˈstrækʃn/","ru":"отвлечение","sentence":"Turn off your phone to avoid distraction.","strans":"Выключи телефон, чтобы избежать отвлечения."},{"en":"theory","ipa":"/ˈθɪəri/","ru":"теория","sentence":"In theory, the plan should work.","strans":"В теории план должен сработать."}]},{"topic":"Фразовые глаголы","words":[{"en":"give up","ipa":"/ˌɡɪv ˈʌp/","ru":"сдаваться; бросать","sentence":"Don't give up when things get hard.","strans":"Не сдавайся, когда становится трудно."},{"en":"find out","ipa":"/ˌfaɪnd ˈaʊt/","ru":"выяснять, узнавать","sentence":"I need to find out the truth.","strans":"Мне нужно выяснить правду."},{"en":"carry out","ipa":"/ˌkæri ˈaʊt/","ru":"выполнять, проводить","sentence":"Scientists carry out many tests.","strans":"Учёные проводят множество тестов."},{"en":"look forward to","ipa":"/ˌlʊk ˈfɔːwəd tə/","ru":"с нетерпением ждать","sentence":"I look forward to seeing you soon.","strans":"С нетерпением жду встречи с тобой."},{"en":"put off","ipa":"/ˌpʊt ˈɒf/","ru":"откладывать","sentence":"We had to put off the meeting.","strans":"Нам пришлось отложить встречу."},{"en":"bring up","ipa":"/ˌbrɪŋ ˈʌp/","ru":"воспитывать; поднимать (тему)","sentence":"She brought up three children alone.","strans":"Она воспитала троих детей одна."},{"en":"come across","ipa":"/ˌkʌm əˈkrɒs/","ru":"натыкаться, случайно находить","sentence":"I came across an old photo album.","strans":"Я наткнулся на старый фотоальбом."},{"en":"deal with","ipa":"/ˈdiːl wɪð/","ru":"справляться, иметь дело","sentence":"He knows how to deal with stress.","strans":"Он знает, как справляться со стрессом."},{"en":"point out","ipa":"/ˌpɔɪnt ˈaʊt/","ru":"указывать, отмечать","sentence":"She pointed out several errors.","strans":"Она указала на несколько ошибок."},{"en":"set up","ipa":"/ˌset ˈʌp/","ru":"создавать, основывать","sentence":"They set up a small company.","strans":"Они основали небольшую компанию."},{"en":"turn down","ipa":"/ˌtɜːn ˈdaʊn/","ru":"отклонять, отказывать","sentence":"He turned down the job offer.","strans":"Он отклонил предложение о работе."},{"en":"work out","ipa":"/ˌwɜːk ˈaʊt/","ru":"разбираться; тренироваться","sentence":"I couldn't work out the answer.","strans":"Я не смог разобраться с ответом."},{"en":"run out of","ipa":"/ˌrʌn ˈaʊt əv/","ru":"исчерпать, закончиться","sentence":"We ran out of milk this morning.","strans":"У нас утром закончилось молоко."},{"en":"take over","ipa":"/ˌteɪk ˈəʊvə/","ru":"брать под контроль, поглощать","sentence":"A larger firm took over the company.","strans":"Более крупная фирма поглотила компанию."},{"en":"get over","ipa":"/ˌɡet ˈəʊvə/","ru":"преодолеть, оправиться","sentence":"It took her months to get over it.","strans":"Ей понадобились месяцы, чтобы оправиться."},{"en":"go through","ipa":"/ˌɡəʊ ˈθruː/","ru":"переживать; просматривать","sentence":"They went through a difficult time.","strans":"Они пережили трудный период."},{"en":"make up","ipa":"/ˌmeɪk ˈʌp/","ru":"мириться; выдумывать","sentence":"The friends made up after the fight.","strans":"Друзья помирились после ссоры."},{"en":"look into","ipa":"/ˌlʊk ˈɪntə/","ru":"изучать, расследовать","sentence":"Police are looking into the case.","strans":"Полиция расследует это дело."},{"en":"cut down on","ipa":"/ˌkʌt ˈdaʊn ɒn/","ru":"сокращать (потребление)","sentence":"I'm trying to cut down on sugar.","strans":"Я стараюсь сократить потребление сахара."},{"en":"stand out","ipa":"/ˌstænd ˈaʊt/","ru":"выделяться","sentence":"Her talent really stands out.","strans":"Её талант действительно выделяется."}]},{"topic":"Изменения и описание","words":[{"en":"increase","ipa":"/ɪnˈkriːs/","ru":"увеличивать(ся), рост","sentence":"Prices continue to increase steadily.","strans":"Цены продолжают неуклонно расти."},{"en":"decrease","ipa":"/dɪˈkriːs/","ru":"уменьшать(ся)","sentence":"Sales decreased during the winter.","strans":"Продажи снизились зимой."},{"en":"rise","ipa":"/raɪz/","ru":"подниматься, расти","sentence":"Temperatures rise sharply in July.","strans":"В июле температура резко поднимается."},{"en":"fall","ipa":"/fɔːl/","ru":"падать, снижаться","sentence":"Demand fell after the price change.","strans":"Спрос упал после изменения цены."},{"en":"remain","ipa":"/rɪˈmeɪn/","ru":"оставаться","sentence":"Unemployment remained high last year.","strans":"В прошлом году безработица оставалась высокой."},{"en":"gradual","ipa":"/ˈɡrædʒuəl/","ru":"постепенный","sentence":"There was a gradual improvement.","strans":"Наблюдалось постепенное улучшение."},{"en":"sudden","ipa":"/ˈsʌdn/","ru":"внезапный","sentence":"A sudden change surprised everyone.","strans":"Внезапная перемена всех удивила."},{"en":"dramatic","ipa":"/drəˈmætɪk/","ru":"резкий, значительный","sentence":"There was a dramatic drop in sales.","strans":"Произошёл резкий спад продаж."},{"en":"steady","ipa":"/ˈstedi/","ru":"устойчивый, ровный","sentence":"The economy showed steady growth.","strans":"Экономика показала устойчивый рост."},{"en":"significant","ipa":"/sɪɡˈnɪfɪkənt/","ru":"значительный","sentence":"There was a significant difference.","strans":"Была значительная разница."},{"en":"slight","ipa":"/slaɪt/","ru":"незначительный, слабый","sentence":"We noticed a slight improvement.","strans":"Мы заметили небольшое улучшение."},{"en":"double","ipa":"/ˈdʌbl/","ru":"удваивать(ся)","sentence":"The population doubled in twenty years.","strans":"Население удвоилось за двадцать лет."},{"en":"expand","ipa":"/ɪkˈspænd/","ru":"расширять(ся)","sentence":"The business expanded into Asia.","strans":"Бизнес расширился в Азию."},{"en":"reduce","ipa":"/rɪˈdjuːs/","ru":"сокращать, снижать","sentence":"They reduced the price by half.","strans":"Они снизили цену вдвое."},{"en":"trend","ipa":"/trend/","ru":"тенденция, тренд","sentence":"There is a growing trend towards remote work.","strans":"Растёт тенденция к удалённой работе."},{"en":"peak","ipa":"/piːk/","ru":"пик; достигать пика","sentence":"Sales reached a peak in December.","strans":"Продажи достигли пика в декабре."},{"en":"stable","ipa":"/ˈsteɪbl/","ru":"стабильный","sentence":"Prices have stayed fairly stable.","strans":"Цены оставались довольно стабильными."},{"en":"fluctuate","ipa":"/ˈflʌktʃueɪt/","ru":"колебаться","sentence":"Exchange rates fluctuate daily.","strans":"Курсы валют колеблются ежедневно."},{"en":"consistent","ipa":"/kənˈsɪstənt/","ru":"постоянный, последовательный","sentence":"Her results are remarkably consistent.","strans":"Её результаты удивительно стабильны."},{"en":"overall","ipa":"/ˌəʊvərˈɔːl/","ru":"в целом, общий","sentence":"Overall, the project was a success.","strans":"В целом проект был успешным."}]}]}
+</script>
+
+<script>
+/* ================= ДАННЫЕ И РАСПИСАНИЕ ================= */
+const LESSONS = JSON.parse(document.getElementById('vocab').textContent).lessons;
+const TOTAL_WORDS = LESSONS.reduce((s,L)=>s+L.words.length,0);
+
+// Расписание: после каждых 3 уроков — день повторения.
+const SCHED = [];
+for(let i=0;i<LESSONS.length;i++){
+  SCHED.push({type:'lesson', li:i});
+  if((i+1)%3===0) SCHED.push({type:'review', from:[i-2,i-1,i]});
+}
+
+const WORDMAP = {};
+LESSONS.forEach(L=>L.words.forEach(w=>{ if(!WORDMAP[w.en]) WORDMAP[w.en]=w; }));
+
+/* ================= ХРАНИЛИЩЕ ================= */
+const LS = 'english_b1b2_progress';
+// Хранилище с запасным вариантом: если localStorage заблокирован
+// (Safari с запретом cookie, приватный режим и т.п.) — работаем в памяти.
+const storage = (()=>{
+  try{
+    const t = '__espanol_test__';
+    localStorage.setItem(t, '1');
+    localStorage.removeItem(t);
+    return localStorage;
+  }catch(e){
+    const mem = {};
+    setTimeout(()=>{ try{ showFatal('Браузер запретил сохранение данных — сайт работает, но прогресс не сохранится после закрытия вкладки.'); }catch(_){} }, 0);
+    return {
+      getItem: k => (k in mem ? mem[k] : null),
+      setItem: (k,v) => { mem[k] = String(v); },
+      removeItem: k => { delete mem[k]; }
+    };
+  }
+})();
+let store;
+try{ store = JSON.parse(storage.getItem(LS) || 'null'); }catch(e){ store = null; }
+if(!store){ try{ store = JSON.parse(storage.getItem('b1b2_progress') || '{}'); }catch(e){ store = {}; } }
+
+// миграция со старой схемы (d1..d6)
+if(!store.v){
+  const old = store;
+  store = {v:2, lessons:{}, reviews:{}, srs:{}, act:{}, streak:{count:0,last:''}, history:[], lastDay:0};
+  const map = {d1:'l0', d2:'l1', d3:'l2'};
+  Object.keys(map).forEach(k=>{
+    if(old[k]) store.lessons[map[k]] = {learned:old[k].learned||[], score:old[k].score||null};
+  });
+  save();
+}
+store.lessons ||= {}; store.reviews ||= {}; store.srs ||= {};
+store.act ||= {}; store.streak ||= {count:0,last:''}; store.history ||= [];
+store.lastDay ||= 0;
+
+function save(){ try{ storage.setItem(LS, JSON.stringify(store)); }catch(e){} }
+
+let cur = Math.min(store.lastDay, SCHED.length-1);
+let mode = 'learn';
+let lastPractice = 'flashcards';
+
+function entry(){ return SCHED[cur]; }
+function isReviewDay(){ return entry().type === 'review'; }
+function lessonState(i){ return store.lessons['l'+i] ||= {learned:[], score:null}; }
+function curWords(){
+  const e = entry();
+  if(e.type==='review') return e.from.flatMap(i=>LESSONS[i].words);
+  return LESSONS[e.li].words;
+}
+function dayNum(){ return cur+1; }
+
+/* ================= ДАТЫ / СТРИК / АКТИВНОСТЬ ================= */
+function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function today(){ return iso(new Date()); }
+function addDays(ds,n){ const d=new Date(ds+'T12:00:00'); d.setDate(d.getDate()+n); return iso(d); }
+
+function bump(){
+  const t = today();
+  store.act[t] = (store.act[t]||0)+1;
+  const s = store.streak;
+  if(s.last !== t){
+    s.count = (s.last === addDays(t,-1)) ? s.count+1 : 1;
+    s.last = t;
+  }
+  save(); renderStreak();
+}
+function renderStreak(){
+  const s = store.streak;
+  const alive = s.last===today() || s.last===addDays(today(),-1);
+  document.getElementById('streakEl').textContent = '🔥 ' + (alive ? s.count : 0);
+}
+
+/* ================= SRS =================
+   Ошибка → слово сразу в очереди. Каждый верный ответ в «Повторить»
+   двигает его дальше: +1 день, +3 дня, +7 дней, потом слово выучено. */
+const SRS_INT = [0,1,3,7];
+function srsWrong(en){
+  if(!WORDMAP[en]) return;
+  store.srs[en] = {box:0, due:today()};
+  save(); updateBadge();
+}
+function srsRight(en){
+  const e = store.srs[en];
+  if(!e) return;
+  e.box++;
+  if(e.box >= SRS_INT.length){ delete store.srs[en]; }   // слово выучено — выпускаем
+  else e.due = addDays(today(), SRS_INT[e.box]);
+  save(); updateBadge();
+}
+function dueList(){
+  const t = today();
+  return Object.keys(store.srs).filter(k=>store.srs[k].due<=t && WORDMAP[k]);
+}
+function updateBadge(){
+  const n = dueList().length;
+  document.getElementById('srsBadge').textContent = n || '';
+}
+
+/* ================= ИСПАНСКИЕ БУКВЫ ================= */
+const CHARS = [];
+function charbarHTML(){
+  return '<div class="charbar">'+CHARS.map(c=>'<button type="button" class="ch">'+c+'</button>').join('')+'</div>';
+}
+function wireCharbar(scope, input){
+  scope.querySelectorAll('.ch').forEach(b=>{
+    b.onclick = ()=>{
+      if(input.disabled) return;
+      const s = input.selectionStart ?? input.value.length;
+      const e = input.selectionEnd ?? s;
+      input.value = input.value.slice(0,s) + b.textContent + input.value.slice(e);
+      input.focus();
+      input.setSelectionRange(s+1, s+1);
+    };
+  });
+}
+function norm(s){
+  return s.toLowerCase().trim()
+    .replace(/[.,;!?¿¡]/g,'')
+    .normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/ё/g,'е');
+}
+
+/* ================= КОНФЕТТИ ================= */
+function confetti(){
+  const cols = ['var(--accent)','var(--good)','var(--accent-2)','#ffffff'];
+  for(let i=0;i<70;i++){
+    const d = document.createElement('div');
+    d.className = 'conf';
+    d.style.left = Math.random()*100 + 'vw';
+    d.style.background = cols[i%4];
+    d.style.animationDelay = (Math.random()*0.5) + 's';
+    d.style.transform = 'rotate('+(Math.random()*360)+'deg)';
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove(), 3500);
+  }
+}
+
+/* ================= ШАПКА / НАВИГАЦИЯ ПО ДНЯМ ================= */
+function renderHeader(){
+  const e = entry();
+  const review = e.type==='review';
+  document.getElementById('dayNum').textContent = dayNum();
+  const sub = document.getElementById('daySub');
+  sub.textContent = review ? 'ПОВТОРЕНИЕ' : LESSONS[e.li].topic;
+  sub.style.color = review ? 'var(--accent-bright)' : '';
+  sub.style.fontWeight = review ? '700' : '';
+  document.getElementById('prev').disabled = cur===0;
+  document.getElementById('next').disabled = cur===SCHED.length-1;
+  document.querySelector('#mainTabs button[data-tab="learn"]').style.display = review ? 'none' : '';
+  const heroCard = document.querySelector('.hero-card');
+  if(heroCard){
+    heroCard.innerHTML = review
+      ? '<b>День '+dayNum()+' · Повторение</b><br>Большой тест по словам трёх предыдущих уроков ('+curWords().length+' слов).<br>Проверь, что закрепилось.'
+      : '<b>День '+dayNum()+' · '+LESSONS[e.li].topic+'</b><br>20 новых английских слов с транскрипцией и переводом.<br>Прогресс сохраняется автоматически.';
+  }
+}
+function renderProgress(){
+  const e = entry();
+  let pct = 0;
+  if(e.type==='lesson'){
+    const st = lessonState(e.li);
+    pct = Math.round(st.learned.length / LESSONS[e.li].words.length * 100);
+  } else {
+    const sc = store.reviews['r'+dayNum()];
+    pct = sc && sc.score ? Math.round(sc.score.c/sc.score.t*100) : 0;
+  }
+  document.getElementById('progBar').style.width = pct + '%';
+}
+
+/* ================= ПОДСКАЗКА-ПОПАП ================= */
+const popup = document.getElementById('wordPopup');
+let popTimer = null;
+function showPopup(el, word){
+  document.getElementById('popEn').textContent = word.en;
+  document.getElementById('popIpa').textContent = word.ipa || '';
+  document.getElementById('popRu').textContent = word.ru;
+  const rect = el.getBoundingClientRect();
+  const pw = 260;
+  let left = rect.left + window.scrollX;
+  let top = rect.bottom + window.scrollY + 8;
+  if(left + pw > window.innerWidth - 16) left = window.innerWidth - pw - 16;
+  popup.style.left = left+'px';
+  popup.style.top = top+'px';
+  popup.classList.add('show');
+  clearTimeout(popTimer);
+  popTimer = setTimeout(()=>popup.classList.remove('show'), 2800);
+}
+document.addEventListener('click', e=>{
+  if(!e.target.closest('td.en')) popup.classList.remove('show');
+});
+
+/* ================= УЧИТЬ ================= */
+function renderLearn(){
+  const e = entry();
+  if(e.type!=='lesson'){ document.getElementById('rows').innerHTML=''; return; }
+  const words = LESSONS[e.li].words, st = lessonState(e.li);
+  document.getElementById('rows').innerHTML = words.map((w,i)=>{
+    const on = st.learned.includes(i) ? 'checked' : '';
+    const cls = st.learned.includes(i) ? 'learned' : '';
+    return `<tr class="${cls}" style="animation-delay:${i*22}ms">
+      <td class="num">${i+1}</td>
+      <td class="en" data-i="${i}">${w.en}</td>
+      <td class="ipa">${w.ipa||''}</td>
+      <td>${w.ru}</td>
+      
+      <td class="chk"><input type="checkbox" data-i="${i}" ${on}></td>
+    </tr>`;
+  }).join('');
+
+  document.querySelectorAll('#rows td.en').forEach(td=>{
+    td.addEventListener('click', ()=>showPopup(td, words[+td.dataset.i]));
+  });
+  document.querySelectorAll('#rows input').forEach(c=>{
+    c.onchange = ev=>{
+      const i = +ev.target.dataset.i, st = lessonState(e.li);
+      if(ev.target.checked){ if(!st.learned.includes(i)) st.learned.push(i); }
+      else st.learned = st.learned.filter(x=>x!==i);
+      save(); bump(); renderProgress();
+      ev.target.closest('tr').classList.toggle('learned', ev.target.checked);
+    };
+  });
+  renderProgress();
+}
+
+/* ================= КАРТОЧКИ ================= */
+let fc = { items:[], idx:0, known:new Set() };
+function initFlash(){
+  fc.items = curWords().slice();
+  fc.idx = 0; fc.known = new Set();
+  renderFlash();
+}
+function shuffleFlash(){
+  for(let i=fc.items.length-1;i>0;i--){
+    const j=(Math.random()*(i+1))|0;
+    [fc.items[i],fc.items[j]]=[fc.items[j],fc.items[i]];
+  }
+  fc.idx=0;
+  document.getElementById('fcCard').classList.remove('flipped');
+  renderFlash();
+}
+function renderFlash(){
+  document.getElementById('fcCard').classList.remove('flipped');
+  const w = fc.items[fc.idx];
+  document.getElementById('fcWord').textContent = w.en;
+  document.getElementById('fcIpa').textContent = w.ipa||'';
+  document.getElementById('fcRu').textContent = w.ru;
+  document.getElementById('fcCounter').textContent = (fc.idx+1)+' / '+fc.items.length;
+  document.getElementById('fcPrev').disabled = fc.idx===0;
+  document.getElementById('fcNext').disabled = fc.idx===fc.items.length-1;
+  document.getElementById('fcStatus').textContent = fc.known.size>0 ? `Знаешь: ${fc.known.size} из ${fc.items.length}` : '';
+}
+function markCard(type){
+  const w = fc.items[fc.idx];
+  if(type==='know'){ fc.known.add(fc.idx); srsRight(w.en); }
+  else { fc.known.delete(fc.idx); srsWrong(w.en); }
+  bump();
+  if(fc.idx < fc.items.length-1){ fc.idx++; renderFlash(); }
+  else document.getElementById('fcStatus').textContent = `Готово! Знаешь ${fc.known.size} из ${fc.items.length} слов.`;
+}
+document.getElementById('fcCard').addEventListener('click', ()=>{
+  document.getElementById('fcCard').classList.toggle('flipped');
+});
+document.getElementById('fcPrev').onclick = ()=>{ if(fc.idx>0){fc.idx--; renderFlash();} };
+document.getElementById('fcNext').onclick = ()=>{ if(fc.idx<fc.items.length-1){fc.idx++; renderFlash();} };
+
+/* ================= ПАРЫ ================= */
+let matchState = { selected:null, matched:new Set(), total:0, errors:0, locked:false };
+function startMatch(){
+  document.getElementById('matchCtl').style.display='';
+  const shuffled = [...curWords()].sort(()=>Math.random()-.5).slice(0,6);
+  const enItems = shuffled.map((w,i)=>({id:'en_'+i, text:w.en, pair:i, side:'en'}));
+  const ruItems = shuffled.map((w,i)=>({id:'ru_'+i, text:w.ru, pair:i, side:'ru'}));
+  matchState = {
+    selected:null,
+    left:[...enItems].sort(()=>Math.random()-.5),
+    right:[...ruItems].sort(()=>Math.random()-.5),
+    matched:new Set(), total:shuffled.length, errors:0, locked:false
+  };
+  renderMatch();
+}
+function renderMatch(){
+  const grid = document.getElementById('matchGrid');
+  const ms = matchState;
+  if(ms.matched.size === ms.total*2){
+    document.getElementById('matchScore').innerHTML='';
+    document.getElementById('matchCtl').style.display='none';
+    grid.innerHTML = `<div class="match-result" style="grid-column:1/-1">
+      <div class="big">🎉</div>
+      <p>Все ${ms.total} пар верно!<br>Ошибок: ${ms.errors}</p>
+      <button class="btn" onclick="startMatch()">Играть снова</button>
+    </div>`;
+    if(ms.errors===0) confetti();
+    return;
+  }
+  document.getElementById('matchScore').textContent =
+    `Совпало: ${ms.matched.size/2} / ${ms.total} · Ошибок: ${ms.errors}`;
+  let html = '';
+  for(let i=0;i<ms.left.length;i++){
+    const L=ms.left[i], R=ms.right[i];
+    const lM=ms.matched.has('en_'+L.pair), rM=ms.matched.has('ru_'+R.pair);
+    const lS=ms.selected&&ms.selected.id===L.id, rS=ms.selected&&ms.selected.id===R.id;
+    const lW=ms.wrongIds&&ms.wrongIds.includes(L.id), rW=ms.wrongIds&&ms.wrongIds.includes(R.id);
+    html += `<button class="match-btn ${lM?'correct':''} ${lS?'selected':''} ${lW?'wrong':''}"
+      data-id="${L.id}" data-pair="${L.pair}" data-side="en" ${lM?'disabled':''}>${L.text}</button>`;
+    html += `<button class="match-btn ${rM?'correct':''} ${rS?'selected':''} ${rW?'wrong':''}"
+      data-id="${R.id}" data-pair="${R.pair}" data-side="ru" ${rM?'disabled':''}>${R.text}</button>`;
+  }
+  grid.innerHTML = html;
+  grid.querySelectorAll('.match-btn:not([disabled])').forEach(btn=>{
+    btn.onclick = ()=>handleMatchClick(btn);
+  });
+}
+function handleMatchClick(btn){
+  const ms = matchState;
+  if(ms.locked) return;
+  const id=btn.dataset.id, pair=+btn.dataset.pair, side=btn.dataset.side;
+  ms.wrongIds = null;
+  if(!ms.selected){ ms.selected={id,pair,side}; renderMatch(); return; }
+  if(ms.selected.id===id){ ms.selected=null; renderMatch(); return; }
+  if(ms.selected.side===side){ ms.selected={id,pair,side}; renderMatch(); return; }
+  if(ms.selected.pair===pair){
+    ms.matched.add('en_'+pair); ms.matched.add('ru_'+pair);
+    ms.selected=null; bump(); renderMatch();
+  } else {
+    ms.locked=true; ms.errors++;
+    ms.wrongIds=[ms.selected.id, id];
+    bump(); renderMatch();
+    setTimeout(()=>{ ms.wrongIds=null; ms.selected=null; ms.locked=false; renderMatch(); }, 800);
+  }
+}
+
+/* ================= ТЕСТ ================= */
+let quiz = null;
+function startTest(){
+  const items = curWords().map(w=>({...w, dir: Math.random()<0.5 ? 'en2ru':'ru2en'}));
+  for(let i=items.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[items[i],items[j]]=[items[j],items[i]];}
+  quiz = {items, idx:0, correct:0, answered:false};
+  renderQuiz();
+}
+function accepted(item){
+  if(item.dir==='en2ru') return item.ru.split(/[,;(]/).map(s=>norm(s)).filter(Boolean);
+  return [norm(item.en)];
+}
+function renderQuiz(){
+  const t = document.getElementById('test');
+  if(quiz.idx >= quiz.items.length){
+    const total = quiz.items.length;
+    const e = entry();
+    if(e.type==='lesson') lessonState(e.li).score = {c:quiz.correct, t:total};
+    else (store.reviews['r'+dayNum()] ||= {}).score = {c:quiz.correct, t:total};
+    store.history.push({d:today(), day:dayNum(), c:quiz.correct, t:total});
+    if(store.history.length>60) store.history = store.history.slice(-60);
+    save();
+    if(quiz.correct===total && total>0) confetti();
+    t.innerHTML = `<div class="card result">
+      <div class="dir">Результат теста · День ${dayNum()}</div>
+      <div class="score">${quiz.correct} / ${total}</div>
+      <div class="hint">${quiz.correct===total?'Идеально! Все слова верно.':'Ошибки уже ждут во вкладке «Повторить».'}</div>
+      <div class="actions"><button class="btn" onclick="startTest()">Пройти заново</button>
+      <button class="btn ghost" onclick="setMode('learn')">К словам</button></div>
+    </div>`;
+    renderProgress();
+    return;
+  }
+  const it = quiz.items[quiz.idx];
+  const ask = it.dir==='en2ru' ? it.en : it.ru;
+  const dirText = it.dir==='en2ru' ? 'Напиши перевод на русском' : 'Напиши слово на английском';
+  t.innerHTML = `<div class="card">
+    <div class="counter">${quiz.idx+1} / ${quiz.items.length} · верно: ${quiz.correct}</div>
+    <div class="dir">${dirText}</div>
+    <div class="word">${ask}</div>
+    <div class="hint">${it.dir==='en2ru'? (it.ipa||'') : ''}</div>
+    <input type="text" id="ans" autocomplete="off" autocapitalize="off" placeholder="Твой ответ...">
+    ${it.dir==='ru2en' ? charbarHTML() : ''}
+    <div class="actions">
+      <button class="btn" id="check">Проверить</button>
+      <button class="btn ghost" id="skip">Не знаю</button>
+    </div>
+    <div class="feedback" id="fb"></div>
+  </div>`;
+  const inp = document.getElementById('ans');
+  inp.focus();
+  wireCharbar(t, inp);
+  quiz.answered = false;
+  const finish = (ok, skipped)=>{
+    quiz.answered = true;
+    inp.disabled = true;
+    const fb = document.getElementById('fb');
+    const right = it.dir==='en2ru' ? it.ru : it.en;
+    if(ok){
+      quiz.correct++; srsRight(it.en);
+      fb.textContent = '✓ Верно!'; fb.className = 'feedback good';
+    } else {
+      srsWrong(it.en);
+      fb.textContent = (skipped?'Правильно: ':'✗ Правильно: ') + right;
+      fb.className = 'feedback bad';
+    }
+    bump();
+    document.getElementById('check').textContent = 'Далее ›';
+  };
+  const submit = ()=>{
+    if(quiz.answered){ quiz.idx++; renderQuiz(); return; }
+    finish(accepted(it).includes(norm(inp.value)), false);
+  };
+  document.getElementById('check').onclick = submit;
+  document.getElementById('skip').onclick = ()=>{ if(!quiz.answered) finish(false, true); };
+  inp.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+}
+
+/* ================= ПОВТОРИТЬ (SRS) ================= */
+let rev = null;
+function startReview(){
+  const due = dueList();
+  const box = document.getElementById('review');
+  if(!due.length){
+    box.innerHTML = `<div class="card result">
+      <div class="big" style="font-size:48px">🎉</div>
+      <div class="hint" style="margin-top:12px">Пока нечего повторять!<br>
+      Слова попадают сюда сразу после ошибок в тесте, фразах и карточках —<br>а потом возвращаются по умной схеме: через 1, 3 и 7 дней.</div>
+      <div class="actions" style="margin-top:20px"><button class="btn ghost" onclick="setMode('test')">Пройти тест дня</button></div>
+    </div>`;
+    return;
+  }
+  const items = due.map(en=>({...WORDMAP[en], dir: Math.random()<0.5?'en2ru':'ru2en'}));
+  for(let i=items.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[items[i],items[j]]=[items[j],items[i]];}
+  rev = {items, idx:0, correct:0, answered:false};
+  renderReview();
+}
+function renderReview(){
+  const t = document.getElementById('review');
+  if(rev.idx >= rev.items.length){
+    if(rev.correct===rev.items.length) confetti();
+    t.innerHTML = `<div class="card result">
+      <div class="dir">Повторение завершено</div>
+      <div class="score">${rev.correct} / ${rev.items.length}</div>
+      <div class="hint">${rev.correct===rev.items.length?'Отлично! Слова уходят на следующий интервал.':'Ошибки вернутся завтра.'}</div>
+      <div class="actions"><button class="btn ghost" onclick="setMode('learn')">К словам</button></div>
+    </div>`;
+    return;
+  }
+  const it = rev.items[rev.idx];
+  const ask = it.dir==='en2ru' ? it.en : it.ru;
+  const dirText = it.dir==='en2ru' ? 'Напиши перевод на русском' : 'Напиши слово на английском';
+  const box = store.srs[it.en] ? store.srs[it.en].box : 0;
+  t.innerHTML = `<div class="card">
+    <div class="counter">${rev.idx+1} / ${rev.items.length} · верно: ${rev.correct} · ступень ${box+1} из 4</div>
+    <div class="dir">${dirText}</div>
+    <div class="word">${ask}</div>
+    <div class="hint">${it.dir==='en2ru'? (it.ipa||'') : ''}</div>
+    <input type="text" id="rAns" autocomplete="off" autocapitalize="off" placeholder="Твой ответ...">
+    ${it.dir==='ru2en' ? charbarHTML() : ''}
+    <div class="actions">
+      <button class="btn" id="rCheck">Проверить</button>
+      <button class="btn ghost" id="rSkip">Не знаю</button>
+    </div>
+    <div class="feedback" id="rFb"></div>
+  </div>`;
+  const inp = document.getElementById('rAns');
+  inp.focus();
+  wireCharbar(t, inp);
+  rev.answered = false;
+  const finish = (ok, skipped)=>{
+    rev.answered = true;
+    inp.disabled = true;
+    const fb = document.getElementById('rFb');
+    const right = it.dir==='en2ru' ? it.ru : it.en;
+    if(ok){
+      rev.correct++; srsRight(it.en);
+      fb.textContent = '✓ Верно!'; fb.className='feedback good';
+    } else {
+      srsWrong(it.en);
+      fb.textContent = (skipped?'Правильно: ':'✗ Правильно: ') + right;
+      fb.className='feedback bad';
+    }
+    bump();
+    document.getElementById('rCheck').textContent = 'Далее ›';
+  };
+  const submit = ()=>{
+    if(rev.answered){ rev.idx++; renderReview(); return; }
+    const ok = it.dir==='en2ru'
+      ? it.ru.split(/[,;(]/).map(s=>norm(s)).filter(Boolean).includes(norm(inp.value))
+      : norm(inp.value)===norm(it.en);
+    finish(ok, false);
+  };
+  document.getElementById('rCheck').onclick = submit;
+  document.getElementById('rSkip').onclick = ()=>{ if(!rev.answered) finish(false, true); };
+  inp.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+}
+
+/* ================= ФРАЗЫ ================= */
+let phrState = { items:[], idx:0, answered:false };
+function initPhrases(){
+  phrState.items = curWords().slice();
+  for(let i=phrState.items.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[phrState.items[i],phrState.items[j]]=[phrState.items[j],phrState.items[i]];}
+  phrState.idx = 0;
+  renderPhrase();
+}
+function renderPhrase(){
+  const w = phrState.items[phrState.idx];
+  phrState.answered = false;
+  document.getElementById('phrCounter').textContent = (phrState.idx+1)+' / '+phrState.items.length;
+  const sentEl = document.getElementById('phrSentence');
+  const transEl = document.getElementById('phrTranslation');
+  const inp = document.getElementById('phrInput');
+  const fb = document.getElementById('phrFb');
+  document.getElementById('phrCheck').textContent = 'Проверить';
+  fb.textContent=''; fb.className='feedback';
+  inp.value=''; inp.disabled=false;
+  if(w.sentence){
+    const re = new RegExp('\\b'+w.en.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i');
+    const blanked = w.sentence.replace(re, '______');
+    sentEl.innerHTML = blanked.replace('______','<span style="color:var(--accent-bright);font-weight:700">______</span>');
+    transEl.textContent = w.strans || '';
+  } else {
+    sentEl.innerHTML = 'Впиши перевод слова: <span style="color:var(--accent-bright);font-weight:700">'+w.ru+'</span>';
+    transEl.textContent = '';
+  }
+  inp.focus();
+}
+function setupPhraseButtons(){
+  const inp = document.getElementById('phrInput');
+  const fb = document.getElementById('phrFb');
+  const checkBtn = document.getElementById('phrCheck');
+  document.getElementById('phrChars').innerHTML = CHARS.map(c=>'<button type="button" class="ch">'+c+'</button>').join('');
+  wireCharbar(document.getElementById('phrases'), inp);
+
+  const submit = ()=>{
+    if(phrState.answered){
+      if(phrState.idx < phrState.items.length-1){ phrState.idx++; renderPhrase(); }
+      else { fb.textContent='✓ Все фразы пройдены!'; fb.className='feedback good'; }
+      return;
+    }
+    const w = phrState.items[phrState.idx];
+    const ok = norm(inp.value) === norm(w.en);
+    phrState.answered = true;
+    inp.disabled = true;
+    if(ok){ srsRight(w.en); fb.textContent='✓ Верно!'; fb.className='feedback good'; }
+    else { srsWrong(w.en); fb.textContent='✗ Правильно: '+w.en; fb.className='feedback bad'; }
+    bump();
+    checkBtn.textContent='Далее ›';
+  };
+  checkBtn.onclick = submit;
+  document.getElementById('phrSkip').onclick = ()=>{
+    if(phrState.answered){ submit(); return; }
+    const w = phrState.items[phrState.idx];
+    phrState.answered = true;
+    inp.disabled = true;
+    srsWrong(w.en);
+    fb.textContent='Правильно: '+w.en; fb.className='feedback bad';
+    bump();
+    checkBtn.textContent='Далее ›';
+  };
+  inp.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+}
+setupPhraseButtons();
+
+/* ================= ПРОГРЕСС (СТАТИСТИКА) ================= */
+function renderStats(){
+  const learnedTotal = Object.values(store.lessons).reduce((s,l)=>s+(l.learned?l.learned.length:0),0);
+  const dueN = dueList().length;
+  const s = store.streak;
+  const alive = s.last===today() || s.last===addDays(today(),-1);
+  const lastTest = store.history.length ? store.history[store.history.length-1] : null;
+  document.getElementById('statCards').innerHTML =
+    '<div class="stat-card"><div class="k">Выучено</div><div class="v" style="color:var(--good)">'+learnedTotal+'</div><div class="s">из '+TOTAL_WORDS+' слов</div></div>'+
+    '<div class="stat-card"><div class="k">Серия</div><div class="v">🔥 '+(alive?s.count:0)+'</div><div class="s">дней подряд</div></div>'+
+    '<div class="stat-card"><div class="k">На повторении</div><div class="v" style="color:var(--bad)">'+dueN+'</div><div class="s">слов ждут сегодня</div></div>'+
+    '<div class="stat-card"><div class="k">Последний тест</div><div class="v">'+(lastTest?lastTest.c+'/'+lastTest.t:'—')+'</div><div class="s">'+(lastTest?('день '+lastTest.day):'ещё не было')+'</div></div>';
+
+  // теплокарта: 12 недель
+  const cells = [];
+  const now = new Date();
+  const offset = (now.getDay()+6)%7; // понедельник = 0
+  const daysBack = 7*11 + offset;
+  for(let i=daysBack;i>=0;i--){
+    const d = new Date(now); d.setDate(d.getDate()-i);
+    const ds = iso(d);
+    const n = store.act[ds]||0;
+    const cls = n===0?'':' hm'+(n<3?1:n<8?2:3);
+    cells.push('<div class="hm'+cls+'" title="'+ds+': '+n+'"></div>');
+  }
+  document.getElementById('heatmapBox').innerHTML = '<div class="heatmap">'+cells.join('')+'</div>';
+
+  // история тестов
+  const hist = store.history.slice(-8).reverse();
+  document.getElementById('histBox').innerHTML = hist.length
+    ? hist.map(h=>{
+        const pct = Math.round(h.c/h.t*100);
+        return '<div style="display:flex;align-items:center;gap:10px;margin:7px 0">'+
+          '<span style="color:var(--muted);font-size:12px;min-width:135px">'+h.d+' · день '+h.day+'</span>'+
+          '<div style="flex:1;background:var(--surface-2);border-radius:5px;height:10px;overflow:hidden"><div class="hist-bar" style="width:'+pct+'%"></div></div>'+
+          '<b style="min-width:52px;text-align:right;font-size:13px">'+h.c+'/'+h.t+'</b></div>';
+      }).join('')
+    : '<p style="color:var(--muted);font-size:14px">Пройди первый тест — результаты появятся здесь.</p>';
+
+  // слова текущего дня
+  const e = entry();
+  const st = e.type==='lesson' ? lessonState(e.li) : {learned:[]};
+  document.getElementById('topWords').innerHTML = curWords().map((w,i)=>{
+    const known = e.type==='lesson' && st.learned.includes(i);
+    const col = known ? 'var(--good)' : 'var(--accent-bright)';
+    return '<div style="background:var(--surface-2);border:1px solid var(--border-strong);padding:7px 12px;border-radius:10px;font-size:13px">'+
+      '<span style="color:'+col+';font-weight:600">'+w.en+'</span>'+
+      '<span style="color:var(--muted)"> — '+w.ru+'</span></div>';
+  }).join('');
+
+  const imp = document.getElementById('impFile');
+  imp.onchange = ()=>{
+    const f = imp.files[0];
+    if(!f) return;
+    const r = new FileReader();
+    r.onload = ()=>{
+      try{
+        const obj = JSON.parse(r.result);
+        if(!obj.v) throw new Error('bad file');
+        store = obj; save();
+        location.reload();
+      }catch(e){ alert('Не удалось прочитать файл прогресса.'); }
+    };
+    r.readAsText(f);
+  };
+}
+function exportProgress(){
+  const blob = new Blob([JSON.stringify(store,null,1)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'espanol-progress.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ================= ТЕМЫ ================= */
+const THEME_LIST = {
+  noche:     {c:'#e0a93c', bg:'#211d1a', n:'Golden Night'},
+  panaderia: {c:'#8a5a3b', bg:'#f3ecdf', n:'Warm Cream'},
+  soleado:   {c:'#f59e0b', bg:'#ffd94f', n:'Sunny'},
+  pastel:    {c:'#e07a5f', bg:'#a9bd9d', n:'Soft Pastel'},
+  te:        {c:'#a8452e', bg:'#f5f1e8', n:'Ink & Paper'}
+};
+function buildThemeDots(){
+  const box = document.getElementById('themeDots');
+  box.innerHTML = '';
+  const curTheme = document.documentElement.dataset.theme;
+  Object.keys(THEME_LIST).forEach(k=>{
+    const t = THEME_LIST[k];
+    const b = document.createElement('button');
+    b.className = 'theme-dot' + (k===curTheme?' active':'');
+    b.title = t.n;
+    b.style.background = 'linear-gradient(135deg,'+t.bg+' 50%,'+t.c+' 50%)';
+    b.onclick = ()=>{
+      document.documentElement.dataset.theme = k;
+      try{ localStorage.setItem('english_theme', k); }catch(e){}
+      box.querySelectorAll('.theme-dot').forEach(d=>d.classList.remove('active'));
+      b.classList.add('active');
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ================= НАВИГАЦИЯ ================= */
+const PANELS = ['learn','flashcards','match','test','review','phrases','stats'];
+function groupOf(m){
+  if(m==='learn'||m==='test'||m==='review'||m==='stats') return m;
+  return 'practice';
+}
+function renderPanel(m){
+  if(m==='learn') renderLearn();
+  else if(m==='flashcards') initFlash();
+  else if(m==='match') startMatch();
+  else if(m==='test') startTest();
+  else if(m==='review') startReview();
+  else if(m==='phrases') initPhrases();
+  else if(m==='stats') renderStats();
+}
+function syncTabs(m){
+  const g = groupOf(m);
+  document.querySelectorAll('#mainTabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===g));
+  const sub = document.getElementById('subTabs');
+  sub.style.display = g==='practice' ? 'flex' : 'none';
+  sub.querySelectorAll('button').forEach(b=>b.classList.toggle('active', b.dataset.mode===m));
+  if(g==='practice') lastPractice = m;
+}
+function setMode(m){
+  const prev = mode;
+  mode = m;
+  syncTabs(m);
+  const oldEl = document.getElementById(prev);
+  const newEl = document.getElementById(m);
+  if(prev === m || !oldEl || oldEl.style.display === 'none'){
+    PANELS.forEach(id=>{ document.getElementById(id).style.display = id===m?'block':'none'; });
+    renderPanel(m);
+    newEl.classList.remove('slide-out');
+    newEl.classList.add('slide-in');
+    newEl.addEventListener('animationend', ()=>newEl.classList.remove('slide-in'), {once:true});
+    return;
+  }
+  oldEl.classList.remove('slide-in');
+  oldEl.classList.add('slide-out');
+  let switched = false;
+  const doSwitch = ()=>{
+    if(switched) return;
+    switched = true;
+    oldEl.classList.remove('slide-out');
+    PANELS.forEach(id=>{ document.getElementById(id).style.display = id===m?'block':'none'; });
+    renderPanel(m);
+    newEl.classList.add('slide-in');
+    const clearIn = ()=>newEl.classList.remove('slide-in');
+    newEl.addEventListener('animationend', clearIn, {once:true});
+    setTimeout(clearIn, 500);
+  };
+  oldEl.addEventListener('animationend', doSwitch, {once:true});
+  setTimeout(doSwitch, 300);
+}
+document.querySelectorAll('#mainTabs button').forEach(b=>{
+  b.onclick = ()=>{ const t=b.dataset.tab; setMode(t==='practice' ? lastPractice : t); };
+});
+document.querySelectorAll('#subTabs button').forEach(b=>{
+  b.onclick = ()=>setMode(b.dataset.mode);
+});
+function gotoDay(n){
+  cur = n;
+  store.lastDay = cur; save();
+  renderHeader(); renderProgress();
+  setMode(isReviewDay() ? 'flashcards' : 'learn');
+}
+document.getElementById('prev').onclick = ()=>{ if(cur>0) gotoDay(cur-1); };
+document.getElementById('next').onclick = ()=>{ if(cur<SCHED.length-1) gotoDay(cur+1); };
+
+/* ================= СТАРТ ================= */
+function showFatal(msg){
+  let b = document.getElementById('errBanner');
+  if(!b){
+    b = document.createElement('div');
+    b.id = 'errBanner';
+    b.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;z-index:3000;background:#8a2020;color:#fff;padding:10px 44px 10px 14px;border-radius:10px;font:13px/1.5 -apple-system,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.4)';
+    const x = document.createElement('span');
+    x.textContent = '✕';
+    x.style.cssText = 'position:absolute;right:14px;top:9px;cursor:pointer;font-size:15px';
+    x.onclick = ()=>b.remove();
+    b.appendChild(x);
+    const t = document.createElement('span');
+    t.id = 'errBannerText';
+    b.insertBefore(t, x);
+    document.body.appendChild(b);
+  }
+  document.getElementById('errBannerText').textContent = '⚠ ' + msg;
+}
+window.addEventListener('error', ev=>{
+  showFatal('Ошибка: ' + (ev.message || 'неизвестная') + (ev.lineno ? ' (строка ' + ev.lineno + ')' : ''));
+});
+try{ renderHeader(); }catch(e){ showFatal('renderHeader: ' + e.message); }
+try{ renderStreak(); }catch(e){}
+try{ updateBadge(); }catch(e){}
+try{ buildThemeDots(); }catch(e){}
+try{
+  setMode(isReviewDay() ? 'flashcards' : 'learn');
+}catch(e){
+  showFatal('Запуск: ' + e.message);
+  try{ document.getElementById('learn').style.display = 'block'; renderLearn(); }catch(_){}
+}
+</script>
+</body>
+</html>
