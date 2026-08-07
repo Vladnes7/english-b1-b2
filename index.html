@@ -384,6 +384,17 @@
   .pb-empty{text-align:center;color:var(--muted);padding:36px 16px;font-size:14px}
   @media (min-width:900px){ .pb-list{grid-template-columns:1fr 1fr} }
 
+  /* ---- СЕКЦИЯ SPEAKING (слова с занятий) ---- */
+  #speaking{display:none}
+  .sp-item .sipa{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:2px}
+  .sp-item .snote{font-size:12px;color:var(--accent-bright);margin-top:6px;line-height:1.45;
+    padding-left:9px;border-left:2px solid color-mix(in srgb,var(--accent) 55%,transparent)}
+  .sp-topic-ru{color:var(--muted);font-weight:400;font-size:13px}
+  .sp-note-card{background:color-mix(in srgb,var(--accent) 9%,var(--surface));
+    border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);border-radius:12px;
+    padding:11px 14px;font-size:13px;color:var(--text);line-height:1.5;margin-top:14px;text-align:left}
+  .sp-note-card b{color:var(--accent-bright)}
+
   footer{color:var(--muted);font-size:12px;text-align:center;margin-top:36px;line-height:1.8;letter-spacing:.2px}
 
   ::-webkit-scrollbar{width:6px;height:6px}
@@ -481,6 +492,7 @@
       <button data-tab="test">Тест</button>
       <button data-tab="review">Повторить<span class="badge" id="srsBadge"></span></button>
       <button data-tab="phrasebook">Фразы</button>
+      <button data-tab="speaking">Speaking</button>
       <button data-tab="stats">Прогресс</button>
     </div>
     <div class="themes" id="themeDots"></div>
@@ -615,6 +627,51 @@
     </div>
   </div>
 
+
+  <!-- SPEAKING (слова с занятий с репетитором) -->
+  <div id="speaking">
+    <div class="pb-top">
+      <div class="pb-count" id="spCount"></div>
+      <div class="pb-modes">
+        <button id="spModeList" class="active">Список</button>
+        <button id="spModeCards">Карточки</button>
+      </div>
+    </div>
+    <div id="spListView">
+      <input type="text" class="pb-search" id="spSearch" autocomplete="off" placeholder="Поиск по слову или переводу...">
+      <div class="pb-cats" id="spCats"></div>
+      <div id="spBody"></div>
+    </div>
+    <div id="spCardsView" style="display:none">
+      <div class="fc-wrap">
+        <div class="fc-card" id="spCard">
+          <div class="fc-front">
+            <div class="fc-label">С занятия</div>
+            <div class="fc-word" id="spCardEn" style="font-size:26px;line-height:1.3"></div>
+            <div class="fc-ipa" id="spCardIpa"></div>
+          </div>
+          <div class="fc-back">
+            <div class="fc-label">Перевод</div>
+            <div class="fc-ru" id="spCardRu" style="font-size:19px;line-height:1.4"></div>
+            <div class="sp-note-card" id="spCardNote" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-hint">Нажми на карточку, чтобы перевернуть</div>
+      <div class="fc-nav">
+        <button id="spPrev">‹</button>
+        <span class="fc-counter" id="spCounter">1 / 1</span>
+        <button id="spNext">›</button>
+      </div>
+      <div class="fc-progress-row">
+        <button id="spKnow">✓ Знаю</button>
+        <button id="spSkip">✗ Ещё учу</button>
+        <button id="spShuffle">⇄ Перемешать</button>
+      </div>
+      <div id="spCardStatus" style="color:var(--muted);font-size:13px;text-align:center;margin-top:12px"></div>
+    </div>
+  </div>
+
   <!-- STATS -->
   <div id="stats" style="display:none">
     <div style="max-width:940px;margin:0 auto">
@@ -640,7 +697,7 @@
   </div>
 
   <footer>
-    Английский B1 → B2 · 300 слов · 100 фраз · прогресс сохраняется в этом браузере автоматически.
+    Английский B1 → B2 · 300 слов · 100 фраз · 107 с занятий · прогресс сохраняется в этом браузере автоматически.
   </footer>
 </div>
 
@@ -650,6 +707,10 @@
   <div class="pop-ipa" id="popIpa"></div>
   <div class="pop-ru" id="popRu"></div>
 </div>
+
+<script id="speaking-data" type="application/json">
+{"topics":[{"cat":"TRAVELLING","ru":"Путешествия","items":[{"en":"the Great Wall of China","ipa":"/ðə ˌɡreɪt ˈwɔːl əv ˈtʃaɪnə/","ru":"Великая Китайская стена","note":"Так правильно. «The Great Chinese Wall» — калька с русского, носители так не говорят."},{"en":"I've been to China","ipa":"/aɪv ˈbiːn tə ˈtʃaɪnə/","ru":"Я был в Китае (и вернулся)"},{"en":"fatty food","ipa":"/ˈfæti fuːd/","ru":"жирная еда"},{"en":"heavy food","ipa":"/ˈhevi fuːd/","ru":"тяжёлая еда"},{"en":"Chinese cuisine","ipa":"/ˌtʃaɪˈniːz kwɪˈziːn/","ru":"китайская кухня"},{"en":"last year I went to Turkey twice","ipa":"/aɪ ˈwent tə ˈtɜːki twaɪs/","ru":"в прошлом году я дважды ездил в Турцию","note":"«I was to Turkey» — ошибка. Правильно: I went to Turkey / I was in Turkey."},{"en":"there's a great view over the sea","ipa":"/ə ˌɡreɪt ˈvjuː ˌəʊvə ðə ˈsiː/","ru":"оттуда прекрасный вид на море"},{"en":"mosque","ipa":"/mɒsk/","ru":"мечеть"},{"en":"traveller","ipa":"/ˈtrævələ/","ru":"путешественник"},{"en":"tourist","ipa":"/ˈtʊərɪst/","ru":"турист"},{"en":"plan in advance","ipa":"/ˌplæn ɪn ədˈvɑːns/","ru":"планировать заранее","note":"«Заранее» — это только in advance; всё выражение = «планировать заранее»."},{"en":"play it by ear","ipa":"/ˌpleɪ ɪt baɪ ˈɪə/","ru":"действовать по обстоятельствам, решать на ходу","note":"В конспекте перевод «плыть по течению» — это не то. Play it by ear = не планировать, решать на месте."},{"en":"go with the flow","ipa":"/ˌɡəʊ wɪð ðə ˈfləʊ/","ru":"плыть по течению, не сопротивляться"},{"en":"heavy rain","ipa":"/ˌhevi ˈreɪn/","ru":"сильный дождь"},{"en":"my plans went amiss","ipa":"/maɪ ˈplænz went əˈmɪs/","ru":"мои планы пошли не так"},{"en":"get over it","ipa":"/ˌɡet ˈəʊvər ɪt/","ru":"пережить, справиться с этим"},{"en":"stick to your plans","ipa":"/ˌstɪk tə jɔː ˈplænz/","ru":"придерживаться плана"},{"en":"advantages","ipa":"/ədˈvɑːntɪdʒɪz/","ru":"преимущества"},{"en":"sights","ipa":"/saɪts/","ru":"достопримечательности"},{"en":"go sightseeing","ipa":"/ˌɡəʊ ˈsaɪtsiːɪŋ/","ru":"осматривать достопримечательности","note":"В конспекте «осмотр их» — это глагольное выражение: go sightseeing."},{"en":"hop-on / hop-off bus","ipa":"/ˌhɒp ɒn ˌhɒp ˈɒf bʌs/","ru":"экскурсионный автобус со свободной посадкой и высадкой"},{"en":"double-decker","ipa":"/ˌdʌbl ˈdekə/","ru":"двухэтажный автобус"},{"en":"convenient","ipa":"/kənˈviːniənt/","ru":"удобный"},{"en":"get on well with","ipa":"/ˌɡet ɒn ˈwel wɪð/","ru":"хорошо ладить с"},{"en":"fall out","ipa":"/ˌfɔːl ˈaʊt/","ru":"поссориться, поругаться"},{"en":"spoil","ipa":"/spɔɪl/","ru":"испортить"},{"en":"identify","ipa":"/aɪˈdentɪfaɪ/","ru":"определить, распознать"},{"en":"talk to somebody","ipa":"/ˈtɔːk tə ˌsʌmbədi/","ru":"разговаривать с кем-то"},{"en":"free / independent","ipa":"/friː, ˌɪndɪˈpendənt/","ru":"свободный / самостоятельный"},{"en":"depend on","ipa":"/dɪˈpend ɒn/","ru":"зависеть от"},{"en":"theme park","ipa":"/ˈθiːm pɑːk/","ru":"парк аттракционов"},{"en":"scared to death","ipa":"/ˌskeəd tə ˈdeθ/","ru":"напуган до смерти"},{"en":"market","ipa":"/ˈmɑːkɪt/","ru":"рынок"},{"en":"locals","ipa":"/ˈləʊklz/","ru":"местные жители"},{"en":"blend in","ipa":"/ˌblend ˈɪn/","ru":"слиться с местными, не выделяться"},{"en":"bring back memories","ipa":"/ˌbrɪŋ bæk ˈmeməriz/","ru":"навевать воспоминания","note":"Обычно говорят bring back memories, а не просто bring memories."},{"en":"remind of a place","ipa":"/rɪˈmaɪnd əv ə ˈpleɪs/","ru":"напоминать о месте"}]},{"cat":"FILMS AND SERIES","ru":"Фильмы и сериалы","items":[{"en":"a series","ipa":"/ˈsɪəriːz/","ru":"сериал (форма не меняется: one series — two series)","note":"Внимание: series = сериал целиком, а не «серия»."},{"en":"an episode","ipa":"/ən ˈepɪsəʊd/","ru":"серия, эпизод","note":"Русская «серия» по-английски episode. Частая ошибка — сказать series."},{"en":"genre","ipa":"/ˈʒɒnrə/","ru":"жанр"},{"en":"thriller","ipa":"/ˈθrɪlə/","ru":"триллер","note":"В конспекте «боевик» — это неверно. Боевик = action film."},{"en":"action film","ipa":"/ˈækʃn fɪlm/","ru":"боевик"},{"en":"plot","ipa":"/plɒt/","ru":"сюжет"},{"en":"suspense","ipa":"/səˈspens/","ru":"напряжённое ожидание, саспенс","note":"Не просто «ожидание» — именно тревожное напряжение перед развязкой."},{"en":"light-hearted","ipa":"/ˌlaɪt ˈhɑːtɪd/","ru":"лёгкий, беззаботный"},{"en":"intense","ipa":"/ɪnˈtens/","ru":"напряжённый"},{"en":"energise","ipa":"/ˈenədʒaɪz/","ru":"заряжать энергией"},{"en":"cheer up","ipa":"/ˌtʃɪər ˈʌp/","ru":"взбодриться, поднять настроение"},{"en":"lift your spirits","ipa":"/ˌlɪft jɔː ˈspɪrɪts/","ru":"поднимать настроение"},{"en":"feel low / feel blue","ipa":"/ˌfiːl ˈləʊ, ˌfiːl ˈbluː/","ru":"грустить, хандрить"},{"en":"documentary","ipa":"/ˌdɒkjuˈmentri/","ru":"документальный фильм"},{"en":"all-time favourite","ipa":"/ˌɔːl taɪm ˈfeɪvərɪt/","ru":"любимый на все времена"},{"en":"cast","ipa":"/kɑːst/","ru":"актёрский состав"},{"en":"screenwriting","ipa":"/ˈskriːnraɪtɪŋ/","ru":"написание сценария (процесс)","note":"Сам сценарий как текст — script или screenplay."},{"en":"script / screenplay","ipa":"/skrɪpt, ˈskriːnpleɪ/","ru":"сценарий"},{"en":"set / scenery","ipa":"/set, ˈsiːnəri/","ru":"декорации","note":"Decoration — это украшение (например, ёлочное). В кино декорации = set."},{"en":"special effects","ipa":"/ˌspeʃl ɪˈfekts/","ru":"спецэффекты"},{"en":"director","ipa":"/dəˈrektə/","ru":"режиссёр"},{"en":"cameraman","ipa":"/ˈkæmrəmæn/","ru":"оператор"},{"en":"binge-watch","ipa":"/ˈbɪndʒ wɒtʃ/","ru":"смотреть запоем"},{"en":"binge-watcher","ipa":"/ˈbɪndʒ wɒtʃə/","ru":"тот, кто смотрит сериалы запоем"},{"en":"streaming platform","ipa":"/ˈstriːmɪŋ ˌplætfɔːm/","ru":"стриминговая платформа"},{"en":"go in blind","ipa":"/ˌɡəʊ ɪn ˈblaɪnd/","ru":"идти вслепую, без подготовки","note":"«In blind» отдельно не употребляется — нужен глагол: go in blind."},{"en":"character","ipa":"/ˈkærəktə/","ru":"персонаж"},{"en":"intelligent","ipa":"/ɪnˈtelɪdʒənt/","ru":"умный, сообразительный"},{"en":"confident","ipa":"/ˈkɒnfɪdənt/","ru":"уверенный в себе"},{"en":"fit","ipa":"/fɪt/","ru":"в хорошей физической форме"},{"en":"muscular","ipa":"/ˈmʌskjələ/","ru":"мускулистый"},{"en":"it resonates with me","ipa":"/ɪt ˈrezəneɪts wɪð miː/","ru":"это находит во мне отклик","note":"Конструкция: resonate WITH somebody."}]},{"cat":"FUTURE CAREER","ru":"Будущая карьера","items":[{"en":"certain","ipa":"/ˈsɜːtn/","ru":"уверенный, определившийся"},{"en":"physicist","ipa":"/ˈfɪzɪsɪst/","ru":"физик"},{"en":"earn well","ipa":"/ˌɜːn ˈwel/","ru":"хорошо зарабатывать"},{"en":"responsibility","ipa":"/rɪˌspɒnsəˈbɪləti/","ru":"ответственность"},{"en":"go bankrupt","ipa":"/ˌɡəʊ ˈbæŋkrʌpt/","ru":"обанкротиться"},{"en":"follow your passion","ipa":"/ˌfɒləʊ jɔː ˈpæʃn/","ru":"следовать за своим призванием"},{"en":"career path","ipa":"/kəˈrɪə pɑːθ/","ru":"карьерный путь"},{"en":"achieve","ipa":"/əˈtʃiːv/","ru":"достигать"},{"en":"set goals","ipa":"/ˌset ˈɡəʊlz/","ru":"ставить цели"},{"en":"move forward","ipa":"/ˌmuːv ˈfɔːwəd/","ru":"двигаться вперёд"},{"en":"communication skills","ipa":"/kəˌmjuːnɪˈkeɪʃn skɪlz/","ru":"навыки общения"},{"en":"emotional intelligence","ipa":"/ɪˌməʊʃənl ɪnˈtelɪdʒəns/","ru":"эмоциональный интеллект"},{"en":"employee","ipa":"/ɪmˈplɔɪiː/","ru":"сотрудник, работник"},{"en":"inspiring","ipa":"/ɪnˈspaɪərɪŋ/","ru":"вдохновляющий"},{"en":"bachelor's degree","ipa":"/ˈbætʃələz dɪˌɡriː/","ru":"степень бакалавра, бакалавриат"},{"en":"master's degree","ipa":"/ˈmɑːstəz dɪˌɡriː/","ru":"степень магистра, магистратура"},{"en":"obligatory","ipa":"/əˈblɪɡətri/","ru":"обязательный"},{"en":"negotiate","ipa":"/nɪˈɡəʊʃieɪt/","ru":"вести переговоры, договариваться"},{"en":"be good with numbers","ipa":"/bi ˌɡʊd wɪð ˈnʌmbəz/","ru":"хорошо обращаться с числами"},{"en":"figures","ipa":"/ˈfɪɡəz/","ru":"цифры, показатели"},{"en":"calculations","ipa":"/ˌkælkjuˈleɪʃnz/","ru":"расчёты"},{"en":"hands-on experience","ipa":"/ˌhændz ɒn ɪkˈspɪəriəns/","ru":"практический опыт"},{"en":"job satisfaction","ipa":"/ˈdʒɒb ˌsætɪsfækʃn/","ru":"удовлетворённость работой"},{"en":"salary","ipa":"/ˈsæləri/","ru":"зарплата"},{"en":"gain experience","ipa":"/ˌɡeɪn ɪkˈspɪəriəns/","ru":"набираться опыта"},{"en":"burnout","ipa":"/ˈbɜːnaʊt/","ru":"выгорание"},{"en":"rest","ipa":"/rest/","ru":"отдыхать"},{"en":"recover / recharge","ipa":"/rɪˈkʌvə, ˌriːˈtʃɑːdʒ/","ru":"восстанавливаться (о человеке)","note":"Restore — «восстанавливать что-то» (здание, файл). О себе говорят recover или recharge."},{"en":"challenge","ipa":"/ˈtʃælɪndʒ/","ru":"сложная задача, вызов"},{"en":"face","ipa":"/feɪs/","ru":"столкнуться с, встретить лицом к лицу"},{"en":"blend in with the team","ipa":"/ˌblend ɪn wɪð ðə ˈtiːm/","ru":"вписаться в коллектив"},{"en":"lack of experience","ipa":"/ˌlæk əv ɪkˈspɪəriəns/","ru":"нехватка опыта"},{"en":"career expectations","ipa":"/kəˈrɪər ˌekspekˈteɪʃnz/","ru":"карьерные ожидания"},{"en":"newbie","ipa":"/ˈnjuːbi/","ru":"новичок","note":"Пишется newbie, а не newby."},{"en":"part-time","ipa":"/ˌpɑːt ˈtaɪm/","ru":"частичная занятость"},{"en":"precious experience","ipa":"/ˌpreʃəs ɪkˈspɪəriəns/","ru":"ценный опыт"},{"en":"advantage over your peers","ipa":"/ədˌvɑːntɪdʒ ˌəʊvə jɔː ˈpɪəz/","ru":"преимущество перед сверстниками"},{"en":"work for","ipa":"/ˈwɜːk fɔː/","ru":"работать на (кого-то)"}]}]}
+</script>
 
 <script id="phrasebook-data" type="application/json">
 {"groups":[{"cat":"Начало разговора / Small talk","items":[{"en":"What's up?","ru":"Как дела?"},{"en":"How's it going?","ru":"Как оно?"},{"en":"Long time no see!","ru":"Давно не виделись!"},{"en":"What have you been up to?","ru":"Чем занимался?"},{"en":"Nothing much.","ru":"Да ничего особенного."},{"en":"I can't complain.","ru":"Не жалуюсь."},{"en":"Same old, same old.","ru":"Всё по-старому."}]},{"cat":"Согласие / несогласие","items":[{"en":"I couldn't agree more.","ru":"Полностью согласен."},{"en":"That makes sense.","ru":"Логично / понятно."},{"en":"I see your point, but...","ru":"Я понимаю тебя, но..."},{"en":"I'm not so sure about that.","ru":"Не уверен насчёт этого."},{"en":"Fair enough.","ru":"Ладно, согласен (принимаю аргумент)."},{"en":"No way.","ru":"Ни за что / не может быть."},{"en":"You've got a point.","ru":"Тут ты прав."}]},{"cat":"Мнение","items":[{"en":"If you ask me...","ru":"По-моему..."},{"en":"As far as I know...","ru":"Насколько мне известно..."},{"en":"I'm leaning towards...","ru":"Я больше склоняюсь к..."},{"en":"To be honest...","ru":"Если честно..."},{"en":"From my point of view...","ru":"С моей точки зрения..."}]},{"cat":"Просьбы / вежливость","items":[{"en":"Could you do me a favor?","ru":"Можешь оказать услугу?"},{"en":"Would you mind if...?","ru":"Ты не против, если...?"},{"en":"Do you mind...?","ru":"Не возражаешь...?"},{"en":"I was wondering if you could...","ru":"Хотел спросить, не мог бы ты..."},{"en":"No worries.","ru":"Не переживай / без проблем."},{"en":"Take your time.","ru":"Не спеши."}]},{"cat":"Непонимание","items":[{"en":"Could you say that again?","ru":"Повтори, пожалуйста."},{"en":"What do you mean?","ru":"Что ты имеешь в виду?"},{"en":"I'm not following.","ru":"Я не понимаю (не улавливаю мысль)."},{"en":"Could you break that down for me?","ru":"Можешь объяснить попроще?"},{"en":"I get what you're saying.","ru":"Я понимаю, о чём ты."}]},{"cat":"Работа / деловое общение","items":[{"en":"Let's touch base later.","ru":"Давай на связи попозже."},{"en":"I'll keep you posted.","ru":"Буду держать в курсе."},{"en":"Let's circle back to this.","ru":"Вернёмся к этому позже."},{"en":"That's on my to-do list.","ru":"Это у меня в списке дел."},{"en":"I'm swamped right now.","ru":"Я сейчас завален работой."},{"en":"Let's get the ball rolling.","ru":"Давай начнём (запустим процесс)."},{"en":"I'll follow up on that.","ru":"Я уточню / доведу до конца."},{"en":"Can we push the meeting back?","ru":"Можем перенести встречу?"},{"en":"It's a work in progress.","ru":"Это ещё в процессе."},{"en":"Let's think outside the box.","ru":"Давай мыслить нестандартно."}]},{"cat":"Эмоции","items":[{"en":"I'm thrilled about it.","ru":"Я в восторге."},{"en":"It drives me crazy.","ru":"Это меня бесит."},{"en":"I'm not in the mood.","ru":"Нет настроения."},{"en":"That's a relief.","ru":"Это облегчение."},{"en":"I'm freaking out.","ru":"Я паникую."},{"en":"It means a lot to me.","ru":"Это много для меня значит."},{"en":"I'm over the moon.","ru":"Я на седьмом небе от счастья."}]},{"cat":"Деньги / бизнес","items":[{"en":"It's out of my budget.","ru":"Это не вписывается в мой бюджет."},{"en":"Let's split the bill.","ru":"Давай разделим счёт."},{"en":"I'm saving up for...","ru":"Я коплю на..."},{"en":"It pays off in the long run.","ru":"Это окупается в долгосрочной перспективе."},{"en":"I'm breaking even.","ru":"Я выхожу в ноль."},{"en":"That's a rip-off.","ru":"Это грабёж (переплата)."},{"en":"I'm on a tight budget.","ru":"У меня ограниченный бюджет."},{"en":"Let's cut costs.","ru":"Давай сократим расходы."}]},{"cat":"Планы / решения","items":[{"en":"I haven't decided yet.","ru":"Я ещё не решил."},{"en":"Let's play it by ear.","ru":"Решим по ходу дела."},{"en":"I'm on the fence about it.","ru":"Я сомневаюсь / не определился."},{"en":"Let's give it a shot.","ru":"Давай попробуем."},{"en":"It's now or never.","ru":"Сейчас или никогда."},{"en":"I'll sleep on it.","ru":"Я подумаю над этим (переспать с мыслью)."},{"en":"Let's weigh the pros and cons.","ru":"Давай взвесим плюсы и минусы."}]},{"cat":"Проблемы / трудности","items":[{"en":"It's not a big deal.","ru":"Это не проблема."},{"en":"I'm stuck.","ru":"Я застрял (не знаю, что делать)."},{"en":"Let's figure it out.","ru":"Давай разберёмся."},{"en":"That's easier said than done.","ru":"Легче сказать, чем сделать."},{"en":"I'm dealing with it.","ru":"Я разбираюсь с этим."},{"en":"It's a long story.","ru":"Это долгая история."},{"en":"Let's not jump to conclusions.","ru":"Давай не будем делать поспешных выводов."}]},{"cat":"Прощание","items":[{"en":"Catch you later.","ru":"Увидимся позже."},{"en":"Take care.","ru":"Береги себя."},{"en":"Keep in touch.","ru":"Оставайся на связи."},{"en":"See you around.","ru":"Ещё увидимся."},{"en":"Have a good one.","ru":"Хорошего дня."}]},{"cat":"Заполнители речи","items":[{"en":"You know what I mean?","ru":"Понимаешь, о чём я?"},{"en":"Basically...","ru":"В основном / короче говоря..."},{"en":"Anyway...","ru":"В общем / так или иначе..."},{"en":"At the end of the day...","ru":"В конце концов..."},{"en":"I guess...","ru":"Наверное / полагаю..."},{"en":"Kind of / sort of","ru":"Вроде того / типа"}]},{"cat":"Совет","items":[{"en":"If I were you...","ru":"На твоём месте я бы..."},{"en":"You'd better...","ru":"Тебе лучше..."},{"en":"It's up to you.","ru":"Решать тебе."},{"en":"I'd think twice about that.","ru":"Я бы дважды подумал над этим."}]},{"cat":"Удивление","items":[{"en":"No kidding!","ru":"Да ладно! / Серьёзно?"},{"en":"I couldn't believe my eyes.","ru":"Не мог поверить своим глазам."},{"en":"That caught me off guard.","ru":"Это застало меня врасплох."},{"en":"Who would've thought?","ru":"Кто бы мог подумать?"}]},{"cat":"Технологии / AI","items":[{"en":"It's a game changer.","ru":"Это меняет всё (прорывная вещь)."},{"en":"Let's automate this.","ru":"Давай автоматизируем это."},{"en":"It streamlines the process.","ru":"Это упрощает/ускоряет процесс."},{"en":"AI is taking over.","ru":"ИИ захватывает всё."},{"en":"Let's leverage this tool.","ru":"Давай используем этот инструмент по максимуму."}]},{"cat":"Мотивация / спорт","items":[{"en":"Push yourself to the limit.","ru":"Выкладывайся на максимум."},{"en":"Practice makes perfect.","ru":"Практика — путь к совершенству."},{"en":"Give it your all.","ru":"Выложись на все сто."},{"en":"Stay in the game.","ru":"Оставайся в игре / не сдавайся."},{"en":"It's a marathon, not a sprint.","ru":"Это марафон, а не спринт."},{"en":"Keep grinding.","ru":"Продолжай упорно работать."},{"en":"No pain, no gain.","ru":"Без труда нет плода."}]}]}
@@ -837,6 +898,11 @@ function renderProgress(){
   if(mode === 'phrasebook'){
     const n = (store.pb && store.pb.learned) ? store.pb.learned.length : 0;
     document.getElementById('progBar').style.width = Math.round(n / PB_TOTAL * 100) + '%';
+    return;
+  }
+  if(mode === 'speaking'){
+    const n = (store.sp && store.sp.learned) ? store.sp.learned.length : 0;
+    document.getElementById('progBar').style.width = Math.round(n / SP_TOTAL * 100) + '%';
     return;
   }
   const e = entry();
@@ -1248,6 +1314,7 @@ function renderStats(){
   document.getElementById('statCards').innerHTML =
     '<div class="stat-card"><div class="k">Выучено</div><div class="v" style="color:var(--good)">'+learnedTotal+'</div><div class="s">из '+TOTAL_WORDS+' слов</div></div>'+
     '<div class="stat-card"><div class="k">Фразы</div><div class="v" style="color:var(--accent-2)">'+((store.pb&&store.pb.learned)?store.pb.learned.length:0)+'</div><div class="s">из '+PB_TOTAL+' выучено</div></div>'+
+    '<div class="stat-card"><div class="k">Speaking</div><div class="v" style="color:var(--accent-2)">'+((store.sp&&store.sp.learned)?store.sp.learned.length:0)+'</div><div class="s">из '+SP_TOTAL+' с занятий</div></div>'+
     '<div class="stat-card"><div class="k">Серия</div><div class="v">🔥 '+(alive?s.count:0)+'</div><div class="s">дней подряд</div></div>'+
     '<div class="stat-card"><div class="k">На повторении</div><div class="v" style="color:var(--bad)">'+dueN+'</div><div class="s">слов ждут сегодня</div></div>'+
     '<div class="stat-card"><div class="k">Последний тест</div><div class="v">'+(lastTest?lastTest.c+'/'+lastTest.t:'—')+'</div><div class="s">'+(lastTest?('день '+lastTest.day):'ещё не было')+'</div></div>';
@@ -1453,6 +1520,141 @@ document.getElementById('pbSkip').onclick = () => {
   else pbRenderCard();
 };
 
+
+/* ============ SPEAKING: слова с занятий с репетитором ============ */
+const SP_TOPICS = JSON.parse(document.getElementById('speaking-data').textContent).topics;
+const SP_ALL = SP_TOPICS.flatMap(t => t.items.map(it => ({...it, cat:t.cat})));
+const SP_TOTAL = SP_ALL.length;
+store.sp ||= {learned:[]};
+if(!Array.isArray(store.sp.learned)) store.sp.learned = [];
+
+let spFilter = 'all', spQuery = '', spView = 'list';
+let spCards = { items:[], idx:0 };
+
+const spKey = it => it.cat + '|' + it.en;
+function spIsDone(k){ return store.sp.learned.includes(k); }
+function spToggle(k, on){
+  if(on){ if(!spIsDone(k)) store.sp.learned.push(k); }
+  else store.sp.learned = store.sp.learned.filter(x => x !== k);
+  save(); bump(); spRenderCount();
+}
+function spRenderCount(){
+  const n = store.sp.learned.length;
+  const el = document.getElementById('spCount');
+  if(el) el.innerHTML = 'Выучено слов: <b>' + n + '</b> из ' + SP_TOTAL;
+  if(mode === 'speaking'){
+    const bar = document.getElementById('progBar');
+    if(bar) bar.style.width = Math.round(n / SP_TOTAL * 100) + '%';
+  }
+}
+function spRenderCats(){
+  const box = document.getElementById('spCats');
+  box.innerHTML = '<button data-cat="all"' + (spFilter === 'all' ? ' class="active"' : '') + '>Все · ' + SP_TOTAL + '</button>' +
+    SP_TOPICS.map(t => '<button data-cat="' + pbEsc(t.cat) + '"' +
+      (t.cat === spFilter ? ' class="active"' : '') + '>' + pbEsc(t.cat) + ' · ' + t.items.length + '</button>').join('');
+  box.querySelectorAll('button').forEach(b => {
+    b.onclick = () => { spFilter = b.dataset.cat; spRenderCats(); spRenderList(); };
+  });
+}
+function spMatches(it){
+  if(spFilter !== 'all' && it.cat !== spFilter) return false;
+  if(!spQuery) return true;
+  const q = spQuery.toLowerCase();
+  return it.en.toLowerCase().includes(q) || it.ru.toLowerCase().includes(q);
+}
+function spRenderList(){
+  const body = document.getElementById('spBody');
+  let html = '';
+  SP_TOPICS.forEach(t => {
+    const items = t.items.filter(it => spMatches({...it, cat:t.cat}));
+    if(!items.length) return;
+    html += '<div class="pb-group"><h3>' + pbEsc(t.cat) +
+      ' <span class="sp-topic-ru">· ' + pbEsc(t.ru) + '</span></h3><div class="pb-list">';
+    items.forEach(it => {
+      const k = t.cat + '|' + it.en;
+      const done = spIsDone(k);
+      html += '<label class="pb-item sp-item' + (done ? ' done' : '') + '">' +
+        '<div class="txt"><div class="pen">' + pbEsc(it.en) + '</div>' +
+        (it.ipa ? '<div class="sipa">' + pbEsc(it.ipa) + '</div>' : '') +
+        '<div class="pru">' + pbEsc(it.ru) + '</div>' +
+        (it.note ? '<div class="snote">✎ ' + pbEsc(it.note) + '</div>' : '') +
+        '</div><input type="checkbox" data-k="' + pbEsc(k) + '"' + (done ? ' checked' : '') + '></label>';
+    });
+    html += '</div></div>';
+  });
+  body.innerHTML = html || '<div class="pb-empty">Ничего не найдено — попробуй другой запрос.</div>';
+  body.querySelectorAll('input[type=checkbox]').forEach(c => {
+    c.onchange = ev => {
+      spToggle(ev.target.dataset.k, ev.target.checked);
+      ev.target.closest('.pb-item').classList.toggle('done', ev.target.checked);
+    };
+  });
+}
+function spInitCards(reshuffle){
+  if(reshuffle || !spCards.items.length){
+    spCards.items = SP_ALL.filter(it => spFilter === 'all' || it.cat === spFilter).slice();
+    if(!spCards.items.length) spCards.items = SP_ALL.slice();
+    if(reshuffle){
+      for(let i = spCards.items.length - 1; i > 0; i--){
+        const j = (Math.random() * (i + 1)) | 0;
+        [spCards.items[i], spCards.items[j]] = [spCards.items[j], spCards.items[i]];
+      }
+    }
+    spCards.idx = 0;
+  }
+  spRenderCard();
+}
+function spRenderCard(){
+  const c = document.getElementById('spCard');
+  c.classList.remove('flipped');
+  const it = spCards.items[spCards.idx];
+  if(!it) return;
+  document.getElementById('spCardEn').textContent = it.en;
+  document.getElementById('spCardIpa').textContent = it.ipa || '';
+  document.getElementById('spCardRu').textContent = it.ru;
+  const nb = document.getElementById('spCardNote');
+  if(it.note){ nb.style.display = 'block'; nb.innerHTML = '<b>✎ Обрати внимание:</b> ' + pbEsc(it.note); }
+  else nb.style.display = 'none';
+  document.getElementById('spCounter').textContent = (spCards.idx + 1) + ' / ' + spCards.items.length;
+  document.getElementById('spPrev').disabled = spCards.idx === 0;
+  document.getElementById('spNext').disabled = spCards.idx === spCards.items.length - 1;
+  document.getElementById('spCardStatus').textContent =
+    spIsDone(spKey(it)) ? '✓ отмечено как выученное' : '';
+}
+function spSetView(v){
+  spView = v;
+  document.getElementById('spModeList').classList.toggle('active', v === 'list');
+  document.getElementById('spModeCards').classList.toggle('active', v === 'cards');
+  document.getElementById('spListView').style.display = v === 'list' ? 'block' : 'none';
+  document.getElementById('spCardsView').style.display = v === 'cards' ? 'block' : 'none';
+  if(v === 'cards') spInitCards(false); else spRenderList();
+}
+function initSpeaking(){ spRenderCount(); spRenderCats(); spSetView(spView); }
+
+document.getElementById('spSearch').addEventListener('input', ev => {
+  spQuery = ev.target.value.trim(); spRenderList();
+});
+document.getElementById('spModeList').onclick = () => spSetView('list');
+document.getElementById('spModeCards').onclick = () => { spCards.items = []; spSetView('cards'); };
+document.getElementById('spCard').addEventListener('click', () => {
+  document.getElementById('spCard').classList.toggle('flipped');
+});
+document.getElementById('spPrev').onclick = () => { if(spCards.idx > 0){ spCards.idx--; spRenderCard(); } };
+document.getElementById('spNext').onclick = () => { if(spCards.idx < spCards.items.length - 1){ spCards.idx++; spRenderCard(); } };
+document.getElementById('spShuffle').onclick = () => spInitCards(true);
+document.getElementById('spKnow').onclick = () => {
+  const it = spCards.items[spCards.idx]; if(!it) return;
+  spToggle(spKey(it), true);
+  if(spCards.idx < spCards.items.length - 1){ spCards.idx++; }
+  spRenderCard();
+};
+document.getElementById('spSkip').onclick = () => {
+  const it = spCards.items[spCards.idx]; if(!it) return;
+  spToggle(spKey(it), false);
+  if(spCards.idx < spCards.items.length - 1){ spCards.idx++; }
+  spRenderCard();
+};
+
 /* ================= ТЕМЫ ================= */
 const THEME_LIST = {
   noche:     {c:'#e0a93c', bg:'#211d1a', n:'Golden Night'},
@@ -1482,9 +1684,9 @@ function buildThemeDots(){
 }
 
 /* ================= НАВИГАЦИЯ ================= */
-const PANELS = ['learn','flashcards','match','test','review','phrases','phrasebook','stats'];
+const PANELS = ['learn','flashcards','match','test','review','phrases','phrasebook','speaking','stats'];
 function groupOf(m){
-  if(m==='learn'||m==='test'||m==='review'||m==='stats'||m==='phrasebook') return m;
+  if(m==='learn'||m==='test'||m==='review'||m==='stats'||m==='phrasebook'||m==='speaking') return m;
   return 'practice';
 }
 function renderPanel(m){
@@ -1495,6 +1697,7 @@ function renderPanel(m){
   else if(m==='review') startReview();
   else if(m==='phrases') initPhrases();
   else if(m==='phrasebook') initPhrasebook();
+  else if(m==='speaking') initSpeaking();
   else if(m==='stats') renderStats();
 }
 function syncTabs(m){
@@ -1509,12 +1712,14 @@ function syncTabs(m){
   if(hc){
     if(m==='phrasebook'){
       hc.innerHTML = '<b>100 разговорных фраз</b><br>16 тем: small talk, работа, деньги, эмоции, спорт и другое.<br>Отдельный блок — не привязан к дням.';
+    } else if(m==='speaking'){
+      hc.innerHTML = '<b>Слова с занятий · ' + SP_TOTAL + '</b><br>' + SP_TOPICS.map(t=>t.cat).join(' · ') + '.<br>Отдельный блок — не привязан к дням.';
     } else {
       try{ renderHeader(); }catch(e){}
     }
   }
   // Фразы живут отдельно от дней — скрываем переключатель дней
-  const dayOnly = m !== 'phrasebook';
+  const dayOnly = m !== 'phrasebook' && m !== 'speaking';
   ['prev','next'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = dayOnly ? '' : 'none'; });
   const lbl = document.querySelector('.daynav .label');
   if(lbl) lbl.style.display = dayOnly ? '' : 'none';
