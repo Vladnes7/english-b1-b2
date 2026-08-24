@@ -8,21 +8,24 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&display=swap');
 
   /* ===================== ОБЩЕЕ ===================== */
-  /* Единственная тема — цвета флага Италии: зелёный #009246, белый, красный #CE2B37 */
+  /* Единственная тема: тёмный «римский закат». Зелёный и красный флага осветлены —
+     оригинальные #009246 / #CE2B37 на чёрном не читаются. */
   html{
+    color-scheme:dark;
     --font-body:'Inter',sans-serif; --font-display:'Fraunces',serif; --font-script:'Great Vibes',cursive;
-    --bg:#f6f4ee; --surface:#fffefb; --surface-2:#f1efe6; --surface-3:#fffefb;
-    --border:#e2dfd3; --border-strong:#cdc8b6;
-    --text:#2b2b2b; --muted:#84806f;
-    --accent:#009246; --accent-2:#ce2b37; --accent-bright:#00713a;
-    --good:#0a7d3f; --bad:#b21f2b;
-    --btn-text:#fff;
-    --accent-grad:linear-gradient(135deg,#009246,#0aa757);
-    --word-grad:linear-gradient(135deg,#00713a,#009246);
-    --hero-bg:linear-gradient(100deg,#d3e9d9 0%,#e9f4ec 28%,#fbfaf5 52%,#fbe9e8 76%,#f2d3d5 100%);
-    --hero-text:#2b2b2b; --hero-muted:#6b6659; --hero-title-color:#23231f;
-    --hero-sub-grad:linear-gradient(95deg,#009246 0%,#0a8f4a 42%,#ce2b37 100%);
-    --hero-card-bg:rgba(255,254,251,.86); --hero-card-text:#4a463c; --hero-card-strong:#1f1f1f;
+    --bg:#12100e; --surface:#1b1815; --surface-2:#221e1a; --surface-3:#272220;
+    --border:#332c26; --border-strong:#463b31;
+    --text:#f2ece0; --muted:#9d9382;
+    --accent:#17a35a; --accent-2:#e04352; --accent-bright:#3ed184;
+    --good:#2fb36a; --bad:#e04352;
+    --btn-text:#08170f;
+    --accent-grad:linear-gradient(135deg,#17a35a,#3ed184);
+    --word-grad:linear-gradient(135deg,#3ed184,#f4c25e);
+    --sunset:linear-gradient(100deg,#e8913f,#e04352);
+    --hero-bg:linear-gradient(160deg,#1b1430 0%,#5a2f3c 45%,#c9703a 78%,#f0a63f 100%);
+    --hero-text:#f7efdd; --hero-muted:#cdbca2; --hero-title-color:#fffaf0;
+    --hero-sub-grad:linear-gradient(95deg,#3ed184 0%,#8fd96a 40%,#ff6b76 100%);
+    --hero-card-bg:rgba(18,15,13,.72); --hero-card-text:#d8cbb4; --hero-card-strong:#fff6e6;
     --radius:16px;
     --glow-accent:color-mix(in srgb,var(--accent) 30%,transparent);
     --glow-good:color-mix(in srgb,var(--good) 30%,transparent);
@@ -31,32 +34,35 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{
     background:var(--bg);color:var(--text);font-family:var(--font-body);
-    line-height:1.6;min-height:100vh;padding:36px clamp(16px,4vw,64px) 80px;
-    background-image:radial-gradient(color-mix(in srgb,var(--accent) 6%,transparent) 1px,transparent 1px);
+    line-height:1.6;min-height:100vh;padding:22px clamp(12px,2.5vw,40px) 70px;
+    background-image:radial-gradient(color-mix(in srgb,var(--accent) 9%,transparent) 1px,transparent 1px);
     background-size:26px 26px;
     transition:background-color .3s;
   }
-  body::before{content:'';position:fixed;top:-200px;left:-200px;width:600px;height:600px;
-    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 10%,transparent) 0%,transparent 70%);
+  body::before{content:'';position:fixed;top:-260px;left:-240px;width:760px;height:760px;
+    background:radial-gradient(circle,rgba(232,145,63,.16) 0%,transparent 70%);
     pointer-events:none;z-index:0}
-  body::after{content:'';position:fixed;bottom:-200px;right:-200px;width:500px;height:500px;
-    background:radial-gradient(circle,color-mix(in srgb,var(--accent-2) 10%,transparent) 0%,transparent 70%);
+  body::after{content:'';position:fixed;bottom:-240px;right:-240px;width:700px;height:700px;
+    background:radial-gradient(circle,rgba(23,163,90,.16) 0%,transparent 70%);
     pointer-events:none;z-index:0}
-  .wrap{max-width:1400px;margin:0 auto;position:relative;z-index:1}
+  .wrap{max-width:none;margin:0;position:relative;z-index:1}
 
   /* HERO */
   .hero{position:relative;margin-bottom:18px;border-radius:22px;overflow:hidden;
     border:1px solid var(--border-strong);background:var(--hero-bg);
-    box-shadow:0 0 50px color-mix(in srgb,var(--accent) 12%,transparent),0 20px 60px rgba(0,0,0,.08);
-    min-height:clamp(330px,42vh,470px);display:flex;flex-direction:column;justify-content:flex-end}
+    box-shadow:0 0 60px rgba(232,145,63,.14),0 20px 60px rgba(0,0,0,.5);
+    min-height:clamp(340px,46vh,520px);display:flex;flex-direction:column;justify-content:flex-end}
+  /* Два слоя фона. Верхний — своя фотография hero.jpg рядом с этим файлом;
+     если её нет, слой просто не рисуется и видно нижний — нарисованный закат над Римом.
+     Чтобы поставить своё фото, достаточно положить hero.jpg в эту папку. */
+  .hero-bg{position:absolute;inset:0;z-index:0;
+    background-image:url('hero.jpg'),url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201600%20900%22%20preserveAspectRatio%3D%22xMidYMid%20slice%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22sky%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220.12%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23101538%22%2F%3E%3Cstop%20offset%3D%220.24%22%20stop-color%3D%22%2333244f%22%2F%3E%3Cstop%20offset%3D%220.44%22%20stop-color%3D%22%237d3f4c%22%2F%3E%3Cstop%20offset%3D%220.6%22%20stop-color%3D%22%23c96a3a%22%2F%3E%3Cstop%20offset%3D%220.72%22%20stop-color%3D%22%23ee9d3a%22%2F%3E%3Cstop%20offset%3D%220.84%22%20stop-color%3D%22%23f9cf5f%22%2F%3E%3C%2FlinearGradient%3E%3CradialGradient%20id%3D%22sunGlow%22%20cx%3D%220.5%22%20cy%3D%220.5%22%20r%3D%220.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d2%22%20stop-opacity%3D%220.95%22%2F%3E%3Cstop%20offset%3D%220.3%22%20stop-color%3D%22%23ffcf68%22%20stop-opacity%3D%220.55%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff8f3c%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3ClinearGradient%20id%3D%22far%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%238a5147%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%235c342e%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22mid%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%234a2822%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23241412%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22near%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231d100d%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230d0706%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22colo%22%20x1%3D%220.1%22%20y1%3D%220%22%20x2%3D%220.9%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23electric%22%2F%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23472720%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231a0e0b%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url(%23sky)%22%2F%3E%3Ccircle%20cx%3D%22322%22%20cy%3D%22574%22%20r%3D%22330%22%20fill%3D%22url(%23sunGlow)%22%2F%3E%3Ccircle%20cx%3D%22322%22%20cy%3D%22574%22%20r%3D%2252%22%20fill%3D%22%23fff2bc%22%20opacity%3D%220.97%22%2F%3E%3Cg%20opacity%3D%220.3%22%3E%3Cellipse%20cx%3D%22330%22%20cy%3D%22146%22%20rx%3D%22300%22%20ry%3D%2216%22%20fill%3D%22%23c98fa8%22%2F%3E%3Cellipse%20cx%3D%22940%22%20cy%3D%22108%22%20rx%3D%22340%22%20ry%3D%2213%22%20fill%3D%22%23c98fa8%22%2F%3E%3Cellipse%20cx%3D%221300%22%20cy%3D%22212%22%20rx%3D%22260%22%20ry%3D%2214%22%20fill%3D%22%23d99080%22%2F%3E%3Cellipse%20cx%3D%22600%22%20cy%3D%22266%22%20rx%3D%22250%22%20ry%3D%2212%22%20fill%3D%22%23e09a72%22%2F%3E%3C%2Fg%3E%3Cg%20opacity%3D%220.42%22%3E%3Cellipse%20cx%3D%221120%22%20cy%3D%22336%22%20rx%3D%22310%22%20ry%3D%2212%22%20fill%3D%22%23f3ae67%22%2F%3E%3Cellipse%20cx%3D%22250%22%20cy%3D%22372%22%20rx%3D%22215%22%20ry%3D%2210%22%20fill%3D%22%23f6b96e%22%2F%3E%3Cellipse%20cx%3D%22800%22%20cy%3D%22418%22%20rx%3D%22270%22%20ry%3D%229%22%20fill%3D%22%23f9c775%22%2F%3E%3Cellipse%20cx%3D%221430%22%20cy%3D%22452%22%20rx%3D%22200%22%20ry%3D%228%22%20fill%3D%22%23f9c775%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22url(%23far)%22%3E%3Crect%20x%3D%22168%22%20y%3D%22470%22%20width%3D%2234%22%20height%3D%22150%22%2F%3E%3Cpolygon%20points%3D%22168%2C470%20185%2C436%20202%2C470%22%2F%3E%3Cpath%20d%3D%22M770%20606%20a86%2092%200%200%201%20172%200%20z%22%2F%3E%3Crect%20x%3D%22846%22%20y%3D%22468%22%20width%3D%2220%22%20height%3D%2248%22%2F%3E%3Ccircle%20cx%3D%22856%22%20cy%3D%22464%22%20r%3D%2213%22%2F%3E%3Crect%20x%3D%22750%22%20y%3D%22558%22%20width%3D%22212%22%20height%3D%2248%22%2F%3E%3Cpath%20d%3D%22M556%20606%20a44%2048%200%200%201%2088%200%20z%22%2F%3E%3Crect%20x%3D%22592%22%20y%3D%22522%22%20width%3D%2214%22%20height%3D%2232%22%2F%3E%3Cpath%20d%3D%22M1024%20606%20a34%2036%200%200%201%2068%200%20z%22%2F%3E%3Crect%20x%3D%2240%22%20y%3D%22554%22%20width%3D%2296%22%20height%3D%2252%22%2F%3E%3Crect%20x%3D%22228%22%20y%3D%22570%22%20width%3D%22122%22%20height%3D%2236%22%2F%3E%3Crect%20x%3D%22378%22%20y%3D%22560%22%20width%3D%2290%22%20height%3D%2246%22%2F%3E%3Crect%20x%3D%22488%22%20y%3D%22578%22%20width%3D%2262%22%20height%3D%2228%22%2F%3E%3Crect%20x%3D%22658%22%20y%3D%22572%22%20width%3D%2274%22%20height%3D%2234%22%2F%3E%3Crect%20x%3D%22978%22%20y%3D%22576%22%20width%3D%2242%22%20height%3D%2230%22%2F%3E%3Crect%20x%3D%221098%22%20y%3D%22564%22%20width%3D%22112%22%20height%3D%2242%22%2F%3E%3Crect%20x%3D%221238%22%20y%3D%22578%22%20width%3D%2292%22%20height%3D%2228%22%2F%3E%3Cpolygon%20points%3D%22378%2C560%20423%2C528%20468%2C560%22%2F%3E%3Cpolygon%20points%3D%221098%2C564%201154%2C532%201210%2C564%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%22602%22%20width%3D%221600%22%20height%3D%2246%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%220%22%20y%3D%22640%22%20width%3D%221600%22%20height%3D%22260%22%20fill%3D%22url(%23mid)%22%2F%3E%3Cg%20fill%3D%22url(%23mid)%22%3E%3Crect%20x%3D%2256%22%20y%3D%22596%22%20width%3D%22152%22%20height%3D%2252%22%2F%3E%3Crect%20x%3D%22248%22%20y%3D%22610%22%20width%3D%22192%22%20height%3D%2240%22%2F%3E%3Crect%20x%3D%22466%22%20y%3D%22590%22%20width%3D%22132%22%20height%3D%2260%22%2F%3E%3Crect%20x%3D%22628%22%20y%3D%22614%22%20width%3D%22172%22%20height%3D%2238%22%2F%3E%3Crect%20x%3D%22828%22%20y%3D%22598%22%20width%3D%22142%22%20height%3D%2252%22%2F%3E%3Crect%20x%3D%22998%22%20y%3D%22616%22%20width%3D%22122%22%20height%3D%2236%22%2F%3E%3Cpolygon%20points%3D%22466%2C590%20532%2C554%20598%2C590%22%2F%3E%3Cpolygon%20points%3D%22828%2C598%20899%2C564%20970%2C598%22%2F%3E%3Crect%20x%3D%221140%22%20y%3D%22620%22%20width%3D%22120%22%20height%3D%2232%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M1112%20900%20L1112%20452%20C1112%20344%201196%20276%201330%20254%20C1448%20234%201556%20250%201600%20274%20L1600%20900%20Z%22%20fill%3D%22url(%23colo)%22%2F%3E%3Cg%20fill%3D%22%23ffbe6c%22%3E%3Cg%20opacity%3D%220.34%22%3E%3Crect%20x%3D%221160%22%20y%3D%22352%22%20width%3D%2242%22%20height%3D%2276%22%20rx%3D%2221%22%2F%3E%3Crect%20x%3D%221242%22%20y%3D%22322%22%20width%3D%2244%22%20height%3D%2278%22%20rx%3D%2222%22%2F%3E%3Crect%20x%3D%221330%22%20y%3D%22304%22%20width%3D%2246%22%20height%3D%2280%22%20rx%3D%2223%22%2F%3E%3Crect%20x%3D%221420%22%20y%3D%22294%22%20width%3D%2246%22%20height%3D%2280%22%20rx%3D%2223%22%2F%3E%3Crect%20x%3D%221512%22%20y%3D%22294%22%20width%3D%2246%22%20height%3D%2280%22%20rx%3D%2223%22%2F%3E%3C%2Fg%3E%3Cg%20opacity%3D%220.26%22%3E%3Crect%20x%3D%221154%22%20y%3D%22480%22%20width%3D%2244%22%20height%3D%2282%22%20rx%3D%2222%22%2F%3E%3Crect%20x%3D%221240%22%20y%3D%22456%22%20width%3D%2246%22%20height%3D%2284%22%20rx%3D%2223%22%2F%3E%3Crect%20x%3D%221330%22%20y%3D%22440%22%20width%3D%2248%22%20height%3D%2286%22%20rx%3D%2224%22%2F%3E%3Crect%20x%3D%221422%22%20y%3D%22432%22%20width%3D%2248%22%20height%3D%2286%22%20rx%3D%2224%22%2F%3E%3Crect%20x%3D%221514%22%20y%3D%22430%22%20width%3D%2248%22%20height%3D%2286%22%20rx%3D%2224%22%2F%3E%3C%2Fg%3E%3Cg%20opacity%3D%220.17%22%3E%3Crect%20x%3D%221150%22%20y%3D%22616%22%20width%3D%2246%22%20height%3D%2288%22%20rx%3D%2223%22%2F%3E%3Crect%20x%3D%221238%22%20y%3D%22598%22%20width%3D%2248%22%20height%3D%2290%22%20rx%3D%2224%22%2F%3E%3Crect%20x%3D%221330%22%20y%3D%22584%22%20width%3D%2250%22%20height%3D%2292%22%20rx%3D%2225%22%2F%3E%3Crect%20x%3D%221424%22%20y%3D%22576%22%20width%3D%2250%22%20height%3D%2292%22%20rx%3D%2225%22%2F%3E%3Crect%20x%3D%221516%22%20y%3D%22574%22%20width%3D%2250%22%20height%3D%2292%22%20rx%3D%2225%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23120906%22%20opacity%3D%220.55%22%3E%3Cpath%20d%3D%22M1112%20452%20C1140%20448%201400%20402%201600%20396%20L1600%20424%20C1400%20430%201140%20476%201112%20480%20Z%22%2F%3E%3Cpath%20d%3D%22M1112%20590%20C1140%20586%201400%20546%201600%20540%20L1600%20566%20C1400%20572%201140%20612%201112%20616%20Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22url(%23near)%22%3E%3Cg%20transform%3D%22translate(700%2C-8)%22%3E%3Crect%20x%3D%22-7%22%20y%3D%22596%22%20width%3D%2214%22%20height%3D%22150%22%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%22588%22%20rx%3D%22100%22%20ry%3D%2234%22%2F%3E%3Cellipse%20cx%3D%22-50%22%20cy%3D%22610%22%20rx%3D%2254%22%20ry%3D%2222%22%2F%3E%3Cellipse%20cx%3D%2252%22%20cy%3D%22608%22%20rx%3D%2250%22%20ry%3D%2220%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(962%2C22)%22%3E%3Crect%20x%3D%22-6%22%20y%3D%22596%22%20width%3D%2212%22%20height%3D%22140%22%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%22590%22%20rx%3D%2280%22%20ry%3D%2228%22%2F%3E%3Cellipse%20cx%3D%22-40%22%20cy%3D%22608%22%20rx%3D%2244%22%20ry%3D%2218%22%2F%3E%3Cellipse%20cx%3D%2242%22%20cy%3D%22606%22%20rx%3D%2242%22%20ry%3D%2217%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(292%2C40)%22%3E%3Crect%20x%3D%22-6%22%20y%3D%22592%22%20width%3D%2212%22%20height%3D%22140%22%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%22586%22%20rx%3D%2272%22%20ry%3D%2226%22%2F%3E%3Cellipse%20cx%3D%22-36%22%20cy%3D%22602%22%20rx%3D%2240%22%20ry%3D%2216%22%2F%3E%3Cellipse%20cx%3D%2238%22%20cy%3D%22600%22%20rx%3D%2238%22%20ry%3D%2215%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(514%2C58)%22%3E%3Crect%20x%3D%22-5%22%20y%3D%22590%22%20width%3D%2210%22%20height%3D%22130%22%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%22584%22%20rx%3D%2258%22%20ry%3D%2221%22%2F%3E%3Cellipse%20cx%3D%22-28%22%20cy%3D%22598%22%20rx%3D%2232%22%20ry%3D%2213%22%2F%3E%3Cellipse%20cx%3D%2230%22%20cy%3D%22596%22%20rx%3D%2230%22%20ry%3D%2212%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20fill%3D%22%230c0605%22%3E%3Crect%20x%3D%220%22%20y%3D%22800%22%20width%3D%221600%22%20height%3D%22100%22%2F%3E%3Cellipse%20cx%3D%2260%22%20cy%3D%22784%22%20rx%3D%22150%22%20ry%3D%2258%22%2F%3E%3Cellipse%20cx%3D%22180%22%20cy%3D%22812%22%20rx%3D%22110%22%20ry%3D%2242%22%2F%3E%3Cellipse%20cx%3D%22300%22%20cy%3D%22790%22%20rx%3D%22120%22%20ry%3D%2248%22%2F%3E%3Cellipse%20cx%3D%22440%22%20cy%3D%22816%22%20rx%3D%22128%22%20ry%3D%2240%22%2F%3E%3Cellipse%20cx%3D%22590%22%20cy%3D%22796%22%20rx%3D%22118%22%20ry%3D%2250%22%2F%3E%3Cellipse%20cx%3D%22740%22%20cy%3D%22820%22%20rx%3D%22120%22%20ry%3D%2238%22%2F%3E%3Cellipse%20cx%3D%22890%22%20cy%3D%22800%22%20rx%3D%22132%22%20ry%3D%2246%22%2F%3E%3Cellipse%20cx%3D%221060%22%20cy%3D%22818%22%20rx%3D%22128%22%20ry%3D%2238%22%2F%3E%3Cellipse%20cx%3D%221210%22%20cy%3D%22800%22%20rx%3D%22120%22%20ry%3D%2246%22%2F%3E%3Cellipse%20cx%3D%221380%22%20cy%3D%22812%22%20rx%3D%22140%22%20ry%3D%2242%22%2F%3E%3Cellipse%20cx%3D%221540%22%20cy%3D%22792%22%20rx%3D%22150%22%20ry%3D%2254%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    background-size:cover,cover;background-position:center 74%,center 74%;background-repeat:no-repeat,no-repeat}
+  .hero-bg::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(12,8,6,.55) 0%,rgba(12,8,6,.15) 34%,rgba(12,8,6,.88) 100%),
+               linear-gradient(90deg,rgba(12,8,6,.6) 0%,transparent 58%)}
   .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;z-index:3;
     background:linear-gradient(90deg,#009246 0 33.33%,#f7f5ef 33.33% 66.66%,#ce2b37 66.66% 100%)}
-  .hero-deco::before{content:'🇮🇹'}
-  .hero-deco::after{content:'🍝'}
-  .hero-deco{position:absolute;inset:0;pointer-events:none;z-index:1}
-  .hero-deco::before,.hero-deco::after{position:absolute;opacity:.92;filter:drop-shadow(0 6px 14px rgba(0,0,0,.14))}
-  .hero-deco::before{top:26px;right:22%;font-size:54px;transform:rotate(-10deg)}
-  .hero-deco::after{bottom:26%;right:6%;font-size:66px;transform:rotate(8deg)}
   .hero-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;
     padding:24px 28px 0;gap:14px;flex-wrap:wrap}
   .hero-top .meta-left{font-size:12px;color:var(--hero-muted);letter-spacing:.3px;line-height:1.7}
@@ -66,7 +72,7 @@
   .hero-top .meta-right .dash{color:var(--accent)}
   .hero-title-wrap{position:relative;z-index:2;padding:0 28px;margin-top:auto;line-height:.85}
   .hero-title{font-family:var(--font-display);font-weight:700;font-size:clamp(62px,15vw,150px);
-    letter-spacing:-2px;color:var(--hero-title-color);margin:0;text-shadow:0 3px 24px rgba(0,0,0,.08)}
+    letter-spacing:-2px;color:var(--hero-title-color);margin:0;text-shadow:0 4px 28px rgba(0,0,0,.75)}
   .hero-title .sub{display:block;width:fit-content;font-family:var(--font-script);font-style:italic;font-weight:500;
     font-size:clamp(32px,7vw,72px);letter-spacing:0;background:var(--hero-sub-grad);
     -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -86,8 +92,24 @@
   /* BAR / TABS */
   .bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:22px 0 12px}
   .daynav{display:flex;align-items:center;gap:10px}
+  /* Единый вид всех кнопок: зелёная обводка на тёмном, заливка — только у активной.
+     Стоит перед частными правилами ниже, чтобы те могли что-то переопределить. */
+  .tabs button,.subtabs button,.daynav button,.fc-nav button,.fc-progress-row button,
+  .charbar button,.match-btn,.btn,.btn.ghost{
+    background:color-mix(in srgb,var(--accent) 7%,transparent);
+    border:1.5px solid color-mix(in srgb,var(--accent) 55%,transparent);
+    color:var(--accent-bright);box-shadow:none}
+  .tabs button:hover:not(:disabled),.subtabs button:hover:not(:disabled),
+  .daynav button:hover:not(:disabled),.fc-nav button:hover:not(:disabled),
+  .fc-progress-row button:hover:not(:disabled),.charbar button:hover:not(:disabled),
+  .match-btn:hover:not(:disabled),.btn:hover:not(:disabled),.btn.ghost:hover:not(:disabled){
+    border-color:var(--accent-bright);color:var(--accent-bright);
+    background:color-mix(in srgb,var(--accent) 16%,transparent);
+    box-shadow:0 0 18px var(--glow-accent)}
   .daynav button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);
-    width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:18px;transition:.2s}
+    width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:18px;transition:.2s;
+    background:color-mix(in srgb,var(--accent) 7%,transparent);
+    border:1.5px solid color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent-bright)}
   .daynav button:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 12px var(--glow-accent);color:var(--accent-bright)}
   .daynav button:disabled{opacity:.3;cursor:default}
   .daynav .label{font-size:14px;color:var(--muted);min-width:120px;text-align:center;
@@ -101,8 +123,8 @@
     padding:8px 16px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s;
     letter-spacing:.2px;font-family:var(--font-body)}
   .tabs button:hover{border-color:var(--border-strong);color:var(--text)}
-  .tabs button.active{background:var(--accent-grad);border-color:transparent;color:var(--btn-text);
-    box-shadow:0 0 20px var(--glow-accent),0 2px 8px rgba(0,0,0,.15)}
+  .tabs button.active{background:var(--accent-grad);border-color:var(--accent-bright);color:var(--btn-text);
+    box-shadow:0 0 24px var(--glow-accent),0 2px 8px rgba(0,0,0,.4)}
   .subtabs{display:none;gap:6px;flex-wrap:wrap;margin:0 0 14px;justify-content:center}
   .subtabs button{background:transparent;border:1px solid var(--border);color:var(--muted);
     padding:6px 14px;border-radius:999px;cursor:pointer;font-size:12.5px;font-weight:600;transition:.2s;font-family:var(--font-body)}
@@ -113,7 +135,7 @@
   .badge:empty{display:none}
 
   .progress{height:4px;background:var(--surface-2);border-radius:999px;overflow:hidden;margin-bottom:20px;border:1px solid var(--border)}
-  .progress > div{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));
+  .progress > div{height:100%;background:linear-gradient(90deg,#17a35a,#8fd96a,#f4c25e,#e8913f);
     width:0;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px var(--glow-good)}
 
   /* TABLE */
@@ -163,9 +185,11 @@
     width:34px;height:34px;border-radius:8px;font-size:16px;cursor:pointer;transition:.15s;font-family:var(--font-body)}
   .charbar button:hover{border-color:var(--accent);box-shadow:0 0 8px var(--glow-accent)}
 
-  .btn{background:var(--accent-grad);border:none;color:var(--btn-text);padding:12px 26px;border-radius:12px;
-    font-size:14px;font-weight:700;cursor:pointer;transition:.2s;box-shadow:0 0 16px var(--glow-accent);font-family:var(--font-body)}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 0 28px var(--glow-accent),0 4px 12px rgba(0,0,0,.15)}
+  .btn{background:var(--accent-grad);border:1.5px solid var(--accent-bright);color:var(--btn-text);
+    padding:12px 26px;border-radius:12px;
+    font-size:14px;font-weight:700;cursor:pointer;transition:.2s;box-shadow:0 0 18px var(--glow-accent);font-family:var(--font-body)}
+  .btn:hover{transform:translateY(-1px);background:var(--accent-grad);color:var(--btn-text);
+    box-shadow:0 0 32px var(--glow-accent),0 4px 12px rgba(0,0,0,.4)}
   .btn:active{transform:translateY(0)}
   .btn.ghost{background:transparent;border:1px solid var(--border-strong);color:var(--muted);box-shadow:none}
   .btn.ghost:hover{border-color:var(--accent);color:var(--text);box-shadow:0 0 12px var(--glow-accent)}
@@ -202,7 +226,9 @@
   .fc-back .fc-ru{font-size:24px;font-weight:700;color:var(--accent-bright)}
   .fc-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px;margin-top:20px}
   .fc-nav button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);
-    width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:20px;transition:.2s}
+    width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:20px;transition:.2s;
+    background:color-mix(in srgb,var(--accent) 7%,transparent);
+    border:1.5px solid color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent-bright)}
   .fc-nav button:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 14px var(--glow-accent);color:var(--accent-bright)}
   .fc-nav button:disabled{opacity:.3;cursor:default}
   .fc-counter{color:var(--muted);font-size:13px;min-width:64px;text-align:center;font-family:var(--font-display);font-weight:500}
@@ -215,15 +241,17 @@
   /* MATCH */
   #match{display:none}
   .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-  .match-btn{background:var(--surface);border:1px solid var(--border-strong);color:var(--text);
+  .match-btn{background:var(--surface-2);border:1.5px solid color-mix(in srgb,var(--accent) 45%,transparent);color:var(--text);
     padding:14px 10px;border-radius:14px;cursor:pointer;font-size:13px;font-weight:500;transition:.2s;
     text-align:center;line-height:1.4;font-family:var(--font-body)}
   .match-btn:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 16px var(--glow-accent);color:var(--accent-bright)}
-  .match-btn.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);
+  .match-btn.selected{border-color:var(--accent-bright);background:var(--accent-grad);color:var(--btn-text);
     box-shadow:0 0 20px var(--glow-accent);color:var(--accent-bright)}
-  .match-btn.correct{border-color:var(--good);background:color-mix(in srgb,var(--good) 10%,transparent);
+  .match-btn.correct{border-color:var(--good);background:color-mix(in srgb,var(--good) 26%,transparent);
+    color:#eafff2;
     color:var(--good);cursor:default;box-shadow:0 0 16px var(--glow-good)}
-  .match-btn.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent);box-shadow:0 0 16px var(--glow-bad)}
+  .match-btn.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 24%,transparent);
+    color:#ffe6e8;box-shadow:0 0 18px var(--glow-bad)}
   .match-btn:disabled{cursor:default}
   .match-score{color:var(--muted);font-size:13px;text-align:center;margin-bottom:14px;font-family:var(--font-display);font-weight:500}
   .match-result{text-align:center;padding:28px 16px}
@@ -266,8 +294,6 @@
     .hero-top{padding:18px 18px 0}
     .hero-title-wrap{padding:0 18px}
     .hero-bottom{padding:14px 18px 20px}
-    .hero-deco::before{font-size:36px;right:14%}
-    .hero-deco::after{font-size:44px}
     th,td{padding:10px 8px;font-size:13px}
     td.num,th.num{display:none}
     td.ipa,th.ipa{font-size:11.5px}
@@ -299,13 +325,13 @@
     .match-btn{padding:18px 14px;font-size:15px}
     #test .card,#review .card{max-width:640px;margin:0 auto}
   }
-  @media (min-width:1500px){.wrap{max-width:1500px}}
+  /* .wrap без max-width — контент во всю ширину экрана */
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="hero">
-    <div class="hero-deco"></div>
+    <div class="hero-bg"></div>
     <div class="hero-top">
       <div class="meta-left">
         <div class="tag">Italiano · A1</div>
