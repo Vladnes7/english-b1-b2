@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Итальянский с нуля · A1</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&display=swap');
+
+  /* ===================== ОБЩЕЕ ===================== */
+  /* Единственная тема — цвета флага Италии: зелёный #009246, белый, красный #CE2B37 */
+  html{
+    --font-body:'Inter',sans-serif; --font-display:'Fraunces',serif; --font-script:'Great Vibes',cursive;
+    --bg:#f6f4ee; --surface:#fffefb; --surface-2:#f1efe6; --surface-3:#fffefb;
+    --border:#e2dfd3; --border-strong:#cdc8b6;
+    --text:#2b2b2b; --muted:#84806f;
+    --accent:#009246; --accent-2:#ce2b37; --accent-bright:#00713a;
+    --good:#0a7d3f; --bad:#b21f2b;
+    --btn-text:#fff;
+    --accent-grad:linear-gradient(135deg,#009246,#0aa757);
+    --word-grad:linear-gradient(135deg,#00713a,#009246);
+    --hero-bg:linear-gradient(100deg,#d3e9d9 0%,#e9f4ec 28%,#fbfaf5 52%,#fbe9e8 76%,#f2d3d5 100%);
+    --hero-text:#2b2b2b; --hero-muted:#6b6659; --hero-title-color:#23231f;
+    --hero-sub-grad:linear-gradient(95deg,#009246 0%,#0a8f4a 42%,#ce2b37 100%);
+    --hero-card-bg:rgba(255,254,251,.86); --hero-card-text:#4a463c; --hero-card-strong:#1f1f1f;
+    --radius:16px;
+    --glow-accent:color-mix(in srgb,var(--accent) 30%,transparent);
+    --glow-good:color-mix(in srgb,var(--good) 30%,transparent);
+    --glow-bad:color-mix(in srgb,var(--bad) 30%,transparent);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--font-body);
+    line-height:1.6;min-height:100vh;padding:36px clamp(16px,4vw,64px) 80px;
+    background-image:radial-gradient(color-mix(in srgb,var(--accent) 6%,transparent) 1px,transparent 1px);
+    background-size:26px 26px;
+    transition:background-color .3s;
+  }
+  body::before{content:'';position:fixed;top:-200px;left:-200px;width:600px;height:600px;
+    background:radial-gradient(circle,color-mix(in srgb,var(--accent) 10%,transparent) 0%,transparent 70%);
+    pointer-events:none;z-index:0}
+  body::after{content:'';position:fixed;bottom:-200px;right:-200px;width:500px;height:500px;
+    background:radial-gradient(circle,color-mix(in srgb,var(--accent-2) 10%,transparent) 0%,transparent 70%);
+    pointer-events:none;z-index:0}
+  .wrap{max-width:1400px;margin:0 auto;position:relative;z-index:1}
+
+  /* HERO */
+  .hero{position:relative;margin-bottom:18px;border-radius:22px;overflow:hidden;
+    border:1px solid var(--border-strong);background:var(--hero-bg);
+    box-shadow:0 0 50px color-mix(in srgb,var(--accent) 12%,transparent),0 20px 60px rgba(0,0,0,.08);
+    min-height:clamp(330px,42vh,470px);display:flex;flex-direction:column;justify-content:flex-end}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;z-index:3;
+    background:linear-gradient(90deg,#009246 0 33.33%,#f7f5ef 33.33% 66.66%,#ce2b37 66.66% 100%)}
+  .hero-deco::before{content:'🇮🇹'}
+  .hero-deco::after{content:'🍝'}
+  .hero-deco{position:absolute;inset:0;pointer-events:none;z-index:1}
+  .hero-deco::before,.hero-deco::after{position:absolute;opacity:.92;filter:drop-shadow(0 6px 14px rgba(0,0,0,.14))}
+  .hero-deco::before{top:26px;right:22%;font-size:54px;transform:rotate(-10deg)}
+  .hero-deco::after{bottom:26%;right:6%;font-size:66px;transform:rotate(8deg)}
+  .hero-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;
+    padding:24px 28px 0;gap:14px;flex-wrap:wrap}
+  .hero-top .meta-left{font-size:12px;color:var(--hero-muted);letter-spacing:.3px;line-height:1.7}
+  .hero-top .meta-left b{color:var(--hero-text);font-weight:700}
+  .hero-top .meta-right{font-size:12px;color:var(--hero-muted);text-align:right;line-height:1.9;letter-spacing:.3px}
+  .hero-top .meta-right span{display:block}
+  .hero-top .meta-right .dash{color:var(--accent)}
+  .hero-title-wrap{position:relative;z-index:2;padding:0 28px;margin-top:auto;line-height:.85}
+  .hero-title{font-family:var(--font-display);font-weight:700;font-size:clamp(62px,15vw,150px);
+    letter-spacing:-2px;color:var(--hero-title-color);margin:0;text-shadow:0 3px 24px rgba(0,0,0,.08)}
+  .hero-title .sub{display:block;width:fit-content;font-family:var(--font-script);font-style:italic;font-weight:500;
+    font-size:clamp(32px,7vw,72px);letter-spacing:0;background:var(--hero-sub-grad);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    margin-top:2px;margin-left:6px;padding-bottom:10px}
+  .hero-bottom{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;
+    gap:20px;flex-wrap:wrap;padding:16px 28px 26px}
+  .hero-card{background:var(--hero-card-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:14px;padding:14px 18px;
+    font-size:12.5px;line-height:1.7;color:var(--hero-card-text);
+    box-shadow:0 6px 24px color-mix(in srgb,var(--accent) 12%,transparent);max-width:340px}
+  .hero-card b{color:var(--hero-card-strong,var(--hero-text));font-weight:700}
+  .hero-desc{font-size:13px;color:var(--hero-muted);line-height:1.6;max-width:300px;text-align:right;margin-left:auto}
+  .hero .tag{display:inline-block;background:color-mix(in srgb,var(--accent) 14%,transparent);
+    border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent-bright);
+    font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:4px 10px;border-radius:6px}
+
+  /* BAR / TABS */
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:22px 0 12px}
+  .daynav{display:flex;align-items:center;gap:10px}
+  .daynav button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);
+    width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:18px;transition:.2s}
+  .daynav button:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 12px var(--glow-accent);color:var(--accent-bright)}
+  .daynav button:disabled{opacity:.3;cursor:default}
+  .daynav .label{font-size:14px;color:var(--muted);min-width:120px;text-align:center;
+    background:var(--surface-2);border:1px solid var(--border);padding:6px 14px;border-radius:10px}
+  .daynav .label b{color:var(--accent-bright);font-family:var(--font-display)}
+  .daynav .label .sublabel{display:block;font-size:11px;line-height:1.4}
+  .streak{font-size:14px;font-weight:700;color:var(--accent-bright);background:var(--surface-2);
+    border:1px solid var(--border);border-radius:10px;padding:8px 12px;white-space:nowrap}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tabs button{background:var(--surface-2);border:1px solid var(--border);color:var(--muted);
+    padding:8px 16px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s;
+    letter-spacing:.2px;font-family:var(--font-body)}
+  .tabs button:hover{border-color:var(--border-strong);color:var(--text)}
+  .tabs button.active{background:var(--accent-grad);border-color:transparent;color:var(--btn-text);
+    box-shadow:0 0 20px var(--glow-accent),0 2px 8px rgba(0,0,0,.15)}
+  .subtabs{display:none;gap:6px;flex-wrap:wrap;margin:0 0 14px;justify-content:center}
+  .subtabs button{background:transparent;border:1px solid var(--border);color:var(--muted);
+    padding:6px 14px;border-radius:999px;cursor:pointer;font-size:12.5px;font-weight:600;transition:.2s;font-family:var(--font-body)}
+  .subtabs button:hover{border-color:var(--accent);color:var(--text)}
+  .subtabs button.active{border-color:var(--accent);color:var(--accent-bright);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+  .badge{display:inline-block;background:var(--bad);color:#fff;font-size:10px;font-weight:700;
+    border-radius:999px;padding:1px 7px;margin-left:5px;vertical-align:1px}
+  .badge:empty{display:none}
+
+  .progress{height:4px;background:var(--surface-2);border-radius:999px;overflow:hidden;margin-bottom:20px;border:1px solid var(--border)}
+  .progress > div{height:100%;background:linear-gradient(90deg,var(--accent),var(--good));
+    width:0;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px var(--glow-good)}
+
+  /* TABLE */
+  table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);
+    border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;
+    box-shadow:0 0 30px color-mix(in srgb,var(--accent) 8%,transparent)}
+  th,td{padding:13px 18px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+  th{color:var(--muted);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;background:var(--surface-2)}
+  tr:last-child td{border-bottom:none}
+  tr{transition:background .15s}
+  tr:hover td{background:color-mix(in srgb,var(--accent) 5%,transparent)}
+  td.en{font-weight:700;cursor:pointer;position:relative;font-family:var(--font-display);font-size:15px;
+    color:var(--text);transition:color .15s}
+  td.en:hover{color:var(--accent-bright)}
+  td.ipa{color:var(--muted);font-style:italic;white-space:nowrap;font-size:13px}
+  .num{color:var(--border-strong);width:38px;font-size:12px;font-weight:600}
+  .chk{width:46px;text-align:center}
+  .chk input{width:17px;height:17px;accent-color:var(--good);cursor:pointer}
+  tr.learned td.en{color:var(--good)}
+  tr.learned{background:color-mix(in srgb,var(--good) 5%,transparent)}
+
+  /* POPUP */
+  .word-popup{position:fixed;z-index:1000;background:var(--surface-3);border:1px solid var(--accent);
+    border-radius:14px;padding:14px 18px;min-width:230px;max-width:300px;
+    box-shadow:0 0 30px var(--glow-accent),0 12px 40px rgba(0,0,0,.25);
+    pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s}
+  .word-popup.show{opacity:1;transform:translateY(0)}
+  .word-popup .pop-en{font-size:20px;font-weight:700;font-family:var(--font-display);
+    background:var(--word-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .word-popup .pop-ipa{font-size:12px;color:var(--muted);font-style:italic;margin:3px 0 7px}
+  .word-popup .pop-ru{font-size:15px;color:var(--text)}
+
+  /* CARD */
+  .card{background:var(--surface);border:1px solid var(--border-strong);border-radius:20px;
+    padding:36px 28px;text-align:center;box-shadow:0 0 40px color-mix(in srgb,var(--accent) 10%,transparent)}
+  .card .dir{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
+  .card .word{font-family:var(--font-display);font-size:36px;font-weight:700;margin:16px 0 4px;
+    background:var(--word-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .card .hint{color:var(--muted);font-size:14px;margin-bottom:18px}
+  .card input[type=text]{width:100%;max-width:380px;background:var(--surface-2);border:1px solid var(--border-strong);
+    color:var(--text);padding:13px 16px;border-radius:12px;font-size:16px;text-align:center;outline:none;
+    transition:.2s;font-family:var(--font-body)}
+  .card input[type=text]:focus{border-color:var(--accent);box-shadow:0 0 20px var(--glow-accent)}
+  .card .actions{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .charbar{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:12px auto 0;max-width:420px}
+  .charbar button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--accent-bright);
+    width:34px;height:34px;border-radius:8px;font-size:16px;cursor:pointer;transition:.15s;font-family:var(--font-body)}
+  .charbar button:hover{border-color:var(--accent);box-shadow:0 0 8px var(--glow-accent)}
+
+  .btn{background:var(--accent-grad);border:none;color:var(--btn-text);padding:12px 26px;border-radius:12px;
+    font-size:14px;font-weight:700;cursor:pointer;transition:.2s;box-shadow:0 0 16px var(--glow-accent);font-family:var(--font-body)}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 0 28px var(--glow-accent),0 4px 12px rgba(0,0,0,.15)}
+  .btn:active{transform:translateY(0)}
+  .btn.ghost{background:transparent;border:1px solid var(--border-strong);color:var(--muted);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--text);box-shadow:0 0 12px var(--glow-accent)}
+
+  .feedback{margin-top:18px;font-size:16px;min-height:24px;font-weight:700}
+  .feedback.good{color:var(--good)}
+  .feedback.bad{color:var(--bad)}
+  .counter{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .result{text-align:center;padding:30px}
+  .result .score{font-family:var(--font-display);font-size:52px;font-weight:700;margin:12px 0;
+    background:linear-gradient(135deg,var(--accent-bright),var(--good));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+  /* FLASHCARDS */
+  #flashcards{display:none}
+  .fc-wrap{perspective:1200px;width:100%;max-width:500px;margin:0 auto 24px}
+  .fc-card{width:100%;height:230px;position:relative;transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer}
+  .fc-card.flipped{transform:rotateY(180deg)}
+  .fc-front,.fc-back{position:absolute;inset:0;background:var(--surface);border:1px solid var(--border-strong);
+    border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;
+    box-shadow:0 0 30px color-mix(in srgb,var(--accent) 10%,transparent);transition:box-shadow .3s}
+  .fc-card:hover .fc-front{box-shadow:0 0 50px var(--glow-accent)}
+  .fc-back{transform:rotateY(180deg);
+    background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,transparent),var(--surface));
+    border-color:var(--accent);box-shadow:0 0 40px var(--glow-accent)}
+  .fc-front .fc-label,.fc-back .fc-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;font-weight:700}
+  .fc-front .fc-label{color:var(--muted)}
+  .fc-back .fc-label{color:var(--accent)}
+  .fc-front .fc-word{font-family:var(--font-display);font-size:34px;font-weight:700;
+    background:var(--word-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .fc-front .fc-ipa{color:var(--muted);font-style:italic;font-size:14px;margin-top:8px}
+  .fc-back .fc-ru{font-size:24px;font-weight:700;color:var(--accent-bright)}
+  .fc-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px;margin-top:20px}
+  .fc-nav button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);
+    width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:20px;transition:.2s}
+  .fc-nav button:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 14px var(--glow-accent);color:var(--accent-bright)}
+  .fc-nav button:disabled{opacity:.3;cursor:default}
+  .fc-counter{color:var(--muted);font-size:13px;min-width:64px;text-align:center;font-family:var(--font-display);font-weight:500}
+  .fc-hint{color:var(--muted);font-size:12px;text-align:center;letter-spacing:.3px}
+  .fc-progress-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+  .fc-progress-row button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--muted);
+    padding:9px 20px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:var(--font-body)}
+  .fc-progress-row button:hover{border-color:var(--accent);color:var(--text);box-shadow:0 0 12px var(--glow-accent)}
+
+  /* MATCH */
+  #match{display:none}
+  .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+  .match-btn{background:var(--surface);border:1px solid var(--border-strong);color:var(--text);
+    padding:14px 10px;border-radius:14px;cursor:pointer;font-size:13px;font-weight:500;transition:.2s;
+    text-align:center;line-height:1.4;font-family:var(--font-body)}
+  .match-btn:hover:not(:disabled){border-color:var(--accent);box-shadow:0 0 16px var(--glow-accent);color:var(--accent-bright)}
+  .match-btn.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);
+    box-shadow:0 0 20px var(--glow-accent);color:var(--accent-bright)}
+  .match-btn.correct{border-color:var(--good);background:color-mix(in srgb,var(--good) 10%,transparent);
+    color:var(--good);cursor:default;box-shadow:0 0 16px var(--glow-good)}
+  .match-btn.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,transparent);box-shadow:0 0 16px var(--glow-bad)}
+  .match-btn:disabled{cursor:default}
+  .match-score{color:var(--muted);font-size:13px;text-align:center;margin-bottom:14px;font-family:var(--font-display);font-weight:500}
+  .match-result{text-align:center;padding:28px 16px}
+  .match-result .big{font-size:48px;margin-bottom:8px}
+  .match-result p{color:var(--muted);font-size:15px;margin-bottom:22px}
+
+  #test{display:none}
+  #review{display:none}
+
+  /* STATS */
+  .stat-card{background:var(--surface);border:1px solid var(--border-strong);border-radius:16px;padding:22px;
+    text-align:center;box-shadow:0 0 24px color-mix(in srgb,var(--accent) 8%,transparent)}
+  .stat-card .k{color:var(--muted);font-size:12px;letter-spacing:.8px;margin-bottom:10px;text-transform:uppercase}
+  .stat-card .v{font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--accent-bright)}
+  .stat-card .s{color:var(--muted);font-size:12px;margin-top:6px}
+  .stat-block{background:var(--surface);border:1px solid var(--border-strong);border-radius:16px;padding:24px;
+    box-shadow:0 0 30px color-mix(in srgb,var(--accent) 8%,transparent);margin-bottom:22px}
+  .stat-block h3{font-family:var(--font-display);margin-bottom:16px;font-size:16px}
+  .heatmap{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);gap:3px;justify-content:start;overflow-x:auto;padding-bottom:4px}
+  .hm{width:13px;height:13px;border-radius:3px;background:var(--surface-2)}
+  .hm1{background:color-mix(in srgb,var(--accent) 30%,var(--surface-2))}
+  .hm2{background:color-mix(in srgb,var(--accent) 60%,var(--surface-2))}
+  .hm3{background:var(--accent)}
+  .hist-bar{height:10px;border-radius:5px;background:linear-gradient(90deg,var(--accent),var(--good))}
+
+  /* ---- БЛОК ФРАЗ ---- */
+  footer{color:var(--muted);font-size:12px;text-align:center;margin-top:36px;line-height:1.8;letter-spacing:.2px}
+
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:3px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+  /* CONFETTI */
+  .conf{position:fixed;top:-16px;width:8px;height:14px;z-index:2000;border-radius:2px;
+    animation:confFall 2.6s ease-in forwards;pointer-events:none}
+  @keyframes confFall{to{transform:translateY(105vh) rotate(720deg)}}
+
+  @media(max-width:560px){
+    .hero-top{padding:18px 18px 0}
+    .hero-title-wrap{padding:0 18px}
+    .hero-bottom{padding:14px 18px 20px}
+    .hero-deco::before{font-size:36px;right:14%}
+    .hero-deco::after{font-size:44px}
+    th,td{padding:10px 8px;font-size:13px}
+    td.num,th.num{display:none}
+    td.ipa,th.ipa{font-size:11.5px}
+    .fc-front .fc-word{font-size:26px}
+    .fc-back .fc-ru{font-size:18px}
+    .tabs button{padding:7px 11px;font-size:12px}
+    .card{padding:24px 16px}
+    .card .word{font-size:28px}
+  }
+
+  @keyframes slideIn{from{opacity:0;transform:translateY(16px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes slideOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-12px) scale(.99)}}
+  .slide-in{animation:slideIn .38s cubic-bezier(.22,.61,.36,1) both}
+  .slide-out{animation:slideOut .22s cubic-bezier(.4,0,1,1) both}
+  @keyframes rowIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+  #rows tr{animation:rowIn .35s ease both}
+  @media (prefers-reduced-motion: reduce){.slide-in,.slide-out,#rows tr,.conf{animation:none !important}}
+
+  @media (min-width:1000px){
+    .hero-title{font-size:clamp(110px,12vw,190px)}
+    .hero-title .sub{font-size:clamp(56px,6vw,100px)}
+    th,td{padding:15px 24px;font-size:15px}
+    td.en{font-size:16px}
+    .fc-wrap{max-width:640px}
+    .fc-card{height:300px}
+    .fc-front .fc-word{font-size:44px}
+    .fc-back .fc-ru{font-size:30px}
+    .match-grid{max-width:900px;margin-left:auto;margin-right:auto;gap:14px}
+    .match-btn{padding:18px 14px;font-size:15px}
+    #test .card,#review .card{max-width:640px;margin:0 auto}
+  }
+  @media (min-width:1500px){.wrap{max-width:1500px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-deco"></div>
+    <div class="hero-top">
+      <div class="meta-left">
+        <div class="tag">Italiano · A1</div>
+        <div style="margin-top:10px">Итальянский с нуля<br><b>20 слов в день</b></div>
+      </div>
+      <div class="meta-right">
+        <span>2026</span>
+        <span>Итальянский · A1</span>
+        <span style="margin-top:8px"><span class="dash">—</span> Карточки</span>
+        <span><span class="dash">—</span> Умное повторение</span>
+        <span><span class="dash">—</span> Тесты</span>
+      </div>
+    </div>
+    <div class="hero-title-wrap">
+      <h1 class="hero-title">CIAO<span class="sub">italiano</span></h1>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-card">
+        <b>Итальянский с нуля · A1</b><br>
+        Каждый день — 20 новых итальянских слов с произношением и переводом.<br>
+        Прогресс сохраняется автоматически.
+      </div>
+      <div class="hero-desc">
+        Учи таблицу, переворачивай карточки, сопоставляй пары и проверяй себя в тесте.
+      </div>
+    </div>
+  </header>
+
+  <div class="bar">
+    <div class="daynav">
+      <button id="prev">‹</button>
+      <span class="label">День <b id="dayNum">1</b><span class="sublabel" id="daySub"></span></span>
+      <button id="next">›</button>
+      <span class="streak" id="streakEl">🔥 0</span>
+    </div>
+    <div class="tabs" id="mainTabs">
+      <button data-tab="learn">Учить</button>
+      <button data-tab="practice">Практика</button>
+      <button data-tab="test">Тест</button>
+      <button data-tab="review">Повторить<span class="badge" id="srsBadge"></span></button>
+      <button data-tab="stats">Прогресс</button>
+    </div>
+  </div>
+
+  <div class="subtabs" id="subTabs">
+    <button data-mode="flashcards">Карточки</button>
+    <button data-mode="match">Пары</button>
+    <button data-mode="phrases">Пропуски</button>
+  </div>
+
+  <div class="progress"><div id="progBar"></div></div>
+
+  <!-- LEARN -->
+  <div id="learn">
+    <table>
+      <thead>
+        <tr>
+          <th class="num">№</th>
+          <th>Italiano</th>
+          <th class="ipa">Произношение</th>
+          <th>Перевод</th>
+          <th class="chk">✓</th>
+        </tr>
+      </thead>
+      <tbody id="rows"><tr><td class="num">1</td><td class="en" data-i="0">ciao</td><td class="ipa">ЧА-о</td><td>привет, пока</td><td class="chk"><input type="checkbox" data-i="0"></td></tr><tr><td class="num">2</td><td class="en" data-i="1">buongiorno</td><td class="ipa">буон-ДЖОР-но</td><td>добрый день, здравствуйте</td><td class="chk"><input type="checkbox" data-i="1"></td></tr><tr><td class="num">3</td><td class="en" data-i="2">buonasera</td><td class="ipa">буо-на-СЕ-ра</td><td>добрый вечер</td><td class="chk"><input type="checkbox" data-i="2"></td></tr><tr><td class="num">4</td><td class="en" data-i="3">buonanotte</td><td class="ipa">буо-на-НОТ-те</td><td>спокойной ночи</td><td class="chk"><input type="checkbox" data-i="3"></td></tr><tr><td class="num">5</td><td class="en" data-i="4">arrivederci</td><td class="ipa">ар-ри-ве-ДЕР-чи</td><td>до свидания</td><td class="chk"><input type="checkbox" data-i="4"></td></tr><tr><td class="num">6</td><td class="en" data-i="5">salve</td><td class="ipa">САЛЬ-ве</td><td>здравствуйте</td><td class="chk"><input type="checkbox" data-i="5"></td></tr><tr><td class="num">7</td><td class="en" data-i="6">grazie</td><td class="ipa">ГРА-цие</td><td>спасибо</td><td class="chk"><input type="checkbox" data-i="6"></td></tr><tr><td class="num">8</td><td class="en" data-i="7">prego</td><td class="ipa">ПРЕ-го</td><td>пожалуйста, не за что</td><td class="chk"><input type="checkbox" data-i="7"></td></tr><tr><td class="num">9</td><td class="en" data-i="8">per favore</td><td class="ipa">пер фа-ВО-ре</td><td>пожалуйста, будьте добры</td><td class="chk"><input type="checkbox" data-i="8"></td></tr><tr><td class="num">10</td><td class="en" data-i="9">scusa</td><td class="ipa">СКУ-за</td><td>извини</td><td class="chk"><input type="checkbox" data-i="9"></td></tr><tr><td class="num">11</td><td class="en" data-i="10">scusi</td><td class="ipa">СКУ-зи</td><td>извините</td><td class="chk"><input type="checkbox" data-i="10"></td></tr><tr><td class="num">12</td><td class="en" data-i="11">sì</td><td class="ipa">си</td><td>да</td><td class="chk"><input type="checkbox" data-i="11"></td></tr><tr><td class="num">13</td><td class="en" data-i="12">no</td><td class="ipa">но</td><td>нет</td><td class="chk"><input type="checkbox" data-i="12"></td></tr><tr><td class="num">14</td><td class="en" data-i="13">come</td><td class="ipa">КО-ме</td><td>как</td><td class="chk"><input type="checkbox" data-i="13"></td></tr><tr><td class="num">15</td><td class="en" data-i="14">bene</td><td class="ipa">БЕ-не</td><td>хорошо</td><td class="chk"><input type="checkbox" data-i="14"></td></tr><tr><td class="num">16</td><td class="en" data-i="15">male</td><td class="ipa">МА-ле</td><td>плохо</td><td class="chk"><input type="checkbox" data-i="15"></td></tr><tr><td class="num">17</td><td class="en" data-i="16">va bene</td><td class="ipa">ва БЕ-не</td><td>хорошо, договорились</td><td class="chk"><input type="checkbox" data-i="16"></td></tr><tr><td class="num">18</td><td class="en" data-i="17">mi chiamo</td><td class="ipa">ми КЬЯ-мо</td><td>меня зовут</td><td class="chk"><input type="checkbox" data-i="17"></td></tr><tr><td class="num">19</td><td class="en" data-i="18">piacere</td><td class="ipa">пья-ЧЕ-ре</td><td>очень приятно</td><td class="chk"><input type="checkbox" data-i="18"></td></tr><tr><td class="num">20</td><td class="en" data-i="19">ecco</td><td class="ipa">ЭК-ко</td><td>вот</td><td class="chk"><input type="checkbox" data-i="19"></td></tr></tbody>
+    </table>
+    <p style="color:var(--muted);font-size:13px;margin-top:10px;text-align:center">💡 Нажми на любое слово, чтобы увидеть подсказку.<br>
+      Заглавные буквы в произношении — ударный слог. <b>(м)</b> и <b>(ж)</b> — род слова в итальянском: <i>il/lo</i> → м, <i>la</i> → ж.</p>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="flashcards">
+    <div class="fc-wrap">
+      <div class="fc-card" id="fcCard">
+        <div class="fc-front">
+          <div class="fc-label">Итальянское слово</div>
+          <div class="fc-word" id="fcWord"></div>
+          <div class="fc-ipa" id="fcIpa"></div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label">Перевод</div>
+          <div class="fc-ru" id="fcRu"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-hint">Нажми на карточку, чтобы перевернуть</div>
+    <div class="fc-nav">
+      <button id="fcPrev">‹</button>
+      <span class="fc-counter" id="fcCounter">1 / 20</span>
+      <button id="fcNext">›</button>
+    </div>
+    <div class="fc-progress-row">
+      <button onclick="markCard('know')">✓ Знаю</button>
+      <button onclick="markCard('skip')">✗ Не знаю</button>
+      <button onclick="shuffleFlash()">⇄ Перемешать</button>
+    </div>
+    <div id="fcStatus" style="color:var(--muted);font-size:13px;text-align:center;margin-top:12px"></div>
+  </div>
+
+  <!-- MATCH -->
+  <div id="match">
+    <div class="match-score" id="matchScore"></div>
+    <div class="match-grid" id="matchGrid"></div>
+    <div style="text-align:center" id="matchCtl">
+      <button class="btn ghost" onclick="startMatch()">↺ Новый раунд</button>
+    </div>
+  </div>
+
+  <!-- TEST -->
+  <div id="test"></div>
+
+  <!-- REVIEW (SRS) -->
+  <div id="review"></div>
+
+  <!-- PHRASES -->
+  <div id="phrases" style="display:none">
+    <div class="card" style="max-width:640px;margin:0 auto">
+      <div class="counter" id="phrCounter"></div>
+      <div class="dir">Вставь нужное слово во фразу</div>
+      <div id="phrSentence" style="font-size:22px;line-height:1.6;margin:18px 0 8px;font-family:var(--font-display)"></div>
+      <div class="hint" id="phrTranslation"></div>
+      <input type="text" id="phrInput" autocomplete="off" autocapitalize="off" placeholder="Твой ответ...">
+      <div class="charbar" id="phrChars"></div>
+      <div class="actions">
+        <button class="btn" id="phrCheck">Проверить</button>
+        <button class="btn ghost" id="phrSkip">Не знаю</button>
+      </div>
+      <div class="feedback" id="phrFb"></div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div id="stats" style="display:none">
+    <div style="max-width:940px;margin:0 auto">
+      <h2 style="font-family:var(--font-display);font-size:24px;margin-bottom:18px;text-align:center">Твой прогресс</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:22px" id="statCards"></div>
+      <div class="stat-block">
+        <h3>Календарь занятий · последние 12 недель</h3>
+        <div id="heatmapBox"></div>
+      </div>
+      <div class="stat-block">
+        <h3>Результаты тестов</h3>
+        <div id="histBox"></div>
+      </div>
+      <div class="stat-block">
+        <h3>Слова текущего дня</h3>
+        <div id="topWords" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
+        <button class="btn ghost" onclick="exportProgress()">⬇ Скачать прогресс</button>
+        <label class="btn ghost" style="cursor:pointer">⬆ Загрузить прогресс<input type="file" id="impFile" accept=".json" style="display:none"></label>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Итальянский с нуля · A1 · 100 базовых слов · прогресс сохраняется в этом браузере автоматически.
+  </footer>
+</div>
+
+<!-- WORD POPUP -->
+<div class="word-popup" id="wordPopup">
+  <div class="pop-en" id="popEn"></div>
+  <div class="pop-ipa" id="popIpa"></div>
+  <div class="pop-ru" id="popRu"></div>
+</div>
+
+<script id="vocab" type="application/json">
+{"lessons":[{"topic":"Приветствия и вежливость","words":[{"en":"ciao","ipa":"ЧА-о","ru":"привет, пока","sentence":"Ciao, come stai?","strans":"Привет, как дела?"},{"en":"buongiorno","ipa":"буон-ДЖОР-но","ru":"добрый день, здравствуйте","sentence":"Buongiorno, signora Rossi!","strans":"Добрый день, синьора Росси!"},{"en":"buonasera","ipa":"буо-на-СЕ-ра","ru":"добрый вечер","sentence":"Buonasera a tutti!","strans":"Добрый вечер всем!"},{"en":"buonanotte","ipa":"буо-на-НОТ-те","ru":"спокойной ночи","sentence":"Buonanotte, a domani!","strans":"Спокойной ночи, до завтра!"},{"en":"arrivederci","ipa":"ар-ри-ве-ДЕР-чи","ru":"до свидания","sentence":"Arrivederci e grazie!","strans":"До свидания и спасибо!"},{"en":"salve","ipa":"САЛЬ-ве","ru":"здравствуйте","sentence":"Salve, posso entrare?","strans":"Здравствуйте, можно войти?"},{"en":"grazie","ipa":"ГРА-цие","ru":"спасибо","sentence":"Grazie mille!","strans":"Большое спасибо!"},{"en":"prego","ipa":"ПРЕ-го","ru":"пожалуйста, не за что","sentence":"Grazie! — Prego.","strans":"Спасибо! — Не за что."},{"en":"per favore","ipa":"пер фа-ВО-ре","ru":"пожалуйста, будьте добры","sentence":"Un caffè, per favore.","strans":"Кофе, пожалуйста."},{"en":"scusa","ipa":"СКУ-за","ru":"извини","sentence":"Scusa, non ho capito.","strans":"Извини, я не понял."},{"en":"scusi","ipa":"СКУ-зи","ru":"извините","sentence":"Scusi, è libero questo posto?","strans":"Извините, это место свободно?"},{"en":"sì","ipa":"си","ru":"да","sentence":"Sì, va bene.","strans":"Да, хорошо."},{"en":"no","ipa":"но","ru":"нет","sentence":"No, grazie.","strans":"Нет, спасибо."},{"en":"come","ipa":"КО-ме","ru":"как","sentence":"Come stai?","strans":"Как дела?"},{"en":"bene","ipa":"БЕ-не","ru":"хорошо","sentence":"Sto bene, grazie.","strans":"У меня всё хорошо, спасибо."},{"en":"male","ipa":"МА-ле","ru":"плохо","sentence":"Oggi sto male.","strans":"Сегодня мне плохо."},{"en":"va bene","ipa":"ва БЕ-не","ru":"хорошо, договорились","sentence":"Va bene, ci vediamo domani.","strans":"Хорошо, увидимся завтра."},{"en":"mi chiamo","ipa":"ми КЬЯ-мо","ru":"меня зовут","sentence":"Mi chiamo Marco.","strans":"Меня зовут Марко."},{"en":"piacere","ipa":"пья-ЧЕ-ре","ru":"очень приятно","sentence":"Piacere, io sono Anna.","strans":"Очень приятно, я Анна."},{"en":"ecco","ipa":"ЭК-ко","ru":"вот","sentence":"Ecco il tuo caffè.","strans":"Вот твой кофе."}]},{"topic":"Люди и семья","words":[{"en":"uomo","ipa":"УО-мо","ru":"мужчина, человек (м)","sentence":"L'uomo legge il giornale.","strans":"Мужчина читает газету."},{"en":"donna","ipa":"ДОН-на","ru":"женщина (ж)","sentence":"La donna beve il caffè.","strans":"Женщина пьёт кофе."},{"en":"bambino","ipa":"бам-БИ-но","ru":"ребёнок, мальчик (м)","sentence":"Il bambino gioca in casa.","strans":"Ребёнок играет дома."},{"en":"ragazzo","ipa":"ра-ГАЦ-цо","ru":"парень, юноша (м)","sentence":"Il ragazzo è mio amico.","strans":"Этот парень — мой друг."},{"en":"ragazza","ipa":"ра-ГАЦ-ца","ru":"девушка (ж)","sentence":"La ragazza studia italiano.","strans":"Девушка учит итальянский."},{"en":"amico","ipa":"а-МИ-ко","ru":"друг (м)","sentence":"Marco è il mio amico.","strans":"Марко — мой друг."},{"en":"famiglia","ipa":"фа-МИ-лья","ru":"семья (ж)","sentence":"La mia famiglia è grande.","strans":"Моя семья большая."},{"en":"madre","ipa":"МА-дре","ru":"мать (ж)","sentence":"Mia madre si chiama Anna.","strans":"Мою маму зовут Анна."},{"en":"padre","ipa":"ПА-дре","ru":"отец (м)","sentence":"Mio padre lavora molto.","strans":"Мой отец много работает."},{"en":"figlio","ipa":"ФИ-льо","ru":"сын (м)","sentence":"Ho un figlio piccolo.","strans":"У меня маленький сын."},{"en":"figlia","ipa":"ФИ-лья","ru":"дочь (ж)","sentence":"Mia figlia va a scuola.","strans":"Моя дочь ходит в школу."},{"en":"fratello","ipa":"фра-ТЕЛ-ло","ru":"брат (м)","sentence":"Mio fratello abita a Roma.","strans":"Мой брат живёт в Риме."},{"en":"sorella","ipa":"со-РЕЛ-ла","ru":"сестра (ж)","sentence":"Mia sorella parla inglese.","strans":"Моя сестра говорит по-английски."},{"en":"nonna","ipa":"НОН-на","ru":"бабушка (ж)","sentence":"La nonna fa la pasta.","strans":"Бабушка готовит пасту."},{"en":"nonno","ipa":"НОН-но","ru":"дедушка (м)","sentence":"Il nonno legge il giornale.","strans":"Дедушка читает газету."},{"en":"marito","ipa":"ма-РИ-то","ru":"муж (м)","sentence":"Mio marito è italiano.","strans":"Мой муж — итальянец."},{"en":"moglie","ipa":"МО-лье","ru":"жена (ж)","sentence":"Sua moglie si chiama Sofia.","strans":"Его жену зовут София."},{"en":"nome","ipa":"НО-ме","ru":"имя (м)","sentence":"Qual è il tuo nome?","strans":"Как тебя зовут?"},{"en":"signora","ipa":"си-НЬО-ра","ru":"синьора, госпожа (ж)","sentence":"La signora abita qui.","strans":"Синьора живёт здесь."},{"en":"gente","ipa":"ДЖЕН-те","ru":"люди, народ (ж)","sentence":"In piazza c'è molta gente.","strans":"На площади много людей."}]},{"topic":"Еда и напитки","words":[{"en":"acqua","ipa":"АК-куа","ru":"вода (ж)","sentence":"Bevo molta acqua.","strans":"Я пью много воды."},{"en":"pane","ipa":"ПА-не","ru":"хлеб (м)","sentence":"Il pane è fresco.","strans":"Хлеб свежий."},{"en":"vino","ipa":"ВИ-но","ru":"вино (м)","sentence":"Un bicchiere di vino rosso.","strans":"Бокал красного вина."},{"en":"caffè","ipa":"каф-ФЭ","ru":"кофе (м)","sentence":"Prendo un caffè, grazie.","strans":"Мне кофе, спасибо."},{"en":"latte","ipa":"ЛАТ-те","ru":"молоко (м)","sentence":"Il bambino beve il latte.","strans":"Ребёнок пьёт молоко."},{"en":"tè","ipa":"тэ","ru":"чай (м)","sentence":"Preferisci il tè o il caffè?","strans":"Ты предпочитаешь чай или кофе?"},{"en":"birra","ipa":"БИР-ра","ru":"пиво (ж)","sentence":"Una birra fredda, per favore.","strans":"Одно холодное пиво, пожалуйста."},{"en":"pizza","ipa":"ПИЦ-ца","ru":"пицца (ж)","sentence":"La pizza è buonissima.","strans":"Пицца очень вкусная."},{"en":"pasta","ipa":"ПА-ста","ru":"паста, макароны (ж)","sentence":"Mangio la pasta ogni giorno.","strans":"Я ем пасту каждый день."},{"en":"formaggio","ipa":"фор-МАД-жо","ru":"сыр (м)","sentence":"Il formaggio italiano è famoso.","strans":"Итальянский сыр знаменит."},{"en":"carne","ipa":"КАР-не","ru":"мясо (ж)","sentence":"Non mangio carne.","strans":"Я не ем мясо."},{"en":"pesce","ipa":"ПЕ-ше","ru":"рыба (м)","sentence":"Il pesce è fresco oggi.","strans":"Рыба сегодня свежая."},{"en":"frutta","ipa":"ФРУТ-та","ru":"фрукты (ж)","sentence":"Compro la frutta al mercato.","strans":"Я покупаю фрукты на рынке."},{"en":"mela","ipa":"МЕ-ла","ru":"яблоко (ж)","sentence":"Vuoi una mela?","strans":"Хочешь яблоко?"},{"en":"zucchero","ipa":"ЦУК-ке-ро","ru":"сахар (м)","sentence":"Caffè senza zucchero, grazie.","strans":"Кофе без сахара, спасибо."},{"en":"sale","ipa":"СА-ле","ru":"соль (м)","sentence":"Passami il sale, per favore.","strans":"Передай мне соль, пожалуйста."},{"en":"colazione","ipa":"ко-ла-ЦЬО-не","ru":"завтрак (ж)","sentence":"Faccio colazione alle otto.","strans":"Я завтракаю в восемь."},{"en":"pranzo","ipa":"ПРАН-цо","ru":"обед (м)","sentence":"Il pranzo è pronto.","strans":"Обед готов."},{"en":"cena","ipa":"ЧЕ-на","ru":"ужин (ж)","sentence":"La cena è alle otto.","strans":"Ужин в восемь."},{"en":"mangiare","ipa":"ман-ДЖА-ре","ru":"есть, кушать","sentence":"Mi piace mangiare la pizza.","strans":"Я люблю есть пиццу."}]},{"topic":"Город, дом и дорога","words":[{"en":"casa","ipa":"КА-за","ru":"дом (ж)","sentence":"La mia casa è vicino al mare.","strans":"Мой дом рядом с морем."},{"en":"città","ipa":"чит-ТА","ru":"город (ж)","sentence":"Roma è una città bellissima.","strans":"Рим — очень красивый город."},{"en":"via","ipa":"ВИ-а","ru":"улица (ж)","sentence":"Abito in via Verdi.","strans":"Я живу на улице Верди."},{"en":"piazza","ipa":"ПЬЯЦ-ца","ru":"площадь (ж)","sentence":"Ci vediamo in piazza.","strans":"Встретимся на площади."},{"en":"negozio","ipa":"не-ГО-цьо","ru":"магазин (м)","sentence":"Il negozio è chiuso.","strans":"Магазин закрыт."},{"en":"mercato","ipa":"мер-КА-то","ru":"рынок (м)","sentence":"Vado al mercato ogni sabato.","strans":"Я хожу на рынок каждую субботу."},{"en":"stazione","ipa":"ста-ЦЬО-не","ru":"вокзал, станция (ж)","sentence":"Dov'è la stazione?","strans":"Где вокзал?"},{"en":"treno","ipa":"ТРЕ-но","ru":"поезд (м)","sentence":"Il treno parte alle nove.","strans":"Поезд отправляется в девять."},{"en":"macchina","ipa":"МАК-ки-на","ru":"машина (ж)","sentence":"La macchina è nuova.","strans":"Машина новая."},{"en":"albergo","ipa":"аль-БЕР-го","ru":"гостиница (м)","sentence":"L'albergo è in centro.","strans":"Гостиница в центре."},{"en":"camera","ipa":"КА-ме-ра","ru":"комната, номер (ж)","sentence":"Vorrei una camera doppia.","strans":"Я хотел бы двухместный номер."},{"en":"bagno","ipa":"БА-ньо","ru":"ванная, туалет (м)","sentence":"Dov'è il bagno, per favore?","strans":"Где туалет, пожалуйста?"},{"en":"porta","ipa":"ПОР-та","ru":"дверь (ж)","sentence":"Chiudi la porta, per favore.","strans":"Закрой дверь, пожалуйста."},{"en":"tavolo","ipa":"ТА-во-ло","ru":"стол (м)","sentence":"Un tavolo per due, per favore.","strans":"Столик на двоих, пожалуйста."},{"en":"letto","ipa":"ЛЕТ-то","ru":"кровать (м)","sentence":"Il letto è comodo.","strans":"Кровать удобная."},{"en":"chiesa","ipa":"КЬЕ-за","ru":"церковь (ж)","sentence":"La chiesa è molto antica.","strans":"Церковь очень старая."},{"en":"strada","ipa":"СТРА-да","ru":"дорога, улица (ж)","sentence":"La strada per Roma è lunga.","strans":"Дорога в Рим длинная."},{"en":"biglietto","ipa":"би-ЛЬЕТ-то","ru":"билет (м)","sentence":"Un biglietto per Milano, grazie.","strans":"Один билет до Милана, спасибо."},{"en":"sinistra","ipa":"си-НИ-стра","ru":"левая сторона, налево","sentence":"Gira a sinistra.","strans":"Поверни налево."},{"en":"destra","ipa":"ДЕ-стра","ru":"правая сторона, направо","sentence":"Il bagno è a destra.","strans":"Туалет справа."}]},{"topic":"Базовые слова и глаголы","words":[{"en":"essere","ipa":"ЭС-се-ре","ru":"быть","sentence":"Voglio essere felice.","strans":"Я хочу быть счастливым."},{"en":"avere","ipa":"а-ВЕ-ре","ru":"иметь","sentence":"Non voglio avere problemi.","strans":"Я не хочу иметь проблем."},{"en":"fare","ipa":"ФА-ре","ru":"делать","sentence":"Che cosa vuoi fare oggi?","strans":"Что ты хочешь делать сегодня?"},{"en":"andare","ipa":"ан-ДА-ре","ru":"идти, ехать","sentence":"Voglio andare a Roma.","strans":"Я хочу поехать в Рим."},{"en":"volere","ipa":"во-ЛЕ-ре","ru":"хотеть","sentence":"Volere è potere.","strans":"Хотеть значит мочь."},{"en":"potere","ipa":"по-ТЕ-ре","ru":"мочь, уметь","sentence":"Vorrei potere parlare italiano.","strans":"Я хотел бы уметь говорить по-итальянски."},{"en":"parlare","ipa":"пар-ЛА-ре","ru":"говорить","sentence":"Voglio parlare italiano.","strans":"Я хочу говорить по-итальянски."},{"en":"capire","ipa":"ка-ПИ-ре","ru":"понимать","sentence":"È difficile capire tutto.","strans":"Трудно всё понять."},{"en":"bere","ipa":"БЕ-ре","ru":"пить","sentence":"Vuoi bere qualcosa?","strans":"Хочешь что-нибудь выпить?"},{"en":"oggi","ipa":"ОД-жи","ru":"сегодня","sentence":"Oggi fa caldo.","strans":"Сегодня жарко."},{"en":"domani","ipa":"до-МА-ни","ru":"завтра","sentence":"Domani vado al mare.","strans":"Завтра я еду на море."},{"en":"ieri","ipa":"ЙЕ-ри","ru":"вчера","sentence":"Ieri ho lavorato molto.","strans":"Вчера я много работал."},{"en":"molto","ipa":"МОЛЬ-то","ru":"очень, много","sentence":"Sono molto stanco.","strans":"Я очень устал."},{"en":"poco","ipa":"ПО-ко","ru":"мало","sentence":"Ho poco tempo.","strans":"У меня мало времени."},{"en":"grande","ipa":"ГРАН-де","ru":"большой","sentence":"La casa è grande.","strans":"Дом большой."},{"en":"piccolo","ipa":"ПИК-ко-ло","ru":"маленький","sentence":"Il mio cane è piccolo.","strans":"Моя собака маленькая."},{"en":"bello","ipa":"БЕЛ-ло","ru":"красивый","sentence":"Il mare è bello.","strans":"Море красивое."},{"en":"buono","ipa":"БУО-но","ru":"хороший, вкусный","sentence":"Questo vino è buono.","strans":"Это вино хорошее."},{"en":"dove","ipa":"ДО-ве","ru":"где","sentence":"Dove sei?","strans":"Ты где?"},{"en":"quanto","ipa":"КУАН-то","ru":"сколько","sentence":"Quanto costa?","strans":"Сколько стоит?"}]}]}
+</script>
+
+<script>
+/* ================= ДАННЫЕ И РАСПИСАНИЕ ================= */
+const LESSONS = JSON.parse(document.getElementById('vocab').textContent).lessons;
+const TOTAL_WORDS = LESSONS.reduce((s,L)=>s+L.words.length,0);
+
+// Расписание: после каждых 3 уроков — день повторения.
+const SCHED = [];
+for(let i=0;i<LESSONS.length;i++){
+  SCHED.push({type:'lesson', li:i});
+  if((i+1)%3===0) SCHED.push({type:'review', from:[i-2,i-1,i]});
+}
+
+const WORDMAP = {};
+LESSONS.forEach(L=>L.words.forEach(w=>{ if(!WORDMAP[w.en]) WORDMAP[w.en]=w; }));
+
+/* ================= ХРАНИЛИЩЕ ================= */
+const LS = 'italiano_a1_progress';
+// Хранилище с запасным вариантом: если localStorage заблокирован
+// (Safari с запретом cookie, приватный режим и т.п.) — работаем в памяти.
+const storage = (()=>{
+  try{
+    const t = '__italiano_test__';
+    localStorage.setItem(t, '1');
+    localStorage.removeItem(t);
+    return localStorage;
+  }catch(e){
+    const mem = {};
+    setTimeout(()=>{ try{ showFatal('Браузер запретил сохранение данных — сайт работает, но прогресс не сохранится после закрытия вкладки.'); }catch(_){} }, 0);
+    return {
+      getItem: k => (k in mem ? mem[k] : null),
+      setItem: (k,v) => { mem[k] = String(v); },
+      removeItem: k => { delete mem[k]; }
+    };
+  }
+})();
+let store;
+try{ store = JSON.parse(storage.getItem(LS) || 'null'); }catch(e){ store = null; }
+if(!store){ try{ store = JSON.parse(storage.getItem('b1b2_progress') || '{}'); }catch(e){ store = {}; } }
+
+// миграция со старой схемы (d1..d6)
+if(!store.v){
+  const old = store;
+  store = {v:2, lessons:{}, reviews:{}, srs:{}, act:{}, streak:{count:0,last:''}, history:[], lastDay:0};
+  const map = {d1:'l0', d2:'l1', d3:'l2'};
+  Object.keys(map).forEach(k=>{
+    if(old[k]) store.lessons[map[k]] = {learned:old[k].learned||[], score:old[k].score||null};
+  });
+  save();
+}
+store.lessons ||= {}; store.reviews ||= {}; store.srs ||= {};
+store.act ||= {}; store.streak ||= {count:0,last:''}; store.history ||= [];
+store.lastDay ||= 0;
+
+function save(){ try{ storage.setItem(LS, JSON.stringify(store)); }catch(e){} }
+
+let cur = Math.min(store.lastDay, SCHED.length-1);
+let mode = 'learn';
+let lastPractice = 'flashcards';
+
+function entry(){ return SCHED[cur]; }
+function isReviewDay(){ return entry().type === 'review'; }
+function lessonState(i){ return store.lessons['l'+i] ||= {learned:[], score:null}; }
+function curWords(){
+  const e = entry();
+  if(e.type==='review') return e.from.flatMap(i=>LESSONS[i].words);
+  return LESSONS[e.li].words;
+}
+function dayNum(){ return cur+1; }
+
+/* ================= ДАТЫ / СТРИК / АКТИВНОСТЬ ================= */
+function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function today(){ return iso(new Date()); }
+function addDays(ds,n){ const d=new Date(ds+'T12:00:00'); d.setDate(d.getDate()+n); return iso(d); }
+
+function bump(){
+  const t = today();
+  store.act[t] = (store.act[t]||0)+1;
+  const s = store.streak;
+  if(s.last !== t){
+    s.count = (s.last === addDays(t,-1)) ? s.count+1 : 1;
+    s.last = t;
+  }
+  save(); renderStreak();
+}
+function renderStreak(){
+  const s = store.streak;
+  const alive = s.last===today() || s.last===addDays(today(),-1);
+  document.getElementById('streakEl').textContent = '🔥 ' + (alive ? s.count : 0);
+}
+
+/* ================= SRS =================
+   Ошибка → слово сразу в очереди. Каждый верный ответ в «Повторить»
+   двигает его дальше: +1 день, +3 дня, +7 дней, потом слово выучено. */
+const SRS_INT = [0,1,3,7];
+function srsWrong(en){
+  if(!WORDMAP[en]) return;
+  store.srs[en] = {box:0, due:today()};
+  save(); updateBadge();
+}
+function srsRight(en){
+  const e = store.srs[en];
+  if(!e) return;
+  e.box++;
+  if(e.box >= SRS_INT.length){ delete store.srs[en]; }   // слово выучено — выпускаем
+  else e.due = addDays(today(), SRS_INT[e.box]);
+  save(); updateBadge();
+}
+function dueList(){
+  const t = today();
+  return Object.keys(store.srs).filter(k=>store.srs[k].due<=t && WORDMAP[k]);
+}
+function updateBadge(){
+  const n = dueList().length;
+  document.getElementById('srsBadge').textContent = n || '';
+}
+
+/* ================= ИТАЛЬЯНСКИЕ БУКВЫ ================= */
+const CHARS = ['à','è','é','ì','ò','ù'];
+function charbarHTML(){
+  return '<div class="charbar">'+CHARS.map(c=>'<button type="button" class="ch">'+c+'</button>').join('')+'</div>';
+}
+function wireCharbar(scope, input){
+  scope.querySelectorAll('.ch').forEach(b=>{
+    b.onclick = ()=>{
+      if(input.disabled) return;
+      const s = input.selectionStart ?? input.value.length;
+      const e = input.selectionEnd ?? s;
+      input.value = input.value.slice(0,s) + b.textContent + input.value.slice(e);
+      input.focus();
+      input.setSelectionRange(s+1, s+1);
+    };
+  });
+}
+function norm(s){
+  return s.toLowerCase().trim()
+    .replace(/[.,;!?¿¡]/g,'')
+    .normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/ё/g,'е');
+}
+
+/* ================= КОНФЕТТИ ================= */
+function confetti(){
+  const cols = ['var(--accent)','var(--good)','var(--accent-2)','#ffffff'];
+  for(let i=0;i<70;i++){
+    const d = document.createElement('div');
+    d.className = 'conf';
+    d.style.left = Math.random()*100 + 'vw';
+    d.style.background = cols[i%4];
+    d.style.animationDelay = (Math.random()*0.5) + 's';
+    d.style.transform = 'rotate('+(Math.random()*360)+'deg)';
+    document.body.appendChild(d);
+    setTimeout(()=>d.remove(), 3500);
+  }
+}
+
+/* ================= ШАПКА / НАВИГАЦИЯ ПО ДНЯМ ================= */
+function renderHeader(){
+  const e = entry();
+  const review = e.type==='review';
+  document.getElementById('dayNum').textContent = dayNum();
+  const sub = document.getElementById('daySub');
+  sub.textContent = review ? 'ПОВТОРЕНИЕ' : LESSONS[e.li].topic;
+  sub.style.color = review ? 'var(--accent-bright)' : '';
+  sub.style.fontWeight = review ? '700' : '';
+  document.getElementById('prev').disabled = cur===0;
+  document.getElementById('next').disabled = cur===SCHED.length-1;
+  document.querySelector('#mainTabs button[data-tab="learn"]').style.display = review ? 'none' : '';
+  const heroCard = document.querySelector('.hero-card');
+  if(heroCard){
+    heroCard.innerHTML = review
+      ? '<b>День '+dayNum()+' · Повторение</b><br>Большой тест по словам трёх предыдущих уроков ('+curWords().length+' слов).<br>Проверь, что закрепилось.'
+      : '<b>День '+dayNum()+' · '+LESSONS[e.li].topic+'</b><br>'+LESSONS[e.li].words.length+' новых итальянских слов с произношением и переводом.<br>Прогресс сохраняется автоматически.';
+  }
+}
+function renderProgress(){
+  const e = entry();
+  let pct = 0;
+  if(e.type==='lesson'){
+    const st = lessonState(e.li);
+    pct = Math.round(st.learned.length / LESSONS[e.li].words.length * 100);
+  } else {
+    const sc = store.reviews['r'+dayNum()];
+    pct = sc && sc.score ? Math.round(sc.score.c/sc.score.t*100) : 0;
+  }
+  document.getElementById('progBar').style.width = pct + '%';
+}
+
+/* ================= ПОДСКАЗКА-ПОПАП ================= */
+const popup = document.getElementById('wordPopup');
+let popTimer = null;
+function showPopup(el, word){
+  document.getElementById('popEn').textContent = word.en;
+  document.getElementById('popIpa').textContent = word.ipa || '';
+  document.getElementById('popRu').textContent = word.ru;
+  const rect = el.getBoundingClientRect();
+  const pw = 260;
+  let left = rect.left + window.scrollX;
+  let top = rect.bottom + window.scrollY + 8;
+  if(left + pw > window.innerWidth - 16) left = window.innerWidth - pw - 16;
+  popup.style.left = left+'px';
+  popup.style.top = top+'px';
+  popup.classList.add('show');
+  clearTimeout(popTimer);
+  popTimer = setTimeout(()=>popup.classList.remove('show'), 2800);
+}
+document.addEventListener('click', e=>{
+  if(!e.target.closest('td.en')) popup.classList.remove('show');
+});
+
+/* ================= УЧИТЬ ================= */
+function renderLearn(){
+  const e = entry();
+  if(e.type!=='lesson'){ document.getElementById('rows').innerHTML=''; return; }
+  const words = LESSONS[e.li].words, st = lessonState(e.li);
+  document.getElementById('rows').innerHTML = words.map((w,i)=>{
+    const on = st.learned.includes(i) ? 'checked' : '';
+    const cls = st.learned.includes(i) ? 'learned' : '';
+    return `<tr class="${cls}" style="animation-delay:${i*22}ms">
+      <td class="num">${i+1}</td>
+      <td class="en" data-i="${i}">${w.en}</td>
+      <td class="ipa">${w.ipa||''}</td>
+      <td>${w.ru}</td>
+      
+      <td class="chk"><input type="checkbox" data-i="${i}" ${on}></td>
+    </tr>`;
+  }).join('');
+
+  document.querySelectorAll('#rows td.en').forEach(td=>{
+    td.addEventListener('click', ()=>showPopup(td, words[+td.dataset.i]));
+  });
+  document.querySelectorAll('#rows input').forEach(c=>{
+    c.onchange = ev=>{
+      const i = +ev.target.dataset.i, st = lessonState(e.li);
+      if(ev.target.checked){ if(!st.learned.includes(i)) st.learned.push(i); }
+      else st.learned = st.learned.filter(x=>x!==i);
+      save(); bump(); renderProgress();
+      ev.target.closest('tr').classList.toggle('learned', ev.target.checked);
+    };
+  });
+  renderProgress();
+}
+
+/* Мгновенный сброс переворота — без обратной анимации,
+   иначе при переходе к следующей карточке на полсекунды виден перевод. */
+function flipReset(el){
+  if(!el || !el.classList.contains('flipped')) return;
+  const prev = el.style.transition;
+  el.style.transition = 'none';
+  el.classList.remove('flipped');
+  void el.offsetWidth;            // форсируем reflow, чтобы сброс применился без анимации
+  el.style.transition = prev || '';
+}
+
+/* ================= КАРТОЧКИ ================= */
+let fc = { items:[], idx:0, known:new Set() };
+function initFlash(){
+  fc.items = curWords().slice();
+  fc.idx = 0; fc.known = new Set();
+  renderFlash();
+}
+function shuffleFlash(){
+  for(let i=fc.items.length-1;i>0;i--){
+    const j=(Math.random()*(i+1))|0;
+    [fc.items[i],fc.items[j]]=[fc.items[j],fc.items[i]];
+  }
+  fc.idx=0;
+  flipReset(document.getElementById('fcCard'));
+  renderFlash();
+}
+function renderFlash(){
+  flipReset(document.getElementById('fcCard'));
+  const w = fc.items[fc.idx];
+  document.getElementById('fcWord').textContent = w.en;
+  document.getElementById('fcIpa').textContent = w.ipa||'';
+  document.getElementById('fcRu').textContent = w.ru;
+  document.getElementById('fcCounter').textContent = (fc.idx+1)+' / '+fc.items.length;
+  document.getElementById('fcPrev').disabled = fc.idx===0;
+  document.getElementById('fcNext').disabled = fc.idx===fc.items.length-1;
+  document.getElementById('fcStatus').textContent = fc.known.size>0 ? `Знаешь: ${fc.known.size} из ${fc.items.length}` : '';
+}
+function markCard(type){
+  const w = fc.items[fc.idx];
+  if(type==='know'){ fc.known.add(fc.idx); srsRight(w.en); }
+  else { fc.known.delete(fc.idx); srsWrong(w.en); }
+  bump();
+  if(fc.idx < fc.items.length-1){ fc.idx++; renderFlash(); }
+  else document.getElementById('fcStatus').textContent = `Готово! Знаешь ${fc.known.size} из ${fc.items.length} слов.`;
+}
+document.getElementById('fcCard').addEventListener('click', ()=>{
+  document.getElementById('fcCard').classList.toggle('flipped');
+});
+document.getElementById('fcPrev').onclick = ()=>{ if(fc.idx>0){fc.idx--; renderFlash();} };
+document.getElementById('fcNext').onclick = ()=>{ if(fc.idx<fc.items.length-1){fc.idx++; renderFlash();} };
+
+/* ================= ПАРЫ ================= */
+let matchState = { selected:null, matched:new Set(), total:0, errors:0, locked:false };
+function startMatch(){
+  document.getElementById('matchCtl').style.display='';
+  const shuffled = [...curWords()].sort(()=>Math.random()-.5).slice(0,6);
+  const enItems = shuffled.map((w,i)=>({id:'en_'+i, text:w.en, pair:i, side:'en'}));
+  const ruItems = shuffled.map((w,i)=>({id:'ru_'+i, text:w.ru, pair:i, side:'ru'}));
+  matchState = {
+    selected:null,
+    left:[...enItems].sort(()=>Math.random()-.5),
+    right:[...ruItems].sort(()=>Math.random()-.5),
+    matched:new Set(), total:shuffled.length, errors:0, locked:false
+  };
+  renderMatch();
+}
+function renderMatch(){
+  const grid = document.getElementById('matchGrid');
+  const ms = matchState;
+  if(ms.matched.size === ms.total*2){
+    document.getElementById('matchScore').innerHTML='';
+    document.getElementById('matchCtl').style.display='none';
+    grid.innerHTML = `<div class="match-result" style="grid-column:1/-1">
+      <div class="big">🎉</div>
+      <p>Все ${ms.total} пар верно!<br>Ошибок: ${ms.errors}</p>
+      <button class="btn" onclick="startMatch()">Играть снова</button>
+    </div>`;
+    if(ms.errors===0) confetti();
+    return;
+  }
+  document.getElementById('matchScore').textContent =
+    `Совпало: ${ms.matched.size/2} / ${ms.total} · Ошибок: ${ms.errors}`;
+  let html = '';
+  for(let i=0;i<ms.left.length;i++){
+    const L=ms.left[i], R=ms.right[i];
+    const lM=ms.matched.has('en_'+L.pair), rM=ms.matched.has('ru_'+R.pair);
+    const lS=ms.selected&&ms.selected.id===L.id, rS=ms.selected&&ms.selected.id===R.id;
+    const lW=ms.wrongIds&&ms.wrongIds.includes(L.id), rW=ms.wrongIds&&ms.wrongIds.includes(R.id);
+    html += `<button class="match-btn ${lM?'correct':''} ${lS?'selected':''} ${lW?'wrong':''}"
+      data-id="${L.id}" data-pair="${L.pair}" data-side="en" ${lM?'disabled':''}>${L.text}</button>`;
+    html += `<button class="match-btn ${rM?'correct':''} ${rS?'selected':''} ${rW?'wrong':''}"
+      data-id="${R.id}" data-pair="${R.pair}" data-side="ru" ${rM?'disabled':''}>${R.text}</button>`;
+  }
+  grid.innerHTML = html;
+  grid.querySelectorAll('.match-btn:not([disabled])').forEach(btn=>{
+    btn.onclick = ()=>handleMatchClick(btn);
+  });
+}
+function handleMatchClick(btn){
+  const ms = matchState;
+  if(ms.locked) return;
+  const id=btn.dataset.id, pair=+btn.dataset.pair, side=btn.dataset.side;
+  ms.wrongIds = null;
+  if(!ms.selected){ ms.selected={id,pair,side}; renderMatch(); return; }
+  if(ms.selected.id===id){ ms.selected=null; renderMatch(); return; }
+  if(ms.selected.side===side){ ms.selected={id,pair,side}; renderMatch(); return; }
+  if(ms.selected.pair===pair){
+    ms.matched.add('en_'+pair); ms.matched.add('ru_'+pair);
+    ms.selected=null; bump(); renderMatch();
+  } else {
+    ms.locked=true; ms.errors++;
+    ms.wrongIds=[ms.selected.id, id];
+    bump(); renderMatch();
+    setTimeout(()=>{ ms.wrongIds=null; ms.selected=null; ms.locked=false; renderMatch(); }, 800);
+  }
+}
+
+/* ================= ТЕСТ ================= */
+let quiz = null;
+function startTest(){
+  const items = curWords().map(w=>({...w, dir: Math.random()<0.5 ? 'en2ru':'ru2en'}));
+  for(let i=items.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[items[i],items[j]]=[items[j],items[i]];}
+  quiz = {items, idx:0, correct:0, answered:false};
+  renderQuiz();
+}
+function accepted(item){
+  if(item.dir==='en2ru') return item.ru.split(/[,;(]/).map(s=>norm(s)).filter(Boolean);
+  return [norm(item.en)];
+}
+function renderQuiz(){
+  const t = document.getElementById('test');
+  if(quiz.idx >= quiz.items.length){
+    const total = quiz.items.length;
+    const e = entry();
+    if(e.type==='lesson') lessonState(e.li).score = {c:quiz.correct, t:total};
+    else (store.reviews['r'+dayNum()] ||= {}).score = {c:quiz.correct, t:total};
+    store.history.push({d:today(), day:dayNum(), c:quiz.correct, t:total});
+    if(store.history.length>60) store.history = store.history.slice(-60);
+    save();
+    if(quiz.correct===total && total>0) confetti();
+    t.innerHTML = `<div class="card result">
+      <div class="dir">Результат теста · День ${dayNum()}</div>
+      <div class="score">${quiz.correct} / ${total}</div>
+      <div class="hint">${quiz.correct===total?'Идеально! Все слова верно.':'Ошибки уже ждут во вкладке «Повторить».'}</div>
+      <div class="actions"><button class="btn" onclick="startTest()">Пройти заново</button>
+      <button class="btn ghost" onclick="setMode('learn')">К словам</button></div>
+    </div>`;
+    renderProgress();
+    return;
+  }
+  const it = quiz.items[quiz.idx];
+  const ask = it.dir==='en2ru' ? it.en : it.ru;
+  const dirText = it.dir==='en2ru' ? 'Напиши перевод на русском' : 'Напиши слово на итальянском';
+  t.innerHTML = `<div class="card">
+    <div class="counter">${quiz.idx+1} / ${quiz.items.length} · верно: ${quiz.correct}</div>
+    <div class="dir">${dirText}</div>
+    <div class="word">${ask}</div>
+    <div class="hint">${it.dir==='en2ru'? (it.ipa||'') : ''}</div>
+    <input type="text" id="ans" autocomplete="off" autocapitalize="off" placeholder="Твой ответ...">
+    ${it.dir==='ru2en' ? charbarHTML() : ''}
+    <div class="actions">
+      <button class="btn" id="check">Проверить</button>
+      <button class="btn ghost" id="skip">Не знаю</button>
+    </div>
+    <div class="feedback" id="fb"></div>
+  </div>`;
+  const inp = document.getElementById('ans');
+  inp.focus();
+  wireCharbar(t, inp);
+  quiz.answered = false;
+  const finish = (ok, skipped)=>{
+    quiz.answered = true;
+    inp.disabled = true;
+    const fb = document.getElementById('fb');
+    const right = it.dir==='en2ru' ? it.ru : it.en;
+    if(ok){
+      quiz.correct++; srsRight(it.en);
+      fb.textContent = '✓ Верно!'; fb.className = 'feedback good';
+    } else {
+      srsWrong(it.en);
+      fb.textContent = (skipped?'Правильно: ':'✗ Правильно: ') + right;
+      fb.className = 'feedback bad';
+    }
+    bump();
+    document.getElementById('check').textContent = 'Далее ›';
+  };
+  const submit = ()=>{
+    if(quiz.answered){ quiz.idx++; renderQuiz(); return; }
+    finish(accepted(it).includes(norm(inp.value)), false);
+  };
+  document.getElementById('check').onclick = submit;
+  document.getElementById('skip').onclick = ()=>{ if(!quiz.answered) finish(false, true); };
+  inp.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+}
+
+/* ================= ПОВТОРИТЬ (SRS) ================= */
+let rev = null;
+function startReview(){
+  const due = dueList();
+  const box = document.getElementById('review');
+  if(!due.length){
+    box.innerHTML = `<div class="card result">
+      <div class="big" style="font-size:48px">🎉</div>
+      <div class="hint" style="margin-top:12px">Пока нечего повторять!<br>
+      Слова попадают сюда сразу после ошибок в тесте, фразах и карточках —<br>а потом возвращаются по умной схеме: через 1, 3 и 7 дней.</div>
+      <div class="actions" style="margin-top:20px"><button class="btn ghost" onclick="setMode('test')">Пройти тест дня</button></div>
+    </div>`;
+    return;
+  }
+  const items = due.map(en=>({...WORDMAP[en], dir: Math.random()<0.5?'en2ru':'ru2en'}));
+  for(let i=items.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[items[i],items[j]]=[items[j],items[i]];}
+  rev = {items, idx:0, correct:0, answered:false};
+  renderReview();
+}
+function renderReview(){
+  const t = document.getElementById('review');
+  if(rev.idx >= rev.items.length){
+    if(rev.correct===rev.items.length) confetti();
+    t.innerHTML = `<div class="card result">
+      <div class="dir">Повторение завершено</div>
+      <div class="score">${rev.correct} / ${rev.items.length}</div>
+      <div class="hint">${rev.correct===rev.items.length?'Отлично! Слова уходят на следующий интервал.':'Ошибки вернутся завтра.'}</div>
+      <div class="actions"><button class="btn ghost" onclick="setMode('learn')">К словам</button></div>
+    </div>`;
+    return;
+  }
+  const it = rev.items[rev.idx];
+  const ask = it.dir==='en2ru' ? it.en : it.ru;
+  const dirText = it.dir==='en2ru' ? 'Напиши перевод на русском' : 'Напиши слово на итальянском';
+  const box = store.srs[it.en] ? store.srs[it.en].box : 0;
+  t.innerHTML = `<div class="card">
+    <div class="counter">${rev.idx+1} / ${rev.items.length} · верно: ${rev.correct} · ступень ${box+1} из 4</div>
+    <div class="dir">${dirText}</div>
+    <div class="word">${ask}</div>
+    <div class="hint">${it.dir==='en2ru'? (it.ipa||'') : ''}</div>
+    <input type="text" id="rAns" autocomplete="off" autocapitalize="off" placeholder="Твой ответ...">
+    ${it.dir==='ru2en' ? charbarHTML() : ''}
+    <div class="actions">
+      <button class="btn" id="rCheck">Проверить</button>
+      <button class="btn ghost" id="rSkip">Не знаю</button>
+    </div>
+    <div class="feedback" id="rFb"></div>
+  </div>`;
+  const inp = document.getElementById('rAns');
+  inp.focus();
+  wireCharbar(t, inp);
+  rev.answered = false;
+  const finish = (ok, skipped)=>{
+    rev.answered = true;
+    inp.disabled = true;
+    const fb = document.getElementById('rFb');
+    const right = it.dir==='en2ru' ? it.ru : it.en;
+    if(ok){
+      rev.correct++; srsRight(it.en);
+      fb.textContent = '✓ Верно!'; fb.className='feedback good';
+    } else {
+      srsWrong(it.en);
+      fb.textContent = (skipped?'Правильно: ':'✗ Правильно: ') + right;
+      fb.className='feedback bad';
+    }
+    bump();
+    document.getElementById('rCheck').textContent = 'Далее ›';
+  };
+  const submit = ()=>{
+    if(rev.answered){ rev.idx++; renderReview(); return; }
+    const ok = it.dir==='en2ru'
+      ? it.ru.split(/[,;(]/).map(s=>norm(s)).filter(Boolean).includes(norm(inp.value))
+      : norm(inp.value)===norm(it.en);
+    finish(ok, false);
+  };
+  document.getElementById('rCheck').onclick = submit;
+  document.getElementById('rSkip').onclick = ()=>{ if(!rev.answered) finish(false, true); };
+  inp.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+}
+
+/* ================= ФРАЗЫ ================= */
+let phrState = { items:[], idx:0, answered:false };
+function initPhrases(){
+  phrState.items = curWords().slice();
+  for(let i=phrState.items.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[phrState.items[i],phrState.items[j]]=[phrState.items[j],phrState.items[i]];}
+  phrState.idx = 0;
+  renderPhrase();
+}
+function renderPhrase(){
+  const w = phrState.items[phrState.idx];
+  phrState.answered = false;
+  document.getElementById('phrCounter').textContent = (phrState.idx+1)+' / '+phrState.items.length;
+  const sentEl = document.getElementById('phrSentence');
+  const transEl = document.getElementById('phrTranslation');
+  const inp = document.getElementById('phrInput');
+  const fb = document.getElementById('phrFb');
+  document.getElementById('phrCheck').textContent = 'Проверить';
+  fb.textContent=''; fb.className='feedback';
+  inp.value=''; inp.disabled=false;
+  if(w.sentence){
+    const esc = w.en.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    const re = new RegExp('(^|[^\\p{L}\\p{N}_])'+esc+'(?![\\p{L}\\p{N}_])','iu');
+    const blanked = w.sentence.replace(re, '$1______');
+    sentEl.innerHTML = blanked.replace('______','<span style="color:var(--accent-bright);font-weight:700">______</span>');
+    transEl.textContent = w.strans || '';
+  } else {
+    sentEl.innerHTML = 'Впиши перевод слова: <span style="color:var(--accent-bright);font-weight:700">'+w.ru+'</span>';
+    transEl.textContent = '';
+  }
+  inp.focus();
+}
+function setupPhraseButtons(){
+  const inp = document.getElementById('phrInput');
+  const fb = document.getElementById('phrFb');
+  const checkBtn = document.getElementById('phrCheck');
+  document.getElementById('phrChars').innerHTML = CHARS.map(c=>'<button type="button" class="ch">'+c+'</button>').join('');
+  wireCharbar(document.getElementById('phrases'), inp);
+
+  const submit = ()=>{
+    if(phrState.answered){
+      if(phrState.idx < phrState.items.length-1){ phrState.idx++; renderPhrase(); }
+      else { fb.textContent='✓ Все фразы пройдены!'; fb.className='feedback good'; }
+      return;
+    }
+    const w = phrState.items[phrState.idx];
+    const ok = norm(inp.value) === norm(w.en);
+    phrState.answered = true;
+    inp.disabled = true;
+    if(ok){ srsRight(w.en); fb.textContent='✓ Верно!'; fb.className='feedback good'; }
+    else { srsWrong(w.en); fb.textContent='✗ Правильно: '+w.en; fb.className='feedback bad'; }
+    bump();
+    checkBtn.textContent='Далее ›';
+  };
+  checkBtn.onclick = submit;
+  document.getElementById('phrSkip').onclick = ()=>{
+    if(phrState.answered){ submit(); return; }
+    const w = phrState.items[phrState.idx];
+    phrState.answered = true;
+    inp.disabled = true;
+    srsWrong(w.en);
+    fb.textContent='Правильно: '+w.en; fb.className='feedback bad';
+    bump();
+    checkBtn.textContent='Далее ›';
+  };
+  inp.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+}
+setupPhraseButtons();
+
+/* ================= ПРОГРЕСС (СТАТИСТИКА) ================= */
+function renderStats(){
+  const learnedTotal = Object.values(store.lessons).reduce((s,l)=>s+(l.learned?l.learned.length:0),0);
+  const dueN = dueList().length;
+  const s = store.streak;
+  const alive = s.last===today() || s.last===addDays(today(),-1);
+  const lastTest = store.history.length ? store.history[store.history.length-1] : null;
+  document.getElementById('statCards').innerHTML =
+    '<div class="stat-card"><div class="k">Выучено</div><div class="v" style="color:var(--good)">'+learnedTotal+'</div><div class="s">из '+TOTAL_WORDS+' слов</div></div>'+
+    '<div class="stat-card"><div class="k">Серия</div><div class="v">🔥 '+(alive?s.count:0)+'</div><div class="s">дней подряд</div></div>'+
+    '<div class="stat-card"><div class="k">На повторении</div><div class="v" style="color:var(--bad)">'+dueN+'</div><div class="s">слов ждут сегодня</div></div>'+
+    '<div class="stat-card"><div class="k">Последний тест</div><div class="v">'+(lastTest?lastTest.c+'/'+lastTest.t:'—')+'</div><div class="s">'+(lastTest?('день '+lastTest.day):'ещё не было')+'</div></div>';
+
+  // теплокарта: 12 недель
+  const cells = [];
+  const now = new Date();
+  const offset = (now.getDay()+6)%7; // понедельник = 0
+  const daysBack = 7*11 + offset;
+  for(let i=daysBack;i>=0;i--){
+    const d = new Date(now); d.setDate(d.getDate()-i);
+    const ds = iso(d);
+    const n = store.act[ds]||0;
+    const cls = n===0?'':' hm'+(n<3?1:n<8?2:3);
+    cells.push('<div class="hm'+cls+'" title="'+ds+': '+n+'"></div>');
+  }
+  document.getElementById('heatmapBox').innerHTML = '<div class="heatmap">'+cells.join('')+'</div>';
+
+  // история тестов
+  const hist = store.history.slice(-8).reverse();
+  document.getElementById('histBox').innerHTML = hist.length
+    ? hist.map(h=>{
+        const pct = Math.round(h.c/h.t*100);
+        return '<div style="display:flex;align-items:center;gap:10px;margin:7px 0">'+
+          '<span style="color:var(--muted);font-size:12px;min-width:135px">'+h.d+' · день '+h.day+'</span>'+
+          '<div style="flex:1;background:var(--surface-2);border-radius:5px;height:10px;overflow:hidden"><div class="hist-bar" style="width:'+pct+'%"></div></div>'+
+          '<b style="min-width:52px;text-align:right;font-size:13px">'+h.c+'/'+h.t+'</b></div>';
+      }).join('')
+    : '<p style="color:var(--muted);font-size:14px">Пройди первый тест — результаты появятся здесь.</p>';
+
+  // слова текущего дня
+  const e = entry();
+  const st = e.type==='lesson' ? lessonState(e.li) : {learned:[]};
+  document.getElementById('topWords').innerHTML = curWords().map((w,i)=>{
+    const known = e.type==='lesson' && st.learned.includes(i);
+    const col = known ? 'var(--good)' : 'var(--accent-bright)';
+    return '<div style="background:var(--surface-2);border:1px solid var(--border-strong);padding:7px 12px;border-radius:10px;font-size:13px">'+
+      '<span style="color:'+col+';font-weight:600">'+w.en+'</span>'+
+      '<span style="color:var(--muted)"> — '+w.ru+'</span></div>';
+  }).join('');
+
+  const imp = document.getElementById('impFile');
+  imp.onchange = ()=>{
+    const f = imp.files[0];
+    if(!f) return;
+    const r = new FileReader();
+    r.onload = ()=>{
+      try{
+        const obj = JSON.parse(r.result);
+        if(!obj.v) throw new Error('bad file');
+        store = obj; save();
+        location.reload();
+      }catch(e){ alert('Не удалось прочитать файл прогресса.'); }
+    };
+    r.readAsText(f);
+  };
+}
+function exportProgress(){
+  const blob = new Blob([JSON.stringify(store,null,1)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'italiano-progress.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+
+/* ================= НАВИГАЦИЯ ================= */
+const PANELS = ['learn','flashcards','match','test','review','phrases','stats'];
+function groupOf(m){
+  if(m==='learn'||m==='test'||m==='review'||m==='stats') return m;
+  return 'practice';
+}
+function renderPanel(m){
+  if(m==='learn') renderLearn();
+  else if(m==='flashcards') initFlash();
+  else if(m==='match') startMatch();
+  else if(m==='test') startTest();
+  else if(m==='review') startReview();
+  else if(m==='phrases') initPhrases();
+  else if(m==='stats') renderStats();
+}
+function syncTabs(m){
+  const g = groupOf(m);
+  document.querySelectorAll('#mainTabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===g));
+  const sub = document.getElementById('subTabs');
+  sub.style.display = g==='practice' ? 'flex' : 'none';
+  sub.querySelectorAll('button').forEach(b=>b.classList.toggle('active', b.dataset.mode===m));
+  if(g==='practice') lastPractice = m;
+  try{ renderHeader(); }catch(e){}
+}
+function setMode(m){
+  const prev = mode;
+  mode = m;
+  syncTabs(m);
+  const oldEl = document.getElementById(prev);
+  const newEl = document.getElementById(m);
+  if(prev === m || !oldEl || oldEl.style.display === 'none'){
+    PANELS.forEach(id=>{ document.getElementById(id).style.display = id===m?'block':'none'; });
+    renderPanel(m);
+    newEl.classList.remove('slide-out');
+    newEl.classList.add('slide-in');
+    newEl.addEventListener('animationend', ()=>newEl.classList.remove('slide-in'), {once:true});
+    return;
+  }
+  oldEl.classList.remove('slide-in');
+  oldEl.classList.add('slide-out');
+  let switched = false;
+  const doSwitch = ()=>{
+    if(switched) return;
+    switched = true;
+    oldEl.classList.remove('slide-out');
+    PANELS.forEach(id=>{ document.getElementById(id).style.display = id===m?'block':'none'; });
+    renderPanel(m);
+    newEl.classList.add('slide-in');
+    const clearIn = ()=>newEl.classList.remove('slide-in');
+    newEl.addEventListener('animationend', clearIn, {once:true});
+    setTimeout(clearIn, 500);
+  };
+  oldEl.addEventListener('animationend', doSwitch, {once:true});
+  setTimeout(doSwitch, 300);
+}
+document.querySelectorAll('#mainTabs button').forEach(b=>{
+  b.onclick = ()=>{ const t=b.dataset.tab; setMode(t==='practice' ? lastPractice : t); };
+});
+document.querySelectorAll('#subTabs button').forEach(b=>{
+  b.onclick = ()=>setMode(b.dataset.mode);
+});
+function gotoDay(n){
+  cur = n;
+  store.lastDay = cur; save();
+  renderHeader(); renderProgress();
+  setMode(isReviewDay() ? 'flashcards' : 'learn');
+}
+document.getElementById('prev').onclick = ()=>{ if(cur>0) gotoDay(cur-1); };
+document.getElementById('next').onclick = ()=>{ if(cur<SCHED.length-1) gotoDay(cur+1); };
+
+/* ================= СТАРТ ================= */
+function showFatal(msg){
+  let b = document.getElementById('errBanner');
+  if(!b){
+    b = document.createElement('div');
+    b.id = 'errBanner';
+    b.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;z-index:3000;background:#8a2020;color:#fff;padding:10px 44px 10px 14px;border-radius:10px;font:13px/1.5 -apple-system,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.4)';
+    const x = document.createElement('span');
+    x.textContent = '✕';
+    x.style.cssText = 'position:absolute;right:14px;top:9px;cursor:pointer;font-size:15px';
+    x.onclick = ()=>b.remove();
+    b.appendChild(x);
+    const t = document.createElement('span');
+    t.id = 'errBannerText';
+    b.insertBefore(t, x);
+    document.body.appendChild(b);
+  }
+  document.getElementById('errBannerText').textContent = '⚠ ' + msg;
+}
+window.addEventListener('error', ev=>{
+  showFatal('Ошибка: ' + (ev.message || 'неизвестная') + (ev.lineno ? ' (строка ' + ev.lineno + ')' : ''));
+});
+try{ renderHeader(); }catch(e){ showFatal('renderHeader: ' + e.message); }
+try{ renderStreak(); }catch(e){}
+try{ updateBadge(); }catch(e){}
+try{
+  setMode(isReviewDay() ? 'flashcards' : 'learn');
+}catch(e){
+  showFatal('Запуск: ' + e.message);
+  try{ document.getElementById('learn').style.display = 'block'; renderLearn(); }catch(_){}
+}
+</script>
+</body>
+</html>
