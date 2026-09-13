@@ -30,6 +30,71 @@
   html[data-theme="noche"] .hero-deco::after{content:'⭐'}
   html[data-theme="noche"] .hero-title .sub{font-style:normal;font-weight:400;padding-bottom:18px}
   html[data-theme="noche"] .hero-bg{display:block}
+  html[data-theme="noche"]{color-scheme:dark}
+
+  /* Midnight — холодная тёмная тема. Отличается от тёплой золотой noche,
+     фото Лондона показывает так же. Кнопки здесь в обводке (см. ниже),
+     поэтому все правила скоуплены темой — светлые темы их не видят. */
+  html[data-theme="midnight"]{
+    color-scheme:dark;
+    --font-body:'Inter',sans-serif; --font-display:'Oswald',sans-serif; --font-script:'Great Vibes',cursive;
+    --bg:#0b1020; --surface:#121a2e; --surface-2:#18223a; --surface-3:#1e2a45;
+    --border:#243352; --border-strong:#33456e;
+    --text:#e8eefc; --muted:#8797b8;
+    --accent:#3d8bff; --accent-2:#2ee6c8; --accent-bright:#6fb0ff;
+    --good:#2ee6a8; --bad:#ff5f6d;
+    --btn-text:#06101f;
+    --accent-grad:linear-gradient(135deg,#2f6fe0,#3d8bff);
+    --word-grad:linear-gradient(135deg,#6fb0ff,#2ee6c8);
+    --hero-bg:radial-gradient(circle at 30% 25%,#1a2440 0%,#0a0f1e 70%);
+    --hero-text:#eaf1ff; --hero-muted:#a8b8d8; --hero-title-color:#f2f7ff;
+    --hero-sub-grad:linear-gradient(90deg,#6fb0ff,#2ee6c8);
+    --hero-card-bg:rgba(11,16,32,.74); --hero-card-text:#b9c8e4;
+  }
+  html[data-theme="midnight"] .hero-deco::before{content:'🌃'}
+  html[data-theme="midnight"] .hero-deco::after{content:'🎧'}
+  html[data-theme="midnight"] .hero-bg{display:block}
+  html[data-theme="midnight"] .hero-bg{filter:saturate(.75) hue-rotate(-12deg) brightness(.78)}
+  html[data-theme="midnight"] .hero-title .sub{font-style:normal;font-weight:400;padding-bottom:18px}
+
+  /* Кнопки в обводке — только в Midnight */
+  html[data-theme="midnight"] .tabs button,
+  html[data-theme="midnight"] .subtabs button,
+  html[data-theme="midnight"] .daynav button,
+  html[data-theme="midnight"] .fc-nav button,
+  html[data-theme="midnight"] .fc-progress-row button,
+  html[data-theme="midnight"] .charbar button,
+  html[data-theme="midnight"] .pb-modes button,
+  html[data-theme="midnight"] .match-btn,
+  html[data-theme="midnight"] .btn.ghost{
+    background:color-mix(in srgb,var(--accent) 8%,transparent);
+    border:1.5px solid color-mix(in srgb,var(--accent) 55%,transparent);
+    color:var(--accent-bright);box-shadow:none}
+  html[data-theme="midnight"] .match-btn{color:var(--text)}
+  html[data-theme="midnight"] .tabs button:hover:not(:disabled),
+  html[data-theme="midnight"] .subtabs button:hover:not(:disabled),
+  html[data-theme="midnight"] .daynav button:hover:not(:disabled),
+  html[data-theme="midnight"] .fc-nav button:hover:not(:disabled),
+  html[data-theme="midnight"] .fc-progress-row button:hover:not(:disabled),
+  html[data-theme="midnight"] .charbar button:hover:not(:disabled),
+  html[data-theme="midnight"] .pb-modes button:hover:not(:disabled),
+  html[data-theme="midnight"] .match-btn:hover:not(:disabled),
+  html[data-theme="midnight"] .btn.ghost:hover:not(:disabled){
+    border-color:var(--accent-bright);
+    background:color-mix(in srgb,var(--accent) 18%,transparent);
+    box-shadow:0 0 18px var(--glow-accent)}
+  html[data-theme="midnight"] .tabs button.active,
+  html[data-theme="midnight"] .pb-modes button.active{
+    background:var(--accent-grad);border-color:var(--accent-bright);color:var(--btn-text)}
+  html[data-theme="midnight"] .btn{border:1.5px solid var(--accent-bright)}
+  /* Обратная связь в «Парах» специфичнее общей обводки выше — иначе правильный
+     и неправильный ответ красились бы как обычная кнопка и упражнение теряло смысл. */
+  html[data-theme="midnight"] .match-btn.selected{
+    background:var(--accent-grad);border-color:var(--accent-bright);color:var(--btn-text)}
+  html[data-theme="midnight"] .match-btn.correct{
+    background:color-mix(in srgb,var(--good) 26%,transparent);border-color:var(--good);color:#e9fff6}
+  html[data-theme="midnight"] .match-btn.wrong{
+    background:color-mix(in srgb,var(--bad) 24%,transparent);border-color:var(--bad);color:#ffe9eb}
 
   html[data-theme="panaderia"]{
     --font-body:'Nunito',sans-serif; --font-display:'Fraunces',serif; --font-script:'Fraunces',serif;
@@ -108,6 +173,7 @@
 
   /* ===================== ОБЩЕЕ ===================== */
   html{
+    color-scheme:light;   /* тёмные темы переопределяют на dark */
     --radius:16px;
     --btn-text:#fff;
     --glow-accent:color-mix(in srgb,var(--accent) 30%,transparent);
@@ -140,8 +206,8 @@
     background-size:cover;background-position:center 35%;
     filter:saturate(1.05) sepia(.18) brightness(.92)}
   .hero-bg::after{content:'';position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(33,29,26,.62) 0%,rgba(33,29,26,.28) 35%,rgba(33,29,26,.92) 100%),
-               linear-gradient(90deg,rgba(33,29,26,.55) 0%,transparent 55%)}
+    background:linear-gradient(180deg,rgba(33,29,26,.64) 0%,rgba(33,29,26,.3) 35%,rgba(33,29,26,.93) 100%),
+               linear-gradient(90deg,rgba(33,29,26,.58) 0%,transparent 46%,transparent 74%,rgba(33,29,26,.5) 100%)}
   .hero-deco{position:absolute;inset:0;pointer-events:none;z-index:1}
   .hero-deco::before,.hero-deco::after{position:absolute;opacity:.92;filter:drop-shadow(0 6px 14px rgba(0,0,0,.14))}
   .hero-deco::before{top:26px;right:22%;font-size:54px;transform:rotate(-10deg)}
@@ -174,7 +240,12 @@
   html[data-theme="noche"] .hero .tag{color:#f5cf7d}
 
   /* BAR / TABS */
-  .bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:22px 0 12px}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    margin:22px 0 12px;position:sticky;top:0;z-index:50;padding:10px 12px;border-radius:14px;
+    background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+  .bar.stuck{border-color:var(--border);box-shadow:0 6px 24px rgba(0,0,0,.18)}
   .daynav{display:flex;align-items:center;gap:10px}
   .daynav button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);
     width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:18px;transition:.2s}
@@ -367,6 +438,9 @@
   .pb-cats button:hover{border-color:var(--accent);color:var(--text)}
   .pb-cats button.active{border-color:var(--accent);color:var(--accent-bright);
     background:color-mix(in srgb,var(--accent) 12%,transparent)}
+  .pb-cats .pb-n{opacity:.55;font-weight:700;font-size:11px;margin-left:3px}
+  .pb-cats .pb-more{border-style:dashed;color:var(--accent-bright);border-color:var(--border-strong)}
+  .pb-cats .pb-more:hover{border-color:var(--accent);border-style:solid}
   .pb-group{margin-bottom:26px}
   .pb-group h3{font-family:var(--font-display);font-size:15px;color:var(--accent-bright);
     margin-bottom:12px;letter-spacing:.4px;display:flex;align-items:center;gap:10px}
@@ -399,6 +473,11 @@
 
   footer{color:var(--muted);font-size:12px;text-align:center;margin-top:36px;line-height:1.8;letter-spacing:.2px}
 
+  /* Доступность: навигация с клавиатуры должна быть видна.
+     :focus-visible срабатывает только на клавиатурный фокус, мышь обводку не получает. */
+  a:focus-visible,button:focus-visible,input:focus-visible,label:focus-visible,
+  [tabindex]:focus-visible{outline:2px solid var(--accent-bright);outline-offset:2px;border-radius:8px}
+
   ::-webkit-scrollbar{width:6px;height:6px}
   ::-webkit-scrollbar-track{background:var(--bg)}
   ::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:3px}
@@ -413,10 +492,18 @@
     .hero-top{padding:18px 18px 0}
     .hero-title-wrap{padding:0 18px}
     .hero-bottom{padding:14px 18px 20px}
-    .hero-deco::before{font-size:36px;right:14%}
-    .hero-deco::after{font-size:44px}
-    th,td{padding:10px 10px;font-size:13px}
-    td.ipa,th.ipa{display:none}
+    /* На узком экране верхний эмодзи налезал на «Английский B1 → B2» справа */
+    .hero-deco::before{display:none}
+    .hero-deco::after{font-size:40px;bottom:30%;right:5%}
+    th,td{padding:10px 7px;font-size:13px}
+    td.num,th.num{display:none}
+    /* Транскрипция вернулась в мобильную вёрстку вместо номера строки, но базовый
+       white-space:nowrap распирал таблицу шире экрана — здесь разрешаем перенос. */
+    table{table-layout:fixed}
+    td.ipa,th.ipa{font-size:11px;white-space:normal;overflow-wrap:anywhere}
+    td.en{overflow-wrap:anywhere}
+    th.chk,td.chk{width:30px}
+    .bar{padding:8px}
     .fc-front .fc-word{font-size:26px}
     .fc-back .fc-ru{font-size:18px}
     .tabs button{padding:7px 11px;font-size:12px}
@@ -699,7 +786,7 @@
   </div>
 
   <footer>
-    Английский B1 → B2 · 300 слов · 100 фраз · 137 с занятий · прогресс сохраняется в этом браузере автоматически.<span id="ver"><br>версия от 27.08.2026</span>
+    <span id="footCounts">Английский B1 → B2</span> · прогресс сохраняется в этом браузере автоматически.<span id="ver"><br>версия от 13.09.2026</span>
   </footer>
 </div>
 
@@ -715,7 +802,7 @@
 </script>
 
 <script id="phrasebook-data" type="application/json">
-{"groups":[{"cat":"Начало разговора / Small talk","items":[{"en":"What's up?","ru":"Как дела?"},{"en":"How's it going?","ru":"Как оно?"},{"en":"Long time no see!","ru":"Давно не виделись!"},{"en":"What have you been up to?","ru":"Чем занимался?"},{"en":"Nothing much.","ru":"Да ничего особенного."},{"en":"I can't complain.","ru":"Не жалуюсь."},{"en":"Same old, same old.","ru":"Всё по-старому."}]},{"cat":"Согласие / несогласие","items":[{"en":"I couldn't agree more.","ru":"Полностью согласен."},{"en":"That makes sense.","ru":"Логично / понятно."},{"en":"I see your point, but...","ru":"Я понимаю тебя, но..."},{"en":"I'm not so sure about that.","ru":"Не уверен насчёт этого."},{"en":"Fair enough.","ru":"Ладно, согласен (принимаю аргумент)."},{"en":"No way.","ru":"Ни за что / не может быть."},{"en":"You've got a point.","ru":"Тут ты прав."}]},{"cat":"Мнение","items":[{"en":"If you ask me...","ru":"По-моему..."},{"en":"As far as I know...","ru":"Насколько мне известно..."},{"en":"I'm leaning towards...","ru":"Я больше склоняюсь к..."},{"en":"To be honest...","ru":"Если честно..."},{"en":"From my point of view...","ru":"С моей точки зрения..."}]},{"cat":"Просьбы / вежливость","items":[{"en":"Could you do me a favor?","ru":"Можешь оказать услугу?"},{"en":"Would you mind if...?","ru":"Ты не против, если...?"},{"en":"Do you mind...?","ru":"Не возражаешь...?"},{"en":"I was wondering if you could...","ru":"Хотел спросить, не мог бы ты..."},{"en":"No worries.","ru":"Не переживай / без проблем."},{"en":"Take your time.","ru":"Не спеши."}]},{"cat":"Непонимание","items":[{"en":"Could you say that again?","ru":"Повтори, пожалуйста."},{"en":"What do you mean?","ru":"Что ты имеешь в виду?"},{"en":"I'm not following.","ru":"Я не понимаю (не улавливаю мысль)."},{"en":"Could you break that down for me?","ru":"Можешь объяснить попроще?"},{"en":"I get what you're saying.","ru":"Я понимаю, о чём ты."}]},{"cat":"Работа / деловое общение","items":[{"en":"Let's touch base later.","ru":"Давай на связи попозже."},{"en":"I'll keep you posted.","ru":"Буду держать в курсе."},{"en":"Let's circle back to this.","ru":"Вернёмся к этому позже."},{"en":"That's on my to-do list.","ru":"Это у меня в списке дел."},{"en":"I'm swamped right now.","ru":"Я сейчас завален работой."},{"en":"Let's get the ball rolling.","ru":"Давай начнём (запустим процесс)."},{"en":"I'll follow up on that.","ru":"Я уточню / доведу до конца."},{"en":"Can we push the meeting back?","ru":"Можем перенести встречу?"},{"en":"It's a work in progress.","ru":"Это ещё в процессе."},{"en":"Let's think outside the box.","ru":"Давай мыслить нестандартно."}]},{"cat":"Эмоции","items":[{"en":"I'm thrilled about it.","ru":"Я в восторге."},{"en":"It drives me crazy.","ru":"Это меня бесит."},{"en":"I'm not in the mood.","ru":"Нет настроения."},{"en":"That's a relief.","ru":"Это облегчение."},{"en":"I'm freaking out.","ru":"Я паникую."},{"en":"It means a lot to me.","ru":"Это много для меня значит."},{"en":"I'm over the moon.","ru":"Я на седьмом небе от счастья."}]},{"cat":"Деньги / бизнес","items":[{"en":"It's out of my budget.","ru":"Это не вписывается в мой бюджет."},{"en":"Let's split the bill.","ru":"Давай разделим счёт."},{"en":"I'm saving up for...","ru":"Я коплю на..."},{"en":"It pays off in the long run.","ru":"Это окупается в долгосрочной перспективе."},{"en":"I'm breaking even.","ru":"Я выхожу в ноль."},{"en":"That's a rip-off.","ru":"Это грабёж (переплата)."},{"en":"I'm on a tight budget.","ru":"У меня ограниченный бюджет."},{"en":"Let's cut costs.","ru":"Давай сократим расходы."}]},{"cat":"Планы / решения","items":[{"en":"I haven't decided yet.","ru":"Я ещё не решил."},{"en":"Let's play it by ear.","ru":"Решим по ходу дела."},{"en":"I'm on the fence about it.","ru":"Я сомневаюсь / не определился."},{"en":"Let's give it a shot.","ru":"Давай попробуем."},{"en":"It's now or never.","ru":"Сейчас или никогда."},{"en":"I'll sleep on it.","ru":"Я подумаю над этим (переспать с мыслью)."},{"en":"Let's weigh the pros and cons.","ru":"Давай взвесим плюсы и минусы."}]},{"cat":"Проблемы / трудности","items":[{"en":"It's not a big deal.","ru":"Это не проблема."},{"en":"I'm stuck.","ru":"Я застрял (не знаю, что делать)."},{"en":"Let's figure it out.","ru":"Давай разберёмся."},{"en":"That's easier said than done.","ru":"Легче сказать, чем сделать."},{"en":"I'm dealing with it.","ru":"Я разбираюсь с этим."},{"en":"It's a long story.","ru":"Это долгая история."},{"en":"Let's not jump to conclusions.","ru":"Давай не будем делать поспешных выводов."}]},{"cat":"Прощание","items":[{"en":"Catch you later.","ru":"Увидимся позже."},{"en":"Take care.","ru":"Береги себя."},{"en":"Keep in touch.","ru":"Оставайся на связи."},{"en":"See you around.","ru":"Ещё увидимся."},{"en":"Have a good one.","ru":"Хорошего дня."}]},{"cat":"Заполнители речи","items":[{"en":"You know what I mean?","ru":"Понимаешь, о чём я?"},{"en":"Basically...","ru":"В основном / короче говоря..."},{"en":"Anyway...","ru":"В общем / так или иначе..."},{"en":"At the end of the day...","ru":"В конце концов..."},{"en":"I guess...","ru":"Наверное / полагаю..."},{"en":"Kind of / sort of","ru":"Вроде того / типа"}]},{"cat":"Совет","items":[{"en":"If I were you...","ru":"На твоём месте я бы..."},{"en":"You'd better...","ru":"Тебе лучше..."},{"en":"It's up to you.","ru":"Решать тебе."},{"en":"I'd think twice about that.","ru":"Я бы дважды подумал над этим."}]},{"cat":"Удивление","items":[{"en":"No kidding!","ru":"Да ладно! / Серьёзно?"},{"en":"I couldn't believe my eyes.","ru":"Не мог поверить своим глазам."},{"en":"That caught me off guard.","ru":"Это застало меня врасплох."},{"en":"Who would've thought?","ru":"Кто бы мог подумать?"}]},{"cat":"Технологии / AI","items":[{"en":"It's a game changer.","ru":"Это меняет всё (прорывная вещь)."},{"en":"Let's automate this.","ru":"Давай автоматизируем это."},{"en":"It streamlines the process.","ru":"Это упрощает/ускоряет процесс."},{"en":"AI is taking over.","ru":"ИИ захватывает всё."},{"en":"Let's leverage this tool.","ru":"Давай используем этот инструмент по максимуму."}]},{"cat":"Мотивация / спорт","items":[{"en":"Push yourself to the limit.","ru":"Выкладывайся на максимум."},{"en":"Practice makes perfect.","ru":"Практика — путь к совершенству."},{"en":"Give it your all.","ru":"Выложись на все сто."},{"en":"Stay in the game.","ru":"Оставайся в игре / не сдавайся."},{"en":"It's a marathon, not a sprint.","ru":"Это марафон, а не спринт."},{"en":"Keep grinding.","ru":"Продолжай упорно работать."},{"en":"No pain, no gain.","ru":"Без труда нет плода."}]}]}
+{"groups":[{"cat":"Начало разговора / Small talk","items":[{"en":"What's up?","ru":"Как дела?"},{"en":"How's it going?","ru":"Как оно?"},{"en":"Long time no see!","ru":"Давно не виделись!"},{"en":"What have you been up to?","ru":"Чем занимался?"},{"en":"Nothing much.","ru":"Да ничего особенного."},{"en":"I can't complain.","ru":"Не жалуюсь."},{"en":"Same old, same old.","ru":"Всё по-старому."},{"en":"How have you been?","ru":"Как ты поживал всё это время?"},{"en":"What brings you here?","ru":"Какими судьбами?"},{"en":"Small world!","ru":"Как тесен мир!"}]},{"cat":"Согласие / несогласие","items":[{"en":"I couldn't agree more.","ru":"Полностью согласен."},{"en":"That makes sense.","ru":"Логично / понятно."},{"en":"I see your point, but...","ru":"Я понимаю тебя, но..."},{"en":"I'm not so sure about that.","ru":"Не уверен насчёт этого."},{"en":"Fair enough.","ru":"Ладно, согласен (принимаю аргумент)."},{"en":"No way.","ru":"Ни за что / не может быть."},{"en":"You've got a point.","ru":"Тут ты прав."},{"en":"That's exactly my point.","ru":"Это ровно то, о чём я и говорю."},{"en":"I beg to differ.","ru":"Позволю себе не согласиться."},{"en":"Let's agree to disagree.","ru":"Давай останемся каждый при своём."}]},{"cat":"Мнение","items":[{"en":"If you ask me...","ru":"По-моему..."},{"en":"As far as I know...","ru":"Насколько мне известно..."},{"en":"I'm leaning towards...","ru":"Я больше склоняюсь к..."},{"en":"To be honest...","ru":"Если честно..."},{"en":"From my point of view...","ru":"С моей точки зрения..."},{"en":"The way I see it...","ru":"На мой взгляд..."},{"en":"Correct me if I'm wrong, but...","ru":"Поправь меня, если я ошибаюсь, но..."},{"en":"It depends on how you look at it.","ru":"Смотря с какой стороны посмотреть."}]},{"cat":"Просьбы / вежливость","items":[{"en":"Could you do me a favor?","ru":"Можешь оказать услугу?"},{"en":"Would you mind if...?","ru":"Ты не против, если...?"},{"en":"Do you mind...?","ru":"Не возражаешь...?"},{"en":"I was wondering if you could...","ru":"Хотел спросить, не мог бы ты..."},{"en":"No worries.","ru":"Не переживай / без проблем."},{"en":"Take your time.","ru":"Не спеши."},{"en":"Could you give me a hand?","ru":"Не поможешь?"},{"en":"Would it be possible to...?","ru":"Было бы возможно...?"},{"en":"Don't mention it.","ru":"Не стоит благодарности."}]},{"cat":"Непонимание","items":[{"en":"Could you say that again?","ru":"Повтори, пожалуйста."},{"en":"What do you mean?","ru":"Что ты имеешь в виду?"},{"en":"I'm not following.","ru":"Я не понимаю (не улавливаю мысль)."},{"en":"Could you break that down for me?","ru":"Можешь объяснить попроще?"},{"en":"I get what you're saying.","ru":"Я понимаю, о чём ты."},{"en":"Sorry, I didn't catch that.","ru":"Извини, я не расслышал."},{"en":"Could you speak a bit slower?","ru":"Не могли бы вы говорить помедленнее?"},{"en":"What does that stand for?","ru":"Что это означает, как расшифровывается?"}]},{"cat":"Работа / деловое общение","items":[{"en":"Let's touch base later.","ru":"Давай на связи попозже."},{"en":"I'll keep you posted.","ru":"Буду держать в курсе."},{"en":"Let's circle back to this.","ru":"Вернёмся к этому позже."},{"en":"That's on my to-do list.","ru":"Это у меня в списке дел."},{"en":"I'm swamped right now.","ru":"Я сейчас завален работой."},{"en":"Let's get the ball rolling.","ru":"Давай начнём (запустим процесс)."},{"en":"I'll follow up on that.","ru":"Я уточню / доведу до конца."},{"en":"Can we push the meeting back?","ru":"Можем перенести встречу?"},{"en":"It's a work in progress.","ru":"Это ещё в процессе."},{"en":"Let's think outside the box.","ru":"Давай мыслить нестандартно."},{"en":"Let's take it offline.","ru":"Обсудим это отдельно, не сейчас."},{"en":"I'll loop you in.","ru":"Я подключу тебя к переписке."},{"en":"Let's park that for now.","ru":"Отложим это пока в сторону."},{"en":"That's outside my remit.","ru":"Это вне моей зоны ответственности."}]},{"cat":"Эмоции","items":[{"en":"I'm thrilled about it.","ru":"Я в восторге."},{"en":"It drives me crazy.","ru":"Это меня бесит."},{"en":"I'm not in the mood.","ru":"Нет настроения."},{"en":"That's a relief.","ru":"Это облегчение."},{"en":"I'm freaking out.","ru":"Я паникую."},{"en":"It means a lot to me.","ru":"Это много для меня значит."},{"en":"I'm over the moon.","ru":"Я на седьмом небе от счастья."},{"en":"I'm fed up with it.","ru":"Мне это осточертело."},{"en":"That made my day.","ru":"Это подняло мне настроение на весь день."},{"en":"My heart sank.","ru":"У меня сердце упало."}]},{"cat":"Деньги / бизнес","items":[{"en":"It's out of my budget.","ru":"Это не вписывается в мой бюджет."},{"en":"Let's split the bill.","ru":"Давай разделим счёт."},{"en":"I'm saving up for...","ru":"Я коплю на..."},{"en":"It pays off in the long run.","ru":"Это окупается в долгосрочной перспективе."},{"en":"I'm breaking even.","ru":"Я выхожу в ноль."},{"en":"That's a rip-off.","ru":"Это грабёж (переплата)."},{"en":"I'm on a tight budget.","ru":"У меня ограниченный бюджет."},{"en":"Let's cut costs.","ru":"Давай сократим расходы."}]},{"cat":"Планы / решения","items":[{"en":"I haven't decided yet.","ru":"Я ещё не решил."},{"en":"Let's play it by ear.","ru":"Решим по ходу дела."},{"en":"I'm on the fence about it.","ru":"Я сомневаюсь / не определился."},{"en":"Let's give it a shot.","ru":"Давай попробуем."},{"en":"It's now or never.","ru":"Сейчас или никогда."},{"en":"I'll sleep on it.","ru":"Я подумаю над этим (переспать с мыслью)."},{"en":"Let's weigh the pros and cons.","ru":"Давай взвесим плюсы и минусы."}]},{"cat":"Проблемы / трудности","items":[{"en":"It's not a big deal.","ru":"Это не проблема."},{"en":"I'm stuck.","ru":"Я застрял (не знаю, что делать)."},{"en":"Let's figure it out.","ru":"Давай разберёмся."},{"en":"That's easier said than done.","ru":"Легче сказать, чем сделать."},{"en":"I'm dealing with it.","ru":"Я разбираюсь с этим."},{"en":"It's a long story.","ru":"Это долгая история."},{"en":"Let's not jump to conclusions.","ru":"Давай не будем делать поспешных выводов."},{"en":"Let's get to the bottom of this.","ru":"Давай докопаемся до сути."},{"en":"It's a blessing in disguise.","ru":"Нет худа без добра."},{"en":"We're back to square one.","ru":"Мы вернулись к тому, с чего начали."}]},{"cat":"Прощание","items":[{"en":"Catch you later.","ru":"Увидимся позже."},{"en":"Take care.","ru":"Береги себя."},{"en":"Keep in touch.","ru":"Оставайся на связи."},{"en":"See you around.","ru":"Ещё увидимся."},{"en":"Have a good one.","ru":"Хорошего дня."},{"en":"I'd better get going.","ru":"Мне пора идти."},{"en":"Let's do this again sometime.","ru":"Давай как-нибудь повторим."},{"en":"Say hi to everyone for me.","ru":"Передавай всем привет."}]},{"cat":"Заполнители речи","items":[{"en":"You know what I mean?","ru":"Понимаешь, о чём я?"},{"en":"Basically...","ru":"В основном / короче говоря..."},{"en":"Anyway...","ru":"В общем / так или иначе..."},{"en":"At the end of the day...","ru":"В конце концов..."},{"en":"I guess...","ru":"Наверное / полагаю..."},{"en":"Kind of / sort of","ru":"Вроде того / типа"}]},{"cat":"Совет","items":[{"en":"If I were you...","ru":"На твоём месте я бы..."},{"en":"You'd better...","ru":"Тебе лучше..."},{"en":"It's up to you.","ru":"Решать тебе."},{"en":"I'd think twice about that.","ru":"Я бы дважды подумал над этим."},{"en":"Take it with a grain of salt.","ru":"Не принимай это за чистую монету."},{"en":"Don't put all your eggs in one basket.","ru":"Не ставь всё на одну карту."},{"en":"Trust your gut.","ru":"Доверься интуиции."}]},{"cat":"Удивление","items":[{"en":"No kidding!","ru":"Да ладно! / Серьёзно?"},{"en":"I couldn't believe my eyes.","ru":"Не мог поверить своим глазам."},{"en":"That caught me off guard.","ru":"Это застало меня врасплох."},{"en":"Who would've thought?","ru":"Кто бы мог подумать?"},{"en":"You're kidding me!","ru":"Да ты шутишь!"},{"en":"I never saw that coming.","ru":"Я такого совсем не ожидал."},{"en":"That's out of the blue.","ru":"Это как гром среди ясного неба."}]},{"cat":"Технологии / AI","items":[{"en":"It's a game changer.","ru":"Это меняет всё (прорывная вещь)."},{"en":"Let's automate this.","ru":"Давай автоматизируем это."},{"en":"It streamlines the process.","ru":"Это упрощает/ускоряет процесс."},{"en":"AI is taking over.","ru":"ИИ захватывает всё."},{"en":"Let's leverage this tool.","ru":"Давай используем этот инструмент по максимуму."}]},{"cat":"Мотивация / спорт","items":[{"en":"Push yourself to the limit.","ru":"Выкладывайся на максимум."},{"en":"Practice makes perfect.","ru":"Практика — путь к совершенству."},{"en":"Give it your all.","ru":"Выложись на все сто."},{"en":"Stay in the game.","ru":"Оставайся в игре / не сдавайся."},{"en":"It's a marathon, not a sprint.","ru":"Это марафон, а не спринт."},{"en":"Keep grinding.","ru":"Продолжай упорно работать."},{"en":"No pain, no gain.","ru":"Без труда нет плода."}]},{"cat":"Магазин и покупки","items":[{"en":"I'm just browsing, thanks.","ru":"Я просто смотрю, спасибо."},{"en":"Do you have this in a larger size?","ru":"Есть это размером побольше?"},{"en":"Is this on sale?","ru":"На это есть скидка?"},{"en":"Can I pay by card?","ru":"Можно оплатить картой?"},{"en":"Could I get a receipt?","ru":"Можно чек?"},{"en":"I'd like to return this.","ru":"Я хотел бы это вернуть."}]},{"cat":"Кафе и ресторан","items":[{"en":"A table for two, please.","ru":"Столик на двоих, пожалуйста."},{"en":"Could we see the menu?","ru":"Можно меню?"},{"en":"What do you recommend?","ru":"Что посоветуете?"},{"en":"Could I get it to go?","ru":"Можно с собой?"},{"en":"Could we have the bill, please?","ru":"Счёт, пожалуйста."},{"en":"I'm allergic to nuts.","ru":"У меня аллергия на орехи."}]},{"cat":"Транспорт и дорога","items":[{"en":"How do I get to the station?","ru":"Как добраться до вокзала?"},{"en":"Which stop do I get off at?","ru":"На какой остановке мне выходить?"},{"en":"I missed my train.","ru":"Я опоздал на поезд."},{"en":"The flight has been delayed.","ru":"Рейс задерживается."},{"en":"Could you drop me off here?","ru":"Высадите меня здесь, пожалуйста."},{"en":"I think we're lost.","ru":"Кажется, мы заблудились."}]},{"cat":"Здоровье и самочувствие","items":[{"en":"I'm not feeling well.","ru":"Мне нездоровится."},{"en":"I've got a headache.","ru":"У меня болит голова."},{"en":"I think I'm coming down with something.","ru":"Кажется, я заболеваю."},{"en":"Get well soon!","ru":"Выздоравливай!"},{"en":"I didn't sleep a wink.","ru":"Я глаз не сомкнул."}]},{"cat":"Дом и быт","items":[{"en":"Make yourself at home.","ru":"Чувствуй себя как дома."},{"en":"Could you take out the trash?","ru":"Вынесешь мусор?"},{"en":"The sink is clogged.","ru":"Раковина засорилась."},{"en":"I need to do the laundry.","ru":"Мне надо постирать."},{"en":"I'm running out of milk.","ru":"У меня заканчивается молоко."}]},{"cat":"Телефон и переписка","items":[{"en":"Can you hear me?","ru":"Меня слышно?"},{"en":"You're breaking up.","ru":"Ты пропадаешь, связь рвётся."},{"en":"Let me call you back.","ru":"Я тебе перезвоню."},{"en":"Sorry, wrong number.","ru":"Извините, вы ошиблись номером."},{"en":"Text me when you get there.","ru":"Напиши, как доберёшься."},{"en":"My phone died.","ru":"У меня телефон сел."}]},{"cat":"Встречи и договорённости","items":[{"en":"Are you free on Friday?","ru":"Ты свободен в пятницу?"},{"en":"Does Tuesday work for you?","ru":"Вторник тебе подходит?"},{"en":"Something came up.","ru":"Кое-что случилось, планы поменялись."},{"en":"I'm running late.","ru":"Я опаздываю."},{"en":"Can we reschedule?","ru":"Можем перенести?"},{"en":"I'll be there in ten minutes.","ru":"Буду через десять минут."}]},{"cat":"Извинения и неловкие моменты","items":[{"en":"My bad.","ru":"Виноват, моя оплошность."},{"en":"I didn't mean it that way.","ru":"Я не это имел в виду."},{"en":"It completely slipped my mind.","ru":"Совершенно вылетело из головы."},{"en":"I owe you an apology.","ru":"Я должен перед тобой извиниться."},{"en":"I feel terrible about it.","ru":"Мне ужасно неловко из-за этого."}]},{"cat":"Погода и время","items":[{"en":"It's pouring outside.","ru":"На улице льёт как из ведра."},{"en":"It's freezing today.","ru":"Сегодня жуткий холод."},{"en":"The weather is finally picking up.","ru":"Погода наконец налаживается."},{"en":"Time flies.","ru":"Время летит."},{"en":"I'm pressed for time.","ru":"У меня совсем нет времени."}]},{"cat":"Идиомы","items":[{"en":"It's a piece of cake.","ru":"Проще простого."},{"en":"It costs an arm and a leg.","ru":"Это стоит целое состояние."},{"en":"Let's call it a day.","ru":"Давай на сегодня закончим."},{"en":"It rings a bell.","ru":"Что-то знакомое, о чём-то напоминает."},{"en":"You're pulling my leg.","ru":"Ты меня разыгрываешь."},{"en":"It slipped through the cracks.","ru":"Это упустили из виду."},{"en":"I'm all ears.","ru":"Я весь внимание."},{"en":"Speak of the devil!","ru":"Лёгок на помине!"},{"en":"It's the last straw.","ru":"Это последняя капля."},{"en":"Let's bite the bullet.","ru":"Давай стиснем зубы и сделаем."}]},{"cat":"О людях и характере","items":[{"en":"He's a quick learner.","ru":"Он быстро схватывает."},{"en":"She's down to earth.","ru":"Она простая и без пафоса."},{"en":"He's full of himself.","ru":"Он о себе слишком высокого мнения."},{"en":"She's a people person.","ru":"Она отлично ладит с людьми."},{"en":"She has a good head on her shoulders.","ru":"У неё голова на плечах."},{"en":"She doesn't beat around the bush.","ru":"Она говорит прямо, без обиняков."}]}]}
 </script>
 
 <script id="vocab" type="application/json">
@@ -1426,14 +1513,33 @@ function pbRenderCount(){
     if(bar) bar.style.width = Math.round(n / PB_TOTAL * 100) + '%';
   }
 }
+let pbCatsOpen = false;
+const PB_CATS_SHOWN = 10;   // сколько тем видно в свёрнутом виде
 function pbRenderCats(){
   const box = document.getElementById('pbCats');
   const cats = ['all'].concat(PB_GROUPS.map(g => g.cat));
-  box.innerHTML = cats.map(c =>
+  const counts = {};
+  PB_GROUPS.forEach(g => counts[g.cat] = g.items.length);
+  // Свёрнутый список: первые PB_CATS_SHOWN тем плюс выбранная, если она не попала,
+  // иначе активный фильтр пропадал бы из виду.
+  let shown = cats;
+  if(!pbCatsOpen && cats.length > PB_CATS_SHOWN + 1){
+    shown = cats.slice(0, PB_CATS_SHOWN);
+    if(shown.indexOf(pbFilter) === -1) shown.push(pbFilter);
+  }
+  let html = shown.map(c =>
     '<button data-cat="' + pbEsc(c) + '"' + (c === pbFilter ? ' class="active"' : '') + '>' +
-    (c === 'all' ? 'Все · ' + PB_TOTAL : pbEsc(c)) + '</button>').join('');
+    (c === 'all' ? 'Все · ' + PB_TOTAL
+                 : pbEsc(c) + '<span class="pb-n">' + (counts[c] || 0) + '</span>') + '</button>').join('');
+  const hidden = cats.length - shown.length;
+  if(hidden > 0) html += '<button class="pb-more" data-more="1">ещё ' + hidden + ' тем</button>';
+  else if(pbCatsOpen) html += '<button class="pb-more" data-more="0">свернуть</button>';
+  box.innerHTML = html;
   box.querySelectorAll('button').forEach(b => {
-    b.onclick = () => { pbFilter = b.dataset.cat; pbRenderCats(); pbRenderList(); };
+    b.onclick = () => {
+      if(b.dataset.more !== undefined){ pbCatsOpen = b.dataset.more === '1'; pbRenderCats(); return; }
+      pbFilter = b.dataset.cat; pbRenderCats(); pbRenderList();
+    };
   });
 }
 function pbMatches(it){
@@ -1674,7 +1780,8 @@ const THEME_LIST = {
   panaderia: {c:'#8a5a3b', bg:'#f3ecdf', n:'Warm Cream'},
   soleado:   {c:'#f59e0b', bg:'#ffd94f', n:'Sunny'},
   pastel:    {c:'#e07a5f', bg:'#a9bd9d', n:'Soft Pastel'},
-  te:        {c:'#a8452e', bg:'#f5f1e8', n:'Ink & Paper'}
+  te:        {c:'#a8452e', bg:'#f5f1e8', n:'Ink & Paper'},
+  midnight:  {c:'#3d8bff', bg:'#0b1020', n:'Midnight'}
 };
 function buildThemeDots(){
   const box = document.getElementById('themeDots');
@@ -1724,7 +1831,7 @@ function syncTabs(m){
   const hc = document.querySelector('.hero-card');
   if(hc){
     if(m==='phrasebook'){
-      hc.innerHTML = '<b>100 разговорных фраз</b><br>16 тем: small talk, работа, деньги, эмоции, спорт и другое.<br>Отдельный блок — не привязан к дням.';
+      hc.innerHTML = '<b>' + PB_TOTAL + ' разговорных фраз</b><br>' + PB_GROUPS.length + ' тем: быт, small talk, работа, эмоции, идиомы и другое.<br>Отдельный блок — не привязан к дням.';
     } else if(m==='speaking'){
       hc.innerHTML = '<b>Слова с занятий · ' + SP_TOTAL + '</b><br>' + SP_TOPICS.map(t=>t.cat).join(' · ') + '.<br>Отдельный блок — не привязан к дням.';
     } else {
@@ -1809,6 +1916,20 @@ try{ renderHeader(); }catch(e){ showFatal('renderHeader: ' + e.message); }
 try{ renderStreak(); }catch(e){}
 try{ updateBadge(); }catch(e){}
 try{ buildThemeDots(); }catch(e){}
+// Панель вкладок липкая; тень и рамку включаем только когда она прилипла к верху,
+// иначе рамка висит вокруг панели и в обычном положении.
+try{
+  const bar = document.querySelector('.bar');
+  const onScroll = () => bar.classList.toggle('stuck', bar.getBoundingClientRect().top <= 0.5);
+  addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+}catch(e){}
+// Счётчики в подвале — из данных, а не из захардкоженного текста: иначе протухают
+// при каждом пополнении словаря, разговорника или Speaking.
+try{
+  document.getElementById('footCounts').textContent =
+    'Английский B1 → B2 · ' + TOTAL_WORDS + ' слов · ' + PB_TOTAL + ' фраз · ' + SP_TOTAL + ' с занятий';
+}catch(e){}
 try{
   setMode(isReviewDay() ? 'flashcards' : 'learn');
 }catch(e){
