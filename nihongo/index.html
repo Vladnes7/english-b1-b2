@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本語 · Японский N5 по «Минна но Нихонго»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Klee+One:wght@400;600&family=Shippori+Mincho+B1:wght@600;800&display=swap" rel="stylesheet">
+<style>
+/* ===================== ТОКЕНЫ =====================
+   Одна тёмная тема «сумерки над Токио» — цвета взяты с фотографии в шапке:
+   индиго неба, сакура, фонари, ворота-тории. */
+html{
+  color-scheme:dark;
+  --font-ui:'Onest',system-ui,-apple-system,sans-serif;
+  --font-jp:'Klee One','Hiragino Maru Gothic ProN','Hiragino Sans','Yu Gothic','Noto Sans JP',sans-serif;
+  --font-display:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;
+  --bg:#0f0e1c; --surface:#171528; --surface-2:#1f1c34; --surface-3:#28243f;
+  --border:#2e2948; --border-strong:#443d66;
+  --text:#f1ecf5; --muted:#a8a2c0;
+  --sakura:#f4a6c1; --sakura-soft:color-mix(in srgb,#f4a6c1 14%,transparent);
+  --lantern:#f5b95a; --torii:#ef6f52; --sky:#93a0ff; --lilac:#c7a6ff;
+  --good:#6fd6a0; --bad:#ff7d88;
+  --on-accent:#2b0f1d;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-ui);font-size:16px;line-height:1.6;
+  min-height:100vh;padding:20px clamp(12px,2.5vw,40px) 70px}
+.wrap{position:relative;max-width:1500px;margin:0 auto}
+.jp{font-family:var(--font-jp);font-weight:600}
+ruby{ruby-position:over}
+rt{font-family:var(--font-jp);font-weight:400;font-size:.52em;color:var(--sakura);letter-spacing:0;opacity:.95}
+html.nofuri rt{visibility:hidden}
+:focus-visible{outline:2px solid var(--lantern);outline-offset:2px;border-radius:6px}
+button{font-family:inherit}
+
+/* ===================== HERO ===================== */
+.hero{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--border-strong);
+  min-height:clamp(380px,56vh,600px);display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(170deg,#1b1a4a 0%,#4a2e63 40%,#c0584a 75%,#f0a04a 100%)}
+/* Верхний слой — hero.jpg рядом с файлом; если его нет, виден градиент-закат. */
+.hero-bg{position:absolute;inset:0;background:url('hero.jpg') center 58%/cover no-repeat}
+.hero-bg::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(15,14,28,.55) 0%,rgba(15,14,28,.05) 32%,rgba(15,14,28,.25) 58%,rgba(15,14,28,.94) 100%),
+             linear-gradient(90deg,rgba(15,14,28,.7) 0%,rgba(15,14,28,.15) 55%,transparent 100%)}
+.hero-top{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;justify-content:space-between;gap:12px;
+  padding:22px 28px;font-size:13px;color:#e6dcef}
+.hero-top b{color:#fff}
+.hero-main{position:relative;z-index:2;padding:0 28px 26px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.hero-title{font-family:var(--font-display);font-weight:800;color:#fff8f2;line-height:1;
+  font-size:clamp(76px,15vw,196px);letter-spacing:.02em;text-shadow:0 6px 40px rgba(0,0,0,.6)}
+.hero-title rt{font-size:.22em;color:var(--sakura);letter-spacing:.35em;font-family:var(--font-jp);font-weight:600;
+  animation:furiIn 1.1s .5s cubic-bezier(.22,.61,.36,1) both}
+@keyframes furiIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hero-sub{font-size:clamp(16px,1.6vw,21px);color:#efe6f5;margin-top:10px;max-width:34ch;line-height:1.45}
+.hero-card{background:rgba(15,14,28,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid color-mix(in srgb,var(--sakura) 35%,transparent);border-radius:14px;padding:14px 18px;
+  font-size:14px;line-height:1.65;color:#ddd3e8;max-width:360px}
+.hero-card b{color:#fff}
+
+/* ===================== ПАНЕЛЬ ===================== */
+.bar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  margin:18px 0 12px;padding:10px 0;background:var(--bg)}
+.bar.stuck{border-bottom:1px solid var(--border);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.daynav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.iconbtn{width:44px;height:44px;border-radius:12px;font-size:20px;cursor:pointer}
+.daylabel{font-size:14px;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);
+  padding:5px 14px;border-radius:12px;min-width:180px;line-height:1.35}
+.daylabel b{color:var(--text)}
+.daylabel .sublabel{display:block;font-size:12px;color:var(--sakura)}
+.pill{font-size:13px;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 12px;white-space:nowrap}
+.pill b{color:var(--lantern)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+
+/* Все кнопки — в обводке цвета сакуры; заливка — у активной вкладки и главной кнопки. */
+.tabs button,.subtabs button,.iconbtn,.btn,.opt,.match-btn,.chip,.furi-toggle{
+  background:transparent;border:1.5px solid color-mix(in srgb,var(--sakura) 45%,transparent);color:var(--text);
+  transition:background-color .18s,border-color .18s,color .18s}
+.tabs button:hover:not(:disabled),.subtabs button:hover:not(:disabled),.iconbtn:hover:not(:disabled),
+.btn:hover:not(:disabled),.opt:hover:not(:disabled),.match-btn:hover:not(:disabled),.chip:hover,.furi-toggle:hover{
+  border-color:var(--sakura);background:var(--sakura-soft)}
+.iconbtn:disabled{opacity:.3;cursor:default}
+.tabs button{min-height:44px;padding:8px 16px;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600}
+.tabs button.active{background:var(--sakura);border-color:var(--sakura);color:var(--on-accent)}
+.furi-toggle{min-height:44px;padding:6px 12px;border-radius:12px;cursor:pointer;font-family:var(--font-jp);font-weight:600;font-size:14px}
+.furi-toggle[aria-pressed="true"]{border-color:var(--sakura);color:var(--sakura)}
+.subtabs{display:none;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.subtabs button{min-height:40px;padding:6px 14px;border-radius:999px;cursor:pointer;font-size:14px;font-weight:500;color:var(--muted)}
+.subtabs button.active{border-color:var(--sakura);color:var(--sakura);background:var(--sakura-soft)}
+.badge{display:inline-block;background:var(--bad);color:#2a0710;font-size:11px;font-weight:700;border-radius:999px;padding:0 7px;margin-left:6px;vertical-align:1px}
+.badge:empty{display:none}
+.progress{height:4px;background:var(--surface-2);border-radius:999px;overflow:hidden;margin-bottom:20px}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--sakura),var(--lantern));transition:width .4s}
+
+/* ===================== ОБЩИЕ БЛОКИ ===================== */
+.panel{display:none}
+.sect-title{font-size:20px;font-weight:600;margin:28px 0 12px}
+.sect-title small{font-size:14px;color:var(--muted);font-weight:400;margin-left:8px}
+.help{color:var(--muted);font-size:14px;line-height:1.6}
+.help b{color:var(--text)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.chip{min-height:38px;padding:6px 14px;border-radius:999px;cursor:pointer;font-size:14px;color:var(--muted)}
+.chip.active{background:var(--sakura-soft);border-color:var(--sakura);color:var(--text)}
+.btn{min-height:46px;padding:10px 24px;border-radius:12px;cursor:pointer;font-size:15px;font-weight:600}
+.btn.primary{background:var(--sakura);border-color:var(--sakura);color:var(--on-accent)}
+.btn.primary:hover:not(:disabled){background:#f8bcd1;border-color:#f8bcd1}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:6px;white-space:nowrap;
+  border:1px solid currentColor;line-height:1.6;font-family:var(--font-ui)}
+.t-v1{color:var(--torii)} .t-v2{color:var(--sky)} .t-v3{color:var(--lantern)}
+.t-i{color:var(--sakura)} .t-na{color:var(--lilac)} .t-other{color:var(--muted)}
+.reg{font-size:12px;padding:1px 8px;border-radius:6px;white-space:nowrap}
+.reg-f{background:color-mix(in srgb,var(--sky) 18%,transparent);color:#c9d0ff}
+.reg-c{background:color-mix(in srgb,var(--lantern) 18%,transparent);color:#ffd9a0}
+.reg-n{background:var(--surface-3);color:var(--muted)}
+.note{color:var(--lantern);font-size:13px;margin-top:4px}
+mark{background:transparent;color:var(--lantern);border-bottom:2px solid color-mix(in srgb,var(--lantern) 55%,transparent)}
+.gap{display:inline-block;min-width:3.2em;border-bottom:2px solid var(--sakura);color:var(--sakura);text-align:center}
+
+/* ===================== ТАБЛИЦА СЛОВ ===================== */
+.tablebox{overflow-x:auto;border:1px solid var(--border-strong);border-radius:var(--radius);background:var(--surface)}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:13px;background:var(--surface-2)}
+tr:last-child td{border-bottom:none}
+td.num{color:var(--muted);width:40px;font-size:13px}
+td.w{cursor:pointer;font-family:var(--font-jp);font-weight:600;font-size:22px;line-height:1.9;white-space:nowrap}
+td.w:hover{color:var(--sakura)}
+td.rd{font-family:var(--font-jp);font-size:15px;white-space:nowrap}
+td.rd .pol{display:block;font-family:var(--font-ui);font-size:13px;color:var(--muted)}
+td.tr .ex{font-family:var(--font-jp);font-size:16px;margin-top:6px;line-height:2}
+td.tr .exru{color:var(--muted);font-size:14px}
+td.chk{width:56px;text-align:center}
+td.chk input{width:22px;height:22px;accent-color:var(--good);cursor:pointer;margin-top:8px}
+tr.learned td.w{color:var(--good)}
+
+.phr-list{display:grid;gap:8px}
+.phr{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) auto;gap:6px 18px;align-items:baseline;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 16px}
+.phr .jp{font-size:19px;line-height:2}
+.phr .note{grid-column:1/-1;margin-top:0}
+
+/* ===================== ГРАММАТИКА ===================== */
+.gram{max-width:820px}
+.gcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:12px}
+.gcard h3{font-size:19px;font-weight:600;margin-bottom:6px;line-height:1.9}
+.gcard h3 .jp{font-size:21px}
+.gcard .ref{font-size:12px;color:var(--sky);margin-bottom:8px}
+.gcard p{line-height:1.75;font-size:15.5px}
+.gcard p b{color:var(--sakura);font-weight:600}
+.gex{margin-top:12px;border-left:2px solid var(--border-strong);padding-left:14px}
+.gex div{margin:4px 0}
+.gex .jp{font-size:18px;line-height:2.1}
+.gex .ru{color:var(--muted);font-size:14px}
+.conj{overflow-x:auto;margin-top:12px}
+.conj table{font-size:15px}
+.conj td{font-family:var(--font-jp);font-size:17px;line-height:2;white-space:nowrap}
+.conj td:first-child{font-family:var(--font-ui);font-size:13px}
+.dlg{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:12px}
+.dlg>div{padding:8px 14px;border-bottom:1px solid var(--border)}
+.dlg .h{background:var(--surface-2);font-size:13px;color:var(--muted)}
+.dlg .jp{font-size:17px;line-height:2}
+.dlg .ru{grid-column:1/-1;color:var(--muted);font-size:13px;padding-top:0;margin-top:-4px}
+
+/* ===================== КАРТОЧКИ / УПРАЖНЕНИЯ ===================== */
+.card{background:var(--surface);border:1px solid var(--border-strong);border-radius:20px;padding:30px 26px;text-align:center;max-width:720px;margin:0 auto}
+.card .dir{color:var(--muted);font-size:14px}
+.card .big{font-family:var(--font-jp);font-weight:600;font-size:clamp(30px,5vw,46px);line-height:2;margin:8px 0 2px}
+.card .sent{font-family:var(--font-jp);font-size:clamp(20px,3vw,26px);line-height:2.2;margin:12px 0 4px}
+.card .hint{color:var(--muted);font-size:15px;margin-bottom:16px}
+.card input[type=text]{width:100%;max-width:400px;min-height:48px;background:var(--surface-2);border:1.5px solid var(--border-strong);
+  color:var(--text);padding:10px 16px;border-radius:12px;font-size:17px;text-align:center;font-family:var(--font-ui)}
+.card input[type=text]:focus{outline:none;border-color:var(--sakura)}
+.actions{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.counter{color:var(--muted);font-size:13px;margin-bottom:10px}
+.feedback{margin-top:14px;font-size:16px;min-height:26px;font-weight:600}
+.feedback.good{color:var(--good)} .feedback.bad{color:var(--bad)}
+.explain{margin-top:10px;font-size:15px;color:var(--text);background:var(--surface-2);border-radius:12px;padding:10px 14px;text-align:left;line-height:1.8}
+.explain:empty{display:none}
+.explain .jp{font-size:17px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.opt{min-height:56px;padding:8px 12px;border-radius:14px;cursor:pointer;font-family:var(--font-jp);font-weight:600;font-size:20px;line-height:1.9}
+.opt.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 20%,transparent);color:#dfffee}
+.opt.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 20%,transparent);color:#ffe3e6}
+.opt:disabled{cursor:default}
+.result .score{font-size:52px;font-weight:700;color:var(--sakura);margin:8px 0}
+
+.fc-wrap{perspective:1200px;max-width:640px;margin:0 auto}
+.fc-card{position:relative;height:320px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;background:var(--surface);border:1px solid var(--border-strong);border-radius:20px;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center}
+.fc-back{transform:rotateY(180deg);border-color:var(--sakura)}
+.fc-word{font-family:var(--font-jp);font-weight:600;font-size:clamp(30px,6vw,48px);line-height:2}
+.fc-ru{font-size:24px;font-weight:600;color:var(--sakura)}
+.fc-ex{font-family:var(--font-jp);font-size:18px;line-height:2;margin-top:10px}
+.fc-exru{color:var(--muted);font-size:14px}
+.fc-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin:18px 0 10px}
+.fc-counter{color:var(--muted);font-size:14px;min-width:70px;text-align:center}
+
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:900px;margin:0 auto 16px}
+.match-btn{min-height:60px;padding:8px 12px;border-radius:14px;cursor:pointer;font-size:16px;line-height:1.5}
+.match-btn.jpside{font-family:var(--font-jp);font-weight:600;font-size:20px;line-height:1.9}
+.match-btn.sel{background:var(--sakura);border-color:var(--sakura);color:var(--on-accent)}
+.match-btn.sel rt{color:var(--on-accent)}
+.match-btn.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good);cursor:default}
+.match-btn.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 22%,transparent)}
+
+/* ===================== ПРОГРЕСС ===================== */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
+.stat-card .k{color:var(--muted);font-size:14px}
+.stat-card .v{font-size:36px;font-weight:700;color:var(--text);line-height:1.3}
+.stat-card .s{color:var(--muted);font-size:13px}
+.stat-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px}
+.stat-block h3{font-size:16px;font-weight:600;margin-bottom:12px}
+.heatmap{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);gap:3px;overflow-x:auto}
+.hm{width:13px;height:13px;border-radius:3px;background:var(--surface-3)}
+.hm1{background:color-mix(in srgb,var(--sakura) 35%,var(--surface-3))}
+.hm2{background:color-mix(in srgb,var(--sakura) 65%,var(--surface-3))}
+.hm3{background:var(--sakura)}
+
+/* ===================== ПОПАП ===================== */
+.word-popup{position:absolute;z-index:1000;background:var(--surface-3);border:1px solid var(--sakura);border-radius:14px;
+  padding:14px 18px;width:300px;max-width:calc(100vw - 24px);box-shadow:0 14px 40px rgba(0,0,0,.5);
+  opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s,transform .18s,visibility .18s}
+.word-popup.show{opacity:1;visibility:visible;transform:none}
+.word-popup .pw{font-family:var(--font-jp);font-weight:600;font-size:28px;line-height:1.9}
+.word-popup .pk{font-family:var(--font-jp);font-size:15px;color:var(--muted)}
+.word-popup .pr{font-size:16px;margin:6px 0}
+.word-popup .pf{font-family:var(--font-jp);font-size:15px;line-height:2;border-top:1px solid var(--border-strong);margin-top:8px;padding-top:6px}
+.word-popup .pf span{font-family:var(--font-ui);font-size:12px;color:var(--muted)}
+
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:40px;line-height:1.8}
+.conf{position:fixed;top:-16px;width:8px;height:14px;z-index:2000;border-radius:2px;animation:confFall 2.6s ease-in forwards;pointer-events:none}
+@keyframes confFall{to{transform:translateY(105vh) rotate(720deg)}}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.slide-in{animation:slideIn .3s cubic-bezier(.22,.61,.36,1) both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+@media (max-width:640px){
+  .hero-top{padding:16px 18px;font-size:12px}
+  .hero-main{padding:0 18px 20px}
+  th,td{padding:10px 10px}
+  td.num,th.num{display:none}
+  td.w{font-size:19px;white-space:normal}
+  td.rd{white-space:normal}
+  .phr{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr}
+  .card{padding:22px 14px}
+  .dlg{grid-template-columns:1fr}
+  .dlg .h:nth-child(2){display:none}
+  .fc-card{height:360px}
+  /* Таблица слов на телефоне — карточками, без горизонтальной прокрутки */
+  #learn thead{display:none}
+  #learn tbody tr{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:10px;padding:12px 14px;border-bottom:1px solid var(--border)}
+  #learn tbody tr:last-child{border-bottom:none}
+  #learn td{border:0;padding:0}
+  #learn td.w{grid-column:1;font-size:26px}
+  #learn td.chk{grid-column:2;grid-row:1/4;width:auto}
+  #learn td.rd{grid-column:1}
+  #learn td.rd .pol{display:inline;margin-left:8px}
+  #learn td.ty{grid-column:1;display:flex;gap:8px;align-items:center;margin:4px 0 6px}
+  #learn td.ty .jp{margin-top:0!important}
+  #learn td.tr{grid-column:1/-1}
+  .hero-top{flex-direction:column;gap:2px}
+  .bar{position:static}
+  .daynav{display:grid;grid-template-columns:44px 1fr 1fr 44px;width:100%}
+  .daylabel{min-width:0;grid-column:2/4}
+  .daynav .pill{grid-column:1/3;text-align:center}
+  .furi-toggle{grid-column:3/5}
+  .tabs button{padding:8px 12px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-top">
+      <div>Японский для начинающих · уровень <b>N5</b></div>
+      <div>по учебнику <b>みんなの日本語</b></div>
+    </div>
+    <div class="hero-main">
+      <div>
+        <h1 class="hero-title"><ruby>日本語<rt>にほんご</rt></ruby></h1>
+        <p class="hero-sub">Слова с фуриганой, частицы, формы глаголов и живая речь — урок за уроком.</p>
+      </div>
+      <div class="hero-card" id="heroCard"></div>
+    </div>
+  </header>
+
+  <div class="bar" id="bar">
+    <div class="daynav">
+      <button class="iconbtn" id="prev" aria-label="Предыдущий день">‹</button>
+      <span class="daylabel">День <b id="dayNum">1</b> · <span id="dayTopic"></span><span class="sublabel" id="daySub"></span></span>
+      <button class="iconbtn" id="next" aria-label="Следующий день">›</button>
+      <span class="pill" title="Дней подряд с занятиями">Серия: <b id="streakEl">0</b></span>
+      <button class="furi-toggle" id="furiBtn" aria-pressed="true" title="Показать или скрыть чтение над кандзи">ふりがな</button>
+    </div>
+    <nav class="tabs" id="mainTabs" aria-label="Разделы">
+      <button data-tab="learn">Слова</button>
+      <button data-tab="grammar">Грамматика</button>
+      <button data-tab="practice">Практика</button>
+      <button data-tab="test">Тест</button>
+      <button data-tab="review">Повторить<span class="badge" id="srsBadge"></span></button>
+      <button data-tab="stats">Прогресс</button>
+    </nav>
+  </div>
+
+  <div class="subtabs" id="subTabs">
+    <button data-mode="flashcards">Карточки</button>
+    <button data-mode="match">Пары</button>
+    <button data-mode="gaps">Пропуски</button>
+    <button data-mode="kanji">Кандзи</button>
+    <button data-mode="particles">Частицы</button>
+    <button data-mode="forms">Формы</button>
+    <button data-mode="polite">Вежливо ↔ просто</button>
+  </div>
+
+  <div class="progress"><div id="progBar"></div></div>
+
+  <section class="panel" id="learn"></section>
+  <section class="panel" id="grammar"></section>
+  <section class="panel" id="flashcards"></section>
+  <section class="panel" id="match"></section>
+  <section class="panel" id="gaps"></section>
+  <section class="panel" id="kanji"></section>
+  <section class="panel" id="particles"></section>
+  <section class="panel" id="forms"></section>
+  <section class="panel" id="polite"></section>
+  <section class="panel" id="test"></section>
+  <section class="panel" id="review"></section>
+  <section class="panel" id="stats"></section>
+
+  <footer id="footer"></footer>
+</div>
+
+<div class="word-popup" id="wordPopup" role="dialog" aria-live="polite"></div>
+
+<script id="data" type="application/json">{"lessons":[{"mnn":1,"topic":"Знакомство","words":[{"jp":"わたし","t":"pron","ru":"я","ex":"{わたし}は ミラーです。","exru":"Я — Миллер."},{"jp":"あなた","t":"pron","ru":"ты, вы","ex":"{あなた}は 学生[がくせい]ですか。","exru":"Вы студент?","note":"В живой речи あなた звучит резковато — чаще обращаются по имени + さん."},{"jp":"あの人[ひと]","t":"pron","ru":"тот человек, он, она","ex":"{あの人[ひと]}は 木村[きむら]さんです。","exru":"Тот человек — Кимура-сан."},{"jp":"あの方[かた]","t":"pron","ru":"тот человек (вежливо)","ex":"{あの方[かた]}は どなたですか。","exru":"Кто этот человек?"},{"jp":"～さん","t":"suf","ru":"господин, госпожа (к имени)","ex":"ミラー{さん}は 会社員[かいしゃいん]です。","exru":"Миллер-сан — служащий компании.","note":"Никогда не добавляется к своему имени."},{"jp":"～人[じん]","t":"suf","ru":"национальность (…ец, …ка)","ex":"わたしは ロシア{人[じん]}です。","exru":"Я русский."},{"jp":"先生[せんせい]","t":"n","ru":"учитель, преподаватель, врач (обращение)","ex":"あの人[ひと]は 日本語[にほんご]の {先生[せんせい]}です。","exru":"Тот человек — преподаватель японского.","note":"О своей профессии так не говорят — только о других."},{"jp":"教師[きょうし]","t":"n","ru":"учитель (о своей профессии)","ex":"わたしは {教師[きょうし]}です。","exru":"Я учитель."},{"jp":"学生[がくせい]","t":"n","ru":"студент, учащийся","ex":"わたしは {学生[がくせい]}じゃ ありません。","exru":"Я не студент."},{"jp":"会社員[かいしゃいん]","t":"n","ru":"служащий компании","ex":"サントスさんは {会社員[かいしゃいん]}です。","exru":"Сантос-сан — служащий компании."},{"jp":"社員[しゃいん]","t":"n","ru":"сотрудник (такой-то фирмы)","ex":"わたしは IMCの {社員[しゃいん]}です。","exru":"Я сотрудник IMC."},{"jp":"銀行員[ぎんこういん]","t":"n","ru":"банковский служащий","ex":"ワットさんは {銀行員[ぎんこういん]}じゃ ありません。","exru":"Ватт-сан не банковский служащий."},{"jp":"医者[いしゃ]","t":"n","ru":"врач","ex":"ワンさんは {医者[いしゃ]}です。","exru":"Ван-сан — врач."},{"jp":"研究者[けんきゅうしゃ]","t":"n","ru":"исследователь, учёный","ex":"シュミットさんは {研究者[けんきゅうしゃ]}です。","exru":"Шмидт-сан — исследователь."},{"jp":"大学[だいがく]","t":"n","ru":"университет","ex":"わたしは さくら{大学[だいがく]}の 学生[がくせい]です。","exru":"Я студент университета Сакура."},{"jp":"病院[びょういん]","t":"n","ru":"больница","ex":"ワンさんは こうべ{病院[びょういん]}の 医者[いしゃ]です。","exru":"Ван-сан — врач больницы Кобе."},{"jp":"だれ","t":"q","ru":"кто","ex":"あの人[ひと]は {だれ}ですか。","exru":"Кто тот человек?"},{"jp":"どなた","t":"q","ru":"кто (вежливо)","ex":"失礼[しつれい]ですが、{どなた}ですか。","exru":"Простите, а вы кто?"},{"jp":"～歳[さい]","t":"suf","ru":"… лет (возраст)","ex":"わたしは 二十八[にじゅうはっ]{歳[さい]}です。","exru":"Мне 28 лет."},{"jp":"何歳[なんさい]","t":"q","ru":"сколько лет","ex":"テレーザちゃんは {何歳[なんさい]}ですか。","exru":"Сколько лет Терезе?"},{"jp":"はい","t":"other","ru":"да","ex":"{はい}、学生[がくせい]です。","exru":"Да, я студент."},{"jp":"いいえ","t":"other","ru":"нет","ex":"{いいえ}、医者[いしゃ]じゃ ありません。","exru":"Нет, я не врач."}],"phrases":[{"jp":"初[はじ]めまして。","ru":"Здравствуйте! (при первой встрече)","reg":"n","note":"Говорят в самом начале знакомства."},{"jp":"どうぞ よろしく お願[ねが]いします。","ru":"Прошу любить и жаловать; рад знакомству","reg":"f","note":"Конец самопредставления. С другом хватит «よろしく»."},{"jp":"よろしく。","ru":"Рад знакомству (коротко)","reg":"c"},{"jp":"～から 来[き]ました。","ru":"Я приехал(а) из …","reg":"n","note":"ロシアから 来ました — я из России."},{"jp":"失礼[しつれい]ですが、お名前[なまえ]は？","ru":"Простите, как вас зовут?","reg":"f"},{"jp":"こちらは ～さんです。","ru":"Это … (представляю человека)","reg":"f"}]},{"mnn":2,"topic":"Вещи: это и то","words":[{"jp":"これ","t":"pron","ru":"это (рядом со мной)","ex":"{これ}は 辞書[じしょ]です。","exru":"Это словарь."},{"jp":"それ","t":"pron","ru":"это, то (рядом с тобой)","ex":"{それ}は わたしの 傘[かさ]です。","exru":"Это мой зонт."},{"jp":"あれ","t":"pron","ru":"вон то (далеко от обоих)","ex":"{あれ}は だれの 車[くるま]ですか。","exru":"Чья вон та машина?"},{"jp":"この～","t":"pron","ru":"этот … (рядом со мной)","ex":"{この} 本[ほん]は わたしのです。","exru":"Эта книга — моя.","note":"この/その/あの всегда стоят перед существительным."},{"jp":"本[ほん]","t":"n","ru":"книга","ex":"これは 日本語[にほんご]の {本[ほん]}です。","exru":"Это книга на японском."},{"jp":"辞書[じしょ]","t":"n","ru":"словарь","ex":"それは 英語[えいご]の {辞書[じしょ]}ですか。","exru":"Это английский словарь?"},{"jp":"雑誌[ざっし]","t":"n","ru":"журнал","ex":"これは 車[くるま]の {雑誌[ざっし]}です。","exru":"Это журнал об автомобилях."},{"jp":"新聞[しんぶん]","t":"n","ru":"газета","ex":"あれは 英語[えいご]の {新聞[しんぶん]}です。","exru":"Вон то — газета на английском."},{"jp":"ノート","t":"n","ru":"тетрадь","ex":"この {ノート}は だれのですか。","exru":"Чья это тетрадь?"},{"jp":"鉛筆[えんぴつ]","t":"n","ru":"карандаш","ex":"それは {鉛筆[えんぴつ]}ですか、ボールペンですか。","exru":"Это карандаш или ручка?"},{"jp":"傘[かさ]","t":"n","ru":"зонт","ex":"この {傘[かさ]}は わたしのじゃ ありません。","exru":"Этот зонт не мой."},{"jp":"かばん","t":"n","ru":"сумка, портфель","ex":"あれは 先生[せんせい]の {かばん}です。","exru":"Вон та сумка — учителя."},{"jp":"時計[とけい]","t":"n","ru":"часы","ex":"これは スイスの {時計[とけい]}です。","exru":"Это швейцарские часы."},{"jp":"車[くるま]","t":"n","ru":"машина, автомобиль","ex":"あれは 日本[にほん]の {車[くるま]}です。","exru":"Вон то — японская машина."},{"jp":"机[つくえ]","t":"n","ru":"стол (письменный)","ex":"これは わたしの {机[つくえ]}です。","exru":"Это мой стол."},{"jp":"いす","t":"n","ru":"стул","ex":"その {いす}は だれのですか。","exru":"Чей это стул?"},{"jp":"名刺[めいし]","t":"n","ru":"визитная карточка","ex":"これは わたしの {名刺[めいし]}です。どうぞ。","exru":"Это моя визитка. Пожалуйста."},{"jp":"お土産[みやげ]","t":"n","ru":"сувенир, гостинец","ex":"これは ロシアの {お土産[みやげ]}です。","exru":"Это сувенир из России."},{"jp":"日本語[にほんご]","t":"n","ru":"японский язык","ex":"これは {日本語[にほんご]}の 辞書[じしょ]です。","exru":"Это японский словарь."},{"jp":"英語[えいご]","t":"n","ru":"английский язык","ex":"それは {英語[えいご]}の 雑誌[ざっし]ですか。","exru":"Это журнал на английском?"},{"jp":"何[なん]","t":"q","ru":"что","ex":"これは {何[なん]}ですか。","exru":"Что это?","note":"Перед です читается なん, перед を — なに."},{"jp":"そう","t":"adv","ru":"так","ex":"はい、{そう}です。","exru":"Да, так и есть."},{"jp":"違[ちが]います","t":"expr","ru":"нет, не так; неверно","ex":"いいえ、{違[ちが]います}。","exru":"Нет, это не так."}],"phrases":[{"jp":"あのう…","ru":"Э-э… (мягко привлечь внимание)","reg":"n"},{"jp":"どうぞ。","ru":"Пожалуйста (возьмите / проходите)","reg":"n"},{"jp":"どうも ありがとう ございます。","ru":"Большое спасибо","reg":"f"},{"jp":"ありがとう。","ru":"Спасибо","reg":"c"},{"jp":"そうですか。","ru":"Вот как. Понятно.","reg":"n"},{"jp":"これから お世話[せわ]に なります。","ru":"Заранее спасибо за вашу помощь (новым соседям/коллегам)","reg":"f"},{"jp":"こちらこそ よろしく。","ru":"И мне приятно, взаимно","reg":"n"}]},{"mnn":3,"topic":"Места: где это?","words":[{"jp":"ここ","t":"pron","ru":"здесь, это место","ex":"{ここ}は 食堂[しょくどう]です。","exru":"Здесь столовая."},{"jp":"そこ","t":"pron","ru":"там (рядом с тобой)","ex":"{そこ}は 受付[うけつけ]です。","exru":"Там ресепшн."},{"jp":"あそこ","t":"pron","ru":"вон там","ex":"トイレは {あそこ}です。","exru":"Туалет вон там."},{"jp":"どこ","t":"q","ru":"где","ex":"エレベーターは {どこ}ですか。","exru":"Где лифт?"},{"jp":"こちら","t":"pron","ru":"здесь, сюда (вежливо)","ex":"{こちら}は 事務所[じむしょ]です。","exru":"Здесь офис."},{"jp":"どちら","t":"q","ru":"где, куда, какой (вежливо)","ex":"会社[かいしゃ]は {どちら}ですか。","exru":"Какая у вас компания?"},{"jp":"教室[きょうしつ]","t":"n","ru":"класс, аудитория","ex":"{教室[きょうしつ]}は 三階[さんがい]です。","exru":"Аудитория на третьем этаже."},{"jp":"食堂[しょくどう]","t":"n","ru":"столовая","ex":"{食堂[しょくどう]}は どこですか。","exru":"Где столовая?"},{"jp":"事務所[じむしょ]","t":"n","ru":"офис","ex":"{事務所[じむしょ]}は 二階[にかい]です。","exru":"Офис на втором этаже."},{"jp":"受付[うけつけ]","t":"n","ru":"ресепшн, приёмная","ex":"{受付[うけつけ]}は あそこです。","exru":"Ресепшн вон там."},{"jp":"部屋[へや]","t":"n","ru":"комната","ex":"ミラーさんの {部屋[へや]}は 二階[にかい]です。","exru":"Комната Миллера на втором этаже."},{"jp":"トイレ","t":"n","ru":"туалет","ex":"すみません、{トイレ}は どこですか。","exru":"Извините, где туалет?"},{"jp":"お手洗[てあら]い","t":"n","ru":"туалет (вежливо)","ex":"{お手洗[てあら]い}は どちらですか。","exru":"Где здесь туалет?"},{"jp":"階段[かいだん]","t":"n","ru":"лестница","ex":"{階段[かいだん]}は そこです。","exru":"Лестница там."},{"jp":"エレベーター","t":"n","ru":"лифт","ex":"{エレベーター}は あそこです。","exru":"Лифт вон там."},{"jp":"国[くに]","t":"n","ru":"страна","ex":"お{国[くに]}は どちらですか。","exru":"Из какой вы страны?"},{"jp":"会社[かいしゃ]","t":"n","ru":"компания, фирма","ex":"{会社[かいしゃ]}は 東京[とうきょう]です。","exru":"Компания в Токио."},{"jp":"うち","t":"n","ru":"дом, мой дом","ex":"{うち}は どこですか。","exru":"Где твой дом?"},{"jp":"電話[でんわ]","t":"n","ru":"телефон","ex":"{電話[でんわ]}は どこですか。","exru":"Где телефон?"},{"jp":"靴[くつ]","t":"n","ru":"обувь","ex":"この {靴[くつ]}は いくらですか。","exru":"Сколько стоит эта обувь?"},{"jp":"売[う]り場[ば]","t":"n","ru":"отдел (в магазине)","ex":"靴[くつ]{売[う]り場[ば]}は 地下[ちか]です。","exru":"Обувной отдел в подвальном этаже."},{"jp":"地下[ちか]","t":"n","ru":"подземный (цокольный) этаж","ex":"ワイン売[う]り場[ば]は {地下[ちか]}です。","exru":"Винный отдел в цокольном этаже."},{"jp":"～階[かい]","t":"suf","ru":"…-й этаж","ex":"食堂[しょくどう]は 五[ご]{階[かい]}です。","exru":"Столовая на пятом этаже.","note":"一階 いっかい, 三階 さんがい, 何階 なんがい — чтение меняется."},{"jp":"いくら","t":"q","ru":"сколько стоит","ex":"この 時計[とけい]は {いくら}ですか。","exru":"Сколько стоят эти часы?"},{"jp":"～円[えん]","t":"suf","ru":"… иен","ex":"三千[さんぜん]{円[えん]}です。","exru":"Три тысячи иен."}],"phrases":[{"jp":"すみません。","ru":"Извините (привлечь внимание, извиниться)","reg":"n"},{"jp":"どうも。","ru":"Спасибо (коротко)","reg":"c"},{"jp":"いらっしゃいませ。","ru":"Добро пожаловать! (говорит продавец)","reg":"f","note":"Отвечать на это не нужно."},{"jp":"～を 見[み]せて ください。","ru":"Покажите, пожалуйста, …","reg":"f"},{"jp":"じゃ、～を ください。","ru":"Тогда дайте мне …","reg":"n"}]},{"mnn":4,"topic":"Время и распорядок дня","words":[{"jp":"起[お]きます","d":"起[お]きる","t":"v2","ru":"вставать, просыпаться","ex":"毎朝[まいあさ] 六時[ろくじ]に {起[お]きます}。","exru":"Каждое утро встаю в шесть.","note":"Перед ます звук «и», но это II группа — запомни."},{"jp":"寝[ね]ます","d":"寝[ね]る","t":"v2","ru":"ложиться спать","ex":"毎晩[まいばん] 十一時[じゅういちじ]に {寝[ね]ます}。","exru":"Каждый вечер ложусь в одиннадцать."},{"jp":"働[はたら]きます","d":"働[はたら]く","t":"v1","ru":"работать","ex":"九時[くじ]から 五時[ごじ]まで {働[はたら]きます}。","exru":"Работаю с девяти до пяти."},{"jp":"休[やす]みます","d":"休[やす]む","t":"v1","ru":"отдыхать; брать выходной","ex":"明日[あした] {休[やす]みます}。","exru":"Завтра возьму выходной."},{"jp":"勉強[べんきょう]します","d":"勉強[べんきょう]する","t":"v3","ru":"учиться, заниматься","ex":"毎晩[まいばん] 日本語[にほんご]を {勉強[べんきょう]します}。","exru":"Каждый вечер занимаюсь японским."},{"jp":"終[お]わります","d":"終[お]わる","t":"v1","ru":"заканчиваться","ex":"仕事[しごと]は 五時[ごじ]に {終[お]わります}。","exru":"Работа заканчивается в пять."},{"jp":"今[いま]","t":"n","ru":"сейчас","ex":"ニューヨークは {今[いま]} 午前[ごぜん] 四時[よじ]です。","exru":"В Нью-Йорке сейчас четыре утра."},{"jp":"～時[じ]","t":"suf","ru":"… часов","ex":"今[いま] {四時[よじ]}です。","exru":"Сейчас четыре часа.","note":"4 часа — よじ, 7 — しちじ, 9 — くじ."},{"jp":"～分[ふん]","t":"suf","ru":"… минут","ex":"七時[しちじ]{十分[じゅっぷん]}です。","exru":"Семь часов десять минут.","note":"Бывает ふん или ぷん: 一分 いっぷん, 五分 ごふん, 十分 じゅっぷん."},{"jp":"半[はん]","t":"n","ru":"половина (…с половиной)","ex":"九時[くじ]{半[はん]}です。","exru":"Половина десятого."},{"jp":"何時[なんじ]","t":"q","ru":"который час, во сколько","ex":"今[いま] {何時[なんじ]}ですか。","exru":"Который сейчас час?"},{"jp":"午前[ごぜん]","t":"n","ru":"до полудня, утра","ex":"銀行[ぎんこう]は {午前[ごぜん]} 九時[くじ]からです。","exru":"Банк работает с девяти утра."},{"jp":"午後[ごご]","t":"n","ru":"после полудня, дня/вечера","ex":"図書館[としょかん]は {午後[ごご]} 八時[はちじ]までです。","exru":"Библиотека работает до восьми вечера."},{"jp":"朝[あさ]","t":"n","ru":"утро","ex":"明日[あした]の {朝[あさ]} 勉強[べんきょう]します。","exru":"Позанимаюсь завтра утром."},{"jp":"晩[ばん]","t":"n","ru":"вечер","ex":"昨日[きのう]の {晩[ばん]} 勉強[べんきょう]しました。","exru":"Вчера вечером я занимался."},{"jp":"昨日[きのう]","t":"n","ru":"вчера","ex":"{昨日[きのう]} 働[はたら]きました。","exru":"Вчера я работал."},{"jp":"今日[きょう]","t":"n","ru":"сегодня","ex":"{今日[きょう]}は 休[やす]みです。","exru":"Сегодня выходной."},{"jp":"明日[あした]","t":"n","ru":"завтра","ex":"{明日[あした]} 働[はたら]きますか。","exru":"Завтра работаешь?"},{"jp":"毎朝[まいあさ]","t":"n","ru":"каждое утро","ex":"{毎朝[まいあさ]} 何時[なんじ]に 起[お]きますか。","exru":"Во сколько встаёшь каждое утро?"},{"jp":"毎晩[まいばん]","t":"n","ru":"каждый вечер","ex":"{毎晩[まいばん]} 勉強[べんきょう]します。","exru":"Занимаюсь каждый вечер."},{"jp":"休[やす]み","t":"n","ru":"выходной, перерыв, каникулы","ex":"郵便局[ゆうびんきょく]の {休[やす]み}は 日曜日[にちようび]です。","exru":"Почта не работает по воскресеньям."},{"jp":"日曜日[にちようび]","t":"n","ru":"воскресенье","ex":"{日曜日[にちようび]}は 休[やす]みです。","exru":"В воскресенье выходной."},{"jp":"何曜日[なんようび]","t":"q","ru":"какой день недели","ex":"今日[きょう]は {何曜日[なんようび]}ですか。","exru":"Какой сегодня день недели?"},{"jp":"銀行[ぎんこう]","t":"n","ru":"банк","ex":"{銀行[ぎんこう]}は 九時[くじ]から 三時[さんじ]までです。","exru":"Банк работает с девяти до трёх."},{"jp":"郵便局[ゆうびんきょく]","t":"n","ru":"почта","ex":"{郵便局[ゆうびんきょく]}は 何時[なんじ]までですか。","exru":"До скольки работает почта?"},{"jp":"図書館[としょかん]","t":"n","ru":"библиотека","ex":"{図書館[としょかん]}は 午後[ごご] 八時[はちじ]までです。","exru":"Библиотека до восьми вечера."}],"phrases":[{"jp":"大変[たいへん]ですね。","ru":"Тяжело вам, нелегко (сочувствие)","reg":"n"},{"jp":"何時[なんじ]から 何時[なんじ]までですか。","ru":"С какого по какое время?","reg":"f"},{"jp":"お疲[つか]れさまでした。","ru":"Спасибо за работу! (после рабочего дня)","reg":"f","note":"Коллеге-другу: «お疲れ！»."},{"jp":"お疲[つか]れ！","ru":"Спасибо за работу! (коротко)","reg":"c"},{"jp":"おやすみなさい。","ru":"Спокойной ночи","reg":"f"},{"jp":"おやすみ。","ru":"Спокойной ночи","reg":"c"}]},{"mnn":5,"topic":"Поездки: куда и на чём","words":[{"jp":"行[い]きます","d":"行[い]く","t":"v1","ru":"идти, ехать (туда)","ex":"明日[あした] 京都[きょうと]へ {行[い]きます}。","exru":"Завтра поеду в Киото.","note":"Исключение в て-форме: 行って (не 行いて)."},{"jp":"来[き]ます","d":"来[く]る","t":"v3","ru":"приходить, приезжать (сюда)","ex":"来月[らいげつ] 友達[ともだち]が 日本[にほん]へ {来[き]ます}。","exru":"В следующем месяце в Японию приедет друг.","note":"Кандзи читается по-разному: 来[く]る, 来[き]ます, 来[こ]ない."},{"jp":"帰[かえ]ります","d":"帰[かえ]る","t":"v1","ru":"возвращаться (домой, в свою страну)","ex":"毎晩[まいばん] 七時[しちじ]に うちへ {帰[かえ]ります}。","exru":"Каждый вечер возвращаюсь домой в семь.","note":"Оканчивается на える, но это I группа — ловушка!"},{"jp":"学校[がっこう]","t":"n","ru":"школа","ex":"バスで {学校[がっこう]}へ 行[い]きます。","exru":"Еду в школу на автобусе."},{"jp":"スーパー","t":"n","ru":"супермаркет","ex":"昨日[きのう] {スーパー}へ 行[い]きました。","exru":"Вчера ходил в супермаркет."},{"jp":"駅[えき]","t":"n","ru":"станция, вокзал","ex":"{駅[えき]}は どこですか。","exru":"Где станция?"},{"jp":"電車[でんしゃ]","t":"n","ru":"электричка, поезд","ex":"{電車[でんしゃ]}で 会社[かいしゃ]へ 行[い]きます。","exru":"Езжу в компанию на электричке."},{"jp":"地下鉄[ちかてつ]","t":"n","ru":"метро","ex":"{地下鉄[ちかてつ]}で 大学[だいがく]へ 来[き]ました。","exru":"Приехал в университет на метро."},{"jp":"新幹線[しんかんせん]","t":"n","ru":"синкансэн (скоростной поезд)","ex":"{新幹線[しんかんせん]}で 大阪[おおさか]へ 行[い]きます。","exru":"Поеду в Осаку на синкансэне."},{"jp":"バス","t":"n","ru":"автобус","ex":"{バス}で 帰[かえ]ります。","exru":"Вернусь на автобусе."},{"jp":"飛行機[ひこうき]","t":"n","ru":"самолёт","ex":"{飛行機[ひこうき]}で ロシアへ 帰[かえ]ります。","exru":"Полечу в Россию на самолёте."},{"jp":"自転車[じてんしゃ]","t":"n","ru":"велосипед","ex":"{自転車[じてんしゃ]}で スーパーへ 行[い]きます。","exru":"Еду в супермаркет на велосипеде."},{"jp":"歩[ある]いて","t":"expr","ru":"пешком","ex":"駅[えき]から {歩[ある]いて} 帰[かえ]りました。","exru":"Вернулся от станции пешком.","note":"Без で: 歩いて 行きます."},{"jp":"友達[ともだち]","t":"n","ru":"друг, подруга","ex":"{友達[ともだち]}と 京都[きょうと]へ 行[い]きます。","exru":"Поеду в Киото с другом."},{"jp":"家族[かぞく]","t":"n","ru":"семья","ex":"{家族[かぞく]}と 日本[にほん]へ 来[き]ました。","exru":"Приехал в Японию с семьёй."},{"jp":"一人[ひとり]で","t":"expr","ru":"одному, в одиночку","ex":"{一人[ひとり]で} 東京[とうきょう]へ 来[き]ました。","exru":"Приехал в Токио один."},{"jp":"先週[せんしゅう]","t":"n","ru":"на прошлой неделе","ex":"{先週[せんしゅう]} 大阪[おおさか]へ 行[い]きました。","exru":"На прошлой неделе ездил в Осаку."},{"jp":"来週[らいしゅう]","t":"n","ru":"на следующей неделе","ex":"{来週[らいしゅう]} 国[くに]へ 帰[かえ]ります。","exru":"На следующей неделе вернусь на родину."},{"jp":"来月[らいげつ]","t":"n","ru":"в следующем месяце","ex":"{来月[らいげつ]} 北海道[ほっかいどう]へ 行[い]きます。","exru":"В следующем месяце поеду на Хоккайдо."},{"jp":"去年[きょねん]","t":"n","ru":"в прошлом году","ex":"{去年[きょねん]} 日本[にほん]へ 来[き]ました。","exru":"Приехал в Японию в прошлом году."},{"jp":"誕生日[たんじょうび]","t":"n","ru":"день рождения","ex":"{誕生日[たんじょうび]}は いつですか。","exru":"Когда у тебя день рождения?"},{"jp":"いつ","t":"q","ru":"когда","ex":"{いつ} 日本[にほん]へ 来[き]ましたか。","exru":"Когда вы приехали в Японию?"}],"phrases":[{"jp":"どういたしまして。","ru":"Не за что","reg":"n"},{"jp":"行[い]って きます。","ru":"Я пошёл (и вернусь) — выходя из дома","reg":"n"},{"jp":"行[い]って らっしゃい。","ru":"Счастливо! Возвращайся — провожая","reg":"n"},{"jp":"ただいま。","ru":"Я дома! — вернувшись","reg":"n"},{"jp":"お帰[かえ]りなさい。","ru":"С возвращением! — встречая","reg":"n","note":"Среди своих часто «おかえり»."},{"jp":"この 電車[でんしゃ]は ～へ 行[い]きますか。","ru":"Этот поезд идёт до …?","reg":"f"}]},{"mnn":6,"topic":"Еда и занятия: что делаешь?","words":[{"jp":"食[た]べます","d":"食[た]べる","t":"v2","ru":"есть, кушать","ex":"毎朝[まいあさ] パンを {食[た]べます}。","exru":"Каждое утро ем хлеб."},{"jp":"飲[の]みます","d":"飲[の]む","t":"v1","ru":"пить","ex":"毎晩[まいばん] お茶[ちゃ]を {飲[の]みます}。","exru":"Каждый вечер пью чай."},{"jp":"見[み]ます","d":"見[み]る","t":"v2","ru":"смотреть, видеть","ex":"日曜日[にちようび] 映画[えいが]を {見[み]ます}。","exru":"В воскресенье смотрю фильм.","note":"Перед ます звук «и», но это II группа."},{"jp":"聞[き]きます","d":"聞[き]く","t":"v1","ru":"слушать; спрашивать","ex":"毎朝[まいあさ] 音楽[おんがく]を {聞[き]きます}。","exru":"Каждое утро слушаю музыку."},{"jp":"読[よ]みます","d":"読[よ]む","t":"v1","ru":"читать","ex":"電車[でんしゃ]で 新聞[しんぶん]を {読[よ]みます}。","exru":"Читаю газету в электричке."},{"jp":"書[か]きます","d":"書[か]く","t":"v1","ru":"писать","ex":"家族[かぞく]に 手紙[てがみ]を {書[か]きます}。","exru":"Пишу письмо семье."},{"jp":"買[か]います","d":"買[か]う","t":"v1","ru":"покупать","ex":"スーパーで 野菜[やさい]を {買[か]います}。","exru":"Покупаю овощи в супермаркете."},{"jp":"撮[と]ります","d":"撮[と]る","t":"v1","ru":"фотографировать (写真を)","ex":"京都[きょうと]で 写真[しゃしん]を {撮[と]ります}。","exru":"Фотографирую в Киото."},{"jp":"します","d":"する","t":"v3","ru":"делать; играть (в спорт)","ex":"図書館[としょかん]で 宿題[しゅくだい]を {します}。","exru":"Делаю домашнее задание в библиотеке."},{"jp":"会[あ]います","d":"会[あ]う","t":"v1","ru":"встречаться (с кем-то)","ex":"駅[えき]で 友達[ともだち]に {会[あ]います}。","exru":"Встречаюсь с другом на станции.","note":"С кем — частица に, а не を."},{"jp":"ご飯[はん]","t":"n","ru":"еда; варёный рис","ex":"一緒[いっしょ]に {ご飯[はん]}を 食[た]べましょう。","exru":"Давай поедим вместе."},{"jp":"朝[あさ]ご飯[はん]","t":"n","ru":"завтрак","ex":"毎朝[まいあさ] {朝[あさ]ご飯[はん]}を 食[た]べます。","exru":"Каждое утро завтракаю."},{"jp":"パン","t":"n","ru":"хлеб","ex":"{パン}と 卵[たまご]を 食[た]べます。","exru":"Ем хлеб и яйца."},{"jp":"卵[たまご]","t":"n","ru":"яйцо","ex":"スーパーで {卵[たまご]}を 買[か]いました。","exru":"Купил яйца в супермаркете."},{"jp":"肉[にく]","t":"n","ru":"мясо","ex":"わたしは {肉[にく]}を 食[た]べません。","exru":"Я не ем мясо."},{"jp":"魚[さかな]","t":"n","ru":"рыба","ex":"{魚[さかな]}を 食[た]べますか。","exru":"Ты ешь рыбу?"},{"jp":"野菜[やさい]","t":"n","ru":"овощи","ex":"毎日[まいにち] {野菜[やさい]}を 食[た]べます。","exru":"Каждый день ем овощи."},{"jp":"水[みず]","t":"n","ru":"вода","ex":"{水[みず]}を 飲[の]みます。","exru":"Пью воду."},{"jp":"お茶[ちゃ]","t":"n","ru":"чай (зелёный)","ex":"{お茶[ちゃ]}を 飲[の]みませんか。","exru":"Не выпьете чаю?"},{"jp":"写真[しゃしん]","t":"n","ru":"фотография","ex":"ここで {写真[しゃしん]}を 撮[と]りましょう。","exru":"Давай сфотографируемся здесь."},{"jp":"映画[えいが]","t":"n","ru":"фильм, кино","ex":"一緒[いっしょ]に {映画[えいが]}を 見[み]ませんか。","exru":"Не хочешь посмотреть фильм вместе?"},{"jp":"手紙[てがみ]","t":"n","ru":"письмо","ex":"母[はは]に {手紙[てがみ]}を 書[か]きました。","exru":"Написал письмо маме."},{"jp":"宿題[しゅくだい]","t":"n","ru":"домашнее задание","ex":"昨日[きのう] {宿題[しゅくだい]}を しました。","exru":"Вчера сделал домашку."},{"jp":"一緒[いっしょ]に","t":"adv","ru":"вместе","ex":"{一緒[いっしょ]に} 京都[きょうと]へ 行[い]きませんか。","exru":"Не поедем вместе в Киото?"},{"jp":"時々[ときどき]","t":"adv","ru":"иногда","ex":"{時々[ときどき]} 映画[えいが]を 見[み]ます。","exru":"Иногда смотрю фильмы."},{"jp":"いつも","t":"adv","ru":"всегда, обычно","ex":"{いつも} 駅[えき]で 新聞[しんぶん]を 買[か]います。","exru":"Всегда покупаю газету на станции."},{"jp":"それから","t":"conj","ru":"потом, затем","ex":"宿題[しゅくだい]を します。{それから} 寝[ね]ます。","exru":"Сделаю домашку. Потом лягу спать."}],"phrases":[{"jp":"いただきます。","ru":"Приятного аппетита (говорят перед едой)","reg":"n"},{"jp":"ごちそうさまでした。","ru":"Спасибо, было вкусно (после еды)","reg":"f","note":"Среди друзей — «ごちそうさま»."},{"jp":"いいですね。","ru":"Отлично, давайте!","reg":"f"},{"jp":"いいね。","ru":"Классно, давай!","reg":"c"},{"jp":"ええ、いいですよ。","ru":"Да, конечно (согласие)","reg":"n"},{"jp":"ちょっと…","ru":"Ну, это немного… (мягкий отказ)","reg":"n","note":"Японцы редко говорят прямое «нет»."},{"jp":"分[わ]かりました。","ru":"Понятно; хорошо, договорились","reg":"f"}]},{"mnn":7,"topic":"Предметы и подарки","words":[{"jp":"切[き]ります","d":"切[き]る","t":"v1","ru":"резать","ex":"ナイフで パンを {切[き]ります}。","exru":"Режу хлеб ножом.","note":"Оканчивается на いる, но это I группа — ловушка!"},{"jp":"送[おく]ります","d":"送[おく]る","t":"v1","ru":"отправлять","ex":"国[くに]の 家族[かぞく]に 荷物[にもつ]を {送[おく]ります}。","exru":"Отправляю посылку семье на родину."},{"jp":"あげます","d":"あげる","t":"v2","ru":"дарить, давать (кому-то)","ex":"木村[きむら]さんに 花[はな]を {あげます}。","exru":"Дарю цветы Кимуре-сан."},{"jp":"もらいます","d":"もらう","t":"v1","ru":"получать (от кого-то)","ex":"父[ちち]に お金[かね]を {もらいます}。","exru":"Получаю деньги от отца."},{"jp":"貸[か]します","d":"貸[か]す","t":"v1","ru":"давать взаймы, одалживать","ex":"友達[ともだち]に お金[かね]を {貸[か]します}。","exru":"Одалживаю другу деньги."},{"jp":"借[か]ります","d":"借[か]りる","t":"v2","ru":"брать взаймы","ex":"図書館[としょかん]で 本[ほん]を {借[か]ります}。","exru":"Беру книгу в библиотеке.","note":"貸す — даю я, 借りる — беру я. Не перепутай!"},{"jp":"教[おし]えます","d":"教[おし]える","t":"v2","ru":"учить (кого-то), сообщать","ex":"わたしは ロシア語[ご]を {教[おし]えます}。","exru":"Я преподаю русский."},{"jp":"習[なら]います","d":"習[なら]う","t":"v1","ru":"учиться (у кого-то)","ex":"先生[せんせい]に 日本語[にほんご]を {習[なら]います}。","exru":"Учу японский у преподавателя."},{"jp":"かけます","d":"かける","t":"v2","ru":"звонить (電話を)","ex":"家族[かぞく]に 電話[でんわ]を {かけます}。","exru":"Звоню семье."},{"jp":"手[て]","t":"n","ru":"рука","ex":"{手[て]}で パンを 食[た]べます。","exru":"Ем хлеб руками."},{"jp":"はし","t":"n","ru":"палочки для еды","ex":"{はし}で ご飯[はん]を 食[た]べます。","exru":"Ем рис палочками."},{"jp":"スプーン","t":"n","ru":"ложка","ex":"{スプーン}で カレーを 食[た]べます。","exru":"Ем карри ложкой."},{"jp":"はさみ","t":"n","ru":"ножницы","ex":"{はさみ}で 紙[かみ]を 切[き]ります。","exru":"Режу бумагу ножницами."},{"jp":"パソコン","t":"n","ru":"компьютер","ex":"{パソコン}で 映画[えいが]を 見[み]ます。","exru":"Смотрю фильм на компьютере."},{"jp":"携帯[けいたい]","t":"n","ru":"мобильный телефон","ex":"{携帯[けいたい]}で 写真[しゃしん]を 撮[と]ります。","exru":"Фотографирую на телефон."},{"jp":"メール","t":"n","ru":"e-mail, сообщение","ex":"友達[ともだち]に {メール}を 送[おく]ります。","exru":"Отправляю другу сообщение."},{"jp":"切符[きっぷ]","t":"n","ru":"билет","ex":"駅[えき]で {切符[きっぷ]}を 買[か]います。","exru":"Покупаю билет на станции."},{"jp":"プレゼント","t":"n","ru":"подарок","ex":"誕生日[たんじょうび]に {プレゼント}を あげます。","exru":"Дарю подарок на день рождения."},{"jp":"荷物[にもつ]","t":"n","ru":"багаж, вещи, посылка","ex":"{荷物[にもつ]}は どこですか。","exru":"Где багаж?"},{"jp":"お金[かね]","t":"n","ru":"деньги","ex":"銀行[ぎんこう]で {お金[かね]}を 借[か]ります。","exru":"Беру деньги в долг в банке."},{"jp":"花[はな]","t":"n","ru":"цветок, цветы","ex":"母[はは]に {花[はな]}を もらいました。","exru":"Получил цветы от мамы."},{"jp":"父[ちち]","t":"n","ru":"(мой) отец","ex":"{父[ちち]}に 電話[でんわ]を かけます。","exru":"Звоню отцу.","note":"О чужом отце — お父[とう]さん."},{"jp":"母[はは]","t":"n","ru":"(моя) мать","ex":"{母[はは]}は 医者[いしゃ]です。","exru":"Моя мама — врач.","note":"О чужой маме — お母[かあ]さん."},{"jp":"もう","t":"adv","ru":"уже","ex":"{もう} 昼[ひる]ご飯[はん]を 食[た]べましたか。","exru":"Ты уже пообедал?"},{"jp":"まだ","t":"adv","ru":"ещё (не)","ex":"いいえ、{まだ}です。","exru":"Нет, ещё нет."},{"jp":"これから","t":"adv","ru":"сейчас (собираюсь), с этого момента","ex":"{これから} 食[た]べます。","exru":"Сейчас буду есть."}],"phrases":[{"jp":"ごめんください。","ru":"Есть кто-нибудь? Можно войти? (у двери)","reg":"f"},{"jp":"いらっしゃい。","ru":"Проходи, добро пожаловать (хозяин гостю)","reg":"n"},{"jp":"どうぞ お上[あ]がり ください。","ru":"Проходите, пожалуйста (в дом)","reg":"f"},{"jp":"失礼[しつれい]します。","ru":"Извините за беспокойство (входя или уходя)","reg":"f"},{"jp":"～は いかがですか。","ru":"Не хотите ли …?","reg":"f"},{"jp":"～は 日本語[にほんご]で 何[なん]ですか。","ru":"Как … по-японски?","reg":"f","note":"Главная фраза ученика!"}]},{"mnn":8,"topic":"Прилагательные: какой?","words":[{"jp":"大[おお]きい","t":"i","ru":"большой","ex":"東京[とうきょう]は {大[おお]きい} 町[まち]です。","exru":"Токио — большой город."},{"jp":"小[ちい]さい","t":"i","ru":"маленький","ex":"これは {小[ちい]さい} かばんです。","exru":"Это маленькая сумка."},{"jp":"新[あたら]しい","t":"i","ru":"новый","ex":"{新[あたら]しい} 車[くるま]ですね。","exru":"Новая машина, да?"},{"jp":"古[ふる]い","t":"i","ru":"старый (о вещах)","ex":"この 辞書[じしょ]は {古[ふる]い}です。","exru":"Этот словарь старый."},{"jp":"いい","t":"i","ru":"хороший","ex":"{いい} 天気[てんき]ですね。","exru":"Хорошая погода, правда?","note":"Формы строятся от よい: よくない, よかった."},{"jp":"暑[あつ]い","t":"i","ru":"жаркий (о погоде)","ex":"日本[にほん]の 夏[なつ]は {暑[あつ]い}です。","exru":"Лето в Японии жаркое."},{"jp":"寒[さむ]い","t":"i","ru":"холодный (о погоде)","ex":"ロシアの 冬[ふゆ]は とても {寒[さむ]い}です。","exru":"Зима в России очень холодная."},{"jp":"難[むずか]しい","t":"i","ru":"трудный","ex":"日本語[にほんご]は {難[むずか]しい}ですか。","exru":"Японский трудный?"},{"jp":"易[やさ]しい","t":"i","ru":"лёгкий, простой","ex":"この 本[ほん]は {易[やさ]しい}です。","exru":"Эта книга простая."},{"jp":"高[たか]い","t":"i","ru":"дорогой; высокий","ex":"この 時計[とけい]は {高[たか]い}です。","exru":"Эти часы дорогие."},{"jp":"安[やす]い","t":"i","ru":"дешёвый","ex":"スーパーの 野菜[やさい]は {安[やす]い}です。","exru":"Овощи в супермаркете дешёвые."},{"jp":"おいしい","t":"i","ru":"вкусный","ex":"この 魚[さかな]は {おいしい}です。","exru":"Эта рыба вкусная."},{"jp":"忙[いそが]しい","t":"i","ru":"занятой","ex":"今日[きょう]は {忙[いそが]しい}です。","exru":"Сегодня я занят."},{"jp":"楽[たの]しい","t":"i","ru":"весёлый, радостный, приятный","ex":"日本[にほん]の 生活[せいかつ]は {楽[たの]しい}です。","exru":"Жизнь в Японии приятная."},{"jp":"面白[おもしろ]い","t":"i","ru":"интересный, забавный","ex":"この 映画[えいが]は {面白[おもしろ]い}です。","exru":"Этот фильм интересный."},{"jp":"きれい","t":"na","ru":"красивый; чистый","ex":"富士山[ふじさん]は {きれい}な 山[やま]です。","exru":"Фудзи — красивая гора.","note":"Оканчивается на い, но это な-прилагательное — ловушка!"},{"jp":"静[しず]か","t":"na","ru":"тихий","ex":"図書館[としょかん]は {静[しず]か}です。","exru":"В библиотеке тихо."},{"jp":"にぎやか","t":"na","ru":"оживлённый, шумный","ex":"大阪[おおさか]は {にぎやか}な 町[まち]です。","exru":"Осака — оживлённый город."},{"jp":"有名[ゆうめい]","t":"na","ru":"знаменитый","ex":"京都[きょうと]は {有名[ゆうめい]}な 町[まち]です。","exru":"Киото — знаменитый город."},{"jp":"親切[しんせつ]","t":"na","ru":"добрый, отзывчивый","ex":"先生[せんせい]は とても {親切[しんせつ]}です。","exru":"Учитель очень добрый."},{"jp":"元気[げんき]","t":"na","ru":"здоровый, бодрый","ex":"お{元気[げんき]}ですか。","exru":"Как поживаете?"},{"jp":"暇[ひま]","t":"na","ru":"свободный (о времени)","ex":"明日[あした]は {暇[ひま]}です。","exru":"Завтра я свободен."},{"jp":"便利[べんり]","t":"na","ru":"удобный","ex":"地下鉄[ちかてつ]は {便利[べんり]}です。","exru":"Метро удобное."},{"jp":"町[まち]","t":"n","ru":"город, район","ex":"わたしの {町[まち]}は 静[しず]かです。","exru":"Мой город тихий."},{"jp":"山[やま]","t":"n","ru":"гора","ex":"富士山[ふじさん]は 高[たか]い {山[やま]}です。","exru":"Фудзи — высокая гора."},{"jp":"食[た]べ物[もの]","t":"n","ru":"еда, продукты","ex":"日本[にほん]の {食[た]べ物[もの]}は おいしいです。","exru":"Японская еда вкусная."},{"jp":"仕事[しごと]","t":"n","ru":"работа","ex":"{仕事[しごと]}は どうですか。","exru":"Как работа?"},{"jp":"どう","t":"q","ru":"как","ex":"日本[にほん]の 生活[せいかつ]は {どう}ですか。","exru":"Как жизнь в Японии?"},{"jp":"どんな","t":"q","ru":"какой","ex":"奈良[なら]は {どんな} 町[まち]ですか。","exru":"Какой город Нара?"},{"jp":"とても","t":"adv","ru":"очень","ex":"{とても} おいしいです。","exru":"Очень вкусно."},{"jp":"あまり","t":"adv","ru":"не очень (с отрицанием)","ex":"この 本[ほん]は {あまり} 面白[おもしろ]くないです。","exru":"Эта книга не очень интересная."}],"phrases":[{"jp":"お元気[げんき]ですか。","ru":"Как поживаете?","reg":"f"},{"jp":"元気[げんき]？","ru":"Как ты? Всё хорошо?","reg":"c"},{"jp":"いい 天気[てんき]ですね。","ru":"Хорошая погода, правда?","reg":"f"},{"jp":"もう 一杯[いっぱい] いかがですか。","ru":"Не хотите ещё чашечку?","reg":"f"},{"jp":"そろそろ 失礼[しつれい]します。","ru":"Мне уже пора (уходя из гостей)","reg":"f"},{"jp":"また いらっしゃって ください。","ru":"Приходите ещё","reg":"f"}]},{"mnn":9,"topic":"Нравится, умею, понимаю","words":[{"jp":"好[す]き","t":"na","ru":"любимый, нравится","ex":"わたしは 日本[にほん]の 料理[りょうり]が {好[す]き}です。","exru":"Мне нравится японская кухня.","note":"Что нравится — частица が."},{"jp":"嫌[きら]い","t":"na","ru":"нелюбимый, не нравится","ex":"魚[さかな]が {嫌[きら]い}です。","exru":"Не люблю рыбу.","note":"Оканчивается на い, но это な-прилагательное!"},{"jp":"上手[じょうず]","t":"na","ru":"умелый, хорошо умеет","ex":"ミラーさんは 料理[りょうり]が {上手[じょうず]}です。","exru":"Миллер-сан хорошо готовит.","note":"О себе не говорят — это похвала другим."},{"jp":"下手[へた]","t":"na","ru":"неумелый, плохо умеет","ex":"わたしは 歌[うた]が {下手[へた]}です。","exru":"Я плохо пою."},{"jp":"分[わ]かります","d":"分[わ]かる","t":"v1","ru":"понимать","ex":"漢字[かんじ]が {分[わ]かります}か。","exru":"Ты понимаешь кандзи?","note":"Что понятно — が, а не を."},{"jp":"あります","d":"ある","t":"v1","ru":"иметь; есть, находиться (о вещах)","ex":"車[くるま]が {あります}。","exru":"У меня есть машина.","note":"ない-форма — исключение: ない (не «あらない»)."},{"jp":"料理[りょうり]","t":"n","ru":"блюдо, кухня; готовка","ex":"母[はは]の {料理[りょうり]}は おいしいです。","exru":"Мамина еда вкусная."},{"jp":"飲[の]み物[もの]","t":"n","ru":"напиток","ex":"どんな {飲[の]み物[もの]}が 好[す]きですか。","exru":"Какие напитки ты любишь?"},{"jp":"スポーツ","t":"n","ru":"спорт","ex":"{スポーツ}は あまり 好[す]きじゃ ありません。","exru":"Спорт не очень люблю."},{"jp":"音楽[おんがく]","t":"n","ru":"музыка","ex":"{音楽[おんがく]}が 好[す]きです。","exru":"Люблю музыку."},{"jp":"歌[うた]","t":"n","ru":"песня","ex":"日本[にほん]の {歌[うた]}が 分[わ]かりますか。","exru":"Понимаешь японские песни?"},{"jp":"ひらがな","t":"n","ru":"хирагана","ex":"{ひらがな}が 分[わ]かります。","exru":"Я знаю хирагану."},{"jp":"カタカナ","t":"n","ru":"катакана","ex":"{カタカナ}は まだ 分[わ]かりません。","exru":"Катакану ещё не знаю."},{"jp":"漢字[かんじ]","t":"n","ru":"кандзи, иероглифы","ex":"{漢字[かんじ]}は 難[むずか]しいです。","exru":"Кандзи трудные."},{"jp":"時間[じかん]","t":"n","ru":"время","ex":"{時間[じかん]}が ありません。","exru":"Нет времени."},{"jp":"用事[ようじ]","t":"n","ru":"дело, дела","ex":"明日[あした] {用事[ようじ]}が あります。","exru":"Завтра у меня дела."},{"jp":"約束[やくそく]","t":"n","ru":"договорённость, встреча, обещание","ex":"今晩[こんばん] 友達[ともだち]と {約束[やくそく]}が あります。","exru":"Сегодня вечером у меня встреча с другом."},{"jp":"子[こ]ども","t":"n","ru":"ребёнок, дети","ex":"{子[こ]ども}は 音楽[おんがく]が 好[す]きです。","exru":"Дети любят музыку."},{"jp":"旅行[りょこう]","t":"n","ru":"путешествие","ex":"{旅行[りょこう]}が 好[す]きです。","exru":"Люблю путешествовать."},{"jp":"よく","t":"adv","ru":"хорошо; часто","ex":"英語[えいご]が {よく} 分[わ]かります。","exru":"Хорошо понимаю английский."},{"jp":"少[すこ]し","t":"adv","ru":"немного","ex":"日本語[にほんご]が {少[すこ]し} 分[わ]かります。","exru":"Немного понимаю по-японски."},{"jp":"全然[ぜんぜん]","t":"adv","ru":"совсем не (с отрицанием)","ex":"韓国語[かんこくご]が {全然[ぜんぜん]} 分[わ]かりません。","exru":"Совсем не понимаю корейский."},{"jp":"たくさん","t":"adv","ru":"много","ex":"お金[かね]が {たくさん} あります。","exru":"Денег много."},{"jp":"どうして","t":"q","ru":"почему","ex":"{どうして} 早[はや]く 帰[かえ]りますか。","exru":"Почему уходишь рано?"},{"jp":"～から","t":"conj","ru":"потому что, так как","ex":"用事[ようじ]が あります{から}、帰[かえ]ります。","exru":"У меня дела, поэтому я пойду.","note":"Ставится после причины."}],"phrases":[{"jp":"残念[ざんねん]ですね。","ru":"Жаль","reg":"f"},{"jp":"残念[ざんねん]。","ru":"Жаль!","reg":"c"},{"jp":"すみません、ちょっと…","ru":"Простите, (сегодня) не получится… — вежливый отказ","reg":"f"},{"jp":"また 今度[こんど] お願[ねが]いします。","ru":"Давайте в другой раз","reg":"f"},{"jp":"だめですか。","ru":"Не получится?","reg":"n"}]},{"mnn":10,"topic":"Что где находится","words":[{"jp":"います","d":"いる","t":"v2","ru":"быть, находиться (о живых)","ex":"公園[こうえん]に 子[こ]どもが {います}。","exru":"В парке есть дети.","note":"います — для людей и животных, あります — для вещей."},{"jp":"男[おとこ]の人[ひと]","t":"n","ru":"мужчина","ex":"あそこに {男[おとこ]の人[ひと]}が います。","exru":"Вон там мужчина."},{"jp":"女[おんな]の人[ひと]","t":"n","ru":"женщина","ex":"受付[うけつけ]に {女[おんな]の人[ひと]}が います。","exru":"На ресепшне женщина."},{"jp":"男[おとこ]の子[こ]","t":"n","ru":"мальчик","ex":"{男[おとこ]の子[こ]}は 公園[こうえん]に います。","exru":"Мальчик в парке."},{"jp":"女[おんな]の子[こ]","t":"n","ru":"девочка","ex":"あの {女[おんな]の子[こ]}は だれですか。","exru":"Кто та девочка?"},{"jp":"犬[いぬ]","t":"n","ru":"собака","ex":"庭[にわ]に {犬[いぬ]}が います。","exru":"Во дворе собака."},{"jp":"猫[ねこ]","t":"n","ru":"кошка","ex":"いすの 下[した]に {猫[ねこ]}が います。","exru":"Под стулом кошка."},{"jp":"木[き]","t":"n","ru":"дерево","ex":"公園[こうえん]に 大[おお]きい {木[き]}が あります。","exru":"В парке большое дерево."},{"jp":"箱[はこ]","t":"n","ru":"коробка","ex":"{箱[はこ]}の 中[なか]に 何[なに]が ありますか。","exru":"Что в коробке?"},{"jp":"冷蔵庫[れいぞうこ]","t":"n","ru":"холодильник","ex":"{冷蔵庫[れいぞうこ]}に 卵[たまご]が あります。","exru":"В холодильнике есть яйца."},{"jp":"テーブル","t":"n","ru":"стол (обеденный)","ex":"{テーブル}の 上[うえ]に 花[はな]が あります。","exru":"На столе цветы."},{"jp":"ベッド","t":"n","ru":"кровать","ex":"猫[ねこ]は {ベッド}の 上[うえ]に います。","exru":"Кошка на кровати."},{"jp":"窓[まど]","t":"n","ru":"окно","ex":"{窓[まど]}の 近[ちか]くに 机[つくえ]が あります。","exru":"Около окна стоит стол."},{"jp":"公園[こうえん]","t":"n","ru":"парк","ex":"{公園[こうえん]}は 駅[えき]の 前[まえ]に あります。","exru":"Парк перед станцией."},{"jp":"本屋[ほんや]","t":"n","ru":"книжный магазин","ex":"{本屋[ほんや]}は どこに ありますか。","exru":"Где книжный магазин?"},{"jp":"上[うえ]","t":"n","ru":"верх; на, над","ex":"机[つくえ]の {上[うえ]}に 辞書[じしょ]が あります。","exru":"На столе словарь."},{"jp":"下[した]","t":"n","ru":"низ; под","ex":"テーブルの {下[した]}に かばんが あります。","exru":"Под столом сумка."},{"jp":"前[まえ]","t":"n","ru":"перед, впереди","ex":"駅[えき]の {前[まえ]}に 銀行[ぎんこう]が あります。","exru":"Перед станцией банк."},{"jp":"後[うし]ろ","t":"n","ru":"сзади, за","ex":"ドアの {後[うし]ろ}に 傘[かさ]が あります。","exru":"За дверью зонт."},{"jp":"右[みぎ]","t":"n","ru":"право, справа","ex":"郵便局[ゆうびんきょく]は 銀行[ぎんこう]の {右[みぎ]}です。","exru":"Почта справа от банка."},{"jp":"左[ひだり]","t":"n","ru":"лево, слева","ex":"スーパーの {左[ひだり]}に 本屋[ほんや]が あります。","exru":"Слева от супермаркета книжный."},{"jp":"中[なか]","t":"n","ru":"внутри, в","ex":"かばんの {中[なか]}に 財布[さいふ]が あります。","exru":"В сумке кошелёк."},{"jp":"隣[となり]","t":"n","ru":"рядом, по соседству","ex":"病院[びょういん]の {隣[となり]}に 公園[こうえん]が あります。","exru":"Рядом с больницей парк."},{"jp":"近[ちか]く","t":"n","ru":"поблизости, около","ex":"この {近[ちか]く}に コンビニが ありますか。","exru":"Здесь поблизости есть круглосуточный магазин?"},{"jp":"間[あいだ]","t":"n","ru":"между","ex":"銀行[ぎんこう]と 本屋[ほんや]の {間[あいだ]}に 花屋[はなや]が あります。","exru":"Между банком и книжным — цветочный."}],"phrases":[{"jp":"すみません、～は どこに ありますか。","ru":"Извините, где находится …?","reg":"f"},{"jp":"～は ありますか。","ru":"У вас есть …? (в магазине)","reg":"f"},{"jp":"ちょっと 待[ま]って ください。","ru":"Подождите немного","reg":"f"},{"jp":"ちょっと 待[ま]って。","ru":"Погоди","reg":"c"},{"jp":"ありがとう ございました。","ru":"Спасибо (за то, что уже сделали)","reg":"f"}]}],"grammar":{"1":[{"title":"N1 は N2 です","body":"Основа основ: «N1 — это N2». <b>は<\/b> отмечает тему — то, о чём говорим. Как частица она читается <b>«ва»<\/b>, хотя пишется знаком は. <b>です<\/b> — вежливая связка «есть, является»; в русском её не переводят.","ex":[["わたしは マイク・ミラーです。","Я — Майк Миллер."],["ワンさんは 医者[いしゃ]です。","Ван-сан — врач."]]},{"title":"N1 は N2 じゃ ありません","body":"Отрицание: «N1 — не N2». <b>じゃ ありません<\/b> — в разговоре, <b>では ありません<\/b> — в письменной и официальной речи. Смысл одинаковый.","ex":[["サントスさんは 学生[がくせい]じゃ ありません。","Сантос-сан не студент."]]},{"title":"Вопрос с か","body":"Чтобы получить вопрос, добавь <b>か<\/b> в конец — порядок слов не меняется. Отвечают <b>はい<\/b> (да) или <b>いいえ<\/b> (нет). Вопросительное слово (だれ, 何) ставится там, где был бы ответ.","ex":[["ミラーさんは アメリカ人[じん]ですか。","Миллер-сан американец?"],["あの人[ひと]は だれですか。","Кто тот человек?"]]},{"title":"N も","body":"<b>も<\/b> — «тоже, также». Ставится <b>вместо<\/b> は, а не рядом с ним.","ex":[["ミラーさんは 会社員[かいしゃいん]です。グプタさんも 会社員[かいしゃいん]です。","Миллер-сан — служащий. Гупта-сан тоже служащий."]]},{"title":"N1 の N2","body":"<b>の<\/b> соединяет два существительных: N1 уточняет N2 — принадлежность, место работы, учёбы. Порядок обратный русскому: «IMC の 社員» = «сотрудник IMC».","ex":[["わたしは さくら大学[だいがく]の 学生[がくせい]です。","Я студент университета Сакура."]]},{"title":"～さん и возраст ～歳","body":"<b>さん<\/b> добавляют к имени или фамилии собеседника и других людей, но <b>никогда к своему<\/b>. Детям — <b>ちゃん<\/b>. Возраст: число + <b>歳[さい]<\/b>; спросить — <b>何歳[なんさい]<\/b> или вежливо <b>おいくつ<\/b>.","ex":[["テレーザちゃんは 九歳[きゅうさい]です。","Терезе девять лет."]]}],"2":[{"title":"これ・それ・あれ","body":"Система «ко-со-а»: <b>これ<\/b> — рядом со мной, <b>それ<\/b> — рядом с собеседником, <b>あれ<\/b> — далеко от обоих. Эти слова заменяют существительное и стоят сами по себе.","ex":[["これは 辞書[じしょ]です。","Это словарь."],["あれは 何[なん]ですか。","Что это вон там?"]]},{"title":"この・その・あの + N","body":"Если после указательного слова идёт существительное, используй <b>この/その/あの<\/b>. Нельзя сказать «これ本».","ex":[["この 本[ほん]は わたしのです。","Эта книга — моя."]]},{"title":"そうです / 違[ちが]います","body":"На вопрос-существительное можно ответить коротко: <b>はい、そうです<\/b> (да, так) или <b>いいえ、違[ちが]います<\/b> (нет, не так).","ex":[["それは テレホンカードですか。— はい、そうです。","Это телефонная карта? — Да."]]},{"title":"～か、～か (выбор)","body":"Два вопроса подряд — вопрос с выбором «… или …?». Отвечают без はい/いいえ, просто называют вариант.","ex":[["これは「9」ですか、「7」ですか。— 「9」です。","Это «9» или «7»? — «9»."]]},{"title":"N1 の N2 — «о чём» и «чей»","body":"の также значит «о чём, на каком языке»: <b>車[くるま]の 雑誌[ざっし]<\/b> — журнал об автомобилях. А если N2 понятно из контекста, его можно опустить: <b>わたしの<\/b> — «мой (предмет)».","ex":[["これは コンピューターの 本[ほん]です。","Это книга о компьютерах."],["あの 傘[かさ]は わたしのです。","Тот зонт — мой."]]}],"3":[{"title":"ここ・そこ・あそこ・どこ","body":"Та же система «ко-со-а», но для мест. Вежливые варианты: <b>こちら・そちら・あちら・どちら<\/b> — их любят в магазинах и офисах.","ex":[["ここは 食堂[しょくどう]です。","Здесь столовая."],["トイレは どこですか。","Где туалет?"]]},{"title":"N は место です","body":"Чтобы сказать, где что-то находится, достаточно です: «N — вон там».","ex":[["電話[でんわ]は 二階[にかい]です。","Телефон на втором этаже."]]},{"title":"どちら — страна, компания, школа","body":"О стране, компании или школе собеседника вежливо спрашивают <b>どちら<\/b>, а не 何.","ex":[["お国[くに]は どちらですか。— ロシアです。","Из какой вы страны? — Из России."]]},{"title":"いくらですか","body":"<b>いくら<\/b> — «сколько стоит». Цена — число + <b>円[えん]<\/b>.","ex":[["この 靴[くつ]は いくらですか。— 三千[さんぜん]円[えん]です。","Сколько стоит эта обувь? — 3000 иен."]]},{"title":"Вежливая приставка お","body":"<b>お<\/b> делает слово вежливее, когда речь о собеседнике: <b>お国[くに]<\/b> — ваша страна, <b>お名前[なまえ]<\/b> — ваше имя. О себе お не добавляют.","ex":[["お名前[なまえ]は？","Как вас зовут?"]]}],"4":[{"title":"Время: ～時[じ]～分[ふん]です","body":"Часы — <b>時[じ]<\/b>, минуты — <b>分[ふん/ぷん]<\/b>. Запомни чтения: 4時 <b>よじ<\/b>, 7時 <b>しちじ<\/b>, 9時 <b>くじ<\/b>. Половина — <b>半[はん]<\/b>.","ex":[["今[いま] 四時[よじ]半[はん]です。","Сейчас половина пятого."]]},{"title":"V ます / ません / ました / ませんでした","body":"Первые глаголы! В учебнике они даны в <b>ます-форме<\/b> — вежливой. Четыре формы:<br><b>ます<\/b> — сейчас/буду, <b>ません<\/b> — не делаю/не буду, <b>ました<\/b> — делал, <b>ませんでした<\/b> — не делал. Будущего времени отдельно нет.","ex":[["毎朝[まいあさ] 六時[ろくじ]に 起[お]きます。","Каждое утро встаю в шесть."],["昨日[きのう] 勉強[べんきょう]しませんでした。","Вчера я не занимался."]]},{"title":"Время + に","body":"Если время названо <b>числом<\/b> (6時, 日曜日) — ставим <b>に<\/b>. Со словами <b>今日[きょう]・明日[あした]・毎朝[まいあさ]・今[いま]<\/b> частица に не нужна.","ex":[["十一時[じゅういちじ]に 寝[ね]ます。","Ложусь в одиннадцать."],["明日[あした] 働[はたら]きます。","Завтра работаю (без に)."]]},{"title":"～から ～まで","body":"<b>から<\/b> — «с, от», <b>まで<\/b> — «до, по». Работает и со временем, и с местами. Можно сразу добавить です.","ex":[["銀行[ぎんこう]は 九時[くじ]から 三時[さんじ]までです。","Банк работает с девяти до трёх."]]},{"title":"N1 と N2 — «и»","body":"<b>と<\/b> между существительными значит «и». Между глаголами или предложениями と так не используется.","ex":[["銀行[ぎんこう]の 休[やす]みは 土曜日[どようび]と 日曜日[にちようび]です。","Банк не работает в субботу и воскресенье."]]},{"title":"～ね","body":"<b>ね<\/b> в конце — «правда же?», когда ждёшь согласия или сочувствуешь.","ex":[["毎晩[まいばん] 十時[じゅうじ]まで 働[はたら]きます。— 大変[たいへん]ですね。","Каждый вечер работаю до десяти. — Нелегко вам."]]}],"5":[{"title":"Место へ 行[い]きます・来[き]ます・帰[かえ]ります","body":"Направление движения — <b>へ<\/b> (читается <b>«э»<\/b>). Можно заменить на に. <b>行く<\/b> — туда, <b>来る<\/b> — сюда (к говорящему), <b>帰る<\/b> — домой, к себе.","ex":[["京都[きょうと]へ 行[い]きます。","Поеду в Киото."],["日本[にほん]へ 来[き]ました。","Приехал в Японию."]]},{"title":"どこ[へ]も / 何[なに]も + отрицание","body":"<b>どこ(へ)も 行[い]きません<\/b> — «никуда не иду», <b>何[なに]も 食[た]べません<\/b> — «ничего не ем». Вопросительное слово + も + отрицательный глагол = «никто/ничего/никуда».","ex":[["日曜日[にちようび] どこ[へ]も 行[い]きませんでした。","В воскресенье никуда не ходил."]]},{"title":"Транспорт で","body":"На чём едем — <b>で<\/b>: 電車で, バスで. Но «пешком» — <b>歩[ある]いて<\/b>, без で.","ex":[["電車[でんしゃ]で 行[い]きます。","Поеду на электричке."],["駅[えき]から 歩[ある]いて 帰[かえ]りました。","Шёл от станции пешком."]]},{"title":"Человек と","body":"С кем — <b>と<\/b>. Если один — <b>一人[ひとり]で<\/b> (без と).","ex":[["家族[かぞく]と 日本[にほん]へ 来[き]ました。","Приехал в Японию с семьёй."]]},{"title":"いつ","body":"<b>いつ<\/b> — «когда». После いつ частица に не ставится.","ex":[["いつ 日本[にほん]へ 来[き]ましたか。","Когда вы приехали в Японию?"]]},{"title":"～よ","body":"<b>よ<\/b> — сообщаю то, чего собеседник не знает, с лёгким нажимом: «между прочим».","ex":[["この 電車[でんしゃ]は 甲子園[こうしえん]へ 行[い]きませんよ。","Этот поезд, кстати, не идёт до Косиэна."]]}],"6":[{"title":"N を V","body":"Прямой объект действия — <b>を<\/b> (читается <b>«о»<\/b>). Что едим, пьём, читаем, смотрим.","ex":[["ジュースを 飲[の]みます。","Пью сок."],["手紙[てがみ]を 書[か]きます。","Пишу письмо."]]},{"title":"N を します","body":"<b>します<\/b> с разными существительными: <b>サッカーを します<\/b> — играю в футбол, <b>宿題[しゅくだい]を します<\/b> — делаю домашку.","ex":[["友達[ともだち]と テニスを します。","Играю в теннис с другом."]]},{"title":"何[なに]を しますか","body":"«Что делаешь?» — <b>何[なに]を しますか<\/b>. Перед を слово 何 читается <b>なに<\/b>, перед です — <b>なん<\/b>.","ex":[["日曜日[にちようび] 何[なに]を しますか。","Что будешь делать в воскресенье?"]]},{"title":"Место で V","body":"Где <b>происходит действие<\/b> — <b>で<\/b>. Не путай с へ (куда идём) и с に в уроке 10 (где находится).","ex":[["駅[えき]で 新聞[しんぶん]を 買[か]います。","Покупаю газету на станции."]]},{"title":"V ませんか — приглашение","body":"<b>～ませんか<\/b> — «не хотите ли …?». Мягкое, вежливое приглашение.","ex":[["一緒[いっしょ]に 京都[きょうと]へ 行[い]きませんか。","Не поедем вместе в Киото?"]]},{"title":"V ましょう — «давайте»","body":"<b>～ましょう<\/b> — «давайте …». Часто так соглашаются на приглашение: ええ、行[い]きましょう。","ex":[["ちょっと 休[やす]みましょう。","Давайте немного отдохнём."]]}],"7":[{"title":"Инструмент で","body":"Чем, с помощью чего — <b>で<\/b>: палочками, ножом, на компьютере, на каком языке.","ex":[["はしで 食[た]べます。","Ем палочками."],["日本語[にほんご]で レポートを 書[か]きます。","Пишу доклад на японском."]]},{"title":"「слово」は ～語[ご]で 何[なん]ですか","body":"Как спросить перевод: <b>«Thank you»は 日本語[にほんご]で 何[なん]ですか<\/b> — «Как Thank you по-японски?»","ex":[["「ありがとう」は ロシア語[ご]で 何[なん]ですか。— 「спасибо」です。","Как «аригато» по-русски? — «спасибо»."]]},{"title":"Человек に あげます・貸[か]します・教[おし]えます","body":"Кому даю, одалживаю, кого учу — <b>に<\/b>.","ex":[["木村[きむら]さんに 花[はな]を あげました。","Подарил Кимуре-сан цветы."]]},{"title":"Человек に もらいます・借[か]ります・習[なら]います","body":"От кого получаю, у кого беру, у кого учусь — тоже <b>に<\/b> (можно и <b>から<\/b>). Направление понятно из глагола.","ex":[["カリナさんに CDを 借[か]りました。","Взял у Карины диск."]]},{"title":"もう V ました / まだです","body":"<b>もう<\/b> — «уже». На вопрос «уже сделал?» отвечают <b>はい、もう ～ました<\/b> или <b>いいえ、まだです<\/b> — «ещё нет».","ex":[["もう 荷物[にもつ]を 送[おく]りましたか。— いいえ、まだです。","Уже отправил посылку? — Нет, ещё нет."]]}],"8":[{"title":"Два типа прилагательных","body":"В японском прилагательные делятся на <b>い-прилагательные<\/b> (大きい, 高い) и <b>な-прилагательные<\/b> (静か, 有名). Отличаются тем, как изменяются. Ловушки: <b>きれい, 嫌[きら]い, 有名[ゆうめい]<\/b> — это な, хотя きれい и 嫌い оканчиваются на い.","ex":[["富士山[ふじさん]は 高[たか]いです。","Фудзи высокая (い)."],["奈良[なら]は 静[しず]かです。","Нара тихий (な)."]]},{"title":"Отрицание: くないです / じゃ ありません","body":"<b>い-прил.<\/b>: い → <b>くないです<\/b>: 高い → 高くないです.<br><b>な-прил.<\/b>: + <b>じゃ ありません<\/b>: 静か → 静かじゃ ありません.<br>Исключение: <b>いい → よくないです<\/b>.","ex":[["この 本[ほん]は 面白[おもしろ]くないです。","Эта книга неинтересная."],["この 町[まち]は にぎやかじゃ ありません。","Этот город не оживлённый."]]},{"title":"Прилагательное + N","body":"<b>い-прил.<\/b> ставим прямо перед существительным: 高い 山. <b>な-прил.<\/b> — через <b>な<\/b>: 静かな 町. Отсюда и название группы.","ex":[["大[おお]きい 町[まち]","большой город"],["きれいな 花[はな]","красивые цветы"]]},{"title":"とても / あまり","body":"<b>とても<\/b> — «очень», с утверждением. <b>あまり<\/b> — «не очень», только с отрицанием.","ex":[["とても 寒[さむ]いです。","Очень холодно."],["あまり 寒[さむ]くないです。","Не очень холодно."]]},{"title":"どうですか / どんな N","body":"<b>N は どうですか<\/b> — «как тебе N?», просят впечатление. <b>どんな N<\/b> — «какой N?», просят описание.","ex":[["日本[にほん]の 生活[せいかつ]は どうですか。— 楽[たの]しいです。","Как жизнь в Японии? — Весело."]]},{"title":"～が — «но»","body":"<b>が<\/b> между двумя предложениями — «но».","ex":[["日本[にほん]の 食[た]べ物[もの]は おいしいですが、高[たか]いです。","Японская еда вкусная, но дорогая."]]}],"9":[{"title":"N が 好[す]き / 嫌[きら]い / 上手[じょうず] / 下手[へた]","body":"С этими словами объект отмечается <b>が<\/b>, а не を. Все четыре — な-прилагательные.","ex":[["わたしは イタリア料理[りょうり]が 好[す]きです。","Люблю итальянскую кухню."]]},{"title":"N が 分[わ]かります / あります","body":"<b>分かる<\/b> — «понятно»: что понятно — <b>が<\/b>. <b>ある<\/b> — «есть, имеется»: 時間が あります, 用事が あります.","ex":[["漢字[かんじ]が 分[わ]かります。","Понимаю кандзи."],["お金[かね]が ありません。","Нет денег."]]},{"title":"Насколько: よく・だいたい・少[すこ]し・全然[ぜんぜん]","body":"<b>よく<\/b> — хорошо, <b>だいたい<\/b> — в основном, <b>少し<\/b> — немного (с утверждением). <b>あまり<\/b> — не очень, <b>全然<\/b> — совсем не (только с отрицанием). <b>たくさん<\/b> — много.","ex":[["英語[えいご]が よく 分[わ]かります。","Хорошо понимаю английский."],["韓国語[かんこくご]が 全然[ぜんぜん] 分[わ]かりません。","Совсем не понимаю корейский."]]},{"title":"～から — «потому что»","body":"Причина + <b>から<\/b>, затем результат. В ответе на どうして предложение с から ставят в конце.","ex":[["時間[じかん]が ありませんから、新聞[しんぶん]を 読[よ]みません。","Нет времени, поэтому не читаю газет."],["どうして 早[はや]く 帰[かえ]りますか。— 用事[ようじ]が ありますから。","Почему уходишь рано? — Потому что дела."]]}],"10":[{"title":"あります и います","body":"Оба значат «есть, находится». <b>あります<\/b> — для неживого (вещи, растения), <b>います<\/b> — для живого (люди, животные). Кто или что — <b>が<\/b>.","ex":[["コンピューターが あります。","Есть компьютер."],["男[おとこ]の人[ひと]が います。","Есть мужчина."]]},{"title":"Место に N が あります / います","body":"«В таком-то месте есть N». Место существования — <b>に<\/b> (не で: で — для действий).","ex":[["わたしの 部屋[へや]に 机[つくえ]が あります。","В моей комнате есть стол."]]},{"title":"N は место に あります / います","body":"«N находится в таком-то месте». Когда N уже известен и спрашиваем, <b>где<\/b> он, — <b>は<\/b>.","ex":[["東京[とうきょう]ディズニーランドは 千葉県[ちばけん]に あります。","Токийский Диснейленд находится в префектуре Тиба."]]},{"title":"N1 の 上[うえ]・下[した]・中[なか]・前[まえ]…","body":"Положение: <b>N1 の + слово места<\/b>. 机の 上 — на столе, 駅の 前 — перед станцией, 銀行と 本屋の 間 — между банком и книжным.","ex":[["箱[はこ]の 中[なか]に 何[なに]が ありますか。","Что в коробке?"]]},{"title":"N1 や N2 [など]","body":"<b>や<\/b> — «… и … (и другое)», перечисляем часть. <b>と<\/b> — полный список. <b>など<\/b> в конце — «и так далее».","ex":[["箱[はこ]の 中[なか]に 手紙[てがみ]や 写真[しゃしん][など]が あります。","В коробке письма, фотографии и прочее."]]}]},"particles":[{"p":"は","mnn":"1","title":"は — тема","body":"Отмечает тему: «что касается …». Читается <b>«ва»<\/b>. Часто стоит в начале предложения.","ex":[["わたしは 学生[がくせい]です。","Я студент."]]},{"p":"が","mnn":"9, 10","title":"が — субъект и объект чувств","body":"1) С <b>好き, 嫌い, 上手, 分かる, ある<\/b> — что нравится/понятно/есть. 2) С <b>あります/います<\/b> — кто или что появляется в поле зрения. 3) Между предложениями — «но».","ex":[["猫[ねこ]が 好[す]きです。","Люблю кошек."],["あそこに 犬[いぬ]が います。","Вон там собака."]]},{"p":"を","mnn":"6","title":"を — прямой объект","body":"Над чем совершается действие: 食べる, 飲む, 読む, 見る, 買う. Читается <b>«о»<\/b>.","ex":[["映画[えいが]を 見[み]ます。","Смотрю фильм."]]},{"p":"に","mnn":"4, 7, 10","title":"に — точка: время, адресат, место","body":"1) Точное время: <b>六時に<\/b>. 2) Кому / от кого: <b>友達に あげます<\/b>. 3) Где находится (с ある/いる): <b>部屋に います<\/b>. 4) С кем встречаемся: <b>友達に 会います<\/b>.","ex":[["七時[しちじ]に 起[お]きます。","Встаю в семь."],["公園[こうえん]に 子[こ]どもが います。","В парке дети."]]},{"p":"で","mnn":"5, 6, 7","title":"で — где действие, чем, на чём","body":"1) Место действия: <b>図書館で 勉強します<\/b>. 2) Транспорт: <b>バスで<\/b>. 3) Инструмент, язык: <b>はしで, 日本語で<\/b>.","ex":[["食堂[しょくどう]で 昼[ひる]ご飯[はん]を 食[た]べます。","Обедаю в столовой."]]},{"p":"へ","mnn":"5","title":"へ — направление","body":"Куда движемся: <b>行く, 来る, 帰る<\/b>. Читается <b>«э»<\/b>. Можно заменить на に.","ex":[["国[くに]へ 帰[かえ]ります。","Возвращаюсь на родину."]]},{"p":"と","mnn":"4, 5","title":"と — «и», «вместе с»","body":"1) Между существительными — «и» (полный список). 2) С кем делаем что-то вместе: <b>友達と<\/b>.","ex":[["パンと 卵[たまご]を 食[た]べます。","Ем хлеб и яйца."],["家族[かぞく]と 行[い]きます。","Иду с семьёй."]]},{"p":"も","mnn":"1, 5","title":"も — «тоже»; «ни-»","body":"1) «Тоже» — вместо は/が/を. 2) Вопр. слово + も + отрицание: <b>何も<\/b> — ничего, <b>どこも<\/b> — никуда, <b>だれも<\/b> — никто.","ex":[["わたしも 学生[がくせい]です。","Я тоже студент."],["何[なに]も 食[た]べません。","Ничего не ем."]]},{"p":"の","mnn":"1, 2","title":"の — связь двух существительных","body":"«N1 の N2»: чей, откуда, о чём. <b>わたしの 本<\/b> — моя книга, <b>車の 雑誌<\/b> — журнал об автомобилях.","ex":[["これは 先生[せんせい]の かばんです。","Это сумка учителя."]]},{"p":"から・まで","mnn":"4","title":"から・まで — «с … до …»","body":"<b>から<\/b> — начальная точка (время, место), <b>まで<\/b> — конечная. После предложения から значит «потому что» (урок 9).","ex":[["九時[くじ]から 五時[ごじ]まで 働[はたら]きます。","Работаю с девяти до пяти."]]},{"p":"や","mnn":"10","title":"や — «… и … (среди прочего)»","body":"Перечисляем часть, не всё. と — полный список.","ex":[["机[つくえ]の 上[うえ]に 本[ほん]や ペンが あります。","На столе книги, ручки и прочее."]]},{"p":"か・ね・よ","mnn":"1, 4, 5","title":"か・ね・よ — в конце предложения","body":"<b>か<\/b> — вопрос. <b>ね<\/b> — «правда же?», ждём согласия. <b>よ<\/b> — сообщаем новое для собеседника.","ex":[["いい 天気[てんき]ですね。","Хорошая погода, правда?"],["あの 店[みせ]は 安[やす]いですよ。","Тот магазин, кстати, дешёвый."]]}],"pdrill":[{"l":1,"s":"わたし{は} 学生[がくせい]です。","o":["は","を","に","の"],"ru":"Я студент.","why":"は отмечает тему предложения."},{"l":1,"s":"ミラーさん{も} 会社員[かいしゃいん]です。","o":["も","を","の","に"],"ru":"Миллер-сан тоже служащий.","why":"も — «тоже», ставится вместо は."},{"l":1,"s":"さくら大学[だいがく]{の} 学生[がくせい]です。","o":["の","は","に","を"],"ru":"Студент университета Сакура.","why":"の связывает два существительных: студент какого университета."},{"l":1,"s":"あの人[ひと]は だれです{か}。","o":["か","ね","よ","の"],"ru":"Кто тот человек?","why":"か в конце делает предложение вопросом."},{"l":1,"s":"ワンさん{は} 医者[いしゃ]じゃ ありません。","o":["は","を","も","に"],"ru":"Ван-сан не врач.","why":"Тема предложения — は."},{"l":2,"s":"これは わたし{の} 本[ほん]です。","o":["の","は","も","に"],"ru":"Это моя книга.","why":"わたしの — «мой»."},{"l":2,"s":"これは 車[くるま]{の} 雑誌[ざっし]です。","o":["の","を","で","に"],"ru":"Это журнал об автомобилях.","why":"の — «о чём»."},{"l":3,"s":"トイレ{は} あそこです。","o":["は","を","へ","で"],"ru":"Туалет вон там.","why":"Тема — туалет, сообщаем, где он: は."},{"l":4,"s":"六時[ろくじ]{に} 起[お]きます。","o":["に","で","を","へ"],"ru":"Встаю в шесть.","why":"Точное время — に."},{"l":4,"s":"九時[くじ]{から} 五時[ごじ]まで 働[はたら]きます。","o":["から","まで","に","で"],"ru":"Работаю с девяти до пяти.","why":"から — «с, от»."},{"l":4,"s":"月曜日[げつようび]から 金曜日[きんようび]{まで} 働[はたら]きます。","o":["まで","から","に","へ"],"ru":"Работаю с понедельника по пятницу.","why":"まで — «до, по»."},{"l":4,"s":"パン{と} 卵[たまご]を 食[た]べます。","o":["と","も","を","の"],"ru":"Ем хлеб и яйца.","why":"と между существительными — «и»."},{"l":4,"s":"いい 天気[てんき]です{ね}。","o":["ね","か","よ","を"],"ru":"Хорошая погода, правда?","why":"ね — ищем согласия собеседника."},{"l":5,"s":"京都[きょうと]{へ} 行[い]きます。","o":["へ","を","で","が"],"ru":"Еду в Киото.","why":"へ (читается «э») — направление движения."},{"l":5,"s":"電車[でんしゃ]{で} 会社[かいしゃ]へ 行[い]きます。","o":["で","に","を","と"],"ru":"Езжу в компанию на электричке.","why":"で — на чём, транспорт."},{"l":5,"s":"友達[ともだち]{と} 大阪[おおさか]へ 行[い]きました。","o":["と","で","に","を"],"ru":"Ездил в Осаку с другом.","why":"と — с кем."},{"l":5,"s":"日曜日[にちようび]は どこ{へ}も 行[い]きません。","o":["へ","を","で","に"],"ru":"В воскресенье никуда не хожу.","why":"どこ(へ)も + отрицание — «никуда»."},{"l":5,"s":"わたしは ロシア{から} 来[き]ました。","o":["から","まで","に","で"],"ru":"Я приехал из России.","why":"から — откуда."},{"l":5,"s":"この 電車[でんしゃ]は 大阪[おおさか]へ 行[い]きません{よ}。","o":["よ","ね","か","を"],"ru":"Этот поезд, кстати, не идёт в Осаку.","why":"よ — сообщаем новое для собеседника."},{"l":6,"s":"パン{を} 食[た]べます。","o":["を","が","に","で"],"ru":"Ем хлеб.","why":"を (читается «о») — прямой объект: что едим."},{"l":6,"s":"図書館[としょかん]{で} 勉強[べんきょう]します。","o":["で","に","へ","を"],"ru":"Занимаюсь в библиотеке.","why":"で — место, где происходит действие."},{"l":6,"s":"駅[えき]で 友達[ともだち]{に} 会[あ]います。","o":["に","を","で","へ"],"ru":"Встречаюсь с другом на станции.","why":"会う требует に: встретиться с кем-то."},{"l":6,"s":"何[なに]{も} 食[た]べませんでした。","o":["も","を","が","は"],"ru":"Ничего не ел.","why":"何も + отрицание — «ничего»."},{"l":7,"s":"はし{で} ご飯[はん]を 食[た]べます。","o":["で","に","を","と"],"ru":"Ем рис палочками.","why":"で — инструмент: чем."},{"l":7,"s":"木村[きむら]さん{に} 花[はな]を あげます。","o":["に","を","で","へ"],"ru":"Дарю цветы Кимуре-сан.","why":"に — кому."},{"l":7,"s":"先生[せんせい]{に} 日本語[にほんご]を 習[なら]います。","o":["に","を","で","が"],"ru":"Учу японский у преподавателя.","why":"に — у кого учусь."},{"l":7,"s":"これは 日本語[にほんご]{で} 何[なん]ですか。","o":["で","に","の","を"],"ru":"Как это по-японски?","why":"で — на каком языке."},{"l":8,"s":"日本[にほん]の 食[た]べ物[もの]は おいしいです{が}、高[たか]いです。","o":["が","から","も","ね"],"ru":"Японская еда вкусная, но дорогая.","why":"が между предложениями — «но»."},{"l":9,"s":"ミラーさんは 料理[りょうり]{が} 上手[じょうず]です。","o":["が","を","は","に"],"ru":"Миллер-сан хорошо готовит.","why":"С 上手/好き/嫌い объект отмечается が."},{"l":9,"s":"漢字[かんじ]{が} 分[わ]かります。","o":["が","を","に","で"],"ru":"Понимаю кандзи.","why":"分かる — «понятно что-то»: が, а не を."},{"l":9,"s":"わたしは 日本[にほん]の 歌[うた]{が} 好[す]きです。","o":["が","を","は","の"],"ru":"Люблю японские песни.","why":"Что нравится — が."},{"l":9,"s":"時間[じかん]が ありません{から}、タクシーで 行[い]きます。","o":["から","が","ね","まで"],"ru":"Нет времени, поэтому поеду на такси.","why":"から после предложения — «потому что»."},{"l":10,"s":"公園[こうえん]{に} 子[こ]どもが います。","o":["に","で","を","へ"],"ru":"В парке дети.","why":"С ある/いる место — に. で — только для действий."},{"l":10,"s":"公園[こうえん]に 子[こ]ども{が} います。","o":["が","を","は","と"],"ru":"В парке есть дети.","why":"Кто есть (новая информация) с いる/ある — が."},{"l":10,"s":"机[つくえ]の 上[うえ]{に} 本[ほん]が あります。","o":["に","で","を","へ"],"ru":"На столе книга.","why":"Где находится — に."},{"l":10,"s":"本屋[ほんや]{は} 駅[えき]の 前[まえ]に あります。","o":["は","を","で","へ"],"ru":"Книжный находится перед станцией.","why":"Известный предмет, сообщаем где он — は."},{"l":10,"s":"箱[はこ]の 中[なか]に 手紙[てがみ]{や} 写真[しゃしん]が あります。","o":["や","を","で","へ"],"ru":"В коробке письма, фото и прочее.","why":"や — перечисляем часть: «… и … среди прочего»."}],"polite":[{"p":"毎朝[まいあさ] コーヒーを 飲[の]みます。","c":"毎朝[まいあさ] コーヒー 飲[の]む。","w":["毎朝[まいあさ] コーヒー 飲[の]みる。","毎朝[まいあさ] コーヒー 飲[の]んだ。"],"ru":"Каждое утро пью кофе.","why":"飲みます → 飲む (словарная форма). В разговоре を часто опускают."},{"p":"昨日[きのう] 映画[えいが]を 見[み]ました。","c":"昨日[きのう] 映画[えいが] 見[み]た。","w":["昨日[きのう] 映画[えいが] 見[み]る。","昨日[きのう] 映画[えいが] 見[み]った。"],"ru":"Вчера посмотрел фильм.","why":"ました → た-форма: 見ました → 見た."},{"p":"今日[きょう]は 暇[ひま]です。","c":"今日[きょう]は 暇[ひま]だ。","w":["今日[きょう]は 暇[ひま]だった。","今日[きょう]は 暇[ひま]じゃない。"],"ru":"Сегодня я свободен.","why":"な-прил. и сущ.: です → だ (в речи часто просто «今日は暇»)."},{"p":"この 本[ほん]は 面白[おもしろ]いです。","c":"この 本[ほん]は 面白[おもしろ]い。","w":["この 本[ほん]は 面白[おもしろ]いだ。","この 本[ほん]は 面白[おもしろ]かった。"],"ru":"Эта книга интересная.","why":"い-прил.: просто убираем です. «面白いだ» — ошибка!"},{"p":"今日[きょう]は 行[い]きません。","c":"今日[きょう]は 行[い]かない。","w":["今日[きょう]は 行[い]きない。","今日[きょう]は 行[い]かなかった。"],"ru":"Сегодня не пойду.","why":"ません → ない-форма: 行く → 行かない (I гр.: -u → -a + ない)."},{"p":"昨日[きのう]は 寒[さむ]かったです。","c":"昨日[きのう]は 寒[さむ]かった。","w":["昨日[きのう]は 寒[さむ]いだった。","昨日[きのう]は 寒[さむ]くない。"],"ru":"Вчера было холодно.","why":"い-прил. в прошедшем: 寒かったです → 寒かった."},{"p":"日曜日[にちようび]は 休[やす]みでした。","c":"日曜日[にちようび]は 休[やす]みだった。","w":["日曜日[にちようび]は 休[やす]みかった。","日曜日[にちようび]は 休[やす]みだ。"],"ru":"В воскресенье был выходной.","why":"Сущ./な-прил.: でした → だった."},{"p":"肉[にく]は 食[た]べませんでした。","c":"肉[にく]は 食[た]べなかった。","w":["肉[にく]は 食[た]べないでした。","肉[にく]は 食[た]べった。"],"ru":"Мясо не ел.","why":"ませんでした → なかった: 食べない → 食べなかった."},{"p":"漢字[かんじ]が 分[わ]かりますか。","c":"漢字[かんじ]、分[わ]かる？","w":["漢字[かんじ]、分[わ]かりる？","漢字[かんじ]、分[わ]かった？"],"ru":"Понимаешь кандзи?","why":"分かります → 分かる. В простой речи か опускают, вопрос — интонацией."},{"p":"一緒[いっしょ]に 行[い]きませんか。","c":"一緒[いっしょ]に 行[い]かない？","w":["一緒[いっしょ]に 行[い]きない？","一緒[いっしょ]に 行[い]かなかった？"],"ru":"Пойдём вместе?","why":"Приглашение ～ませんか → ～ない？"},{"p":"はい、そうです。","c":"うん、そう。","w":["ううん、そう。","うん、そうだった。"],"ru":"Да, так.","why":"はい → うん, いいえ → ううん. そうです → そう."},{"p":"いいえ、学生[がくせい]じゃ ありません。","c":"ううん、学生[がくせい]じゃ ない。","w":["うん、学生[がくせい]じゃ ない。","ううん、学生[がくせい]くない。"],"ru":"Нет, я не студент.","why":"じゃ ありません → じゃ ない; いいえ → ううん."},{"p":"宿題[しゅくだい]を しました。","c":"宿題[しゅくだい] した。","w":["宿題[しゅくだい] すった。","宿題[しゅくだい] しる。"],"ru":"Сделал домашку.","why":"III группа: しました → した."},{"p":"友達[ともだち]が 来[き]ます。","c":"友達[ともだち]が 来[く]る。","w":["友達[ともだち]が 来[き]る。","友達[ともだち]が 来[こ]る。"],"ru":"Придёт друг.","why":"来ます → 来る — читается «くる»!"},{"p":"時間[じかん]が ありません。","c":"時間[じかん]が ない。","w":["時間[じかん]が あらない。","時間[じかん]が ありない。"],"ru":"Нет времени.","why":"ある → ない (исключение, не «あらない»)."},{"p":"この 部屋[へや]は 静[しず]かじゃ ありません。","c":"この 部屋[へや]は 静[しず]かじゃ ない。","w":["この 部屋[へや]は 静[しず]かくない。","この 部屋[へや]は 静[しず]かない。"],"ru":"В этой комнате не тихо.","why":"な-прил.: じゃ ありません → じゃ ない. «静かくない» — ошибка, так только у い-прил."},{"p":"いい 天気[てんき]ですね。","c":"いい 天気[てんき]だね。","w":["いい 天気[てんき]だったね。","いい 天気[てんき]かね。"],"ru":"Хорошая погода, да?","why":"Существительное + です → だ; ね остаётся."},{"p":"明日[あした]は 忙[いそが]しくないです。","c":"明日[あした]は 忙[いそが]しくない。","w":["明日[あした]は 忙[いそが]しいじゃ ない。","明日[あした]は 忙[いそが]しかった。"],"ru":"Завтра я не занят.","why":"い-прил.: 忙しくないです → 忙しくない. «忙しいじゃない» — ошибка."}],"dialog":[["明日[あした] 何[なに]を しますか。","明日[あした] 何[なに] する？","Что будешь делать завтра?"],["京都[きょうと]へ 行[い]きます。","京都[きょうと]へ 行[い]く。","Поеду в Киото."],["いいですね。一人[ひとり]で 行[い]きますか。","いいね。一人[ひとり]で 行[い]く？","Здорово. Один поедешь?"],["いいえ、友達[ともだち]と 行[い]きます。","ううん、友達[ともだち]と 行[い]く。","Нет, с другом."],["京都[きょうと]は 寒[さむ]いですか。","京都[きょうと]、寒[さむ]い？","В Киото холодно?"],["はい、ちょっと 寒[さむ]いです。でも、きれいですよ。","うん、ちょっと 寒[さむ]い。でも、きれいだよ。","Да, немного холодно. Но красиво!"]]}</script>
+<script>
+/* ================= ДАННЫЕ ================= */
+const DATA = JSON.parse(document.getElementById('data').textContent);
+const LESSONS = DATA.lessons;
+const TOTAL_WORDS = LESSONS.reduce((s,L)=>s+L.words.length,0);
+const ALL_WORDS = LESSONS.flatMap((L,li)=>L.words.map(w=>({...w, li})));
+const WORDMAP = {}; ALL_WORDS.forEach(w=>{ WORDMAP[w.jp]=w; });
+
+// Расписание: после каждых 3 уроков — день повторения.
+const SCHED = [];
+for(let i=0;i<LESSONS.length;i++){
+  SCHED.push({type:'lesson', li:i});
+  if((i+1)%3===0) SCHED.push({type:'review', from:[i-2,i-1,i]});
+}
+
+/* ================= ФУРИГАНА =================
+   В данных кандзи пишутся как 食[た]べる: чтение в квадратных скобках сразу после кандзи. */
+const KANJI = '[\\u3400-\\u9fff\\uf900-\\ufaff々〆ヶ]';
+const RUBY_RE = new RegExp('('+KANJI+'+)\\[([^\\]]+)\\]','g');
+const HAS_KANJI = new RegExp(KANJI);
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function rb(s){ return esc(s).replace(RUBY_RE,'<ruby>$1<rt>$2</rt></ruby>'); }
+function rbHTML(s){ return String(s).replace(RUBY_RE,'<ruby>$1<rt>$2</rt></ruby>'); } // для своих html-текстов
+function kana(s){ return String(s).replace(RUBY_RE,'$2').replace(/[{}]/g,''); }
+function kanjiOnly(s){ return String(s).replace(RUBY_RE,'$1').replace(/[{}]/g,''); }
+function jpSpan(s){ return '<span class="jp">'+rb(s)+'</span>'; }
+// Предложение с выделенным {словом}; blank=true — вместо слова пропуск
+function sentHTML(s, blank){
+  return String(s).split(/(\{[^}]*\})/).map(p=>{
+    if(p[0]!=='{') return rb(p);
+    return blank ? '<span class="gap">？</span>' : '<mark>'+rb(p.slice(1,-1))+'</mark>';
+  }).join('');
+}
+function gapAnswer(s){ const m = String(s).match(/\{([^}]*)\}/); return m ? m[1] : null; }
+
+/* ================= КИРИЛЛИЦА (Поливанов) ================= */
+const KANA_RU = {
+ 'きゃ':'кя','きゅ':'кю','きょ':'кё','しゃ':'ся','しゅ':'сю','しょ':'сё','ちゃ':'тя','ちゅ':'тю','ちょ':'тё',
+ 'にゃ':'ня','にゅ':'ню','にょ':'нё','ひゃ':'хя','ひゅ':'хю','ひょ':'хё','みゃ':'мя','みゅ':'мю','みょ':'мё',
+ 'りゃ':'ря','りゅ':'рю','りょ':'рё','ぎゃ':'гя','ぎゅ':'гю','ぎょ':'гё','じゃ':'дзя','じゅ':'дзю','じょ':'дзё',
+ 'びゃ':'бя','びゅ':'бю','びょ':'бё','ぴゃ':'пя','ぴゅ':'пю','ぴょ':'пё',
+ 'てぃ':'ти','でぃ':'ди','ふぁ':'фа','ふぃ':'фи','ふぇ':'фэ','ふぉ':'фо','うぃ':'уи','うぇ':'уэ','じぇ':'дзэ','しぇ':'сэ','ちぇ':'тэ',
+ 'あ':'а','い':'и','う':'у','え':'э','お':'о','か':'ка','き':'ки','く':'ку','け':'кэ','こ':'ко',
+ 'さ':'са','し':'си','す':'су','せ':'сэ','そ':'со','た':'та','ち':'ти','つ':'цу','て':'тэ','と':'то',
+ 'な':'на','に':'ни','ぬ':'ну','ね':'нэ','の':'но','は':'ха','ひ':'хи','ふ':'фу','へ':'хэ','ほ':'хо',
+ 'ま':'ма','み':'ми','む':'му','め':'мэ','も':'мо','や':'я','ゆ':'ю','よ':'ё','ら':'ра','り':'ри','る':'ру','れ':'рэ','ろ':'ро',
+ 'わ':'ва','を':'о','ん':'н','が':'га','ぎ':'ги','ぐ':'гу','げ':'гэ','ご':'го','ざ':'дза','じ':'дзи','ず':'дзу','ぜ':'дзэ','ぞ':'дзо',
+ 'だ':'да','ぢ':'дзи','づ':'дзу','で':'дэ','ど':'до','ば':'ба','び':'би','ぶ':'бу','べ':'бэ','ぼ':'бо','ぱ':'па','ぴ':'пи','ぷ':'пу','ぺ':'пэ','ぽ':'по',
+ 'ぁ':'а','ぃ':'и','ぅ':'у','ぇ':'э','ぉ':'о'
+};
+function toRu(str){
+  const h = kana(str).replace(/(こんにち|こんばん)は/g,'$1わ').replace(/[ァ-ヶ]/g, c=>String.fromCharCode(c.charCodeAt(0)-0x60)).replace(/[～、。？！・「」\s]/g,' ');
+  let out='';
+  for(let i=0;i<h.length;i++){
+    const two=h.slice(i,i+2), one=h[i];
+    if(one==='っ'){ const nx=KANA_RU[h.slice(i+1,i+3)]||KANA_RU[h[i+1]]; if(nx) out+=nx[0]; continue; }
+    if(one==='ー'){ out+=':'; continue; }
+    if(KANA_RU[two] && two.length===2){ out+=KANA_RU[two]; i++; continue; }
+    if(one==='い' && /[аэоу]$/.test(out)){ out+='й'; continue; }
+    if(one==='ん'){ const nx=KANA_RU[h[i+1]]||''; out+= /^[мбп]/.test(nx)?'м':'н'; continue; }
+    out += KANA_RU[one] || one;
+  }
+  return out.replace(/\s+/g,' ').trim();
+}
+
+/* ================= ТИПЫ СЛОВ ================= */
+const TYPES = {
+  v1:['гл. I гр.','Глагол I группы (う-глагол)'], v2:['гл. II гр.','Глагол II группы (る-глагол)'], v3:['гл. III гр.','Неправильный глагол: する, 来る'],
+  i:['い-прил.','い-прилагательное'], na:['な-прил.','な-прилагательное: перед существительным нужно な'],
+  n:['сущ.','Существительное'], pron:['мест.','Местоимение, указательное слово'], q:['вопр.','Вопросительное слово'],
+  adv:['нареч.','Наречие'], conj:['связка','Союз, связка'], suf:['суфф.','Суффикс, счётное слово'], expr:['выраж.','Выражение'], other:['слово','']
+};
+function tagHTML(t){ const T=TYPES[t]||TYPES.other; const c = ['v1','v2','v3','i','na'].includes(t)?'t-'+t:'t-other'; return '<span class="tag '+c+'" title="'+T[1]+'">'+T[0]+'</span>'; }
+function display(w){ return w.t==='na' ? w.jp+'(な)' : w.jp; }
+
+/* ================= СПРЯЖЕНИЕ ================= */
+const I_ROW={'う':'い','く':'き','ぐ':'ぎ','す':'し','つ':'ち','ぬ':'に','ぶ':'び','む':'み','る':'り'};
+const A_ROW={'う':'わ','く':'か','ぐ':'が','す':'さ','つ':'た','ぬ':'な','ぶ':'ば','む':'ま','る':'ら'};
+const TE_END={'う':'って','つ':'って','る':'って','む':'んで','ぶ':'んで','ぬ':'んで','く':'いて','ぐ':'いで','す':'して'};
+function taOf(te){ return te.replace(/て$/,'た').replace(/で$/,'だ'); }
+function gnum(w){ return w.t==='v1'?1:w.t==='v2'?2:3; }
+// Основы глагола по словарной форме d и группе g (1, 2, 3)
+function vbase(d,g){
+  if(g===3){
+    if(d.endsWith('来[く]る')){ const p=d.slice(0,-5); return {m:p+'来[き]', n:p+'来[こ]', te:p+'来[き]て'}; }
+    if(d.endsWith('する')){ const p=d.slice(0,-2); return {m:p+'し', n:p+'し', te:p+'して'}; }
+    return null;
+  }
+  const e=d.slice(-1), p=d.slice(0,-1);
+  if(g===2) return {m:p, n:p, te:p+'て'};
+  if(!I_ROW[e]) return null;
+  const te = d.endsWith('行[い]く') ? p+'って' : p+TE_END[e];
+  return {m:p+I_ROW[e], n: d==='ある' ? '' : p+A_ROW[e], te};
+}
+const VFORMS = {
+  masu:{label:'ます-форма', f:(b,d)=>b.m+'ます'},
+  masen:{label:'ません (отрицание)', f:(b,d)=>b.m+'ません'},
+  mashita:{label:'ました (прошедшее)', f:(b,d)=>b.m+'ました'},
+  masendeshita:{label:'ませんでした (прош. отрицание)', f:(b,d)=>b.m+'ませんでした'},
+  dict:{label:'словарная форма (辞書形)', f:(b,d)=>d},
+  nai:{label:'ない-форма', f:(b,d)=>b.n+'ない'},
+  te:{label:'て-форма', f:(b,d)=>b.te},
+  ta:{label:'た-форма', f:(b,d)=>taOf(b.te)}
+};
+function conjV(w, form, g){ const b=vbase(w.d, g||gnum(w)); return b ? VFORMS[form].f(b, w.d) : null; }
+
+const AFORMS = {
+  neg:{label:'отрицание (просто)'}, negp:{label:'отрицание (вежливо)'},
+  past:{label:'прошедшее (просто)'}, pastp:{label:'прошедшее (вежливо)'},
+  pneg:{label:'прош. отрицание (просто)'}, pnegp:{label:'прош. отрицание (вежливо)'}
+};
+function conjA(jp, type, form){
+  if(type==='i'){
+    const b = jp==='いい' ? 'よ' : jp.slice(0,-1);
+    return {neg:b+'くない', negp:b+'くないです', past:b+'かった', pastp:b+'かったです', pneg:b+'くなかった', pnegp:b+'くなかったです'}[form];
+  }
+  return {neg:jp+'じゃ ない', negp:jp+'じゃ ありません', past:jp+'だった', pastp:jp+'でした', pneg:jp+'じゃ なかった', pnegp:jp+'じゃ ありませんでした'}[form];
+}
+// Правдоподобные ошибки — как если бы слово было другой группы
+function wrongForms(w, form){
+  const pool = new Set();
+  if(w.t==='i'||w.t==='na'){
+    const j=w.jp, pol=form.endsWith('p')?'です':'';
+    const iEnd={neg:'くない',negp:'くない',past:'かった',pastp:'かった',pneg:'くなかった',pnegp:'くなかった'}[form];
+    pool.add(conjA(j, w.t, {neg:'past',negp:'pastp',past:'neg',pastp:'negp',pneg:'past',pnegp:'pastp'}[form]));
+    if(w.t==='i'){
+      pool.add(conjA(j,'na',form));          // 高いじゃない, 高いでした
+      pool.add(j+iEnd+pol);                  // 高いくない, 高いかった
+      if(j==='いい') pool.add('い'+iEnd+pol);  // いくない
+    } else {
+      pool.add(j+iEnd+pol);                  // 静かくない, 静かかった
+      pool.add(j+'ない'+pol);                 // 静かない
+      if(j.endsWith('い')) pool.add(j.slice(0,-1)+iEnd+pol); // きれくない
+      pool.add(conjA(j,'na',{neg:'pneg',negp:'pnegp',past:'pneg',pastp:'pnegp',pneg:'neg',pnegp:'negp'}[form]));
+    }
+  } else {
+    const g = gnum(w);
+    [1,2].forEach(gg=>{ if(gg!==g){ const x=conjV(w, form, gg); if(x) pool.add(x); } });
+    const p = w.d.slice(0,-1), b = vbase(w.d,g);
+    if(form==='te'||form==='ta'){ ['って','んで','いて','して'].forEach(x=>pool.add(p+(form==='te'?x:taOf(x)))); pool.add(b.m+(form==='te'?'て':'た')); }
+    if(form==='nai'){ pool.add(b.m+'ない'); pool.add(w.d+'ない'); pool.add(p+'らない'); pool.add(p+'わない'); pool.add(p+'ない'); }
+    if(form==='dict'){ ['る','う','く','む'].forEach(x=>pool.add(p+x)); pool.add(b.m+'る'); pool.add(b.m+'う'); }
+    if(form.startsWith('mas')){
+      const suf = VFORMS[form].f({m:''},'');
+      pool.add(w.d+suf); if(b.n) pool.add(b.n+suf); pool.add(p+'い'+suf); pool.add(p+'り'+suf);
+    }
+  }
+  const right = w.t==='i'||w.t==='na' ? conjA(w.jp,w.t,form) : conjV(w,form);
+  return [...pool].filter(x=>x && x!==right && !x.includes('undefined'));
+}
+function ruleText(w, form){
+  if(w.t==='i'){
+    const base = w.jp==='いい' ? '<b>いい → よ</b> (исключение), затем ' : '';
+    return 'い-прилагательное: '+base+'い → <b>くない</b> (не), <b>かった</b> (было), <b>くなかった</b> (не было). Вежливо — добавь です.';
+  }
+  if(w.t==='na') return 'な-прилагательное: как существительное — <b>じゃ ない / じゃ ありません</b>, <b>だった / でした</b>, <b>じゃ なかった / じゃ ありませんでした</b>.';
+  const g=gnum(w), e=w.d.slice(-1);
+  if(g===3) return 'III группа — запоминается: <b>する → します・しない・して・した</b>; <b>来[く]る → 来[き]ます・来[こ]ない・来[き]て・来[き]た</b>.';
+  if(g===2) return 'II группа: отбрасываем <b>る</b> и добавляем окончание: ます・ない・て・た.';
+  const map = {
+    te:'I группа: <b>'+e+' → '+(w.d.endsWith('行[い]く')?'って (исключение 行く!)':TE_END[e])+'</b>.',
+    ta:'I группа: как て-форма, но с た/だ: <b>'+e+' → '+(w.d.endsWith('行[い]く')?'った (исключение 行く!)':taOf(TE_END[e]))+'</b>.',
+    nai:'I группа: <b>'+e+' → '+(w.d==='ある'?'ない (исключение ある!)':A_ROW[e]+'ない')+'</b> — звук «у» меняем на «а».',
+    dict:'I группа: <b>'+I_ROW[e]+'ます → '+e+'</b> — звук «и» перед ます меняем на «у».'
+  };
+  return map[form] || 'I группа: <b>'+e+' → '+I_ROW[e]+'</b> + ます/ません/ました.';
+}
+
+/* ================= ХРАНИЛИЩЕ ================= */
+const LS = 'nihongo_n5_progress';
+const storage = (()=>{
+  try{ localStorage.setItem('__nh__','1'); localStorage.removeItem('__nh__'); return localStorage; }
+  catch(e){
+    const mem={};
+    setTimeout(()=>{ try{ showFatal('Браузер запретил сохранение — сайт работает, но прогресс не сохранится после закрытия вкладки.'); }catch(_){} },0);
+    return {getItem:k=>(k in mem?mem[k]:null), setItem:(k,v)=>{mem[k]=String(v);}, removeItem:k=>{delete mem[k];}};
+  }
+})();
+let store;
+try{ store = JSON.parse(storage.getItem(LS)||'null'); }catch(e){ store=null; }
+store ||= {v:1};
+store.lessons ||= {}; store.reviews ||= {}; store.srs ||= {}; store.act ||= {};
+store.streak ||= {count:0,last:''}; store.history ||= []; store.lastDay ||= 0;
+store.drill ||= {}; if(store.furi===undefined) store.furi = true;
+function save(){ try{ storage.setItem(LS, JSON.stringify(store)); }catch(e){} }
+function drillHit(kind, ok){ const d = store.drill[kind] ||= {c:0,t:0}; d.t++; if(ok) d.c++; save(); }
+
+let cur = Math.min(store.lastDay, SCHED.length-1);
+let mode = 'learn', lastPractice = 'flashcards';
+function entry(){ return SCHED[cur]; }
+function isReviewDay(){ return entry().type==='review'; }
+function lessonState(i){ return store.lessons['l'+i] ||= {learned:[], score:null}; }
+function curLessonIdx(){ const e=entry(); return e.type==='review' ? e.from : [e.li]; }
+function curWords(){ return curLessonIdx().flatMap(i=>LESSONS[i].words); }
+function curPhrases(){ return curLessonIdx().flatMap(i=>LESSONS[i].phrases); }
+function maxLesson(){ const a=curLessonIdx(); return a[a.length-1]; }
+function wordsUpTo(){ return ALL_WORDS.filter(w=>w.li<=maxLesson()); }
+
+/* ================= ДАТЫ / СЕРИЯ ================= */
+function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function today(){ return iso(new Date()); }
+function addDays(ds,n){ const d=new Date(ds+'T12:00:00'); d.setDate(d.getDate()+n); return iso(d); }
+function bump(){
+  const t=today(); store.act[t]=(store.act[t]||0)+1;
+  const s=store.streak; if(s.last!==t){ s.count = s.last===addDays(t,-1) ? s.count+1 : 1; s.last=t; }
+  save(); renderStreak();
+}
+function streakNow(){ const s=store.streak; return (s.last===today()||s.last===addDays(today(),-1)) ? s.count : 0; }
+function renderStreak(){ document.getElementById('streakEl').textContent = streakNow(); }
+
+/* ================= SRS: ошибки возвращаются через 1, 3, 7 дней ================= */
+const SRS_INT=[0,1,3,7];
+function srsWrong(jp){ if(!WORDMAP[jp]) return; store.srs[jp]={box:0,due:today()}; save(); updateBadge(); }
+function srsRight(jp){ const e=store.srs[jp]; if(!e) return; e.box++; if(e.box>=SRS_INT.length) delete store.srs[jp]; else e.due=addDays(today(),SRS_INT[e.box]); save(); updateBadge(); }
+function dueList(){ const t=today(); return Object.keys(store.srs).filter(k=>store.srs[k].due<=t && WORDMAP[k]); }
+function updateBadge(){ document.getElementById('srsBadge').textContent = dueList().length || ''; }
+
+/* ================= МЕЛОЧИ ================= */
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]];} return a; }
+function pick(a,n){ return shuffle(a).slice(0,n); }
+function norm(s){ return String(s).toLowerCase().trim().replace(/[.,;!?«»"]/g,'').replace(/ё/g,'е').replace(/\s+/g,' '); }
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cols=['#f4a6c1','#f5b95a','#93a0ff','#ffffff'];
+  for(let i=0;i<60;i++){ const d=document.createElement('div'); d.className='conf'; d.style.left=Math.random()*100+'vw';
+    d.style.background=cols[i%4]; d.style.animationDelay=(Math.random()*.5)+'s'; document.body.appendChild(d); setTimeout(()=>d.remove(),3500); }
+}
+const $ = id => document.getElementById(id);
+
+/* ================= ШАПКА ================= */
+function renderHeader(){
+  const e=entry(), review=e.type==='review';
+  $('dayNum').textContent = cur+1;
+  if(review){
+    $('dayTopic').textContent = 'Повторение';
+    $('daySub').textContent = 'уроки '+LESSONS[e.from[0]].mnn+'–'+LESSONS[e.from[2]].mnn+' учебника';
+  } else {
+    $('dayTopic').textContent = LESSONS[e.li].topic;
+    $('daySub').textContent = 'Минна но Нихонго, урок '+LESSONS[e.li].mnn+' · 第'+LESSONS[e.li].mnn+'課';
+  }
+  $('prev').disabled = cur===0; $('next').disabled = cur===SCHED.length-1;
+  const L = review ? null : LESSONS[e.li];
+  $('heroCard').innerHTML = review
+    ? '<b>День '+(cur+1)+' · повторение</b><br>'+curWords().length+' слов из трёх уроков. Карточки, пары и большой тест — проверь, что закрепилось.'
+    : '<b>Урок '+L.mnn+' · '+esc(L.topic)+'</b><br>'+L.words.length+' слов с примерами, '+L.phrases.length+' фраз и '+((DATA.grammar[L.mnn]||[]).length)+' тем грамматики. Прогресс сохраняется сам.';
+}
+function renderProgress(){
+  const e=entry(); let pct=0;
+  if(e.type==='lesson'){ const st=lessonState(e.li); pct=Math.round(st.learned.length/LESSONS[e.li].words.length*100); }
+  else { const sc=store.reviews['r'+(cur+1)]; pct = sc&&sc.score ? Math.round(sc.score.c/sc.score.t*100) : 0; }
+  $('progBar').style.width = pct+'%';
+}
+function applyFuri(){
+  document.documentElement.classList.toggle('nofuri', !store.furi);
+  $('furiBtn').setAttribute('aria-pressed', store.furi?'true':'false');
+}
+$('furiBtn').onclick = ()=>{ store.furi=!store.furi; save(); applyFuri(); };
+
+/* ================= ПОПАП СЛОВА ================= */
+const popup = $('wordPopup');
+function showPopup(el, w){
+  let forms='';
+  if(w.d){ forms = '<div class="pf">'+['dict','nai','te','ta'].map(f=>'<span>'+VFORMS[f].label.split(' (')[0]+':</span> '+rb(conjV(w,f))).join('<br>')+'</div>'; }
+  else if(w.t==='i'||w.t==='na'){ forms = '<div class="pf"><span>не:</span> '+rb(conjA(w.jp,w.t,'neg'))+'<br><span>было:</span> '+rb(conjA(w.jp,w.t,'past'))+'</div>'; }
+  popup.innerHTML = '<div class="pw">'+rb(display(w))+'</div>'+
+    '<div class="pk">'+esc(kana(w.jp))+' · '+esc(toRu(w.jp))+'</div>'+
+    '<div class="pr">'+esc(w.ru)+' '+tagHTML(w.t)+'</div>'+
+    (w.note?'<div class="note">'+esc(w.note)+'</div>':'')+forms;
+  const r = el.getBoundingClientRect();
+  let left = r.left + scrollX; const pw = Math.min(300, innerWidth-24);
+  if(left+pw > innerWidth-12) left = innerWidth-pw-12;
+  popup.style.left = Math.max(12,left)+'px'; popup.style.top = (r.bottom+scrollY+6)+'px';
+  popup.classList.add('show');
+}
+document.addEventListener('click', e=>{ if(!e.target.closest('td.w') && !e.target.closest('#wordPopup')) popup.classList.remove('show'); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') popup.classList.remove('show'); });
+
+/* ================= СЛОВА ================= */
+function renderLearn(){
+  const box=$('learn'), e=entry();
+  const lessons = curLessonIdx();
+  let html='';
+  lessons.forEach(li=>{
+    const L=LESSONS[li], st=lessonState(li);
+    if(lessons.length>1) html+='<h2 class="sect-title">Урок '+L.mnn+' · '+esc(L.topic)+'</h2>';
+    html+='<div class="tablebox"><table><thead><tr><th class="num">№</th><th>Слово</th><th>Чтение</th><th>Тип</th><th>Перевод и пример</th><th class="chk">Знаю</th></tr></thead><tbody>';
+    html+=L.words.map((w,i)=>{
+      const on=st.learned.includes(i);
+      return '<tr class="'+(on?'learned':'')+'">'+
+        '<td class="num">'+(i+1)+'</td>'+
+        '<td class="w" data-jp="'+esc(w.jp)+'" tabindex="0">'+rb(display(w))+'</td>'+
+        '<td class="rd">'+esc(kana(w.jp))+'<span class="pol">'+esc(toRu(w.jp))+'</span></td>'+
+        '<td class="ty">'+tagHTML(w.t)+(w.d?'<div class="jp" style="font-size:14px;margin-top:6px;color:var(--muted)">'+rb(w.d)+'</div>':'')+'</td>'+
+        '<td class="tr">'+esc(w.ru)+(w.note?'<div class="note">'+esc(w.note)+'</div>':'')+
+          '<div class="ex">'+sentHTML(w.ex)+'</div><div class="exru">'+esc(w.exru)+'</div></td>'+
+        '<td class="chk"><input type="checkbox" aria-label="Знаю слово" data-li="'+li+'" data-i="'+i+'" '+(on?'checked':'')+'></td></tr>';
+    }).join('');
+    html+='</tbody></table></div>';
+  });
+  html+='<p class="help" style="margin-top:12px">Нажми на слово — появятся чтение и формы. <b>Розовые знаки над кандзи</b> — фуригана, чтение хираганой; её можно скрыть кнопкой «ふりがな», когда захочешь проверить себя. '+
+    'У глаголов под типом — словарная форма. Группы глаголов — как в учебнике: <span class="tag t-v1">I</span> <span class="tag t-v2">II</span> <span class="tag t-v3">III</span>.</p>';
+  html+='<h2 class="sect-title">Фразы урока <small>устойчивые выражения</small></h2><div class="phr-list">';
+  html+=curPhrases().map(p=>'<div class="phr"><div class="jp">'+rb(p.jp)+'</div><div>'+esc(p.ru)+'</div><span class="reg reg-'+p.reg+'">'+({f:'вежливо',c:'с друзьями',n:'нейтрально'}[p.reg])+'</span>'+(p.note?'<div class="note">'+esc(p.note)+'</div>':'')+'</div>').join('');
+  html+='</div>';
+  box.innerHTML=html;
+  box.querySelectorAll('td.w').forEach(td=>{
+    const w=WORDMAP[td.dataset.jp];
+    td.onclick=()=>showPopup(td,w);
+    td.onkeydown=ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); showPopup(td,w); } };
+  });
+  box.querySelectorAll('input[type=checkbox]').forEach(c=>{
+    c.onchange=()=>{
+      const li=+c.dataset.li, i=+c.dataset.i, st=lessonState(li);
+      if(c.checked){ if(!st.learned.includes(i)) st.learned.push(i); } else st.learned=st.learned.filter(x=>x!==i);
+      c.closest('tr').classList.toggle('learned', c.checked);
+      save(); bump(); renderProgress();
+    };
+  });
+  renderProgress();
+}
+
+/* ================= ГРАММАТИКА ================= */
+let gramTab = 'lesson';
+function gcard(g, ref){
+  return '<article class="gcard"><h3>'+rbHTML(g.title)+'</h3>'+(ref?'<div class="ref">'+ref+'</div>':'')+
+    '<p>'+rbHTML(g.body)+'</p>'+
+    (g.ex&&g.ex.length?'<div class="gex">'+g.ex.map(x=>'<div><div class="jp">'+rb(x[0])+'</div><div class="ru">'+esc(x[1])+'</div></div>').join('')+'</div>':'')+
+    (g.extra||'')+'</article>';
+}
+function conjTable(words, forms, labelFn){
+  return '<div class="conj tablebox"><table><thead><tr><th></th>'+words.map(w=>'<th>'+esc(w.ru.split(/[,;(]/)[0])+'</th>').join('')+'</tr></thead><tbody>'+
+    forms.map(f=>'<tr><td>'+labelFn(f)+'</td>'+words.map(w=>'<td>'+rb(f==='_group'?'':(w.d?conjV(w,f):conjA(w.jp,w.t,f)))+(f==='_group'?tagHTML(w.t):'')+'</td>').join('')+'</tr>').join('')+
+    '</tbody></table></div>';
+}
+function renderGrammar(){
+  const box=$('grammar');
+  const tabs=[['lesson', isReviewDay()?'Уроки дня':'Урок '+LESSONS[entry().li].mnn],['particles','Частицы'],['verbs','Глаголы: формы'],['adj','Прилагательные'],['style','Вежливо и просто']];
+  let html='<div class="chips" role="tablist">'+tabs.map(t=>'<button class="chip '+(gramTab===t[0]?'active':'')+'" data-g="'+t[0]+'">'+t[1]+'</button>').join('')+'</div><div class="gram">';
+  if(gramTab==='lesson'){
+    curLessonIdx().forEach(li=>{
+      const L=LESSONS[li];
+      html+='<h2 class="sect-title">Урок '+L.mnn+' · '+esc(L.topic)+'</h2>';
+      html+=(DATA.grammar[L.mnn]||[]).map(g=>gcard(g,'Минна но Нихонго, урок '+L.mnn)).join('');
+    });
+    html+='<p class="help">Эти темы совпадают с разделом «文型・例文» (грамматика и примеры) урока в учебнике — удобно читать параллельно.</p>';
+  }
+  if(gramTab==='particles'){
+    html+='<p class="help" style="margin-bottom:14px">Частица стоит <b>после</b> слова и показывает его роль в предложении — как падежные окончания в русском. Потренироваться — «Практика → Частицы».</p>';
+    html+=DATA.particles.map(p=>gcard({title:'<span class="jp">'+p.p+'</span> — '+p.title.split(' — ').slice(1).join(' — '), body:p.body, ex:p.ex},'Минна но Нихонго: урок '+p.mnn)).join('');
+  }
+  if(gramTab==='verbs'){
+    const sample = ['書[か]く','飲[の]む','帰[かえ]る','食[た]べる','見[み]る','する','来[く]る'].map(d=>ALL_WORDS.find(w=>w.d===d)).filter(Boolean);
+    html+=gcard({title:'Три группы глаголов',body:'<b>I группа</b> (う-глаголы): перед ます звук «и» — 書きます, 飲みます. <b>II группа</b> (る-глаголы): перед ます звук «э» — 食べます, или «и» у особых глаголов — 見ます, 起きます, 借ります, います (их учебник даёт отдельным списком). <b>III группа</b> — только します и 来ます.<br>Ловушки: <b>帰る, 切る, 入る, 走る, 知る</b> похожи на II группу, но это I.'},'Минна но Нихонго: урок 14 (группы), 4 (ます)');
+    html+=gcard({title:'ます-форма и словарная форма (辞書形)',body:'<b>ます-форма</b> — вежливая, её учат первой. <b>Словарная форма</b> — так глагол записан в словаре, так говорят с друзьями.<br>I: 書<b>き</b>ます → 書<b>く</b> (и → у). II: 食べ<b>ます</b> → 食べ<b>る</b>. III: します → する, 来[き]ます → 来[く]る.',extra:conjTable(sample,['_group','masu','dict'],f=>f==='_group'?'группа':VFORMS[f].label)},'Минна но Нихонго: урок 4 (ます), урок 18 (辞書形)');
+    html+=gcard({title:'ない-форма',body:'Простое отрицание «не делаю». I: звук «у» → «а» + ない: 書<b>く</b> → 書<b>か</b>ない; <b>う → わ</b>ない: 買う → 買わない. II: る → ない. III: しない, 来[こ]ない. Исключение: <b>ある → ない</b>.',extra:conjTable(sample,['nai'],f=>VFORMS[f].label)},'Минна но Нихонго: урок 17');
+    html+=gcard({title:'て-форма',body:'Самая нужная форма: просьбы (～てください), «сейчас делаю» (～ています) и многое другое.<br>I группа по последнему звуку: <b>う・つ・る → って</b>, <b>む・ぶ・ぬ → んで</b>, <b>く → いて</b>, <b>ぐ → いで</b>, <b>す → して</b>. Исключение: <b>行く → 行って</b>.<br>II: る → て. III: して, 来[き]て.',extra:conjTable(sample,['te'],f=>VFORMS[f].label)},'Минна но Нихонго: урок 14');
+    html+=gcard({title:'た-форма',body:'Простое прошедшее «сделал». Строится точно как て-форма, только て → <b>た</b>, で → <b>だ</b>: 書いて → 書いた, 飲んで → 飲んだ.',extra:conjTable(sample,['ta'],f=>VFORMS[f].label)},'Минна но Нихонго: урок 19');
+  }
+  if(gramTab==='adj'){
+    const ia=['高[たか]い','いい'].map(j=>WORDMAP[j]), na=['静[しず]か','きれい'].map(j=>WORDMAP[j]);
+    html+=gcard({title:'い-прилагательные',body:'Изменяются сами: <b>い → くない</b> (не), <b>い → かった</b> (было), <b>い → くなかった</b> (не было). Для вежливости добавь です. Запомни: <b>いい → よくない, よかった</b>. Ошибка новичка — «高いでした»: правильно <b>高かったです</b>.',extra:conjTable(ia,Object.keys(AFORMS),f=>AFORMS[f].label)},'Минна но Нихонго: урок 8 (настоящее), урок 12 (прошедшее)');
+    html+=gcard({title:'な-прилагательные',body:'Изменяются как существительные — через связку: <b>じゃ ない</b>, <b>だった / でした</b>, <b>じゃ なかった</b>. Перед существительным — <b>な</b>: 静かな 町. Ловушка: <b>きれい</b> и <b>嫌[きら]い</b> оканчиваются на い, но это な-прилагательные — «きれくない» не бывает.',extra:conjTable(na,Object.keys(AFORMS),f=>AFORMS[f].label)},'Минна но Нихонго: урок 8, урок 12');
+  }
+  if(gramTab==='style'){
+    html+=gcard({title:'Вежливая речь (です・ます) и простая',body:'С незнакомыми, старшими, коллегами — <b>です・ます</b>. С друзьями и семьёй — <b>простая форма</b>:<br>ます → словарная форма (行きます → 行く), ません → ない, ました → た, ませんでした → なかった.<br>です: у сущ. и な-прил. → <b>だ</b> (часто опускается), у い-прил. просто убираем (高いです → 高い).<br>В простой речи か в вопросе обычно не ставят, частицы は・を часто пропадают, はい → <b>うん</b>, いいえ → <b>ううん</b>.'},'Минна но Нихонго: урок 20');
+    html+='<article class="gcard"><h3>Один разговор — два стиля</h3><div class="dlg"><div class="h">С коллегой (вежливо)</div><div class="h">С другом (просто)</div>'+
+      DATA.dialog.map(d=>'<div class="jp">'+rb(d[0])+'</div><div class="jp">'+rb(d[1])+'</div><div class="ru">'+esc(d[2])+'</div>').join('')+'</div></article>';
+  }
+  html+='</div>';
+  box.innerHTML=html;
+  box.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{ gramTab=b.dataset.g; renderGrammar(); });
+}
+
+
+/* ================= ОБЩИЙ ВОПРОС С ВАРИАНТАМИ =================
+   q: {counter, dir, prompt(html), hint, options:[строки с фуриганой], right, explain(html), onAnswer(ok)} */
+function askChoice(box, q, next){
+  const opts = shuffle([q.right, ...[...new Set(q.wrong.filter(x=>x!==q.right))].slice(0,3)]);
+  box.innerHTML = '<div class="card">'+
+    '<div class="counter">'+q.counter+'</div><div class="dir">'+q.dir+'</div>'+
+    '<div class="'+(q.cls||'big')+'">'+q.prompt+'</div>'+(q.hint?'<div class="hint">'+q.hint+'</div>':'')+
+    '<div class="opts">'+opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+(q.plainOpts?esc(o):rb(o))+'</button>').join('')+'</div>'+
+    '<div class="feedback" id="chFb" aria-live="polite"></div><div class="explain" id="chEx"></div>'+
+    '<div class="actions"><button class="btn primary" id="chNext" hidden>Дальше ›</button></div></div>';
+  const btns = box.querySelectorAll('.opt');
+  btns.forEach(b=>b.onclick=()=>{
+    const chosen = opts[+b.dataset.i], ok = chosen===q.right;
+    btns.forEach(x=>{ x.disabled=true; if(opts[+x.dataset.i]===q.right) x.classList.add('ok'); });
+    if(!ok) b.classList.add('no');
+    const fb=box.querySelector('#chFb'); fb.textContent = ok ? 'Верно!' : 'Не совсем. Правильный ответ отмечен зелёным.'; fb.className='feedback '+(ok?'good':'bad');
+    if(q.explain) box.querySelector('#chEx').innerHTML = q.explain;
+    q.onAnswer && q.onAnswer(ok); bump();
+    const n=box.querySelector('#chNext'); n.hidden=false; n.focus(); n.onclick=next;
+  });
+}
+function finishCard(box, title, c, t, again){
+  if(c===t && t>0) confetti();
+  box.innerHTML='<div class="card result"><div class="dir">'+title+'</div><div class="score">'+c+' / '+t+'</div>'+
+    '<div class="hint">'+(c===t?'Без единой ошибки!':'Слова с ошибками уже ждут во вкладке «Повторить».')+'</div>'+
+    '<div class="actions"><button class="btn primary" id="again">Ещё раз</button></div></div>';
+  box.querySelector('#again').onclick=again;
+}
+
+/* ================= КАРТОЧКИ ================= */
+let fc={items:[],idx:0,known:new Set(),src:'words'};
+function flipReset(el){ if(!el||!el.classList.contains('flipped')) return; el.style.transition='none'; el.classList.remove('flipped'); void el.offsetWidth; el.style.transition=''; }
+function initFlash(){
+  fc.items = fc.src==='words' ? curWords().slice() : curPhrases().slice();
+  fc.idx=0; fc.known=new Set();
+  const box=$('flashcards');
+  box.innerHTML='<div class="chips" style="justify-content:center"><button class="chip" data-src="words">Слова</button><button class="chip" data-src="phrases">Фразы</button></div>'+
+    '<div class="fc-wrap"><div class="fc-card" id="fcCard" tabindex="0" role="button" aria-label="Перевернуть карточку">'+
+    '<div class="fc-face" id="fcFront"></div><div class="fc-face fc-back" id="fcBack"></div></div></div>'+
+    '<p class="help" style="text-align:center;margin-top:10px">Нажми на карточку, чтобы перевернуть</p>'+
+    '<div class="fc-nav"><button class="iconbtn" id="fcPrev" aria-label="Назад">‹</button><span class="fc-counter" id="fcCounter"></span><button class="iconbtn" id="fcNext" aria-label="Вперёд">›</button></div>'+
+    '<div class="actions"><button class="btn" id="fcKnow">Знаю</button><button class="btn" id="fcSkip">Не знаю</button><button class="btn" id="fcShuf">Перемешать</button></div>'+
+    '<p class="help" id="fcStatus" style="text-align:center;margin-top:10px"></p>';
+  box.querySelectorAll('[data-src]').forEach(b=>{ b.classList.toggle('active',b.dataset.src===fc.src); b.onclick=()=>{ fc.src=b.dataset.src; initFlash(); }; });
+  const card=$('fcCard');
+  card.onclick=()=>card.classList.toggle('flipped');
+  card.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); card.classList.toggle('flipped'); } };
+  $('fcPrev').onclick=()=>{ if(fc.idx>0){ fc.idx--; renderFlash(); } };
+  $('fcNext').onclick=()=>{ if(fc.idx<fc.items.length-1){ fc.idx++; renderFlash(); } };
+  $('fcShuf').onclick=()=>{ fc.items=shuffle(fc.items); fc.idx=0; renderFlash(); };
+  $('fcKnow').onclick=()=>markCard(true); $('fcSkip').onclick=()=>markCard(false);
+  renderFlash();
+}
+function renderFlash(){
+  flipReset($('fcCard'));
+  const w=fc.items[fc.idx];
+  if(fc.src==='words'){
+    $('fcFront').innerHTML='<div class="fc-word">'+rb(display(w))+'</div><div style="margin-top:6px">'+tagHTML(w.t)+'</div>';
+    $('fcBack').innerHTML='<div class="fc-ru">'+esc(w.ru)+'</div>'+(w.d?'<div class="help jp">'+rb(w.d)+'</div>':'')+
+      '<div class="fc-ex">'+sentHTML(w.ex)+'</div><div class="fc-exru">'+esc(w.exru)+'</div>';
+  } else {
+    $('fcFront').innerHTML='<div class="fc-word" style="font-size:clamp(22px,4vw,32px)">'+rb(w.jp)+'</div><div style="margin-top:8px"><span class="reg reg-'+w.reg+'">'+({f:'вежливо',c:'с друзьями',n:'нейтрально'}[w.reg])+'</span></div>';
+    $('fcBack').innerHTML='<div class="fc-ru">'+esc(w.ru)+'</div>'+(w.note?'<div class="note" style="margin-top:10px">'+esc(w.note)+'</div>':'');
+  }
+  $('fcCounter').textContent=(fc.idx+1)+' / '+fc.items.length;
+  $('fcPrev').disabled=fc.idx===0; $('fcNext').disabled=fc.idx===fc.items.length-1;
+  $('fcStatus').textContent = fc.known.size ? 'Знаешь: '+fc.known.size+' из '+fc.items.length : '';
+}
+function markCard(ok){
+  const w=fc.items[fc.idx];
+  if(ok){ fc.known.add(fc.idx); if(fc.src==='words') srsRight(w.jp); } else { fc.known.delete(fc.idx); if(fc.src==='words') srsWrong(w.jp); }
+  bump();
+  if(fc.idx<fc.items.length-1){ fc.idx++; renderFlash(); }
+  else $('fcStatus').textContent='Готово! Знаешь '+fc.known.size+' из '+fc.items.length+'.';
+}
+
+/* ================= ПАРЫ ================= */
+let ms={src:'words'};
+function startMatch(){
+  const pool = ms.src==='words' ? curWords() : curPhrases();
+  const items = pick(pool, Math.min(6,pool.length));
+  ms = {src:ms.src, left:shuffle(items.map((w,i)=>({id:'j'+i,pair:i,html:rb(ms.src==='words'?display(w):w.jp)}))),
+        right:shuffle(items.map((w,i)=>({id:'r'+i,pair:i,html:esc(w.ru)}))), sel:null, done:new Set(), errors:0, wrong:null, lock:false, total:items.length};
+  renderMatch();
+}
+function renderMatch(){
+  const box=$('match');
+  let html='<div class="chips" style="justify-content:center"><button class="chip '+(ms.src==='words'?'active':'')+'" data-src="words">Слова</button><button class="chip '+(ms.src==='phrases'?'active':'')+'" data-src="phrases">Фразы</button></div>';
+  if(ms.done.size===ms.total){
+    if(ms.errors===0) confetti();
+    box.innerHTML=html+'<div class="card result"><div class="score">'+ms.total+' / '+ms.total+'</div><div class="hint">Все пары собраны. Ошибок: '+ms.errors+'</div><div class="actions"><button class="btn primary" id="mAgain">Новый раунд</button></div></div>';
+    $('mAgain').onclick=startMatch; wireSrc(); return;
+  }
+  html+='<p class="help" style="text-align:center;margin-bottom:12px">Соедини японское с переводом. Собрано: '+ms.done.size+' / '+ms.total+' · ошибок: '+ms.errors+'</p><div class="match-grid">';
+  for(let i=0;i<ms.left.length;i++){
+    [ms.left[i], ms.right[i]].forEach((it,side)=>{
+      const done=ms.done.has(it.pair), sel=ms.sel&&ms.sel.id===it.id, no=ms.wrong&&ms.wrong.includes(it.id);
+      html+='<button class="match-btn '+(side===0?'jpside ':'')+(done?'ok ':'')+(sel?'sel ':'')+(no?'no':'')+'" data-id="'+it.id+'" data-pair="'+it.pair+'" data-side="'+side+'" '+(done?'disabled':'')+'>'+it.html+'</button>';
+    });
+  }
+  html+='</div><div class="actions"><button class="btn" id="mNew">Новый раунд</button></div>';
+  box.innerHTML=html; wireSrc();
+  $('mNew').onclick=startMatch;
+  box.querySelectorAll('.match-btn:not([disabled])').forEach(b=>b.onclick=()=>{
+    if(ms.lock) return;
+    const it={id:b.dataset.id,pair:+b.dataset.pair,side:b.dataset.side};
+    if(!ms.sel||ms.sel.side===it.side){ ms.sel = ms.sel&&ms.sel.id===it.id ? null : it; renderMatch(); return; }
+    if(ms.sel.pair===it.pair){ ms.done.add(it.pair); ms.sel=null; bump(); renderMatch(); }
+    else { ms.errors++; ms.wrong=[ms.sel.id,it.id]; ms.lock=true; renderMatch(); setTimeout(()=>{ ms.wrong=null; ms.sel=null; ms.lock=false; renderMatch(); },700); }
+  });
+  function wireSrc(){ box.querySelectorAll('[data-src]').forEach(b=>b.onclick=()=>{ ms.src=b.dataset.src; startMatch(); }); }
+}
+
+/* ================= ПРОПУСКИ ================= */
+let gp=null;
+function startGaps(){ gp={items:shuffle(curWords().filter(w=>gapAnswer(w.ex))), idx:0, c:0}; nextGap(); }
+function nextGap(){
+  const box=$('gaps');
+  if(gp.idx>=gp.items.length){ drillHit('gaps',true); return finishCard(box,'Пропуски пройдены',gp.c,gp.items.length,startGaps); }
+  const w=gp.items[gp.idx], ans=gapAnswer(w.ex);
+  const same = ALL_WORDS.filter(x=>x.jp!==w.jp && x.t===w.t && gapAnswer(x.ex) && gapAnswer(x.ex)!==ans);
+  const pool = same.length>=3 ? same : ALL_WORDS.filter(x=>x.jp!==w.jp && gapAnswer(x.ex) && gapAnswer(x.ex)!==ans);
+  const wrong=[...new Set(shuffle(pool).map(x=>gapAnswer(x.ex)))];
+  askChoice(box,{counter:(gp.idx+1)+' / '+gp.items.length+' · верно: '+gp.c, dir:'Какое слово пропущено?', cls:'sent', prompt:sentHTML(w.ex,true), hint:esc(w.exru),
+    right:ans, wrong, explain:'<span class="jp">'+sentHTML(w.ex)+'</span><br>'+esc(kanjiOnly(ans))+' — '+esc(w.ru)+' '+tagHTML(w.t),
+    onAnswer:ok=>{ if(ok){gp.c++; srsRight(w.jp);} else srsWrong(w.jp); }}, ()=>{ gp.idx++; nextGap(); });
+}
+
+/* ================= КАНДЗИ: прочитай слово ================= */
+let kj=null;
+function startKanji(){
+  const pool = shuffle(wordsUpTo().filter(w=>HAS_KANJI.test(w.jp)));
+  const own = pool.filter(w=>curLessonIdx().includes(w.li));
+  kj={items:(own.length?own:pool).slice(0,15), all:pool, idx:0, c:0};
+  nextKanji();
+}
+function nextKanji(){
+  const box=$('kanji');
+  if(kj.idx>=kj.items.length) return finishCard(box,'Чтение кандзи',kj.c,kj.items.length,startKanji);
+  const w=kj.items[kj.idx], right=kana(w.jp);
+  const byLen = shuffle(ALL_WORDS.filter(x=>HAS_KANJI.test(x.jp) && kana(x.jp)!==right)).sort((a,b)=>Math.abs(kana(a.jp).length-right.length)-Math.abs(kana(b.jp).length-right.length));
+  askChoice(box,{counter:(kj.idx+1)+' / '+kj.items.length+' · верно: '+kj.c, dir:'Как читается это слово? Фуригана спрятана.', prompt:'<span lang="ja">'+esc(kanjiOnly(display(w)))+'</span>',
+    hint:esc(w.ru), right, wrong:[...new Set(byLen.slice(0,6).map(x=>kana(x.jp)))], plainOpts:true,
+    explain:'<span class="jp" style="font-size:24px">'+rb(w.jp)+'</span> — '+esc(w.ru)+'<br><span class="jp">'+sentHTML(w.ex)+'</span>',
+    onAnswer:ok=>{ drillHit('kanji',ok); if(ok){kj.c++; srsRight(w.jp);} else srsWrong(w.jp); }}, ()=>{ kj.idx++; nextKanji(); });
+}
+
+/* ================= ЧАСТИЦЫ ================= */
+let pt=null;
+function startParticles(){
+  const mnn = LESSONS[maxLesson()].mnn;
+  pt={items:shuffle(DATA.pdrill.filter(x=>x.l<=mnn)).slice(0,15), idx:0, c:0, mnn};
+  nextParticle();
+}
+function nextParticle(){
+  const box=$('particles');
+  if(pt.idx>=pt.items.length) return finishCard(box,'Частицы',pt.c,pt.items.length,startParticles);
+  const x=pt.items[pt.idx], right=gapAnswer(x.s);
+  askChoice(box,{counter:(pt.idx+1)+' / '+pt.items.length+' · верно: '+pt.c+' · частицы уроков 1–'+pt.mnn, dir:'Вставь частицу', cls:'sent', prompt:sentHTML(x.s,true), hint:esc(x.ru),
+    right, wrong:x.o.filter(o=>o!==right), explain:'<span class="jp">'+sentHTML(x.s)+'</span><br>'+esc(x.why),
+    onAnswer:ok=>{ drillHit('particles',ok); if(ok) pt.c++; }}, ()=>{ pt.idx++; nextParticle(); });
+}
+
+/* ================= ФОРМЫ ================= */
+const FORM_SETS = {
+  mix:{label:'Всё вперемешку'},
+  dict:{label:'ます → словарная', verbs:['dict']},
+  masu:{label:'словарная → ます', verbs:['masu'], fromDict:true},
+  nai:{label:'ない-форма', verbs:['nai']},
+  te:{label:'て-форма', verbs:['te']},
+  ta:{label:'た-форма', verbs:['ta']},
+  polite:{label:'ません・ました', verbs:['masen','mashita','masendeshita']},
+  iadj:{label:'い-прил.: было / не', adj:'i'},
+  naadj:{label:'な-прил.: было / не', adj:'na'}
+};
+let fm={set:'mix'};
+function startForms(){
+  const words = ALL_WORDS; // тренируем все глаголы и прилагательные сайта
+  const qs=[];
+  const set=FORM_SETS[fm.set];
+  const verbForms = set.verbs || (fm.set==='mix' ? ['dict','nai','te','ta','masen','mashita'] : []);
+  const adjTypes = set.adj ? [set.adj] : (fm.set==='mix' ? ['i','na'] : []);
+  words.filter(w=>w.d).forEach(w=>verbForms.forEach(f=>qs.push({w,f,from:(set.fromDict?'dict':'masu')})));
+  words.filter(w=>adjTypes.includes(w.t)).forEach(w=>Object.keys(AFORMS).forEach(f=>qs.push({w,f})));
+  fm={set:fm.set, items:shuffle(qs).slice(0,15), idx:0, c:0};
+  nextForm();
+}
+function nextForm(){
+  const box=$('forms');
+  const chips='<div class="chips" style="justify-content:center">'+Object.keys(FORM_SETS).map(k=>'<button class="chip '+(fm.set===k?'active':'')+'" data-set="'+k+'">'+FORM_SETS[k].label+'</button>').join('')+'</div>';
+  const wrap=document.createElement('div');
+  if(fm.idx>=fm.items.length){ finishCard(wrap,'Формы',fm.c,fm.items.length,startForms); }
+  else {
+    const {w,f,from}=fm.items[fm.idx];
+    const isAdj = !w.d;
+    const src = isAdj ? display(w) : conjV(w, from);
+    const right = isAdj ? conjA(w.jp,w.t,f) : conjV(w,f);
+    const label = isAdj ? AFORMS[f].label : VFORMS[f].label;
+    const wrong = shuffle(wrongForms(w,f));
+    askChoice(wrap,{counter:(fm.idx+1)+' / '+fm.items.length+' · верно: '+fm.c, dir:'Поставь в форму: <b style="color:var(--sakura)">'+label+'</b>',
+      prompt:rb(src), hint:tagHTML(w.t)+' '+esc(w.ru), right, wrong,
+      explain:'<span class="jp" style="font-size:22px">'+rb(src)+' → '+rb(right)+'</span><br>'+ruleText(w,f),
+      onAnswer:ok=>{ drillHit('forms',ok); if(ok) fm.c++; }}, ()=>{ fm.idx++; nextForm(); });
+  }
+  box.innerHTML=chips+'<p class="help" style="text-align:center;margin-bottom:12px">Тренируются все глаголы и прилагательные сайта. Теория — «Грамматика → Глаголы: формы».</p>';
+  box.appendChild(wrap);
+  box.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{ fm.set=b.dataset.set; startForms(); });
+}
+
+/* ================= ВЕЖЛИВО ↔ ПРОСТО ================= */
+let pl=null;
+function startPolite(){ pl={items:shuffle(DATA.polite).map(x=>({...x, dir:Math.random()<.65?'p2c':'c2p'})), idx:0, c:0}; nextPolite(); }
+function nextPolite(){
+  const box=$('polite');
+  if(pl.idx>=pl.items.length) return finishCard(box,'Вежливая и простая речь',pl.c,pl.items.length,startPolite);
+  const x=pl.items[pl.idx];
+  const p2c = x.dir==='p2c';
+  const others = shuffle(DATA.polite.filter(y=>y.p!==x.p)).slice(0,1).map(y=>y.p);
+  askChoice(box,{counter:(pl.idx+1)+' / '+pl.items.length+' · верно: '+pl.c,
+    dir: p2c ? 'Как сказать это <b>другу</b> (простая форма)?' : 'Как сказать это <b>вежливо</b> (です・ます)?',
+    cls:'sent', prompt:rb(p2c?x.p:x.c), hint:esc(x.ru),
+    right: p2c?x.c:x.p,
+    wrong: p2c ? [...x.w, x.p] : [x.c, ...others, ...x.w.slice(0,1)],
+    explain:'<span class="jp">'+rb(x.p)+'</span><br><span class="jp">'+rb(x.c)+'</span><br>'+esc(x.why),
+    onAnswer:ok=>{ drillHit('polite',ok); if(ok) pl.c++; }}, ()=>{ pl.idx++; nextPolite(); });
+}
+
+/* ================= ТЕСТ И ПОВТОРЕНИЕ ================= */
+function accepted(w){ return w.ru.replace(/\([^)]*\)/g,',').split(/[,;]/).map(norm).filter(Boolean); }
+function quizRun(boxId, items, onDone){
+  const box=$(boxId); let idx=0, c=0;
+  const step=()=>{
+    if(idx>=items.length) return onDone(c, items.length);
+    const it=items[idx], counter=(idx+1)+' / '+items.length+' · верно: '+c;
+    const answer=ok=>{ if(ok){ c++; srsRight(it.jp); } else srsWrong(it.jp); };
+    if(it.dir==='ru2jp'){
+      const same=ALL_WORDS.filter(x=>x.jp!==it.jp && x.t===it.t);
+      askChoice(box,{counter, dir:'Выбери слово на японском', cls:'sent', prompt:esc(it.ru), hint:tagHTML(it.t), right:display(it),
+        wrong:shuffle(same.length>=3?same:ALL_WORDS.filter(x=>x.jp!==it.jp)).map(display),
+        explain:'<span class="jp" style="font-size:22px">'+rb(display(it))+'</span> — '+esc(kana(it.jp))+'<br><span class="jp">'+sentHTML(it.ex)+'</span>',
+        onAnswer:answer}, ()=>{ idx++; step(); });
+      return;
+    }
+    box.innerHTML='<div class="card"><div class="counter">'+counter+'</div><div class="dir">Напиши перевод по-русски</div>'+
+      '<div class="big">'+rb(display(it))+'</div><div class="hint">'+tagHTML(it.t)+'</div>'+
+      '<input type="text" id="qIn" autocomplete="off" aria-label="Перевод" placeholder="Перевод…">'+
+      '<div class="actions"><button class="btn primary" id="qGo">Проверить</button><button class="btn" id="qSkip">Не знаю</button></div>'+
+      '<div class="feedback" id="qFb" aria-live="polite"></div><div class="explain" id="qEx"></div></div>';
+    const inp=box.querySelector('#qIn'); inp.focus(); let done=false;
+    const fin=(ok,skipped)=>{
+      done=true; inp.disabled=true; answer(ok); bump();
+      box.querySelector('#qFb').textContent = ok ? 'Верно!' : (skipped?'Правильно: ':'Не совсем. Правильно: ')+it.ru;
+      box.querySelector('#qFb').className='feedback '+(ok?'good':'bad');
+      box.querySelector('#qEx').innerHTML='<span class="jp">'+sentHTML(it.ex)+'</span><br>'+esc(it.exru);
+      box.querySelector('#qGo').textContent='Дальше ›'; box.querySelector('#qGo').focus();
+    };
+    const submit=()=>{ if(done){ idx++; step(); return; } const v=norm(inp.value); if(!v) return; fin(accepted(it).some(a=>a===v || (v.length>=4 && a.startsWith(v))), false); };
+    box.querySelector('#qGo').onclick=submit; box.querySelector('#qSkip').onclick=()=>{ if(!done) fin(false,true); else { idx++; step(); } };
+    inp.onkeydown=e=>{ if(e.key==='Enter') submit(); };
+  };
+  step();
+}
+function startTest(){
+  const items = shuffle(curWords()).map(w=>({...w, dir:Math.random()<.5?'jp2ru':'ru2jp'}));
+  quizRun('test', items, (c,t)=>{
+    const e=entry();
+    if(e.type==='lesson') lessonState(e.li).score={c,t}; else (store.reviews['r'+(cur+1)] ||= {}).score={c,t};
+    store.history.push({d:today(), day:cur+1, c, t}); store.history=store.history.slice(-60); save();
+    finishCard($('test'),'Тест · день '+(cur+1),c,t,startTest); renderProgress();
+  });
+}
+function startReview(){
+  const due=dueList(), box=$('review');
+  if(!due.length){
+    box.innerHTML='<div class="card result"><div class="big" lang="ja">お疲[つか]れさま！</div><div class="hint">Сейчас повторять нечего. Слова попадают сюда после ошибок в тесте, карточках, пропусках и кандзи — и возвращаются через 1, 3 и 7 дней.</div><div class="actions"><button class="btn primary" id="goTest">Пройти тест дня</button></div></div>';
+    box.querySelector('.big').innerHTML=rb('お疲[つか]れさま！');
+    $('goTest').onclick=()=>setMode('test'); return;
+  }
+  quizRun('review', shuffle(due.map(jp=>({...WORDMAP[jp], dir:Math.random()<.5?'jp2ru':'ru2jp'}))), (c,t)=>finishCard(box,'Повторение',c,t,startReview));
+}
+
+/* ================= ПРОГРЕСС ================= */
+function renderStats(){
+  const learned=Object.values(store.lessons).reduce((s,l)=>s+(l.learned?l.learned.length:0),0);
+  const last=store.history[store.history.length-1];
+  const pct=k=>{ const d=store.drill[k]; return d&&d.t ? Math.round(d.c/d.t*100)+'%' : '—'; };
+  const cnt=k=>{ const d=store.drill[k]; return d&&d.t ? d.t+' ответов' : 'ещё не было'; };
+  let html='<div style="max-width:980px;margin:0 auto"><div class="stat-grid">'+
+    '<div class="stat-card"><div class="k">Выучено слов</div><div class="v" style="color:var(--good)">'+learned+'</div><div class="s">из '+TOTAL_WORDS+'</div></div>'+
+    '<div class="stat-card"><div class="k">Серия</div><div class="v">'+streakNow()+'</div><div class="s">дней подряд</div></div>'+
+    '<div class="stat-card"><div class="k">Ждут повторения</div><div class="v" style="color:var(--bad)">'+dueList().length+'</div><div class="s">слов сегодня</div></div>'+
+    '<div class="stat-card"><div class="k">Последний тест</div><div class="v">'+(last?last.c+'/'+last.t:'—')+'</div><div class="s">'+(last?'день '+last.day:'ещё не было')+'</div></div></div>'+
+    '<div class="stat-grid">'+[['particles','Частицы'],['forms','Формы'],['kanji','Кандзи'],['polite','Вежливо ↔ просто']].map(k=>'<div class="stat-card"><div class="k">'+k[1]+'</div><div class="v" style="font-size:28px">'+pct(k[0])+'</div><div class="s">'+cnt(k[0])+'</div></div>').join('')+'</div>';
+  const cells=[], now=new Date(), off=(now.getDay()+6)%7;
+  for(let i=77+off;i>=0;i--){ const d=new Date(now); d.setDate(d.getDate()-i); const ds=iso(d), n=store.act[ds]||0; cells.push('<div class="hm'+(n?' hm'+(n<5?1:n<20?2:3):'')+'" title="'+ds+': '+n+'"></div>'); }
+  html+='<div class="stat-block"><h3>Календарь занятий за 12 недель</h3><div class="heatmap">'+cells.join('')+'</div></div>';
+  const hist=store.history.slice(-8).reverse();
+  html+='<div class="stat-block"><h3>Результаты тестов</h3>'+(hist.length?hist.map(h=>'<div style="display:flex;align-items:center;gap:10px;margin:6px 0"><span class="help" style="min-width:140px">'+h.d+' · день '+h.day+'</span><div style="flex:1;background:var(--surface-3);border-radius:5px;height:10px;overflow:hidden"><div style="height:100%;width:'+Math.round(h.c/h.t*100)+'%;background:var(--sakura)"></div></div><b>'+h.c+'/'+h.t+'</b></div>').join(''):'<p class="help">Пройди первый тест — результаты появятся здесь.</p>')+'</div>';
+  html+='<div class="actions"><button class="btn" id="expBtn">Скачать прогресс</button><label class="btn" style="display:inline-flex;align-items:center">Загрузить прогресс<input type="file" id="impFile" accept=".json" hidden></label></div></div>';
+  $('stats').innerHTML=html;
+  $('expBtn').onclick=()=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(store)],{type:'application/json'})); a.download='nihongo-progress.json'; a.click(); URL.revokeObjectURL(a.href); };
+  $('impFile').onchange=()=>{ const f=$('impFile').files[0]; if(!f) return; const r=new FileReader();
+    r.onload=()=>{ try{ const o=JSON.parse(r.result); if(!o.lessons) throw 0; store=o; save(); location.reload(); }catch(e){ showFatal('Не удалось прочитать файл прогресса — нужен файл, скачанный кнопкой «Скачать прогресс».'); } };
+    r.readAsText(f); };
+}
+
+/* ================= НАВИГАЦИЯ ================= */
+const PANELS=['learn','grammar','flashcards','match','gaps','kanji','particles','forms','polite','test','review','stats'];
+const PRACTICE=['flashcards','match','gaps','kanji','particles','forms','polite'];
+function renderPanel(m){
+  ({learn:renderLearn, grammar:renderGrammar, flashcards:initFlash, match:startMatch, gaps:startGaps, kanji:startKanji,
+    particles:startParticles, forms:startForms, polite:startPolite, test:startTest, review:startReview, stats:renderStats})[m]();
+}
+function setMode(m){
+  mode=m; popup.classList.remove('show');
+  const g = PRACTICE.includes(m) ? 'practice' : m;
+  if(g==='practice') lastPractice=m;
+  document.querySelectorAll('#mainTabs button').forEach(b=>{ const on=b.dataset.tab===g; b.classList.toggle('active',on); b.setAttribute('aria-current',on?'page':'false'); });
+  $('subTabs').style.display = g==='practice' ? 'flex' : 'none';
+  document.querySelectorAll('#subTabs button').forEach(b=>b.classList.toggle('active', b.dataset.mode===m));
+  PANELS.forEach(id=>{ $(id).style.display = id===m ? 'block' : 'none'; });
+  renderPanel(m);
+  const el=$(m); el.classList.remove('slide-in'); void el.offsetWidth; el.classList.add('slide-in');
+}
+document.querySelectorAll('#mainTabs button').forEach(b=>b.onclick=()=>setMode(b.dataset.tab==='practice'?lastPractice:b.dataset.tab));
+document.querySelectorAll('#subTabs button').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+function gotoDay(n){ cur=n; store.lastDay=cur; save(); renderHeader(); renderProgress(); setMode(mode==='stats'||mode==='review'?mode:(isReviewDay()&&mode==='learn'?'learn':mode)); }
+$('prev').onclick=()=>{ if(cur>0) gotoDay(cur-1); };
+$('next').onclick=()=>{ if(cur<SCHED.length-1) gotoDay(cur+1); };
+const barEl=$('bar');
+addEventListener('scroll',()=>{ barEl.classList.toggle('stuck', barEl.getBoundingClientRect().top<=0 && scrollY>200); },{passive:true});
+
+/* ================= СТАРТ ================= */
+function showFatal(msg){
+  let b=$('errBanner');
+  if(!b){ b=document.createElement('div'); b.id='errBanner'; b.setAttribute('role','alert');
+    b.style.cssText='position:fixed;bottom:12px;left:12px;right:12px;z-index:3000;background:#7a2233;color:#fff;padding:12px 48px 12px 16px;border-radius:12px;font:14px/1.5 system-ui,sans-serif';
+    const x=document.createElement('button'); x.textContent='✕'; x.setAttribute('aria-label','Закрыть');
+    x.style.cssText='position:absolute;right:8px;top:6px;width:36px;height:36px;background:none;border:0;color:#fff;font-size:16px;cursor:pointer'; x.onclick=()=>b.remove();
+    const t=document.createElement('span'); t.id='errText'; b.append(t,x); document.body.appendChild(b); }
+  $('errText').textContent=msg;
+}
+addEventListener('error', ev=>showFatal('Ошибка: '+(ev.message||'неизвестная')));
+$('footer').textContent = 'Японский N5 по «Минна но Нихонго» · '+LESSONS.length+' уроков, '+TOTAL_WORDS+' слов, '+LESSONS.reduce((s,L)=>s+L.phrases.length,0)+' фраз · прогресс хранится в этом браузере.';
+applyFuri(); renderHeader(); renderStreak(); updateBadge(); setMode('learn');
+
+</script>
+</body>
+</html>
