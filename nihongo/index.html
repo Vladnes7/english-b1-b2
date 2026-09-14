@@ -232,6 +232,39 @@ tr.learned td.w{color:var(--good)}
 .word-popup .pf{font-family:var(--font-jp);font-size:15px;line-height:2;border-top:1px solid var(--border-strong);margin-top:8px;padding-top:6px}
 .word-popup .pf span{font-family:var(--font-ui);font-size:12px;color:var(--muted)}
 
+/* ===================== ПОДСВЕТКА =====================
+   Розовое свечение у кнопок и рамок при наведении и нажатии;
+   у «Знаю / Не знаю» — зелёное. Наведение — только там, где есть мышь,
+   чтобы на телефоне подсветка не «залипала» после касания. */
+html{
+  --glow-pink:0 0 0 1px color-mix(in srgb,var(--sakura) 55%,transparent),0 0 16px color-mix(in srgb,var(--sakura) 40%,transparent),0 0 34px color-mix(in srgb,var(--sakura) 16%,transparent);
+  --glow-pink-strong:0 0 0 1px var(--sakura),0 0 22px color-mix(in srgb,var(--sakura) 60%,transparent),0 0 46px color-mix(in srgb,var(--sakura) 26%,transparent);
+  --glow-green:0 0 0 1px color-mix(in srgb,var(--good) 60%,transparent),0 0 16px color-mix(in srgb,var(--good) 42%,transparent),0 0 34px color-mix(in srgb,var(--good) 16%,transparent);
+  --glow-green-strong:0 0 0 1px var(--good),0 0 24px color-mix(in srgb,var(--good) 62%,transparent),0 0 48px color-mix(in srgb,var(--good) 26%,transparent);
+  --glow-red:0 0 0 1px color-mix(in srgb,var(--bad) 60%,transparent),0 0 18px color-mix(in srgb,var(--bad) 40%,transparent);
+}
+.tabs button,.subtabs button,.iconbtn,.btn,.opt,.match-btn,.chip,.furi-toggle,
+.tablebox,.gcard,.card,.phr,.stat-card,.stat-block,.fc-face,.daylabel,.pill,td.chk input{
+  transition:background-color .2s,border-color .2s,color .2s,box-shadow .25s ease,transform .12s ease}
+@media (hover:hover){
+  .tabs button:hover:not(:disabled),.subtabs button:hover,.iconbtn:hover:not(:disabled),.btn:hover:not(:disabled),
+  .opt:hover:not(:disabled),.match-btn:hover:not(:disabled),.chip:hover,.furi-toggle:hover{box-shadow:var(--glow-pink)}
+  .tablebox:hover,.gcard:hover,.phr:hover,.stat-card:hover,.stat-block:hover,.card:hover,.daylabel:hover,.pill:hover{
+    border-color:color-mix(in srgb,var(--sakura) 55%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--sakura) 16%,transparent)}
+  .fc-card:hover .fc-face{box-shadow:0 0 30px color-mix(in srgb,var(--sakura) 26%,transparent)}
+  td.chk input:hover{box-shadow:var(--glow-green)}
+  .btn.know:hover:not(:disabled){border-color:var(--good);color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent);box-shadow:var(--glow-green)}
+}
+.tabs button:active:not(:disabled),.subtabs button:active,.iconbtn:active:not(:disabled),.btn:active:not(:disabled),
+.opt:active:not(:disabled),.match-btn:active:not(:disabled),.chip:active,.furi-toggle:active{box-shadow:var(--glow-pink-strong);transform:scale(.97)}
+.tabs button.active,.furi-toggle[aria-pressed="true"],.match-btn.sel{box-shadow:var(--glow-pink)}
+.btn.know{border-color:color-mix(in srgb,var(--good) 55%,transparent)}
+.btn.know:active:not(:disabled){border-color:var(--good);color:var(--good);background:color-mix(in srgb,var(--good) 18%,transparent);box-shadow:var(--glow-green-strong)}
+/* короткая вспышка после нажатия «Знаю / Не знаю» — видна и на телефоне */
+.btn.know.flash{border-color:var(--good);color:var(--good);box-shadow:var(--glow-green-strong)}
+.opt.ok,.match-btn.ok{box-shadow:var(--glow-green)}
+.opt.no,.match-btn.no{box-shadow:var(--glow-red)}
+.card input[type=text]:focus{box-shadow:var(--glow-pink)}
 footer{color:var(--muted);font-size:13px;text-align:center;margin-top:40px;line-height:1.8}
 .conf{position:fixed;top:-16px;width:8px;height:14px;z-index:2000;border-radius:2px;animation:confFall 2.6s ease-in forwards;pointer-events:none}
 @keyframes confFall{to{transform:translateY(105vh) rotate(720deg)}}
@@ -743,6 +776,9 @@ function finishCard(box, title, c, t, again){
   box.querySelector('#again').onclick=again;
 }
 
+// Зелёная вспышка на кнопке «Знаю / Не знаю» — подтверждает нажатие, в том числе на телефоне
+function flashBtn(b){ if(!b) return; b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); setTimeout(()=>b.classList.remove('flash'),450); }
+
 /* ================= КАРТОЧКИ ================= */
 let fc={items:[],idx:0,known:new Set(),src:'words'};
 function flipReset(el){ if(!el||!el.classList.contains('flipped')) return; el.style.transition='none'; el.classList.remove('flipped'); void el.offsetWidth; el.style.transition=''; }
@@ -755,7 +791,7 @@ function initFlash(){
     '<div class="fc-face" id="fcFront"></div><div class="fc-face fc-back" id="fcBack"></div></div></div>'+
     '<p class="help" style="text-align:center;margin-top:10px">Нажми на карточку, чтобы перевернуть</p>'+
     '<div class="fc-nav"><button class="iconbtn" id="fcPrev" aria-label="Назад">‹</button><span class="fc-counter" id="fcCounter"></span><button class="iconbtn" id="fcNext" aria-label="Вперёд">›</button></div>'+
-    '<div class="actions"><button class="btn" id="fcKnow">Знаю</button><button class="btn" id="fcSkip">Не знаю</button><button class="btn" id="fcShuf">Перемешать</button></div>'+
+    '<div class="actions"><button class="btn know" id="fcKnow">Знаю</button><button class="btn know" id="fcSkip">Не знаю</button><button class="btn" id="fcShuf">Перемешать</button></div>'+
     '<p class="help" id="fcStatus" style="text-align:center;margin-top:10px"></p>';
   box.querySelectorAll('[data-src]').forEach(b=>{ b.classList.toggle('active',b.dataset.src===fc.src); b.onclick=()=>{ fc.src=b.dataset.src; initFlash(); }; });
   const card=$('fcCard');
@@ -764,7 +800,8 @@ function initFlash(){
   $('fcPrev').onclick=()=>{ if(fc.idx>0){ fc.idx--; renderFlash(); } };
   $('fcNext').onclick=()=>{ if(fc.idx<fc.items.length-1){ fc.idx++; renderFlash(); } };
   $('fcShuf').onclick=()=>{ fc.items=shuffle(fc.items); fc.idx=0; renderFlash(); };
-  $('fcKnow').onclick=()=>markCard(true); $('fcSkip').onclick=()=>markCard(false);
+  $('fcKnow').onclick=()=>{ flashBtn($('fcKnow')); markCard(true); };
+  $('fcSkip').onclick=()=>{ flashBtn($('fcSkip')); markCard(false); };
   renderFlash();
 }
 function renderFlash(){
@@ -960,7 +997,7 @@ function quizRun(boxId, items, onDone){
     box.innerHTML='<div class="card"><div class="counter">'+counter+'</div><div class="dir">Напиши перевод по-русски</div>'+
       '<div class="big">'+rb(display(it))+'</div><div class="hint">'+tagHTML(it.t)+'</div>'+
       '<input type="text" id="qIn" autocomplete="off" aria-label="Перевод" placeholder="Перевод…">'+
-      '<div class="actions"><button class="btn primary" id="qGo">Проверить</button><button class="btn" id="qSkip">Не знаю</button></div>'+
+      '<div class="actions"><button class="btn primary" id="qGo">Проверить</button><button class="btn know" id="qSkip">Не знаю</button></div>'+
       '<div class="feedback" id="qFb" aria-live="polite"></div><div class="explain" id="qEx"></div></div>';
     const inp=box.querySelector('#qIn'); inp.focus(); let done=false;
     const fin=(ok,skipped)=>{
@@ -971,7 +1008,7 @@ function quizRun(boxId, items, onDone){
       box.querySelector('#qGo').textContent='Дальше ›'; box.querySelector('#qGo').focus();
     };
     const submit=()=>{ if(done){ idx++; step(); return; } const v=norm(inp.value); if(!v) return; fin(accepted(it).some(a=>a===v || (v.length>=4 && a.startsWith(v))), false); };
-    box.querySelector('#qGo').onclick=submit; box.querySelector('#qSkip').onclick=()=>{ if(!done) fin(false,true); else { idx++; step(); } };
+    box.querySelector('#qGo').onclick=submit; box.querySelector('#qSkip').onclick=()=>{ flashBtn(box.querySelector('#qSkip')); if(!done) fin(false,true); else { idx++; step(); } };
     inp.onkeydown=e=>{ if(e.key==='Enter') submit(); };
   };
   step();

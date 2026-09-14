@@ -28,6 +28,9 @@ function finishCard(box, title, c, t, again){
   box.querySelector('#again').onclick=again;
 }
 
+// Зелёная вспышка на кнопке «Знаю / Не знаю» — подтверждает нажатие, в том числе на телефоне
+function flashBtn(b){ if(!b) return; b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); setTimeout(()=>b.classList.remove('flash'),450); }
+
 /* ================= КАРТОЧКИ ================= */
 let fc={items:[],idx:0,known:new Set(),src:'words'};
 function flipReset(el){ if(!el||!el.classList.contains('flipped')) return; el.style.transition='none'; el.classList.remove('flipped'); void el.offsetWidth; el.style.transition=''; }
@@ -40,7 +43,7 @@ function initFlash(){
     '<div class="fc-face" id="fcFront"></div><div class="fc-face fc-back" id="fcBack"></div></div></div>'+
     '<p class="help" style="text-align:center;margin-top:10px">Нажми на карточку, чтобы перевернуть</p>'+
     '<div class="fc-nav"><button class="iconbtn" id="fcPrev" aria-label="Назад">‹</button><span class="fc-counter" id="fcCounter"></span><button class="iconbtn" id="fcNext" aria-label="Вперёд">›</button></div>'+
-    '<div class="actions"><button class="btn" id="fcKnow">Знаю</button><button class="btn" id="fcSkip">Не знаю</button><button class="btn" id="fcShuf">Перемешать</button></div>'+
+    '<div class="actions"><button class="btn know" id="fcKnow">Знаю</button><button class="btn know" id="fcSkip">Не знаю</button><button class="btn" id="fcShuf">Перемешать</button></div>'+
     '<p class="help" id="fcStatus" style="text-align:center;margin-top:10px"></p>';
   box.querySelectorAll('[data-src]').forEach(b=>{ b.classList.toggle('active',b.dataset.src===fc.src); b.onclick=()=>{ fc.src=b.dataset.src; initFlash(); }; });
   const card=$('fcCard');
@@ -49,7 +52,8 @@ function initFlash(){
   $('fcPrev').onclick=()=>{ if(fc.idx>0){ fc.idx--; renderFlash(); } };
   $('fcNext').onclick=()=>{ if(fc.idx<fc.items.length-1){ fc.idx++; renderFlash(); } };
   $('fcShuf').onclick=()=>{ fc.items=shuffle(fc.items); fc.idx=0; renderFlash(); };
-  $('fcKnow').onclick=()=>markCard(true); $('fcSkip').onclick=()=>markCard(false);
+  $('fcKnow').onclick=()=>{ flashBtn($('fcKnow')); markCard(true); };
+  $('fcSkip').onclick=()=>{ flashBtn($('fcSkip')); markCard(false); };
   renderFlash();
 }
 function renderFlash(){
@@ -245,7 +249,7 @@ function quizRun(boxId, items, onDone){
     box.innerHTML='<div class="card"><div class="counter">'+counter+'</div><div class="dir">Напиши перевод по-русски</div>'+
       '<div class="big">'+rb(display(it))+'</div><div class="hint">'+tagHTML(it.t)+'</div>'+
       '<input type="text" id="qIn" autocomplete="off" aria-label="Перевод" placeholder="Перевод…">'+
-      '<div class="actions"><button class="btn primary" id="qGo">Проверить</button><button class="btn" id="qSkip">Не знаю</button></div>'+
+      '<div class="actions"><button class="btn primary" id="qGo">Проверить</button><button class="btn know" id="qSkip">Не знаю</button></div>'+
       '<div class="feedback" id="qFb" aria-live="polite"></div><div class="explain" id="qEx"></div></div>';
     const inp=box.querySelector('#qIn'); inp.focus(); let done=false;
     const fin=(ok,skipped)=>{
@@ -256,7 +260,7 @@ function quizRun(boxId, items, onDone){
       box.querySelector('#qGo').textContent='Дальше ›'; box.querySelector('#qGo').focus();
     };
     const submit=()=>{ if(done){ idx++; step(); return; } const v=norm(inp.value); if(!v) return; fin(accepted(it).some(a=>a===v || (v.length>=4 && a.startsWith(v))), false); };
-    box.querySelector('#qGo').onclick=submit; box.querySelector('#qSkip').onclick=()=>{ if(!done) fin(false,true); else { idx++; step(); } };
+    box.querySelector('#qGo').onclick=submit; box.querySelector('#qSkip').onclick=()=>{ flashBtn(box.querySelector('#qSkip')); if(!done) fin(false,true); else { idx++; step(); } };
     inp.onkeydown=e=>{ if(e.key==='Enter') submit(); };
   };
   step();
