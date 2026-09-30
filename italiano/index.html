@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Итальянский с нуля · A1</title>
+<meta name="theme-color" content="#f7f3e9">
+<link rel="stylesheet" href="assets/scrollcraft.css">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Great+Vibes&family=Barlow+Condensed:wght@500;600;700&display=swap');
 
   /* ===================== ОБЩЕЕ ===================== */
-  /* Единственная тема: тёмный «римский закат». Зелёный и красный флага осветлены —
-     оригинальные #009246 / #CE2B37 на чёрном не читаются. */
+  /* Совместимые стили учебных компонентов. Единственная светлая тема,
+     оформление и анимации задаются в assets/italiano.css ниже. */
   html{
     color-scheme:dark;
     --font-body:'Inter',sans-serif; --font-display:'Fraunces',serif; --font-script:'Great Vibes',cursive;
@@ -471,45 +472,47 @@
   }
   @media (prefers-reduced-motion: reduce){.flap.spin{animation:none}}
 </style>
+<link rel="stylesheet" href="assets/italiano.css">
 </head>
 <body>
+<a class="skip-link" href="#study">Перейти к уроку</a>
 <div class="wrap">
-  <header class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-top">
-      <div class="meta-left">
-        <div class="tag">Italiano · A1</div>
-        <div style="margin-top:10px">Итальянский с нуля<br><b>20 слов в день</b></div>
+  <div class="studio-top">
+    <a class="studio-brand" href="./" aria-label="Italiano, главная страница">
+      <span class="studio-monogram" aria-hidden="true">i</span>
+      <span class="studio-name">Studio italiano<small>маленькое путешествие каждый день</small></span>
+    </a>
+    <div class="studio-top-note"><span>Язык. Культура. La dolce vita.</span><span class="italian-flag" aria-label="Флаг Италии" role="img"></span></div>
+  </div>
+  <header class="hero" data-sc-act="flow">
+    <div class="hero-copy">
+      <p class="hero-kicker">Итальянский с нуля · A1</p>
+      <h1 class="hero-title" lang="it">Ciao, <span class="sub">Italia.</span></h1>
+      <p class="hero-intro">Большое путешествие начинается с маленького <i lang="it">ciao</i>. Открывай итальянский через слова, живые фразы и немного ежедневной практики.</p>
+      <div class="hero-tools">
+        <a class="hero-start" href="#study">К сегодняшнему уроку <span aria-hidden="true">↗</span></a>
+        <span class="hero-note">20 новых слов в день<br>В твоём собственном ритме</span>
       </div>
-      <div class="meta-right">
-        <span>2026</span>
-        <span>Итальянский · A1</span>
-        <span style="margin-top:8px"><span class="dash">—</span> Грамматика</span>
-        <span><span class="dash">—</span> Карточки</span>
-        <span><span class="dash">—</span> Умное повторение</span>
-        <span><span class="dash">—</span> Тесты</span>
-      </div>
+      <div class="hero-card"><b>Твой итальянский начинается здесь.</b><br>Прогресс сохраняется автоматически.</div>
     </div>
-    <div class="hero-title-wrap">
-      <h1 class="hero-title">CIAO<span class="sub">italiano</span></h1>
-    </div>
-    <div class="hero-bottom">
-      <div class="hero-card">
-        <b>Итальянский с нуля · A1</b><br>
-        Каждый день — 20 новых итальянских слов с произношением и переводом.<br>
-        Прогресс сохраняется автоматически.
+    <figure class="loggia" aria-label="Светлая итальянская лоджия с видом на побережье Амальфи">
+      <div class="loggia-window">
+        <img src="hero.jpg?v=amalfi" width="1672" height="941" alt="Солнечная терраса с видом на зелёные склоны Амальфи и Средиземное море" fetchpriority="high" decoding="async" data-sc-parallax="0.025">
       </div>
-      <div class="hero-desc">
-        Учи слова и фразы, разбирай грамматику, собирай предложения и проверяй себя в тесте.
-      </div>
-    </div>
+      <img class="loggia-column left" src="assets/column.svg" alt="" aria-hidden="true" width="160" height="620" data-sc-parallax="0.055">
+      <img class="loggia-column right" src="assets/column.svg" alt="" aria-hidden="true" width="160" height="620" data-sc-parallax="0.055">
+      <div class="loggia-ledge" aria-hidden="true"></div>
+      <figcaption class="loggia-caption"><span lang="it">Una finestra sull’Italia</span><span>Amalfi · Italia</span></figcaption>
+    </figure>
   </header>
 
+  <main id="study" tabindex="-1">
+  <div class="study-intro"><h2>Твоя итальянская глава</h2><p>Слова становятся фразами.<br>Фразы становятся разговорами.</p></div>
   <div class="bar">
     <div class="daynav">
-      <button id="prev">‹</button>
+      <button id="prev" aria-label="Предыдущий день">‹</button>
       <span class="label">День <b id="dayNum">1</b><span class="sublabel" id="daySub"></span></span>
-      <button id="next">›</button>
+      <button id="next" aria-label="Следующий день">›</button>
       <span class="streak" id="streakEl">🔥 0</span>
     </div>
     <div class="tabs" id="mainTabs">
@@ -541,7 +544,7 @@
         <tr>
           <th class="num">№</th>
           <th>Italiano</th>
-          <th class="ipa">Произношение</th>
+          <th class="ipa">Как читать</th>
           <th>Перевод</th>
           <th class="chk">✓</th>
         </tr>
@@ -550,6 +553,10 @@
     </table>
     <p style="color:var(--muted);font-size:13px;margin-top:10px;text-align:center">💡 Нажми на любое слово, чтобы увидеть подсказку.<br>
       Заглавные буквы в произношении — ударный слог. <b>(м)</b> и <b>(ж)</b> — род слова в итальянском: <i>il/lo</i> → м, <i>la</i> → ж.</p>
+    <aside class="italian-pause" aria-label="Немного итальянского настроения">
+      <figure><img src="assets/toscana.jpg" alt="Светлые холмы Тосканы, кипарисы и дорога к каменному дому" width="1536" height="1024" loading="lazy" decoding="async"><figcaption>Toscana, Italia</figcaption></figure>
+      <div><span class="pause-rule" aria-hidden="true"></span><p lang="it">Un piccolo passo,<br>ogni giorno.</p><span>Маленький шаг. Каждый день.</span></div>
+    </aside>
     <div id="lessonExtra"></div>
   </div>
 
@@ -572,7 +579,7 @@
     <div class="fc-dir" role="group" aria-label="Какой стороной показывать карточку"><button type="button" data-dir="fwd">IT → RU</button><button type="button" data-dir="rev">RU → IT</button><button type="button" data-dir="mix">Вперемешку</button></div>
 
     <div class="fc-wrap">
-      <div class="fc-card" id="fcCard">
+      <div class="fc-card" id="fcCard" role="button" tabindex="0" aria-label="Перевернуть карточку">
         <div class="fc-front">
           <div class="fc-label">Итальянское слово</div>
           <div class="fc-word" id="fcWord"></div>
@@ -586,9 +593,9 @@
     </div>
     <div class="fc-hint">Нажми на карточку, чтобы перевернуть</div>
     <div class="fc-nav">
-      <button id="fcPrev">‹</button>
+      <button id="fcPrev" aria-label="Предыдущая карточка">‹</button>
       <span class="fc-counter" id="fcCounter">1 / 20</span>
-      <button id="fcNext">›</button>
+      <button id="fcNext" aria-label="Следующая карточка">›</button>
     </div>
     <div class="fc-progress-row">
       <button onclick="markCard('know')">✓ Знаю</button>
@@ -658,8 +665,10 @@
     </div>
   </div>
 
-  <footer id="footer">
-    Итальянский с нуля · A1 · прогресс сохраняется в этом браузере автоматически.
+  </main>
+  <footer>
+    <span class="studio-close" lang="it">Piano piano, si va lontano.</span>
+    <span id="footer">Итальянский с нуля · A1 · прогресс сохраняется в этом браузере автоматически.</span>
   </footer>
 </div>
 
@@ -1857,13 +1866,16 @@ function syncTabs(m){
   if(g==='practice') lastPractice = m;
   try{ renderHeader(); }catch(e){}
 }
+let modeTransition = 0;
 function setMode(m){
+  const transition = ++modeTransition;
   const prev = mode;
   mode = m;
   syncTabs(m);
   const oldEl = document.getElementById(prev);
   const newEl = document.getElementById(m);
-  if(prev === m || !oldEl || oldEl.style.display === 'none'){
+  if(prev === m || !oldEl || oldEl.style.display === 'none' || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    PANELS.forEach(id=>document.getElementById(id).classList.remove('slide-in','slide-out'));
     PANELS.forEach(id=>{ document.getElementById(id).style.display = id===m?'block':'none'; });
     renderPanel(m);
     newEl.classList.remove('slide-out');
@@ -1875,9 +1887,10 @@ function setMode(m){
   oldEl.classList.add('slide-out');
   let switched = false;
   const doSwitch = ()=>{
-    if(switched) return;
+    if(switched || transition !== modeTransition) return;
     switched = true;
     oldEl.classList.remove('slide-out');
+    PANELS.forEach(id=>document.getElementById(id).classList.remove('slide-in','slide-out'));
     PANELS.forEach(id=>{ document.getElementById(id).style.display = id===m?'block':'none'; });
     renderPanel(m);
     newEl.classList.add('slide-in');
@@ -1937,5 +1950,7 @@ try{
   try{ document.getElementById('learn').style.display = 'block'; renderLearn(); }catch(_){}
 }
 </script>
+<script src="assets/scrollcraft.js" defer></script>
+<script src="assets/italiano.js" defer></script>
 </body>
 </html>
