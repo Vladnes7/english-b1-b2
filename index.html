@@ -44,7 +44,7 @@
     background:radial-gradient(circle,rgba(170,80,255,.24) 0%,rgba(255,61,154,.08) 40%,transparent 68%)}
   /* фиолетовое свечение по краям экрана */
   html[data-theme="tube"]::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-    box-shadow:inset 0 0 140px rgba(139,77,255,.30),inset 0 0 40px rgba(170,90,255,.18)}
+    background:radial-gradient(ellipse 75% 70% at 50% 50%,transparent 62%,rgba(139,77,255,.16) 85%,rgba(150,80,255,.34) 100%)}
   html[data-theme="tube"] .hero{box-shadow:0 0 0 1px rgba(139,77,255,.18),0 0 80px rgba(139,77,255,.22),0 0 140px rgba(255,61,154,.08)}
   html[data-theme="tube"] .hero-title-wrap,html[data-theme="tube"] .hero-deco{display:none}
   html[data-theme="tube"] .tube-hero{display:flex}
@@ -96,8 +96,15 @@
   html[data-theme="tube"] .btn{box-shadow:0 0 22px rgba(139,77,255,.35)}
   html[data-theme="tube"] .btn:hover{box-shadow:0 0 0 1px #ff3d9a,0 0 26px rgba(255,61,154,.55),0 0 60px rgba(77,124,255,.35)}
   /* карточки и панели подсвечиваются краем */
-  html[data-theme="tube"] .fc-card:hover .fc-front,html[data-theme="tube"] .fc-card:hover .fc-back{
-    box-shadow:0 0 0 1px rgba(77,124,255,.5),0 0 40px rgba(77,124,255,.35),0 0 90px rgba(255,61,154,.15)}
+  /* Свечение карточки живёт на .fc-wrap::before — вне 3D-поворота и меняет только opacity.
+     Большие тени прямо на сторонах карточки перерисовывались при каждом перевороте и давали подвисание. */
+  html[data-theme="tube"] .fc-front,html[data-theme="tube"] .fc-back,
+  html[data-theme="tube"] .fc-card:hover .fc-front,html[data-theme="tube"] .fc-card:hover .fc-back{box-shadow:none;transition:none}
+  html[data-theme="tube"] .fc-wrap{position:relative}
+  html[data-theme="tube"] .fc-wrap::before{content:'';position:absolute;inset:0;border-radius:20px;pointer-events:none;
+    box-shadow:0 0 0 1px rgba(77,124,255,.45),0 0 40px rgba(77,124,255,.32),0 0 90px rgba(255,61,154,.14);
+    opacity:.35;transition:opacity .3s}
+  html[data-theme="tube"] .fc-wrap:hover::before{opacity:1}
   html[data-theme="tube"] .fc-back{border-color:var(--l-metro);
     background:linear-gradient(135deg,rgba(255,61,154,.12),var(--surface) 60%)}
   html[data-theme="tube"] .card{transition:box-shadow .3s,border-color .3s}
@@ -518,6 +525,7 @@
   .fc-card{width:100%;height:230px;position:relative;transform-style:preserve-3d;
     transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer}
   .fc-card.flipped{transform:rotateY(180deg)}
+  .fc-card{will-change:transform}   /* слой готов заранее — переворот стартует без рывка */
   .fc-front,.fc-back{position:absolute;inset:0;background:var(--surface);border:1px solid var(--border-strong);
     border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
     display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;
