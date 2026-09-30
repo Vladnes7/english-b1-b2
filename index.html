@@ -373,6 +373,16 @@
   .fc-nav button:disabled{opacity:.3;cursor:default}
   .fc-counter{color:var(--muted);font-size:13px;min-width:64px;text-align:center;font-family:var(--font-display);font-weight:500}
   .fc-hint{color:var(--muted);font-size:12px;text-align:center;letter-spacing:.3px}
+  /* Направление карточек: .rev показывает оборот (перевод) первым */
+  .fc-dir{display:flex;justify-content:center;gap:6px;margin:0 auto 14px;flex-wrap:wrap}
+  .fc-dir button{background:var(--surface-2);border:1px solid var(--border);color:var(--muted);
+    padding:7px 14px;border-radius:10px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+  .fc-dir button:hover{border-color:var(--border-strong);color:var(--text)}
+  .fc-dir button.active{border-color:var(--accent);color:var(--accent-bright);
+    background:color-mix(in srgb,var(--accent) 14%,transparent)}
+  .fc-card.rev .fc-front{transform:rotateY(180deg)}
+  .fc-card.rev .fc-back{transform:none}
+  .fc-card.rev .sp-note-card{display:none!important}
   .fc-progress-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
   .fc-progress-row button{background:var(--surface-2);border:1px solid var(--border-strong);color:var(--muted);
     padding:9px 20px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:var(--font-body)}
@@ -614,6 +624,8 @@
 
   <!-- FLASHCARDS -->
   <div id="flashcards">
+    <div class="fc-dir" role="group" aria-label="Какой стороной показывать карточку"><button type="button" data-dir="fwd">EN → RU</button><button type="button" data-dir="rev">RU → EN</button><button type="button" data-dir="mix">Вперемешку</button></div>
+
     <div class="fc-wrap">
       <div class="fc-card" id="fcCard">
         <div class="fc-front">
@@ -689,6 +701,8 @@
       <div id="pbBody"></div>
     </div>
     <div id="pbCardsView" style="display:none">
+      <div class="fc-dir" role="group" aria-label="Какой стороной показывать карточку"><button type="button" data-dir="fwd">EN → RU</button><button type="button" data-dir="rev">RU → EN</button><button type="button" data-dir="mix">Вперемешку</button></div>
+
       <div class="fc-wrap">
         <div class="fc-card" id="pbCard">
           <div class="fc-front">
@@ -732,6 +746,8 @@
       <div id="spBody"></div>
     </div>
     <div id="spCardsView" style="display:none">
+      <div class="fc-dir" role="group" aria-label="Какой стороной показывать карточку"><button type="button" data-dir="fwd">EN → RU</button><button type="button" data-dir="rev">RU → EN</button><button type="button" data-dir="mix">Вперемешку</button></div>
+
       <div class="fc-wrap">
         <div class="fc-card" id="spCard">
           <div class="fc-front">
@@ -1072,6 +1088,36 @@ function flipReset(el){
   el.style.transition = prev || '';
 }
 
+/* ================= НАПРАВЛЕНИЕ КАРТОЧЕК =================
+   fwd — сначала EN, rev — сначала русский, mix — случайно для каждой карточки.
+   Переворот делается классом .rev на .fc-card: стороны меняются местами в CSS. */
+const CARD_DIR_KEY = 'english_card_dir';
+let cardDir = 'mix';
+try{ cardDir = localStorage.getItem(CARD_DIR_KEY) || 'mix'; }catch(e){}
+function applyDir(el){
+  if(!el) return;
+  const rev = cardDir === 'rev' || (cardDir === 'mix' && Math.random() < .5);
+  el.classList.toggle('rev', rev);
+  const hint = el.closest('.fc-wrap') && el.closest('.fc-wrap').nextElementSibling;
+  if(hint && hint.classList.contains('fc-hint'))
+    hint.textContent = rev ? 'Скажи по-английски — потом переверни и сверь' : 'Нажми на карточку, чтобы перевернуть';
+}
+function setCardDir(d){
+  cardDir = d;
+  try{ localStorage.setItem(CARD_DIR_KEY, d); }catch(e){}
+  document.querySelectorAll('.fc-dir button').forEach(b => {
+    const on = b.dataset.dir === d;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', on);
+  });
+  document.querySelectorAll('.fc-card').forEach(c => { flipReset(c); applyDir(c); });
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('.fc-dir button');
+  if(b) setCardDir(b.dataset.dir);
+});
+document.addEventListener('DOMContentLoaded', () => setCardDir(cardDir));
+
 /* ================= КАРТОЧКИ ================= */
 let fc = { items:[], idx:0, known:new Set() };
 function initFlash(){
@@ -1090,6 +1136,7 @@ function shuffleFlash(){
 }
 function renderFlash(){
   flipReset(document.getElementById('fcCard'));
+  applyDir(document.getElementById('fcCard'));
   const w = fc.items[fc.idx];
   document.getElementById('fcWord').textContent = w.en;
   document.getElementById('fcIpa').textContent = w.ipa||'';
@@ -1589,6 +1636,7 @@ function pbInitCards(reshuffle){
 function pbRenderCard(){
   const c = document.getElementById('pbCard');
   flipReset(c);
+  applyDir(c);
   const it = pbCards.items[pbCards.idx];
   if(!it) return;
   document.getElementById('pbCardEn').textContent = it.en;
@@ -1726,6 +1774,7 @@ function spInitCards(reshuffle){
 function spRenderCard(){
   const c = document.getElementById('spCard');
   flipReset(c);
+  applyDir(c);
   const it = spCards.items[spCards.idx];
   if(!it) return;
   document.getElementById('spCardEn').textContent = it.en;
