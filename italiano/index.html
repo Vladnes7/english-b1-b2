@@ -473,8 +473,10 @@
   @media (prefers-reduced-motion: reduce){.flap.spin{animation:none}}
 </style>
 <link rel="stylesheet" href="assets/italiano.css">
+<link rel="stylesheet" href="assets/vivace.css">
 </head>
 <body>
+<div class="page-colonnade" aria-hidden="true"><div class="page-column left"><span class="capital"></span><span class="shaft"></span><span class="base"></span></div><div class="page-column right"><span class="capital"></span><span class="shaft"></span><span class="base"></span></div></div>
 <a class="skip-link" href="#study">Перейти к уроку</a>
 <div class="wrap">
   <div class="studio-top">
@@ -539,6 +541,10 @@
 
   <!-- LEARN -->
   <div id="learn">
+    <figure class="lesson-scene" id="lessonScene">
+      <div class="lesson-photo"><img id="lessonPhoto" src="assets/scenes/01.jpg" alt="Знакомство на солнечной итальянской площади" width="1536" height="1024" loading="lazy" decoding="async"></div>
+      <figcaption><span class="scene-kicker" id="sceneKicker">CAPITOLO 01 · ПРИВЕТСТВИЯ</span><p lang="it" id="sceneQuote">Ogni amicizia comincia con un ciao.</p><span id="sceneTranslation">Каждая дружба начинается с «привет».</span><span class="scene-flower" aria-hidden="true">✳</span></figcaption>
+    </figure>
     <table>
       <thead>
         <tr>
@@ -845,6 +851,7 @@ function confetti(){
 /* ================= ШАПКА / НАВИГАЦИЯ ПО ДНЯМ ================= */
 function renderHeader(){
   const e = entry();
+  window.dispatchEvent(new CustomEvent('italiano:lesson-change', {detail:{lessonIndex:e.li, review:e.type==='review'}}));
   const review = e.type==='review';
   document.getElementById('dayNum').textContent = dayNum();
   const sub = document.getElementById('daySub');
@@ -1952,5 +1959,6 @@ try{
 </script>
 <script src="assets/scrollcraft.js" defer></script>
 <script src="assets/italiano.js" defer></script>
+<script src="assets/lesson-scenes.js" defer></script>
 </body>
 </html>
