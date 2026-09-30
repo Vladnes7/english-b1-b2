@@ -1334,10 +1334,22 @@ function renderFlash(){
   document.getElementById('fcNext').disabled = fc.idx===fc.items.length-1;
   document.getElementById('fcStatus').textContent = fc.known.size>0 ? `Знаешь: ${fc.known.size} из ${fc.items.length}` : '';
 }
+/* «Знаю» / «Не знаю» в карточках ставит или снимает галочку этого слова в таблице «Учить».
+   Слово ищется по всем урокам: в день повторения колода собрана из трёх уроков. */
+function setWordLearned(en, on){
+  LESSONS.forEach((L,li)=>{
+    const i = L.words.findIndex(x=>x.en===en);
+    if(i<0) return;
+    const st = lessonState(li);
+    if(on){ if(!st.learned.includes(i)) st.learned.push(i); }
+    else st.learned = st.learned.filter(x=>x!==i);
+  });
+  save(); renderProgress();
+}
 function markCard(type){
   const w = fc.items[fc.idx];
-  if(type==='know'){ fc.known.add(fc.idx); srsRight(w.en); }
-  else { fc.known.delete(fc.idx); srsWrong(w.en); }
+  if(type==='know'){ fc.known.add(fc.idx); srsRight(w.en); setWordLearned(w.en, true); }
+  else { fc.known.delete(fc.idx); srsWrong(w.en); setWordLearned(w.en, false); }
   bump();
   if(fc.idx < fc.items.length-1){ fc.idx++; renderFlash(); }
   else document.getElementById('fcStatus').textContent = `Готово! Знаешь ${fc.known.size} из ${fc.items.length} слов.`;
