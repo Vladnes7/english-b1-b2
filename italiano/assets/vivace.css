@@ -123,3 +123,17 @@ footer { margin-top: 35px; border-top: 5px solid #71a9e0; background: #d4f8fc; p
   footer { padding: 24px 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .lesson-photo img { transition: none; } }
+
+/* Immediate press feedback; motion affects only composited properties. */
+button:not(:disabled), .hero-start {
+  touch-action: manipulation;
+  transition: transform 120ms cubic-bezier(.2,.65,.3,1),
+    background-color 160ms ease, border-color 160ms ease,
+    color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+button:not(:disabled):active, .hero-start:active {
+  transform: translateY(1px) scale(.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  button:not(:disabled):active, .hero-start:active { transform: none; }
+}

@@ -499,10 +499,10 @@
     </div>
     <figure class="loggia" aria-label="Светлая итальянская лоджия с видом на побережье Амальфи">
       <div class="loggia-window">
-        <img src="hero.jpg?v=amalfi" width="1672" height="941" alt="Солнечная терраса с видом на зелёные склоны Амальфи и Средиземное море" fetchpriority="high" decoding="async" data-sc-parallax="0.025">
+        <img src="hero.jpg?v=amalfi" width="1672" height="941" alt="Солнечная терраса с видом на зелёные склоны Амальфи и Средиземное море" fetchpriority="high" decoding="async">
       </div>
-      <img class="loggia-column left" src="assets/column.svg" alt="" aria-hidden="true" width="160" height="620" data-sc-parallax="0.055">
-      <img class="loggia-column right" src="assets/column.svg" alt="" aria-hidden="true" width="160" height="620" data-sc-parallax="0.055">
+      <img class="loggia-column left" src="assets/column.svg" alt="" aria-hidden="true" width="160" height="620">
+      <img class="loggia-column right" src="assets/column.svg" alt="" aria-hidden="true" width="160" height="620">
       <div class="loggia-ledge" aria-hidden="true"></div>
       <figcaption class="loggia-caption"><span lang="it">Una finestra sull’Italia</span><span>Amalfi · Italia</span></figcaption>
     </figure>
@@ -1013,9 +1013,20 @@ function renderFlash(){
 }
 function markCard(type){
   const w = fc.items[fc.idx];
-  if(type==='know'){ fc.known.add(fc.idx); srsRight(w.en); }
+  if(type==='know'){
+    fc.known.add(fc.idx);
+    // Review days and shuffled decks must still mark the original lesson row.
+    const li = LESSONS.findIndex(lesson=>lesson.words.some(word=>word.en===w.en));
+    if(li >= 0){
+      const wi = LESSONS[li].words.findIndex(word=>word.en===w.en);
+      const learned = lessonState(li).learned;
+      if(!learned.includes(wi)) learned.push(wi);
+    }
+    srsRight(w.en);
+  }
   else { fc.known.delete(fc.idx); srsWrong(w.en); }
   bump();
+  renderProgress();
   if(fc.idx < fc.items.length-1){ fc.idx++; renderFlash(); }
   else document.getElementById('fcStatus').textContent = `Готово! Знаешь ${fc.known.size} из ${fc.items.length} слов.`;
 }
@@ -1571,6 +1582,7 @@ const ENDS = {are:['o','i','a','iamo','ate','ano'], ere:['o','i','e','iamo','ete
 const VG_LABEL = {are:'на -are', ere:'на -ere', ire:'на -ire', isc:'на -ire · isc', irr:'неправильный'};
 function allVerbs(){ return LESSONS.flatMap(L=>L.words.filter(w=>w.conj)); }
 let boardToken = 0;
+let boardFrame = 0;
 function renderBoardPage(){
   const main = document.getElementById('grMain');
   const verbs = allVerbs();
@@ -1622,22 +1634,37 @@ function drawBoard(animate){
   </div>`;
   box.innerHTML = html;
   if(!animate) return;
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const token = ++boardToken;
+  if(boardFrame){ cancelAnimationFrame(boardFrame); boardFrame = 0; }
+  const flaps = Array.from(box.querySelectorAll('.flap'));
+  if(reduce){ flaps.forEach(el=>el.textContent = el.dataset.ch); return; }
   const ABC = 'ABCDEFGILMNOPRSTUVZ';
-  box.querySelectorAll('.flap').forEach((el,i)=>{
-    const target = el.dataset.ch;
-    if(reduce || !target){ el.textContent = target; return; }
-    let n = 3 + (i % width) + ((i / width) | 0);
-    const tick = ()=>{
-      if(token !== boardToken) return;
-      el.classList.remove('spin'); void el.offsetWidth; el.classList.add('spin');
-      if(n-- <= 0){ el.textContent = target; return; }
-      el.textContent = ABC[(Math.random()*ABC.length)|0];
-      setTimeout(tick, 55);
-    };
-    setTimeout(tick, (i % width) * 18);
-  });
+  let began = null, lastStep = -1;
+  // Update every letter together; never force layout for each flap.
+  const tick = time=>{
+    if(token !== boardToken || !box.isConnected) { boardFrame = 0; return; }
+    if(began === null) began = time;
+    const elapsed = time - began;
+    const step = Math.floor(elapsed / 55);
+    if(step !== lastStep){
+      lastStep = step;
+      flaps.forEach((el,i)=>{
+        const target = el.dataset.ch;
+        const delay = (i % width) * 18;
+        const duration = (3 + (i % width) + Math.floor(i / width)) * 55;
+        el.textContent = !target || elapsed >= delay + duration
+          ? target : elapsed < delay ? '' : ABC[(Math.random()*ABC.length)|0];
+      });
+    }
+    if(elapsed < (width - 1) * 18 + (width + 7) * 55){
+      boardFrame = requestAnimationFrame(tick);
+    } else {
+      flaps.forEach(el=>el.textContent = el.dataset.ch);
+      boardFrame = 0;
+    }
+  };
+  boardFrame = requestAnimationFrame(tick);
 }
 
 /* ================= СОБЕРИ ФРАЗУ ================= */
@@ -1873,40 +1900,29 @@ function syncTabs(m){
   if(g==='practice') lastPractice = m;
   try{ renderHeader(); }catch(e){}
 }
-let modeTransition = 0;
-function setMode(m){
-  const transition = ++modeTransition;
-  const prev = mode;
+let panelAnimation = null;
+function setMode(m, refresh = false){
+  if(!PANELS.includes(m)) return;
+  const newEl = document.getElementById(m);
+  // Clicking the active tab keeps the current exercise and answer.
+  if(m === mode && !refresh && newEl.style.display !== 'none') return;
+  if(panelAnimation){ panelAnimation.cancel(); panelAnimation = null; }
+  ++boardToken;
+  if(boardFrame){ cancelAnimationFrame(boardFrame); boardFrame = 0; }
   mode = m;
   syncTabs(m);
-  const oldEl = document.getElementById(prev);
-  const newEl = document.getElementById(m);
-  if(prev === m || !oldEl || oldEl.style.display === 'none' || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    PANELS.forEach(id=>document.getElementById(id).classList.remove('slide-in','slide-out'));
-    PANELS.forEach(id=>{ document.getElementById(id).style.display = id===m?'block':'none'; });
-    renderPanel(m);
-    newEl.classList.remove('slide-out');
-    newEl.classList.add('slide-in');
-    newEl.addEventListener('animationend', ()=>newEl.classList.remove('slide-in'), {once:true});
-    return;
+  PANELS.forEach(id=>{
+    const el = document.getElementById(id);
+    el.classList.remove('slide-in', 'slide-out');
+    el.style.display = id === m ? 'block' : 'none';
+  });
+  renderPanel(m);
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && newEl.animate){
+    panelAnimation = newEl.animate(
+      [{opacity:0, transform:'translateY(6px)'}, {opacity:1, transform:'translateY(0)'}],
+      {duration:180, easing:'cubic-bezier(.2,.65,.3,1)'}
+    );
   }
-  oldEl.classList.remove('slide-in');
-  oldEl.classList.add('slide-out');
-  let switched = false;
-  const doSwitch = ()=>{
-    if(switched || transition !== modeTransition) return;
-    switched = true;
-    oldEl.classList.remove('slide-out');
-    PANELS.forEach(id=>document.getElementById(id).classList.remove('slide-in','slide-out'));
-    PANELS.forEach(id=>{ document.getElementById(id).style.display = id===m?'block':'none'; });
-    renderPanel(m);
-    newEl.classList.add('slide-in');
-    const clearIn = ()=>newEl.classList.remove('slide-in');
-    newEl.addEventListener('animationend', clearIn, {once:true});
-    setTimeout(clearIn, 500);
-  };
-  oldEl.addEventListener('animationend', doSwitch, {once:true});
-  setTimeout(doSwitch, 300);
 }
 document.querySelectorAll('#mainTabs button').forEach(b=>{
   b.onclick = ()=>{ const t=b.dataset.tab; setMode(t==='practice' ? lastPractice : t); };
@@ -1919,7 +1935,7 @@ function gotoDay(n){
   grSel = null;
   store.lastDay = cur; save();
   renderHeader(); renderProgress();
-  setMode(isReviewDay() ? 'flashcards' : 'learn');
+  setMode(isReviewDay() ? 'flashcards' : 'learn', true);
 }
 document.getElementById('prev').onclick = ()=>{ if(cur>0) gotoDay(cur-1); };
 document.getElementById('next').onclick = ()=>{ if(cur<SCHED.length-1) gotoDay(cur+1); };
@@ -1951,13 +1967,12 @@ try{ renderHeader(); }catch(e){ showFatal('renderHeader: ' + e.message); }
 try{ renderStreak(); }catch(e){}
 try{ updateBadge(); }catch(e){}
 try{
-  setMode(isReviewDay() ? 'flashcards' : 'learn');
+  setMode(isReviewDay() ? 'flashcards' : 'learn', true);
 }catch(e){
   showFatal('Запуск: ' + e.message);
   try{ document.getElementById('learn').style.display = 'block'; renderLearn(); }catch(_){}
 }
 </script>
-<script src="assets/scrollcraft.js" defer></script>
 <script src="assets/italiano.js" defer></script>
 <script src="assets/lesson-scenes.js" defer></script>
 </body>
