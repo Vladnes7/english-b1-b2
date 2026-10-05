@@ -158,17 +158,6 @@
   tr.learned td.en{color:var(--good)}
   tr.learned{background:color-mix(in srgb,var(--good) 5%,transparent)}
 
-  /* POPUP */
-  .word-popup{position:fixed;z-index:1000;background:var(--surface-3);border:1px solid var(--accent);
-    border-radius:14px;padding:14px 18px;min-width:230px;max-width:300px;
-    box-shadow:0 0 30px var(--glow-accent),0 12px 40px rgba(0,0,0,.25);
-    pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s}
-  .word-popup.show{opacity:1;transform:translateY(0)}
-  .word-popup .pop-en{font-size:20px;font-weight:700;font-family:var(--font-display);
-    background:var(--word-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .word-popup .pop-ipa{font-size:12px;color:var(--muted);font-style:italic;margin:3px 0 7px}
-  .word-popup .pop-ru{font-size:15px;color:var(--text)}
-
   /* CARD */
   .card{background:var(--surface);border:1px solid var(--border-strong);border-radius:20px;
     padding:36px 28px;text-align:center;box-shadow:0 0 40px color-mix(in srgb,var(--accent) 10%,transparent)}
@@ -473,7 +462,7 @@
   @media (prefers-reduced-motion: reduce){.flap.spin{animation:none}}
 </style>
 <link rel="stylesheet" href="assets/italiano.css">
-<link rel="stylesheet" href="assets/vivace.css?v=stress-1">
+<link rel="stylesheet" href="assets/vivace.css?v=clean-words-1">
 </head>
 <body>
 <div class="page-colonnade" aria-hidden="true"><div class="page-column left"><span class="capital"></span><span class="shaft"></span><span class="base"></span></div><div class="page-column right"><span class="capital"></span><span class="shaft"></span><span class="base"></span></div></div>
@@ -557,7 +546,7 @@
       </thead>
       <tbody id="rows"><tr><td class="num">1</td><td class="en" data-i="0">ciao</td><td class="ipa">ЧА-о</td><td>привет, пока</td><td class="chk"><input type="checkbox" data-i="0"></td></tr><tr><td class="num">2</td><td class="en" data-i="1">buongiorno</td><td class="ipa">буон-ДЖОР-но</td><td>добрый день, здравствуйте</td><td class="chk"><input type="checkbox" data-i="1"></td></tr><tr><td class="num">3</td><td class="en" data-i="2">buonasera</td><td class="ipa">буо-на-СЕ-ра</td><td>добрый вечер</td><td class="chk"><input type="checkbox" data-i="2"></td></tr><tr><td class="num">4</td><td class="en" data-i="3">buonanotte</td><td class="ipa">буо-на-НОТ-те</td><td>спокойной ночи</td><td class="chk"><input type="checkbox" data-i="3"></td></tr><tr><td class="num">5</td><td class="en" data-i="4">arrivederci</td><td class="ipa">ар-ри-ве-ДЕР-чи</td><td>до свидания</td><td class="chk"><input type="checkbox" data-i="4"></td></tr><tr><td class="num">6</td><td class="en" data-i="5">salve</td><td class="ipa">САЛЬ-ве</td><td>здравствуйте</td><td class="chk"><input type="checkbox" data-i="5"></td></tr><tr><td class="num">7</td><td class="en" data-i="6">grazie</td><td class="ipa">ГРА-цие</td><td>спасибо</td><td class="chk"><input type="checkbox" data-i="6"></td></tr><tr><td class="num">8</td><td class="en" data-i="7">prego</td><td class="ipa">ПРЕ-го</td><td>пожалуйста, не за что</td><td class="chk"><input type="checkbox" data-i="7"></td></tr><tr><td class="num">9</td><td class="en" data-i="8">per favore</td><td class="ipa">пер фа-ВО-ре</td><td>пожалуйста, будьте добры</td><td class="chk"><input type="checkbox" data-i="8"></td></tr><tr><td class="num">10</td><td class="en" data-i="9">scusa</td><td class="ipa">СКУ-за</td><td>извини</td><td class="chk"><input type="checkbox" data-i="9"></td></tr><tr><td class="num">11</td><td class="en" data-i="10">scusi</td><td class="ipa">СКУ-зи</td><td>извините</td><td class="chk"><input type="checkbox" data-i="10"></td></tr><tr><td class="num">12</td><td class="en" data-i="11">sì</td><td class="ipa">си</td><td>да</td><td class="chk"><input type="checkbox" data-i="11"></td></tr><tr><td class="num">13</td><td class="en" data-i="12">no</td><td class="ipa">но</td><td>нет</td><td class="chk"><input type="checkbox" data-i="12"></td></tr><tr><td class="num">14</td><td class="en" data-i="13">come</td><td class="ipa">КО-ме</td><td>как</td><td class="chk"><input type="checkbox" data-i="13"></td></tr><tr><td class="num">15</td><td class="en" data-i="14">bene</td><td class="ipa">БЕ-не</td><td>хорошо</td><td class="chk"><input type="checkbox" data-i="14"></td></tr><tr><td class="num">16</td><td class="en" data-i="15">male</td><td class="ipa">МА-ле</td><td>плохо</td><td class="chk"><input type="checkbox" data-i="15"></td></tr><tr><td class="num">17</td><td class="en" data-i="16">va bene</td><td class="ipa">ва БЕ-не</td><td>хорошо, договорились</td><td class="chk"><input type="checkbox" data-i="16"></td></tr><tr><td class="num">18</td><td class="en" data-i="17">mi chiamo</td><td class="ipa">ми КЬЯ-мо</td><td>меня зовут</td><td class="chk"><input type="checkbox" data-i="17"></td></tr><tr><td class="num">19</td><td class="en" data-i="18">piacere</td><td class="ipa">пья-ЧЕ-ре</td><td>очень приятно</td><td class="chk"><input type="checkbox" data-i="18"></td></tr><tr><td class="num">20</td><td class="en" data-i="19">ecco</td><td class="ipa">ЭК-ко</td><td>вот</td><td class="chk"><input type="checkbox" data-i="19"></td></tr></tbody>
     </table>
-    <p class="learn-help">Нажми на слово или его строку, чтобы отметить его как выученное. Повторное нажатие снимает отметку. Кнопка «?» открывает пример.<br>
+    <p class="learn-help">Нажми на слово или его строку, чтобы отметить его как выученное. Повторное нажатие снимает отметку.<br>
       Знак над гласной показывает ударение; добавленные знаки в итальянских словах — учебная подсказка. <b>(м)</b> и <b>(ж)</b> — род слова.</p>
     <aside class="italian-pause" aria-label="Немного итальянского настроения">
       <figure><img src="assets/toscana.jpg" alt="Светлые холмы Тосканы, кипарисы и дорога к каменному дому" width="1536" height="1024" loading="lazy" decoding="async"><figcaption>Toscana, Italia</figcaption></figure>
@@ -676,13 +665,6 @@
     <span class="studio-close" lang="it">Piano piano, si va lontano.</span>
     <span id="footer">Итальянский с нуля · A1 · прогресс сохраняется в этом браузере автоматически.</span>
   </footer>
-</div>
-
-<!-- WORD POPUP -->
-<div class="word-popup" id="wordPopup">
-  <div class="pop-en" id="popEn"></div>
-  <div class="pop-ipa" id="popIpa"></div>
-  <div class="pop-ru" id="popRu"></div>
 </div>
 
 <script src="assets/pronunciation.js?v=stress-1"></script>
@@ -882,33 +864,6 @@ function renderProgress(){
   document.getElementById('progBar').style.width = pct + '%';
 }
 
-/* ================= ПОДСКАЗКА-ПОПАП ================= */
-const popup = document.getElementById('wordPopup');
-let popTimer = null;
-function showPopup(el, word){
-  document.getElementById('popEn').textContent = withArt(word);
-  document.getElementById('popIpa').textContent = studyIpa(word);
-  let extra = '';
-  if(word.pl && word.artpl) extra = 'мн. ч.: '+artJoin(word.artpl, word.pl);
-  if(word.conj) extra = word.conj.slice(0,3).join(', ')+' …';
-  document.getElementById('popRu').innerHTML = esc(word.ru) +
-    (extra ? '<div style="color:var(--flap-end);font-size:13px;margin-top:6px">'+esc(extra)+'</div>' : '') +
-    (word.sentence ? '<div style="color:var(--muted);font-size:12.5px;margin-top:6px;font-style:italic">'+esc(word.sentence)+'</div>' : '');
-  const rect = el.getBoundingClientRect();
-  const pw = 260;
-  let left = rect.left + window.scrollX;
-  let top = rect.bottom + window.scrollY + 8;
-  if(left + pw > window.innerWidth - 16) left = window.innerWidth - pw - 16;
-  popup.style.left = left+'px';
-  popup.style.top = top+'px';
-  popup.classList.add('show');
-  clearTimeout(popTimer);
-  popTimer = setTimeout(()=>popup.classList.remove('show'), 2800);
-}
-document.addEventListener('click', e=>{
-  if(!e.target.closest('.word-example')) popup.classList.remove('show');
-});
-
 /* ================= УЧИТЬ ================= */
 function renderLearn(){
   const e = entry();
@@ -919,7 +874,7 @@ function renderLearn(){
     const cls = st.learned.includes(i) ? 'learned' : '';
     return `<tr class="${cls}" data-i="${i}">
       <td class="num">${i+1}</td>
-      <td class="en"><div class="word-controls"><button type="button" class="word-toggle" aria-pressed="${!!on}" aria-label="Знаю слово «${esc(w.en)}»"><span lang="it">${w.art?'<span class="art">'+w.art+'</span>'+(w.art.endsWith("'")?'':' '):''}${esc(studyWord(w))}</span></button><button type="button" class="word-example" data-i="${i}" aria-label="Пример к слову «${esc(w.en)}»" title="Пример употребления">?</button></div></td>
+      <td class="en"><button type="button" class="word-toggle" aria-pressed="${!!on}" aria-label="Знаю слово «${esc(w.en)}»"><span lang="it">${w.art?'<span class="art">'+w.art+'</span>'+(w.art.endsWith("'")?'':' '):''}${esc(studyWord(w))}</span></button></td>
       <td class="ipa">${esc(studyIpa(w))}</td>
       <td>${w.ru}</td>
       
@@ -927,9 +882,6 @@ function renderLearn(){
     </tr>`;
   }).join('');
 
-  document.querySelectorAll('#rows .word-example').forEach(button=>{
-    button.addEventListener('click', ()=>showPopup(button, words[+button.dataset.i]));
-  });
   document.querySelectorAll('#rows input').forEach(c=>{
     c.onchange = ev=>{
       const i = +ev.target.dataset.i, st = lessonState(e.li);
@@ -942,7 +894,7 @@ function renderLearn(){
   });
   document.querySelectorAll('#rows tr').forEach(row=>{
     row.addEventListener('click', event=>{
-      if(event.target.closest('input, .word-example') || window.getSelection()?.toString()) return;
+      if(event.target.closest('input') || window.getSelection()?.toString()) return;
       row.querySelector('input[type="checkbox"]').click();
     });
   });
