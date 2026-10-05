@@ -32,15 +32,6 @@
       el.dataset.studioReveal = 'true';
       observer.observe(el);
     });
-    root.querySelectorAll('#rows input[type="checkbox"]').forEach(el => {
-      const word = el.closest('tr').querySelector('.en').textContent;
-      el.setAttribute('aria-label', `Отметить слово «${word}» как выученное`);
-    });
-    root.querySelectorAll('#rows td.en').forEach(el => {
-      el.tabIndex = 0;
-      el.setAttribute('role', 'button');
-      el.setAttribute('aria-label', `Подсказка к слову «${el.textContent}»`);
-    });
   };
   const syncTabs = () => {
     document.querySelectorAll('#mainTabs button, #subTabs button').forEach(el => {
@@ -64,10 +55,5 @@
   });
   document.querySelector('#fcCard').addEventListener('keydown', event => {
     if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); event.currentTarget.click(); }
-  });
-  document.querySelector('#rows').addEventListener('keydown', event => {
-    if (event.target.matches('td.en') && (event.key === 'Enter' || event.key === ' ')) {
-      event.preventDefault(); event.target.click();
-    }
   });
 })();
