@@ -974,7 +974,6 @@
           <div class="fc-back">
             <div class="fc-label">Перевод</div>
             <div class="fc-ru" id="spCardRu" style="font-size:19px;line-height:1.4"></div>
-            <div class="sp-note-card" id="spCardNote" style="display:none"></div>
           </div>
         </div>
       </div>
@@ -2030,9 +2029,6 @@ function spRenderCard(){
   document.getElementById('spCardEn').textContent = it.en;
   document.getElementById('spCardIpa').textContent = it.ipa || '';
   document.getElementById('spCardRu').textContent = it.ru;
-  const nb = document.getElementById('spCardNote');
-  if(it.note){ nb.style.display = 'block'; nb.innerHTML = '<b>✎ Обрати внимание:</b> ' + pbEsc(it.note); }
-  else nb.style.display = 'none';
   document.getElementById('spCounter').textContent = (spCards.idx + 1) + ' / ' + spCards.items.length;
   document.getElementById('spPrev').disabled = spCards.idx === 0;
   document.getElementById('spNext').disabled = spCards.idx === spCards.items.length - 1;
