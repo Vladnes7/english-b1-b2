@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Сборка: src/lessons.json + src/grammar.json → блок <script id="vocab"> в ../index.html.
+"""Сборка: src/lessons.json + src/grammar.json → блок <script id="vocab"> в ../index.html;
+src/phrasebook.json → блок <script id="phrasebook-data">.
 
 Запуск из корня репозитория или из italiano/:  python3 italiano/src/build.py
 Спряжения глаголов и артикли существительных вычисляются здесь — руками их не пишут.
@@ -142,11 +143,31 @@ def main():
                      lambda m: m.group(1) + '\n' + data + '\n' + m.group(3), html, count=1, flags=re.S)
     if n != 1:
         sys.exit('не найден блок <script id="vocab"> в index.html')
+    # разговорник: src/phrasebook.json → блок <script id="phrasebook-data">
+    pb = json.load(open(os.path.join(SRC, 'phrasebook.json'), encoding='utf-8'))
+    pb_errs, pb_seen = [], set()
+    for g in pb['groups']:
+        for it in g['items']:
+            for k in ('it', 'ipa', 'ru'):
+                if not it.get(k):
+                    pb_errs.append(f'фразы: у «{it.get("it")}» нет поля {k}')
+            if it['it'] in pb_seen:
+                pb_errs.append(f'фразы: «{it["it"]}» повторяется (it — ключ прогресса)')
+            pb_seen.add(it['it'])
+    if pb_errs:
+        print('Ошибки в данных:\n  ' + '\n  '.join(pb_errs))
+        sys.exit(1)
+    pb_data = json.dumps(pb, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+    new, n2 = re.subn(r'(<script id="phrasebook-data" type="application/json">)(.*?)(</script>)',
+                      lambda m: m.group(1) + '\n' + pb_data + '\n' + m.group(3), new, count=1, flags=re.S)
+    if n2 != 1:
+        sys.exit('не найден блок <script id="phrasebook-data"> в index.html')
     open(HTML, 'w', encoding='utf-8').write(new)
     nw = sum(len(L['words']) for L in lessons)
     nv = sum(1 for L in lessons for w in L['words'] if 'conj' in w)
     print(f'OK: {len(lessons)} уроков, {nw} слов, {sum(len(L["phrases"]) for L in lessons)} фраз, '
-          f'{len(grammar)} тем грамматики, {nv} глаголов со спряжением')
+          f'{len(grammar)} тем грамматики, {nv} глаголов со спряжением, '
+          f'{sum(len(g["items"]) for g in pb["groups"])} фраз в разговорнике')
 
 
 if __name__ == '__main__':

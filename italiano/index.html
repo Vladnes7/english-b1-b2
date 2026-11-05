@@ -239,6 +239,54 @@
     padding:9px 20px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:var(--font-body)}
   .fc-progress-row button:hover{border-color:var(--accent);color:var(--text);box-shadow:0 0 12px var(--glow-accent)}
 
+  /* PHRASEBOOK (раздел «Фразы») */
+  #phrasebook{display:none}
+  .pb-top{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin-bottom:14px}
+  .pb-count{font-family:var(--font-display);font-size:14px;color:var(--muted);font-weight:600}
+  .pb-count b{color:var(--accent-bright);font-size:17px}
+  .pb-modes{display:flex;gap:6px}
+  .pb-modes button{background:var(--surface-2);border:1px solid var(--border);color:var(--muted);
+    padding:7px 16px;border-radius:10px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+  .pb-modes button:hover{border-color:var(--border-strong);color:var(--text)}
+  .pb-modes button.active{background:var(--accent-grad);border-color:transparent;color:var(--btn-text)}
+  .pb-search{width:100%;background:var(--surface-2);border:1px solid var(--border-strong);color:var(--text);
+    padding:11px 14px;border-radius:12px;font:inherit;font-size:14px;margin-bottom:12px;outline:none;transition:.2s}
+  .pb-search:focus{border-color:var(--accent);box-shadow:0 0 16px var(--glow-accent)}
+  .pb-cats{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+  .pb-cats button{background:transparent;border:1px solid var(--border);color:var(--muted);
+    padding:6px 12px;border-radius:999px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:.2s}
+  .pb-cats button:hover{border-color:var(--accent);color:var(--text)}
+  .pb-cats button.active{border-color:var(--accent);color:var(--accent-bright);
+    background:color-mix(in srgb,var(--accent) 14%,transparent)}
+  .pb-cats .pb-n{opacity:.55;font-weight:700;font-size:11px;margin-left:3px}
+  .pb-cats .pb-more{border-style:dashed;color:var(--accent-bright);border-color:var(--border-strong)}
+  .pb-cats .pb-more:hover{border-style:solid}
+  .pb-group{margin-bottom:26px}
+  .pb-group h3{font-family:var(--font-display);font-size:15px;color:var(--accent-bright);
+    margin:0 0 10px;display:flex;align-items:center;gap:10px}
+  .pb-group h3::after{content:'';flex:1;height:1px;background:var(--border)}
+  .pb-list{display:grid;grid-template-columns:1fr;gap:9px}
+  .pb-item{background:var(--surface);border:1px solid var(--border-strong);border-radius:13px;
+    padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:.2s}
+  .pb-item:hover{border-color:var(--accent);box-shadow:0 0 20px var(--glow-accent)}
+  .pb-item .txt{flex:1;min-width:0}
+  .pb-item .pit{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text);line-height:1.35}
+  .pb-item .pipa{font-size:12.5px;font-style:italic;color:var(--muted);margin-top:2px}
+  .pb-item .pru{font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+  .pb-item input{width:18px;height:18px;accent-color:var(--good);cursor:pointer;flex-shrink:0}
+  .pb-item.done{background:color-mix(in srgb,var(--good) 6%,var(--surface));border-color:color-mix(in srgb,var(--good) 45%,transparent)}
+  .pb-item.done .pit{color:var(--good)}
+  .pb-empty{text-align:center;color:var(--muted);padding:36px 16px;font-size:14px}
+  .fc-card.pb-card{height:270px}
+  .pb-card .fc-front .fc-word{font-size:26px;line-height:1.3;text-align:center}
+  .pb-card .fc-back .fc-ru{font-size:21px;line-height:1.4;text-align:center}
+  .pb-card .fc-front .fc-ipa{font-size:15px;text-align:center}
+  @media (max-width:600px){
+    .pb-card .fc-front .fc-word{font-size:21px}
+    .pb-card .fc-back .fc-ru{font-size:18px}
+  }
+  @media (min-width:900px){ .pb-list{grid-template-columns:1fr 1fr} }
+
   /* MATCH */
   #match{display:none}
   .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
@@ -512,6 +560,7 @@
       <button data-tab="practice">Практика</button>
       <button data-tab="test">Тест</button>
       <button data-tab="review">Повторить<span class="badge" id="srsBadge"></span></button>
+      <button data-tab="phrasebook">Фразы</button>
       <button data-tab="stats">Прогресс</button>
     </div>
   </div>
@@ -632,6 +681,50 @@
     </div>
   </div>
 
+  <!-- PHRASEBOOK -->
+  <div id="phrasebook" style="display:none">
+    <div class="pb-top">
+      <div class="pb-count" id="pbCount"></div>
+      <div class="pb-modes">
+        <button id="pbModeList" class="active">Список</button>
+        <button id="pbModeCards">Карточки</button>
+      </div>
+    </div>
+    <div id="pbListView">
+      <input type="text" class="pb-search" id="pbSearch" autocomplete="off" placeholder="Поиск по фразе или переводу...">
+      <div class="pb-cats" id="pbCats"></div>
+      <div id="pbBody"></div>
+    </div>
+    <div id="pbCardsView" style="display:none">
+      <div class="fc-dir" role="group" aria-label="Какой стороной показывать карточку"><button type="button" data-dir="fwd">IT → RU</button><button type="button" data-dir="rev">RU → IT</button><button type="button" data-dir="mix">Вперемешку</button></div>
+      <div class="fc-wrap">
+        <div class="fc-card pb-card" id="pbCard">
+          <div class="fc-front">
+            <div class="fc-label">Итальянская фраза</div>
+            <div class="fc-word" id="pbCardIt"></div>
+            <div class="fc-ipa" id="pbCardIpa"></div>
+          </div>
+          <div class="fc-back">
+            <div class="fc-label">Перевод</div>
+            <div class="fc-ru" id="pbCardRu"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-hint">Нажми на карточку, чтобы перевернуть</div>
+      <div class="fc-nav">
+        <button id="pbPrev">‹</button>
+        <span class="fc-counter" id="pbCounter">1 / 1</span>
+        <button id="pbNext">›</button>
+      </div>
+      <div class="fc-progress-row">
+        <button id="pbKnow">✓ Знаю</button>
+        <button id="pbSkip">✗ Ещё учу</button>
+        <button id="pbShuffle">⇄ Перемешать</button>
+      </div>
+      <div id="pbCardStatus" style="color:var(--muted);font-size:13px;text-align:center;margin-top:12px"></div>
+    </div>
+  </div>
+
   <!-- STATS -->
   <div id="stats" style="display:none">
     <div style="max-width:940px;margin:0 auto">
@@ -666,6 +759,10 @@
     <span id="footer">Итальянский с нуля · A1 · прогресс сохраняется в этом браузере автоматически.</span>
   </footer>
 </div>
+
+<script id="phrasebook-data" type="application/json">
+{"groups":[{"cat":"Приветствия и вежливость","items":[{"it":"Ciao, come stai?","ipa":"ЧА-о, КО-ме СТАЙ?","ru":"Привет, как дела?"},{"it":"Sto bene, grazie. E tu?","ipa":"СТО БЭ-не, ГРА-цие. Э ТУ?","ru":"Хорошо, спасибо. А ты?"},{"it":"Buongiorno, come sta?","ipa":"буон-ДЖОР-но, КО-ме СТА?","ru":"Добрый день, как Вы поживаете?"},{"it":"Mi chiamo Anna. E tu?","ipa":"ми КЬЯ-мо АН-на. Э ТУ?","ru":"Меня зовут Анна. А тебя?"},{"it":"Piacere, io sono Marco.","ipa":"пья-ЧЭ-ре, И-о СО-но МАР-ко.","ru":"Очень приятно, я Марко."},{"it":"Scusi, dov'è il bagno?","ipa":"СКУ-зи, до-ВЭ иль БА-ньо?","ru":"Извините, где туалет?"},{"it":"Grazie mille!","ipa":"ГРА-цие МИЛ-ле!","ru":"Большое спасибо!"},{"it":"Non capisco, scusi.","ipa":"нон ка-ПИ-ско, СКУ-зи.","ru":"Извините, я не понимаю."}]},{"cat":"Люди и семья","items":[{"it":"Questa è mia madre.","ipa":"КУЭ-ста Э МИ-а МА-дре.","ru":"Это моя мама."},{"it":"Ho un fratello e una sorella.","ipa":"О ун фра-ТЭЛ-ло э У-на со-РЭЛ-ла.","ru":"У меня есть брат и сестра."},{"it":"Mio padre si chiama Paolo.","ipa":"МИ-о ПА-дре си КЬЯ-ма ПА-о-ло.","ru":"Моего отца зовут Паоло."},{"it":"La mia famiglia è piccola.","ipa":"ла МИ-а фа-МИ-лья Э ПИК-ко-ла.","ru":"Моя семья маленькая."},{"it":"Hai figli?","ipa":"АЙ ФИ-льи?","ru":"У тебя есть дети?"},{"it":"Ho due figli.","ipa":"О ДУ-е ФИ-льи.","ru":"У меня двое детей."},{"it":"Marco è un mio amico.","ipa":"МАР-ко Э ун МИ-о а-МИ-ко.","ru":"Марко — мой друг."},{"it":"Come si chiama tua moglie?","ipa":"КО-ме си КЬЯ-ма ТУ-а МО-лье?","ru":"Как зовут твою жену?"}]},{"cat":"Еда и напитки","items":[{"it":"Un caffè, per favore.","ipa":"ун каф-ФЭ, пер фа-ВО-ре.","ru":"Кофе, пожалуйста."},{"it":"Mi piace la pizza.","ipa":"ми ПЬЯ-че ла ПИ-цца.","ru":"Мне нравится пицца."},{"it":"Non mangio carne.","ipa":"нон МАН-джо КАР-не.","ru":"Я не ем мясо."},{"it":"Vorrei un bicchiere d'acqua.","ipa":"вор-РЭЙ ун бик-КЬЭ-ре ДАК-куа.","ru":"Я хотел бы стакан воды."},{"it":"Il pesce è fresco?","ipa":"иль ПЭ-ше Э ФРЭ-ско?","ru":"Рыба свежая?"},{"it":"Facciamo colazione insieme?","ipa":"фач-ЧА-мо ко-ла-ЦИО-не ин-СЬЭ-ме?","ru":"Позавтракаем вместе?"},{"it":"Che cosa mangi a pranzo?","ipa":"ке КО-за МАН-джи а ПРАН-цо?","ru":"Что ты ешь на обед?"},{"it":"Un tè senza zucchero.","ipa":"ун ТЭ СЭН-ца ЦУК-ке-ро.","ru":"Чай без сахара."}]},{"cat":"Город, дом и дорога","items":[{"it":"Dov'è la stazione?","ipa":"до-ВЭ ла ста-ЦИО-не?","ru":"Где вокзал?"},{"it":"La piazza è a destra.","ipa":"ла ПЬЯ-цца Э а ДЭ-стра.","ru":"Площадь справа."},{"it":"Gira a sinistra.","ipa":"ДЖИ-ра а си-НИ-стра.","ru":"Поверни налево."},{"it":"C'è un albergo qui vicino?","ipa":"ЧЭ ун аль-БЭР-го куи ви-ЧИ-но?","ru":"Здесь рядом есть гостиница?"},{"it":"Vorrei una camera per due.","ipa":"вор-РЭЙ У-на КА-ме-ра пер ДУ-е.","ru":"Я хотел бы номер на двоих."},{"it":"Un biglietto per Roma, per favore.","ipa":"ун би-ЛЬЕТ-то пер РО-ма, пер фа-ВО-ре.","ru":"Один билет до Рима, пожалуйста."},{"it":"Il negozio è chiuso.","ipa":"иль не-ГО-цио Э КЬЮ-зо.","ru":"Магазин закрыт."},{"it":"Abito in una piccola città.","ipa":"А-би-то ин У-на ПИК-ко-ла чит-ТА.","ru":"Я живу в маленьком городе."}]},{"cat":"Базовые слова и глаголы","items":[{"it":"Sono di Mosca.","ipa":"СО-но ди МО-ска.","ru":"Я из Москвы."},{"it":"Hai tempo oggi?","ipa":"АЙ ТЭМ-по ОД-джи?","ru":"У тебя есть время сегодня?"},{"it":"Che cosa fai domani?","ipa":"ке КО-за ФАЙ до-МА-ни?","ru":"Что ты делаешь завтра?"},{"it":"Domani vado a Roma.","ipa":"до-МА-ни ВА-до а РО-ма.","ru":"Завтра я еду в Рим."},{"it":"Voglio bere un caffè.","ipa":"ВО-льо БЭ-ре ун каф-ФЭ.","ru":"Я хочу выпить кофе."},{"it":"Posso parlare italiano?","ipa":"ПОС-со пар-ЛА-ре и-та-ЛЬЯ-но?","ru":"Можно говорить по-итальянски?"},{"it":"Non capisco bene.","ipa":"нон ка-ПИ-ско БЭ-не.","ru":"Я плохо понимаю."},{"it":"La casa è molto bella.","ipa":"ла КА-за Э МОЛ-то БЭЛ-ла.","ru":"Дом очень красивый."}]},{"cat":"Я, ты, мы: местоимения и связки","items":[{"it":"Chi è lui?","ipa":"КИ Э ЛУЙ?","ru":"Кто он?"},{"it":"Noi siamo amici.","ipa":"НОЙ СЬЯ-мо а-МИ-чи.","ru":"Мы друзья."},{"it":"Anche io parlo italiano.","ipa":"АН-ке И-о ПАР-ло и-та-ЛЬЯ-но.","ru":"Я тоже говорю по-итальянски."},{"it":"Che cosa è questo?","ipa":"ке КО-за Э КУЭ-сто?","ru":"Что это?"},{"it":"Perché non vieni con noi?","ipa":"пер-КЭ нон ВЬЭ-ни кон НОЙ?","ru":"Почему ты не идёшь с нами?"},{"it":"Quando torni?","ipa":"КУАН-до ТОР-ни?","ru":"Когда ты вернёшься?"},{"it":"Io sono qui, ma lui no.","ipa":"И-о СО-но КУИ, ма ЛУЙ НО.","ru":"Я здесь, а он нет."},{"it":"Lei parla russo?","ipa":"ЛЭЙ ПАР-ла РУС-со?","ru":"Вы говорите по-русски?"}]},{"cat":"Числа и время","items":[{"it":"Che ore sono?","ipa":"ке О-ре СО-но?","ru":"Который час?"},{"it":"Sono le tre.","ipa":"СО-но ле ТРЭ.","ru":"Три часа."},{"it":"È l'una.","ipa":"Э ЛУ-на.","ru":"Час дня."},{"it":"Sono le otto e mezzo.","ipa":"СО-но ле ОТ-то э МЭД-дзо.","ru":"Половина девятого."},{"it":"A che ora parte il treno?","ipa":"а ке О-ра ПАР-те иль ТРЭ-но?","ru":"Во сколько отправляется поезд?"},{"it":"Alle nove di sera.","ipa":"АЛ-ле НО-ве ди СЭ-ра.","ru":"В девять вечера."},{"it":"Ho venti anni.","ipa":"О ВЭН-ти АН-ни.","ru":"Мне двадцать лет."},{"it":"Un momento, per favore.","ipa":"ун мо-МЭН-то, пер фа-ВО-ре.","ru":"Минутку, пожалуйста."}]},{"cat":"Работа, учёба, страны","items":[{"it":"Che lavoro fai?","ipa":"ке ла-ВО-ро ФАЙ?","ru":"Кем ты работаешь?"},{"it":"Faccio l'insegnante.","ipa":"ФАЧ-чо лин-се-НЬЯН-те.","ru":"Я работаю учителем."},{"it":"Dove lavori?","ipa":"ДО-ве ла-ВО-ри?","ru":"Где ты работаешь?"},{"it":"Lavoro in un ufficio.","ipa":"ла-ВО-ро ин ун уф-ФИ-чо.","ru":"Я работаю в офисе."},{"it":"Studio l'italiano.","ipa":"СТУ-дио ли-та-ЛЬЯ-но.","ru":"Я учу итальянский."},{"it":"Di dove sei?","ipa":"ди ДО-ве СЭЙ?","ru":"Откуда ты?"},{"it":"Sono russa.","ipa":"СО-но РУС-са.","ru":"Я русская."},{"it":"Abito a Mosca.","ipa":"А-би-то а МО-ска.","ru":"Я живу в Москве."}]},{"cat":"Дни недели и времена года","items":[{"it":"Oggi è lunedì.","ipa":"ОД-джи Э лу-не-ДИ.","ru":"Сегодня понедельник."},{"it":"Ci vediamo sabato!","ipa":"чи ве-ДЬЯ-мо СА-ба-то!","ru":"Увидимся в субботу!"},{"it":"Il sabato non lavoro.","ipa":"иль СА-ба-то нон ла-ВО-ро.","ru":"По субботам я не работаю."},{"it":"Che cosa fai il fine settimana?","ipa":"ке КО-за ФАЙ иль ФИ-не сет-ти-МА-на?","ru":"Что ты делаешь на выходных?"},{"it":"Il mio compleanno è in estate.","ipa":"иль МИ-о ком-пле-АН-но Э ин э-СТА-те.","ru":"Мой день рождения летом."},{"it":"D'estate vado sempre al mare.","ipa":"дэ-СТА-те ВА-до СЭМ-пре аль МА-ре.","ru":"Летом я всегда езжу на море."},{"it":"Non lavoro mai la domenica.","ipa":"нон ла-ВО-ро МАЙ ла до-МЭ-ни-ка.","ru":"Я никогда не работаю по воскресеньям."},{"it":"Tanti auguri!","ipa":"ТАН-ти ау-ГУ-ри!","ru":"Поздравляю!"}]},{"cat":"В кафе и ресторане","items":[{"it":"Avete un tavolo libero?","ipa":"а-ВЭ-те ун ТА-во-ло ЛИ-бе-ро?","ru":"У вас есть свободный столик?"},{"it":"Vorrei ordinare.","ipa":"вор-РЭЙ ор-ди-НА-ре.","ru":"Я хотел бы заказать."},{"it":"Posso vedere il menù?","ipa":"ПОС-со ве-ДЭ-ре иль ме-НУ?","ru":"Можно посмотреть меню?"},{"it":"Per me, la pasta.","ipa":"пер МЭ, ла ПА-ста.","ru":"Мне пасту."},{"it":"Da bere, un bicchiere di vino rosso.","ipa":"да БЭ-ре, ун бик-КЬЭ-ре ди ВИ-но РОС-со.","ru":"Из напитков — бокал красного вина."},{"it":"Mi porta il conto, per favore?","ipa":"ми ПОР-та иль КОН-то, пер фа-ВО-ре?","ru":"Принесите, пожалуйста, счёт."},{"it":"È tutto buonissimo!","ipa":"Э ТУТ-то буо-НИС-си-мо!","ru":"Всё очень вкусно!"},{"it":"Posso pagare con la carta?","ipa":"ПОС-со па-ГА-ре кон ла КАР-та?","ru":"Можно заплатить картой?"}]},{"cat":"Свободное время","items":[{"it":"Che cosa ti piace fare?","ipa":"ке КО-за ти ПЬЯ-че ФА-ре?","ru":"Что ты любишь делать?"},{"it":"Mi piace leggere.","ipa":"ми ПЬЯ-че ЛЭД-дже-ре.","ru":"Я люблю читать."},{"it":"Non mi piace il calcio.","ipa":"нон ми ПЬЯ-че иль КАЛ-чо.","ru":"Я не люблю футбол."},{"it":"Mi piacciono i film italiani.","ipa":"ми ПЬЯЧ-чо-но и ФИЛЬМ и-та-ЛЬЯ-ни.","ru":"Мне нравятся итальянские фильмы."},{"it":"Giochi a calcio?","ipa":"ДЖО-ки а КАЛ-чо?","ru":"Ты играешь в футбол?"},{"it":"Andiamo al cinema stasera?","ipa":"ан-ДЬЯ-мо аль ЧИ-не-ма ста-СЭ-ра?","ru":"Пойдём сегодня вечером в кино?"},{"it":"Esco con gli amici.","ipa":"Э-ско кон ли а-МИ-чи.","ru":"Я гуляю с друзьями."},{"it":"Ti piace ballare?","ipa":"ти ПЬЯ-че бал-ЛА-ре?","ru":"Ты любишь танцевать?"}]},{"cat":"Дом и квартира","items":[{"it":"Abito in un appartamento.","ipa":"А-би-то ин ун ап-пар-та-МЭН-то.","ru":"Я живу в квартире."},{"it":"La mia casa ha tre camere.","ipa":"ла МИ-а КА-за А трэ КА-ме-ре.","ru":"В моём доме три комнаты."},{"it":"C'è un giardino?","ipa":"ЧЭ ун джар-ДИ-но?","ru":"Есть сад?"},{"it":"La cucina è piccola ma bella.","ipa":"ла ку-ЧИ-на Э ПИК-ко-ла ма БЭЛ-ла.","ru":"Кухня маленькая, но красивая."},{"it":"Dove sono le chiavi?","ipa":"ДО-ве СО-но ле КЬЯ-ви?","ru":"Где ключи?"},{"it":"Abito al secondo piano.","ipa":"А-би-то аль се-КОН-до ПЬЯ-но.","ru":"Я живу на втором этаже."},{"it":"Il mercato è vicino a casa.","ipa":"иль мер-КА-то Э ви-ЧИ-но а КА-за.","ru":"Рынок рядом с домом."},{"it":"L'affitto è troppo caro.","ipa":"лаф-ФИТ-то Э ТРОП-по КА-ро.","ru":"Аренда слишком дорогая."}]},{"cat":"Одежда, цвета, покупки","items":[{"it":"Quanto costa?","ipa":"КУАН-то КО-ста?","ru":"Сколько стоит?"},{"it":"Quanto costano le scarpe?","ipa":"КУАН-то КО-ста-но ле СКАР-пе?","ru":"Сколько стоят туфли?"},{"it":"Posso provare?","ipa":"ПОС-со про-ВА-ре?","ru":"Можно примерить?"},{"it":"Avete una taglia più grande?","ipa":"а-ВЭ-те У-на ТА-лья пью ГРАН-де?","ru":"У вас есть размер побольше?"},{"it":"È troppo caro.","ipa":"Э ТРОП-по КА-ро.","ru":"Это слишком дорого."},{"it":"Vorrei una maglietta bianca.","ipa":"вор-РЭЙ У-на ма-ЛЬЕТ-та БЬЯН-ка.","ru":"Я хотел бы белую футболку."},{"it":"Il rosso è il mio colore preferito.","ipa":"иль РОС-со Э иль МИ-о ко-ЛО-ре пре-фе-РИ-то.","ru":"Красный — мой любимый цвет."},{"it":"Prendo questa giacca.","ipa":"ПРЭН-до КУЭ-ста ДЖАК-ка.","ru":"Я беру эту куртку."}]},{"cat":"Погода и путешествия","items":[{"it":"Che tempo fa?","ipa":"ке ТЭМ-по ФА?","ru":"Какая погода?"},{"it":"Fa caldo.","ipa":"фа КАЛЬ-до.","ru":"Жарко."},{"it":"Fa freddo.","ipa":"фа ФРЭД-до.","ru":"Холодно."},{"it":"Oggi piove.","ipa":"ОД-джи ПЬО-ве.","ru":"Сегодня идёт дождь."},{"it":"C'è il sole.","ipa":"ЧЭ иль СО-ле.","ru":"Светит солнце."},{"it":"Dove vai in vacanza?","ipa":"ДО-ве ВАЙ ин ва-КАН-ца?","ru":"Куда ты едешь в отпуск?"},{"it":"Quando parte l'aereo?","ipa":"КУАН-до ПАР-те ла-Э-ре-о?","ru":"Когда вылетает самолёт?"},{"it":"Torno a casa domani.","ipa":"ТОР-но а КА-за до-МА-ни.","ru":"Я вернусь домой завтра."}]},{"cat":"Тело и здоровье","items":[{"it":"Non sto bene.","ipa":"нон СТО БЭ-не.","ru":"Я плохо себя чувствую."},{"it":"Mi fa male la testa.","ipa":"ми фа МА-ле ла ТЭ-ста.","ru":"У меня болит голова."},{"it":"Ho mal di pancia.","ipa":"О маль ди ПАН-ча.","ru":"У меня болит живот."},{"it":"Ho la febbre.","ipa":"О ла ФЭБ-бре.","ru":"У меня температура."},{"it":"Ho bisogno di un medico.","ipa":"О би-ЗО-нью ди ун МЭ-ди-ко.","ru":"Мне нужен врач."},{"it":"Dov'è una farmacia?","ipa":"до-ВЭ У-на фар-ма-ЧИ-а?","ru":"Где тут аптека?"},{"it":"Sono molto stanco.","ipa":"СО-но МОЛ-то СТАН-ко.","ru":"Я очень устал."},{"it":"Mi fanno male i piedi.","ipa":"ми ФАН-но МА-ле и ПЬЭ-ди.","ru":"У меня болят ноги."}]},{"cat":"Главные глаголы","items":[{"it":"Non lo so.","ipa":"нон ло СО.","ru":"Я не знаю."},{"it":"Conosci Marco?","ipa":"ко-НО-ши МАР-ко?","ru":"Ты знаешь Марко?"},{"it":"Vieni con me?","ipa":"ВЬЭ-ни кон МЭ?","ru":"Пойдёшь со мной?"},{"it":"Che cosa prendi?","ipa":"ке КО-за ПРЭН-ди?","ru":"Что ты будешь?"},{"it":"Ci vediamo domani!","ipa":"чи ве-ДЬЯ-мо до-МА-ни!","ru":"Увидимся завтра!"},{"it":"Cerco la stazione.","ipa":"ЧЭР-ко ла ста-ЦИО-не.","ru":"Я ищу вокзал."},{"it":"Ti aspetto al bar.","ipa":"ти а-СПЭТ-то аль БАР.","ru":"Жду тебя в баре."},{"it":"Ieri ho visto un film.","ipa":"ЙЭ-ри О ВИ-сто ун ФИЛЬМ.","ru":"Вчера я посмотрел фильм."},{"it":"Ieri sono andato al mare.","ipa":"ЙЭ-ри СО-но ан-ДА-то аль МА-ре.","ru":"Вчера я ездил на море."}]},{"cat":"Знакомство и общение","items":[{"it":"Parli inglese?","ipa":"ПАР-ли ин-ГЛЭ-зе?","ru":"Ты говоришь по-английски?"},{"it":"Può parlare più lentamente?","ipa":"пу-О пар-ЛА-ре пью лен-та-МЭН-те?","ru":"Можете говорить помедленнее?"},{"it":"Può ripetere, per favore?","ipa":"пу-О ри-ПЭ-те-ре, пер фа-ВО-ре?","ru":"Можете повторить, пожалуйста?"},{"it":"Come si dice «grazie» in russo?","ipa":"КО-ме си ДИ-че «ГРА-цие» ин РУС-со?","ru":"Как будет «grazie» по-русски?"},{"it":"Che cosa significa?","ipa":"ке КО-за си-НЬИ-фи-ка?","ru":"Что это значит?"},{"it":"Non parlo bene italiano.","ipa":"нон ПАР-ло БЭ-не и-та-ЛЬЯ-но.","ru":"Я плохо говорю по-итальянски."},{"it":"Sono qui da una settimana.","ipa":"СО-но КУИ да У-на сет-ти-МА-на.","ru":"Я здесь уже неделю."},{"it":"Sono in Italia per studiare.","ipa":"СО-но ин и-ТА-лья пер сту-ДЬЯ-ре.","ru":"Я в Италии, чтобы учиться."}]},{"cat":"Помощь и просьбы","items":[{"it":"Mi può aiutare, per favore?","ipa":"ми пу-О а-ю-ТА-ре, пер фа-ВО-ре?","ru":"Можете мне помочь, пожалуйста?"},{"it":"Ho un problema.","ipa":"О ун про-БЛЭ-ма.","ru":"У меня проблема."},{"it":"Ho perso il telefono.","ipa":"О ПЭР-со иль те-ЛЭ-фо-но.","ru":"Я потерял телефон."},{"it":"Può scrivere l'indirizzo?","ipa":"пу-О СКРИ-ве-ре лин-ди-РИЦ-цо?","ru":"Можете написать адрес?"},{"it":"Dov'è la polizia?","ipa":"до-ВЭ ла по-ли-ЦИ-а?","ru":"Где полиция?"},{"it":"Chiami un'ambulanza!","ipa":"КЬЯ-ми ун-ам-бу-ЛАН-ца!","ru":"Вызовите скорую!"},{"it":"Attenzione!","ipa":"ат-тен-ЦИО-не!","ru":"Осторожно!"},{"it":"Non fa niente.","ipa":"нон фа НЬЭН-те.","ru":"Ничего страшного."}]},{"cat":"Транспорт и ориентирование","items":[{"it":"Come arrivo in centro?","ipa":"КО-ме ар-РИ-во ин ЧЭН-тро?","ru":"Как добраться до центра?"},{"it":"Dov'è la fermata dell'autobus?","ipa":"до-ВЭ ла фер-МА-та дель-АУ-то-бус?","ru":"Где остановка автобуса?"},{"it":"Quanto costa il biglietto?","ipa":"КУАН-то КО-ста иль би-ЛЬЕТ-то?","ru":"Сколько стоит билет?"},{"it":"Questo treno va a Milano?","ipa":"КУЭ-сто ТРЭ-но ВА а ми-ЛА-но?","ru":"Этот поезд идёт в Милан?"},{"it":"Da che binario parte?","ipa":"да ке би-НА-рио ПАР-те?","ru":"С какой платформы отправляется?"},{"it":"Scendo alla prossima fermata.","ipa":"ШЭН-до АЛ-ла ПРОС-си-ма фер-МА-та.","ru":"Я выхожу на следующей остановке."},{"it":"È lontano da qui?","ipa":"Э лон-ТА-но да КУИ?","ru":"Это далеко отсюда?"},{"it":"Vado a piedi.","ipa":"ВА-до а ПЬЭ-ди.","ru":"Я иду пешком."}]},{"cat":"В гостинице","items":[{"it":"Ho una prenotazione a nome Ivanov.","ipa":"О У-на пре-но-та-ЦИО-не а НО-ме и-ВА-нов.","ru":"У меня бронь на имя Иванов."},{"it":"A che ora è la colazione?","ipa":"а ке О-ра Э ла ко-ла-ЦИО-не?","ru":"Во сколько завтрак?"},{"it":"Il wifi funziona?","ipa":"иль ВАЙ-фай фун-ЦИО-на?","ru":"Wi-Fi работает?"},{"it":"Qual è la password del wifi?","ipa":"куаль Э ла ПАС-сворд дэль ВАЙ-фай?","ru":"Какой пароль от Wi-Fi?"},{"it":"Vorrei fare il check-out.","ipa":"вор-РЭЙ ФА-ре иль чек-АУТ.","ru":"Я хотел бы выписаться."},{"it":"Non c'è l'acqua calda.","ipa":"нон ЧЭ ЛАК-куа КАЛЬ-да.","ru":"Нет горячей воды."},{"it":"C'è l'aria condizionata?","ipa":"ЧЭ ЛА-рья кон-ди-цио-НА-та?","ru":"Есть кондиционер?"},{"it":"Posso lasciare la valigia qui?","ipa":"ПОС-со лаш-ША-ре ла ва-ЛИ-джа КУИ?","ru":"Можно оставить чемодан здесь?"}]},{"cat":"Магазин и деньги","items":[{"it":"Posso pagare in contanti?","ipa":"ПОС-со па-ГА-ре ин кон-ТАН-ти?","ru":"Можно заплатить наличными?"},{"it":"Ha un sacchetto?","ipa":"А ун сак-КЕТ-то?","ru":"У вас есть пакет?"},{"it":"Ho bisogno di una ricevuta.","ipa":"О би-ЗО-нью ди У-на ри-че-ВУ-та.","ru":"Мне нужен чек."},{"it":"Dov'è il supermercato?","ipa":"до-ВЭ иль су-пер-мер-КА-то?","ru":"Где супермаркет?"},{"it":"A che ora aprite?","ipa":"а ке О-ра а-ПРИ-те?","ru":"Во сколько вы открываетесь?"},{"it":"A che ora chiudete?","ipa":"а ке О-ра кьу-ДЭ-те?","ru":"Во сколько вы закрываетесь?"},{"it":"Vorrei un chilo di mele.","ipa":"вор-РЭЙ ун КИ-ло ди МЭ-ле.","ru":"Мне килограмм яблок."},{"it":"Basta così, grazie.","ipa":"БА-ста ко-ЗИ, ГРА-цие.","ru":"Хватит, спасибо."}]},{"cat":"Документы и учёба в Италии","items":[{"it":"Sono uno studente russo.","ipa":"СО-но У-но сту-ДЭН-те РУС-со.","ru":"Я русский студент."},{"it":"Vorrei iscrivermi all'università.","ipa":"вор-РЭЙ и-СКРИ-вер-ми аль-лу-ни-вер-си-ТА.","ru":"Я хотел бы поступить в университет."},{"it":"Ho il passaporto con me.","ipa":"О иль пас-са-ПОР-то кон МЭ.","ru":"Паспорт у меня с собой."},{"it":"Dove posso fare il permesso di soggiorno?","ipa":"ДО-ве ПОС-со ФА-ре иль пер-МЭС-со ди сод-ДЖОР-но?","ru":"Где можно оформить вид на жительство?"},{"it":"Ho un appuntamento alle dieci.","ipa":"О ун ап-пун-та-МЭН-то АЛ-ле ДЬЭ-чи.","ru":"У меня встреча в десять."},{"it":"Devo compilare questo modulo?","ipa":"ДЭ-во ком-пи-ЛА-ре КУЭ-сто МО-ду-ло?","ru":"Мне нужно заполнить эту форму?"},{"it":"Quanto costa il corso?","ipa":"КУАН-то КО-ста иль КОР-со?","ru":"Сколько стоит курс?"},{"it":"Studio per l'esame di italiano.","ipa":"СТУ-дио пер лэ-ЗА-ме ди и-та-ЛЬЯ-но.","ru":"Я готовлюсь к экзамену по итальянскому."}]},{"cat":"Эмоции и состояния","items":[{"it":"Sono contento.","ipa":"СО-но кон-ТЭН-то.","ru":"Я доволен."},{"it":"Sono felice di essere qui.","ipa":"СО-но фе-ЛИ-че ди ЭС-се-ре КУИ.","ru":"Я рад быть здесь."},{"it":"Ho fame.","ipa":"О ФА-ме.","ru":"Я голоден."},{"it":"Ho sete.","ipa":"О СЭ-те.","ru":"Я хочу пить."},{"it":"Ho sonno.","ipa":"О СОН-но.","ru":"Хочу спать."},{"it":"Ho paura.","ipa":"О па-У-ра.","ru":"Мне страшно."},{"it":"Che bello!","ipa":"ке БЭЛ-ло!","ru":"Как красиво!"},{"it":"Mi dispiace.","ipa":"ми ди-СПЬЯ-че.","ru":"Мне жаль."}]},{"cat":"Телефон и встречи","items":[{"it":"Qual è il tuo numero di telefono?","ipa":"куаль Э иль ТУ-о НУ-ме-ро ди те-ЛЭ-фо-но?","ru":"Какой у тебя номер телефона?"},{"it":"Ti mando un messaggio.","ipa":"ти МАН-до ун мес-САД-джо.","ru":"Я отправлю тебе сообщение."},{"it":"Pronto, chi parla?","ipa":"ПРОН-то, КИ ПАР-ла?","ru":"Алло, кто говорит?"},{"it":"Sono in ritardo.","ipa":"СО-но ин ри-ТАР-до.","ru":"Я опаздываю."},{"it":"Arrivo tra dieci minuti.","ipa":"ар-РИ-во тра ДЬЭ-чи МИ-ну-ти.","ru":"Буду через десять минут."},{"it":"Sono già arrivato.","ipa":"СО-но ДЖА ар-ри-ВА-то.","ru":"Я уже приехал."},{"it":"Scrivimi quando arrivi.","ipa":"СКРИ-ви-ми КУАН-до ар-РИ-ви.","ru":"Напиши, когда приедешь."},{"it":"A dopo!","ipa":"а ДО-по!","ru":"Пока, до скорого!"}]},{"cat":"Короткие реплики","items":[{"it":"Certo!","ipa":"ЧЭР-то!","ru":"Конечно!"},{"it":"Va bene.","ipa":"ва БЭ-не.","ru":"Хорошо, ладно."},{"it":"Forse.","ipa":"ФОР-се.","ru":"Может быть."},{"it":"Davvero?","ipa":"дав-ВЭ-ро?","ru":"Правда?"},{"it":"Non importa.","ipa":"нон им-ПОР-та.","ru":"Неважно."},{"it":"Magari!","ipa":"ма-ГА-ри!","ru":"Если бы! Хорошо бы!"},{"it":"Che peccato!","ipa":"ке пек-КА-то!","ru":"Как жаль!"},{"it":"Congratulazioni!","ipa":"кон-гра-ту-ла-ЦИО-ни!","ru":"Поздравляю!"},{"it":"Buon appetito!","ipa":"буон ап-пе-ТИ-то!","ru":"Приятного аппетита!"},{"it":"In bocca al lupo!","ipa":"ин БОК-ка аль ЛУ-по!","ru":"Ни пуха ни пера!"}]}]}
+</script>
 
 <script src="assets/pronunciation.js?v=stress-1"></script>
 <script id="vocab" type="application/json">
@@ -1297,6 +1394,7 @@ function renderStats(){
   const lastTest = store.history.length ? store.history[store.history.length-1] : null;
   document.getElementById('statCards').innerHTML =
     '<div class="stat-card"><div class="k">Выучено</div><div class="v" style="color:var(--good)">'+learnedTotal+'</div><div class="s">из '+TOTAL_WORDS+' слов</div></div>'+
+    '<div class="stat-card"><div class="k">Фразы</div><div class="v" style="color:var(--accent-2)">'+store.pb.learned.filter(k=>PB_ALL.some(p=>p.it===k)).length+'</div><div class="s">из '+PB_TOTAL+' фраз</div></div>'+
     '<div class="stat-card"><div class="k">Серия</div><div class="v">🔥 '+(alive?s.count:0)+'</div><div class="s">дней подряд</div></div>'+
     '<div class="stat-card"><div class="k">На повторении</div><div class="v" style="color:var(--bad)">'+dueN+'</div><div class="s">слов ждут сегодня</div></div>'+
     '<div class="stat-card"><div class="k">Последний тест</div><div class="v">'+(lastTest?lastTest.c+'/'+lastTest.t:'—')+'</div><div class="s">'+(lastTest?('день '+lastTest.day):'ещё не было')+'</div></div>';
@@ -1417,7 +1515,7 @@ function drillAdd(k, ok){
 }
 
 function renderFooter(){
-  const nw = TOTAL_WORDS, np = LESSONS.reduce((s,L)=>s+L.phrases.length,0);
+  const nw = TOTAL_WORDS, np = PB_TOTAL;
   document.getElementById('footer').textContent =
     'Итальянский с нуля · A1 · '+LESSONS.length+' уроков · '+nw+' слов · '+np+' фраз · '+GRAMMAR.length+
     ' '+plural(GRAMMAR.length,'тема','темы','тем')+' грамматики · прогресс сохраняется в этом браузере автоматически.';
@@ -1833,10 +1931,164 @@ function nextRule(){
   });
 }
 
+/* ================= РАЗГОВОРНИК («Фразы») ================= */
+const PB_GROUPS = JSON.parse(document.getElementById('phrasebook-data').textContent).groups;
+const PB_ALL = PB_GROUPS.flatMap(g => g.items.map(it => ({...it, cat:g.cat})));
+const PB_TOTAL = PB_ALL.length;
+store.pb ||= {learned:[]};
+if(!Array.isArray(store.pb.learned)) store.pb.learned = [];
+
+let pbFilter = 'all', pbQuery = '', pbView = 'list';
+let pbCards = { items:[], idx:0 };
+
+function pbEsc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function pbIsDone(it){ return store.pb.learned.includes(it); }
+function pbToggle(it, on){
+  if(on){ if(!pbIsDone(it)) store.pb.learned.push(it); }
+  else store.pb.learned = store.pb.learned.filter(x => x !== it);
+  save(); bump(); pbRenderCount();
+}
+function pbRenderCount(){
+  const n = store.pb.learned.filter(k => PB_ALL.some(p => p.it === k)).length;
+  const el = document.getElementById('pbCount');
+  if(el) el.innerHTML = 'Выучено фраз: <b>' + n + '</b> из ' + PB_TOTAL;
+  if(mode === 'phrasebook'){
+    const bar = document.getElementById('progBar');
+    if(bar) bar.style.width = Math.round(n / PB_TOTAL * 100) + '%';
+  }
+}
+let pbCatsOpen = false;
+const PB_CATS_SHOWN = 10;   // сколько тем видно в свёрнутом виде
+function pbRenderCats(){
+  const box = document.getElementById('pbCats');
+  const cats = ['all'].concat(PB_GROUPS.map(g => g.cat));
+  const counts = {};
+  PB_GROUPS.forEach(g => counts[g.cat] = g.items.length);
+  let shown = cats;
+  if(!pbCatsOpen && cats.length > PB_CATS_SHOWN + 1){
+    shown = cats.slice(0, PB_CATS_SHOWN);
+    if(shown.indexOf(pbFilter) === -1) shown.push(pbFilter);
+  }
+  let html = shown.map(c =>
+    '<button data-cat="' + pbEsc(c) + '"' + (c === pbFilter ? ' class="active"' : '') + '>' +
+    (c === 'all' ? 'Все · ' + PB_TOTAL : pbEsc(c) + '<span class="pb-n">' + (counts[c] || 0) + '</span>') + '</button>').join('');
+  const hidden = cats.length - shown.length;
+  if(hidden > 0) html += '<button class="pb-more" data-more="1">ещё ' + hidden + ' ' + plural(hidden,'тема','темы','тем') + '</button>';
+  else if(pbCatsOpen) html += '<button class="pb-more" data-more="0">свернуть</button>';
+  box.innerHTML = html;
+  box.querySelectorAll('button').forEach(b => {
+    b.onclick = () => {
+      if(b.dataset.more !== undefined){ pbCatsOpen = b.dataset.more === '1'; pbRenderCats(); return; }
+      pbFilter = b.dataset.cat; pbCards.items = []; pbRenderCats();
+      if(pbView === 'cards') pbInitCards(false); else pbRenderList();
+    };
+  });
+}
+function pbMatches(it){
+  if(pbFilter !== 'all' && it.cat !== pbFilter) return false;
+  if(!pbQuery) return true;
+  const q = pbQuery.toLowerCase();
+  return it.it.toLowerCase().includes(q) || it.ru.toLowerCase().includes(q) || it.ipa.toLowerCase().includes(q);
+}
+function pbRenderList(){
+  const body = document.getElementById('pbBody');
+  let html = '';
+  PB_GROUPS.forEach(g => {
+    const items = g.items.filter(it => pbMatches({...it, cat:g.cat}));
+    if(!items.length) return;
+    html += '<div class="pb-group"><h3>' + pbEsc(g.cat) + '</h3><div class="pb-list">';
+    items.forEach(it => {
+      const done = pbIsDone(it.it);
+      html += '<label class="pb-item' + (done ? ' done' : '') + '">' +
+        '<div class="txt"><div class="pit">' + pbEsc(it.it) + '</div>' +
+        '<div class="pipa">' + pbEsc(it.ipa) + '</div>' +
+        '<div class="pru">' + pbEsc(it.ru) + '</div></div>' +
+        '<input type="checkbox" data-it="' + pbEsc(it.it) + '"' + (done ? ' checked' : '') + '></label>';
+    });
+    html += '</div></div>';
+  });
+  body.innerHTML = html || '<div class="pb-empty">Ничего не найдено — попробуй другой запрос.</div>';
+  body.querySelectorAll('input[type=checkbox]').forEach(c => {
+    c.onchange = ev => {
+      pbToggle(ev.target.dataset.it, ev.target.checked);
+      ev.target.closest('.pb-item').classList.toggle('done', ev.target.checked);
+    };
+  });
+}
+function pbInitCards(reshuffle){
+  if(reshuffle || !pbCards.items.length){
+    pbCards.items = PB_ALL.filter(it => pbFilter === 'all' || it.cat === pbFilter).slice();
+    if(!pbCards.items.length) pbCards.items = PB_ALL.slice();
+    if(reshuffle){
+      for(let i = pbCards.items.length - 1; i > 0; i--){
+        const j = (Math.random() * (i + 1)) | 0;
+        [pbCards.items[i], pbCards.items[j]] = [pbCards.items[j], pbCards.items[i]];
+      }
+    }
+    pbCards.idx = 0;
+  }
+  pbRenderCard();
+}
+function pbRenderCard(){
+  const c = document.getElementById('pbCard');
+  flipReset(c);
+  applyDir(c);
+  const it = pbCards.items[pbCards.idx];
+  if(!it) return;
+  document.getElementById('pbCardIt').textContent = it.it;
+  document.getElementById('pbCardIpa').textContent = it.ipa;
+  document.getElementById('pbCardRu').textContent = it.ru;
+  document.getElementById('pbCounter').textContent = (pbCards.idx + 1) + ' / ' + pbCards.items.length;
+  document.getElementById('pbPrev').disabled = pbCards.idx === 0;
+  document.getElementById('pbNext').disabled = pbCards.idx === pbCards.items.length - 1;
+  document.getElementById('pbCardStatus').textContent = pbIsDone(it.it) ? '✓ отмечена как выученная' : '';
+}
+function pbSetView(v){
+  pbView = v;
+  document.getElementById('pbModeList').classList.toggle('active', v === 'list');
+  document.getElementById('pbModeCards').classList.toggle('active', v === 'cards');
+  document.getElementById('pbListView').style.display = v === 'list' ? 'block' : 'none';
+  document.getElementById('pbCardsView').style.display = v === 'cards' ? 'block' : 'none';
+  if(v === 'cards') pbInitCards(false); else pbRenderList();
+}
+function initPhrasebook(){
+  pbRenderCount();
+  pbRenderCats();
+  pbSetView(pbView);
+}
+function pbStep(){
+  if(pbCards.idx < pbCards.items.length - 1){ pbCards.idx++; }
+  pbRenderCard();
+}
+document.getElementById('pbSearch').addEventListener('input', ev => {
+  pbQuery = ev.target.value.trim();
+  pbRenderList();
+});
+document.getElementById('pbModeList').onclick = () => pbSetView('list');
+document.getElementById('pbModeCards').onclick = () => { pbCards.items = []; pbSetView('cards'); };
+document.getElementById('pbCard').addEventListener('click', () => {
+  document.getElementById('pbCard').classList.toggle('flipped');
+});
+document.getElementById('pbPrev').onclick = () => { if(pbCards.idx > 0){ pbCards.idx--; pbRenderCard(); } };
+document.getElementById('pbNext').onclick = () => { if(pbCards.idx < pbCards.items.length - 1){ pbCards.idx++; pbRenderCard(); } };
+document.getElementById('pbShuffle').onclick = () => pbInitCards(true);
+document.getElementById('pbKnow').onclick = () => {
+  const it = pbCards.items[pbCards.idx];
+  if(!it) return;
+  pbToggle(it.it, true); pbStep();
+};
+document.getElementById('pbSkip').onclick = () => {
+  const it = pbCards.items[pbCards.idx];
+  if(!it) return;
+  pbToggle(it.it, false); pbStep();
+};
+
 /* ================= НАВИГАЦИЯ ================= */
-const PANELS = ['learn','grammar','flashcards','match','test','review','phrases','build','verbs','articles','rules','stats'];
+const PANELS = ['learn','grammar','flashcards','match','test','review','phrases','phrasebook','build','verbs','articles','rules','stats'];
 function groupOf(m){
-  if(m==='learn'||m==='grammar'||m==='test'||m==='review'||m==='stats') return m;
+  if(m==='learn'||m==='grammar'||m==='test'||m==='review'||m==='stats'||m==='phrasebook') return m;
   return 'practice';
 }
 function renderPanel(m){
@@ -1846,6 +2098,7 @@ function renderPanel(m){
   else if(m==='test') startTest();
   else if(m==='review') startReview();
   else if(m==='phrases') initPhrases();
+  else if(m==='phrasebook') initPhrasebook();
   else if(m==='grammar') renderGrammar();
   else if(m==='build') startBuild();
   else if(m==='verbs') startVerbs();
@@ -1860,7 +2113,7 @@ function syncTabs(m){
   sub.style.display = g==='practice' ? 'flex' : 'none';
   sub.querySelectorAll('button').forEach(b=>b.classList.toggle('active', b.dataset.mode===m));
   if(g==='practice') lastPractice = m;
-  try{ renderHeader(); }catch(e){}
+  try{ renderHeader(); renderProgress(); }catch(e){}
 }
 let panelAnimation = null;
 function setMode(m, refresh = false){
