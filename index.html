@@ -8,7 +8,7 @@
 <title>Английский B1 → B2</title>
 <script>try{
   if(!localStorage.getItem('english_tube_v1')){ localStorage.setItem('english_theme','tube'); localStorage.setItem('english_tube_v1','1'); }
-  document.documentElement.dataset.theme = localStorage.getItem('english_theme') || 'tube';
+  var _t = localStorage.getItem('english_theme'); document.documentElement.dataset.theme = (_t === 'tube' || _t === 'noche') ? _t : 'tube';
 }catch(e){ document.documentElement.dataset.theme = 'tube'; }</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Great+Vibes&family=Nunito:wght@400;600;700;800&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&family=Comfortaa:wght@500;600;700&family=Pacifico&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@500;600;700;800&display=swap');
@@ -88,6 +88,7 @@
   html[data-theme="tube"] .tabs button:nth-child(5){--lc:var(--l-victoria)}
   html[data-theme="tube"] .tabs button:nth-child(6){--lc:var(--l-eliz)}
   html[data-theme="tube"] .tabs button:nth-child(7){--lc:var(--l-metro)}
+  html[data-theme="tube"] .tabs button:nth-child(8){--lc:var(--l-over)}
   html[data-theme="tube"] .fc-dir button,html[data-theme="tube"] .subtabs button{--lc:var(--l-victoria)}
   html[data-theme="tube"] .fc-progress-row button:nth-child(1){--lc:var(--l-district)}
   html[data-theme="tube"] .fc-progress-row button:nth-child(2){--lc:var(--l-central)}
@@ -131,144 +132,6 @@
   html[data-theme="noche"] .hero-bg{display:block}
   html[data-theme="noche"]{color-scheme:dark}
 
-  /* Midnight — холодная тёмная тема. Отличается от тёплой золотой noche,
-     фото Лондона показывает так же. Кнопки здесь в обводке (см. ниже),
-     поэтому все правила скоуплены темой — светлые темы их не видят. */
-  html[data-theme="midnight"]{
-    color-scheme:dark;
-    --font-body:'Inter',sans-serif; --font-display:'Oswald',sans-serif; --font-script:'Great Vibes',cursive;
-    --bg:#0b1020; --surface:#121a2e; --surface-2:#18223a; --surface-3:#1e2a45;
-    --border:#243352; --border-strong:#33456e;
-    --text:#e8eefc; --muted:#8797b8;
-    --accent:#3d8bff; --accent-2:#2ee6c8; --accent-bright:#6fb0ff;
-    --good:#2ee6a8; --bad:#ff5f6d;
-    --btn-text:#06101f;
-    --accent-grad:linear-gradient(135deg,#2f6fe0,#3d8bff);
-    --word-grad:linear-gradient(135deg,#6fb0ff,#2ee6c8);
-    --hero-bg:radial-gradient(circle at 30% 25%,#1a2440 0%,#0a0f1e 70%);
-    --hero-text:#eaf1ff; --hero-muted:#a8b8d8; --hero-title-color:#f2f7ff;
-    --hero-sub-grad:linear-gradient(90deg,#6fb0ff,#2ee6c8);
-    --hero-card-bg:rgba(11,16,32,.74); --hero-card-text:#b9c8e4;
-  }
-  html[data-theme="midnight"] .hero-deco::before{content:'🌃'}
-  html[data-theme="midnight"] .hero-deco::after{content:'🎧'}
-  html[data-theme="midnight"] .hero-bg{display:block}
-  html[data-theme="midnight"] .hero-bg{filter:saturate(.75) hue-rotate(-12deg) brightness(.78)}
-  html[data-theme="midnight"] .hero-title .sub{font-style:normal;font-weight:400;padding-bottom:18px}
-
-  /* Кнопки в обводке — только в Midnight */
-  html[data-theme="midnight"] .tabs button,
-  html[data-theme="midnight"] .subtabs button,
-  html[data-theme="midnight"] .daynav button,
-  html[data-theme="midnight"] .fc-nav button,
-  html[data-theme="midnight"] .fc-progress-row button,
-  html[data-theme="midnight"] .charbar button,
-  html[data-theme="midnight"] .pb-modes button,
-  html[data-theme="midnight"] .match-btn,
-  html[data-theme="midnight"] .btn.ghost{
-    background:color-mix(in srgb,var(--accent) 8%,transparent);
-    border:1.5px solid color-mix(in srgb,var(--accent) 55%,transparent);
-    color:var(--accent-bright);box-shadow:none}
-  html[data-theme="midnight"] .match-btn{color:var(--text)}
-  html[data-theme="midnight"] .tabs button:hover:not(:disabled),
-  html[data-theme="midnight"] .subtabs button:hover:not(:disabled),
-  html[data-theme="midnight"] .daynav button:hover:not(:disabled),
-  html[data-theme="midnight"] .fc-nav button:hover:not(:disabled),
-  html[data-theme="midnight"] .fc-progress-row button:hover:not(:disabled),
-  html[data-theme="midnight"] .charbar button:hover:not(:disabled),
-  html[data-theme="midnight"] .pb-modes button:hover:not(:disabled),
-  html[data-theme="midnight"] .match-btn:hover:not(:disabled),
-  html[data-theme="midnight"] .btn.ghost:hover:not(:disabled){
-    border-color:var(--accent-bright);
-    background:color-mix(in srgb,var(--accent) 18%,transparent);
-    box-shadow:0 0 18px var(--glow-accent)}
-  html[data-theme="midnight"] .tabs button.active,
-  html[data-theme="midnight"] .pb-modes button.active{
-    background:var(--accent-grad);border-color:var(--accent-bright);color:var(--btn-text)}
-  html[data-theme="midnight"] .btn{border:1.5px solid var(--accent-bright)}
-  /* Обратная связь в «Парах» специфичнее общей обводки выше — иначе правильный
-     и неправильный ответ красились бы как обычная кнопка и упражнение теряло смысл. */
-  html[data-theme="midnight"] .match-btn.selected{
-    background:var(--accent-grad);border-color:var(--accent-bright);color:var(--btn-text)}
-  html[data-theme="midnight"] .match-btn.correct{
-    background:color-mix(in srgb,var(--good) 26%,transparent);border-color:var(--good);color:#e9fff6}
-  html[data-theme="midnight"] .match-btn.wrong{
-    background:color-mix(in srgb,var(--bad) 24%,transparent);border-color:var(--bad);color:#ffe9eb}
-
-  html[data-theme="panaderia"]{
-    --font-body:'Nunito',sans-serif; --font-display:'Fraunces',serif; --font-script:'Fraunces',serif;
-    --bg:#f3ecdf; --surface:#fffdf7; --surface-2:#f6efe0; --surface-3:#fffdf7;
-    --border:#e9dfcc; --border-strong:#d9c8aa;
-    --text:#3c2a1e; --muted:#a08a6c;
-    --accent:#8a5a3b; --accent-2:#c08b5a; --accent-bright:#6f4526;
-    --good:#3e7d4f; --bad:#c14a3a;
-    --btn-text:#fff;
-    --accent-grad:linear-gradient(135deg,#8a5a3b,#b07a4e);
-    --word-grad:linear-gradient(135deg,#6f4526,#a5714a);
-    --hero-bg:linear-gradient(160deg,#faf3e5 0%,#f2e3ca 55%,#ead4b2 100%);
-    --hero-text:#3c2a1e; --hero-muted:#8a7357; --hero-title-color:#4a3220;
-    --hero-sub-grad:linear-gradient(90deg,#8a5a3b,#c08b5a);
-    --hero-card-bg:rgba(255,253,247,.78); --hero-card-text:#5b4632;
-  }
-  html[data-theme="panaderia"] .hero-deco::before{content:'☕'}
-  html[data-theme="panaderia"] .hero-deco::after{content:'🌻'}
-
-  html[data-theme="soleado"]{
-    --font-body:'Nunito',sans-serif; --font-display:'Baloo 2',cursive; --font-script:'Baloo 2',cursive;
-    --bg:#fff8e1; --surface:#fffdf4; --surface-2:#fff3c9; --surface-3:#fffdf4;
-    --border:#f3e3ab; --border-strong:#e8cd79;
-    --text:#4a2c12; --muted:#b3894a;
-    --accent:#f59e0b; --accent-2:#f97316; --accent-bright:#c2410c;
-    --good:#5b9e46; --bad:#d63f3f;
-    --btn-text:#43290e;
-    --accent-grad:linear-gradient(135deg,#fbbf24,#f59e0b);
-    --word-grad:linear-gradient(135deg,#c2410c,#f59e0b);
-    --hero-bg:linear-gradient(160deg,#ffd94f 0%,#ffc93c 55%,#ffe27a 100%);
-    --hero-text:#4a2c12; --hero-muted:#7c531f; --hero-title-color:#4a2c12;
-    --hero-sub-grad:linear-gradient(90deg,#d84315,#b45309);
-    --hero-card-bg:rgba(255,253,244,.75); --hero-card-text:#6b4a20;
-  }
-  html[data-theme="soleado"] .hero-deco::before{content:'🍋'}
-  html[data-theme="soleado"] .hero-deco::after{content:'🍓'}
-  html[data-theme="soleado"] .hero-title .sub{font-style:normal}
-
-  html[data-theme="pastel"]{
-    --font-body:'Quicksand',sans-serif; --font-display:'Comfortaa',cursive; --font-script:'Pacifico',cursive;
-    --bg:#edf0e4; --surface:#fdfaf0; --surface-2:#f2efe0; --surface-3:#fdfaf0;
-    --border:#dde2cd; --border-strong:#c2cdb0;
-    --text:#414a39; --muted:#8d977f;
-    --accent:#e07a5f; --accent-2:#eda58c; --accent-bright:#c2543a;
-    --good:#649a68; --bad:#c14a5a;
-    --btn-text:#fff;
-    --accent-grad:linear-gradient(135deg,#e07a5f,#eda58c);
-    --word-grad:linear-gradient(135deg,#c2543a,#e07a5f);
-    --hero-bg:linear-gradient(160deg,#bccbaf 0%,#a9bd9d 60%,#c5d2ba 100%);
-    --hero-text:#fdf8ec; --hero-muted:#e4ead6; --hero-title-color:#fdf8ec;
-    --hero-sub-grad:linear-gradient(90deg,#ffd9c9,#fdf3e3);
-    --hero-card-bg:rgba(253,250,240,.82); --hero-card-text:#5d6652;
-    --hero-card-strong:#414a39;
-  }
-  html[data-theme="pastel"] .hero-deco::before{content:'🌸'}
-  html[data-theme="pastel"] .hero-deco::after{content:'🍦'}
-  html[data-theme="pastel"] .hero-title .sub{font-style:normal;font-weight:400;padding-bottom:18px}
-
-  html[data-theme="te"]{
-    --font-body:'Lora',serif; --font-display:'Cormorant Garamond',serif; --font-script:'Cormorant Garamond',serif;
-    --bg:#f5f1e8; --surface:#fbf8f1; --surface-2:#f0ead9; --surface-3:#fbf8f1;
-    --border:#e5decb; --border-strong:#cec2a6;
-    --text:#3d332a; --muted:#95897a;
-    --accent:#a8452e; --accent-2:#c5764f; --accent-bright:#8e2f22;
-    --good:#5f7d54; --bad:#b23a3a;
-    --btn-text:#fff;
-    --accent-grad:linear-gradient(135deg,#a8452e,#c5764f);
-    --word-grad:linear-gradient(135deg,#8e2f22,#b96a45);
-    --hero-bg:linear-gradient(165deg,#f2ecdd 0%,#e6dbc4 100%);
-    --hero-text:#3d332a; --hero-muted:#83765f; --hero-title-color:#43362a;
-    --hero-sub-grad:linear-gradient(90deg,#a8452e,#c5764f);
-    --hero-card-bg:rgba(251,248,241,.82); --hero-card-text:#5c5142;
-  }
-  html[data-theme="te"] .hero-deco::before{content:'🍵'}
-  html[data-theme="te"] .hero-deco::after{content:'🏮'}
 
   /* ===================== ОБЩЕЕ ===================== */
   html{
@@ -672,7 +535,7 @@
   @media (min-width:900px){ .pb-list{grid-template-columns:1fr 1fr} }
 
   /* ---- СЕКЦИЯ SPEAKING (слова с занятий) ---- */
-  #speaking{display:none}
+  #speaking,#gateway{display:none}
   .sp-item .sipa{font-size:12.5px;color:var(--muted);font-style:italic;margin-top:2px}
   .sp-item .snote{font-size:12px;color:var(--accent-bright);margin-top:6px;line-height:1.45;
     padding-left:9px;border-left:2px solid color-mix(in srgb,var(--accent) 55%,transparent)}
@@ -804,6 +667,7 @@
       <button data-tab="test">Тест</button>
       <button data-tab="review">Повторить<span class="badge" id="srsBadge"></span></button>
       <button data-tab="phrasebook">Фразы</button>
+      <button data-tab="gateway">Gateway B1+</button>
       <button data-tab="speaking">Speaking</button>
       <button data-tab="stats">Прогресс</button>
     </div>
@@ -990,6 +854,52 @@
         <button id="spShuffle">⇄ Перемешать</button>
       </div>
       <div id="spCardStatus" style="color:var(--muted);font-size:13px;text-align:center;margin-top:12px"></div>
+    </div>
+  </div>
+
+  <!-- GATEWAY B1+ (учебник) -->
+  <div id="gateway">
+    <div class="pb-top">
+      <div class="pb-count" id="gwCount"></div>
+      <div class="pb-modes">
+        <button id="gwModeList" class="active">Список</button>
+        <button id="gwModeCards">Карточки</button>
+      </div>
+    </div>
+    <div id="gwListView">
+      <input type="text" class="pb-search" id="gwSearch" autocomplete="off" placeholder="Поиск по слову, фразе или переводу...">
+      <div class="pb-cats" id="gwCats"></div>
+      <div id="gwBody"></div>
+    </div>
+    <div id="gwCardsView" style="display:none">
+      <div class="fc-dir" role="group" aria-label="Какой стороной показывать карточку"><button type="button" data-dir="fwd">EN → RU</button><button type="button" data-dir="rev">RU → EN</button><button type="button" data-dir="mix">Вперемешку</button></div>
+
+      <div class="fc-wrap">
+        <div class="fc-card" id="gwCard">
+          <div class="fc-front">
+            <div class="fc-label">Из учебника Gateway B1+</div>
+            <div class="fc-word" id="gwCardEn" style="font-size:26px;line-height:1.3"></div>
+            <div class="fc-ipa" id="gwCardIpa"></div>
+          </div>
+          <div class="fc-back">
+            <div class="fc-label">Перевод</div>
+            <div class="fc-ru" id="gwCardRu" style="font-size:19px;line-height:1.4"></div>
+            <div class="sp-note-card" id="gwCardNote" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-hint">Нажми на карточку, чтобы перевернуть</div>
+      <div class="fc-nav">
+        <button id="gwPrev">‹</button>
+        <span class="fc-counter" id="gwCounter">1 / 1</span>
+        <button id="gwNext">›</button>
+      </div>
+      <div class="fc-progress-row">
+        <button id="gwKnow">✓ Знаю</button>
+        <button id="gwSkip">✗ Ещё учу</button>
+        <button id="gwShuffle">⇄ Перемешать</button>
+      </div>
+      <div id="gwCardStatus" style="color:var(--muted);font-size:13px;text-align:center;margin-top:12px"></div>
     </div>
   </div>
 
@@ -1217,9 +1127,9 @@ function renderProgress(){
     document.getElementById('progBar').style.width = Math.round(n / PB_TOTAL * 100) + '%';
     return;
   }
-  if(mode === 'speaking'){
-    const n = (store.sp && store.sp.learned) ? store.sp.learned.length : 0;
-    document.getElementById('progBar').style.width = Math.round(n / SP_TOTAL * 100) + '%';
+  if(mode === 'speaking' || mode === 'gateway'){
+    const S = mode === 'gateway' ? GWK : SPK;
+    document.getElementById('progBar').style.width = Math.round(S.done() / S.total * 100) + '%';
     return;
   }
   const e = entry();
@@ -1707,7 +1617,8 @@ function renderStats(){
   document.getElementById('statCards').innerHTML =
     '<div class="stat-card"><div class="k">Выучено</div><div class="v" style="color:var(--good)">'+learnedTotal+'</div><div class="s">из '+TOTAL_WORDS+' слов</div></div>'+
     '<div class="stat-card"><div class="k">Фразы</div><div class="v" style="color:var(--accent-2)">'+((store.pb&&store.pb.learned)?store.pb.learned.length:0)+'</div><div class="s">из '+PB_TOTAL+' выучено</div></div>'+
-    '<div class="stat-card"><div class="k">Speaking</div><div class="v" style="color:var(--accent-2)">'+((store.sp&&store.sp.learned)?store.sp.learned.length:0)+'</div><div class="s">из '+SP_TOTAL+' с занятий</div></div>'+
+    '<div class="stat-card"><div class="k">Gateway B1+</div><div class="v" style="color:var(--accent-2)">'+GWK.done()+'</div><div class="s">из '+GWK.total+' из учебника</div></div>'+
+    '<div class="stat-card"><div class="k">Speaking</div><div class="v" style="color:var(--accent-2)">'+SPK.done()+'</div><div class="s">из '+SP_TOTAL+' с занятий</div></div>'+
     '<div class="stat-card"><div class="k">Серия</div><div class="v">🔥 '+(alive?s.count:0)+'</div><div class="s">дней подряд</div></div>'+
     '<div class="stat-card"><div class="k">На повторении</div><div class="v" style="color:var(--bad)">'+dueN+'</div><div class="s">слов ждут сегодня</div></div>'+
     '<div class="stat-card"><div class="k">Последний тест</div><div class="v">'+(lastTest?lastTest.c+'/'+lastTest.t:'—')+'</div><div class="s">'+(lastTest?('день '+lastTest.day):'ещё не было')+'</div></div>';
@@ -1934,142 +1845,158 @@ document.getElementById('pbSkip').onclick = () => {
 };
 
 
-/* ============ SPEAKING: слова с занятий с репетитором ============ */
-const SP_TOPICS = JSON.parse(document.getElementById('speaking-data').textContent).topics;
-const SP_ALL = SP_TOPICS.flatMap(t => t.items.map(it => ({...it, cat:t.cat})));
-const SP_TOTAL = SP_ALL.length;
+/* ============ SPEAKING и GATEWAY B1+: слова по темам ============
+   Один код на два раздела. Speaking — слова с занятий с репетитором,
+   Gateway B1+ — слова и фразы из учебника (темы с group:"Gateway B1+").
+   Прогресс общий (store.sp.learned), ключ «тема|слово». */
+const SP_RAW = JSON.parse(document.getElementById('speaking-data').textContent).topics;
 store.sp ||= {learned:[]};
 if(!Array.isArray(store.sp.learned)) store.sp.learned = [];
-
-let spFilter = 'all', spQuery = '', spView = 'list';
-let spCards = { items:[], idx:0 };
-
-const spKey = it => it.cat + '|' + it.en;
-function spIsDone(k){ return store.sp.learned.includes(k); }
-function spToggle(k, on){
-  if(on){ if(!spIsDone(k)) store.sp.learned.push(k); }
-  else store.sp.learned = store.sp.learned.filter(x => x !== k);
-  save(); bump(); spRenderCount();
-}
-function spRenderCount(){
-  const n = store.sp.learned.length;
-  const el = document.getElementById('spCount');
-  if(el) el.innerHTML = 'Выучено слов: <b>' + n + '</b> из ' + SP_TOTAL;
-  if(mode === 'speaking'){
-    const bar = document.getElementById('progBar');
-    if(bar) bar.style.width = Math.round(n / SP_TOTAL * 100) + '%';
+function makeSpeaking(P, mname, topics, phraseTopic){
+  const $ = id => document.getElementById(P + id);
+  const keyOf = (t, it) => it.k || (t.cat + '|' + it.en);
+  const ALL = topics.flatMap(t => t.items.map(it => ({...it, cat:t.cat, k:keyOf(t, it)})));
+  const TOTAL = ALL.length;
+  const SHOWN = phraseTopic ? [phraseTopic, ...topics] : topics;   // чипы и список
+  const isDone = k => store.sp.learned.includes(k);
+  let filter = 'all', query = '', view = 'list', cards = {items:[], idx:0};
+  const doneCount = () => ALL.filter(it => isDone(it.k)).length;
+  function toggle(k, on){
+    if(on){ if(!isDone(k)) store.sp.learned.push(k); }
+    else store.sp.learned = store.sp.learned.filter(x => x !== k);
+    save(); bump(); renderCount();
   }
-}
-function spRenderCats(){
-  const box = document.getElementById('spCats');
-  box.innerHTML = '<button data-cat="all"' + (spFilter === 'all' ? ' class="active"' : '') + '>Все · ' + SP_TOTAL + '</button>' +
-    SP_TOPICS.map((t, i) => (t.group && t.group !== (SP_TOPICS[i-1] || {}).group
-        ? '<span class="sp-group-label">' + pbEsc(t.group) + '</span>' : '') +
-      '<button data-cat="' + pbEsc(t.cat) + '"' +
-      (t.cat === spFilter ? ' class="active"' : '') + '>' + pbEsc(t.cat) + ' · ' + t.items.length + '</button>').join('');
-  box.querySelectorAll('button').forEach(b => {
-    b.onclick = () => { spFilter = b.dataset.cat; spRenderCats(); spRenderList(); };
-  });
-}
-function spMatches(it){
-  if(spFilter !== 'all' && it.cat !== spFilter) return false;
-  if(!spQuery) return true;
-  const q = spQuery.toLowerCase();
-  return it.en.toLowerCase().includes(q) || it.ru.toLowerCase().includes(q);
-}
-function spRenderList(){
-  const body = document.getElementById('spBody');
-  let html = '';
-  SP_TOPICS.forEach(t => {
-    const items = t.items.filter(it => spMatches({...it, cat:t.cat}));
-    if(!items.length) return;
-    html += '<div class="pb-group"><h3>' + pbEsc(t.cat) +
-      ' <span class="sp-topic-ru">· ' + pbEsc(t.ru) + (t.group ? ' · ' + pbEsc(t.group) : '') + '</span></h3><div class="pb-list">';
-    items.forEach(it => {
-      const k = t.cat + '|' + it.en;
-      const done = spIsDone(k);
-      html += '<label class="pb-item sp-item' + (done ? ' done' : '') + '">' +
-        '<div class="txt"><div class="pen">' + pbEsc(it.en) + '</div>' +
-        (it.ipa ? '<div class="sipa">' + pbEsc(it.ipa) + '</div>' : '') +
-        '<div class="pru">' + pbEsc(it.ru) + '</div>' +
-        (it.note ? '<div class="snote">✎ ' + pbEsc(it.note) + '</div>' : '') +
-        '</div><input type="checkbox" data-k="' + pbEsc(k) + '"' + (done ? ' checked' : '') + '></label>';
-    });
-    html += '</div></div>';
-  });
-  body.innerHTML = html || '<div class="pb-empty">Ничего не найдено — попробуй другой запрос.</div>';
-  body.querySelectorAll('input[type=checkbox]').forEach(c => {
-    c.onchange = ev => {
-      spToggle(ev.target.dataset.k, ev.target.checked);
-      ev.target.closest('.pb-item').classList.toggle('done', ev.target.checked);
-    };
-  });
-}
-function spInitCards(reshuffle){
-  if(reshuffle || !spCards.items.length){
-    spCards.items = SP_ALL.filter(it => spFilter === 'all' || it.cat === spFilter).slice();
-    if(!spCards.items.length) spCards.items = SP_ALL.slice();
-    if(reshuffle){
-      for(let i = spCards.items.length - 1; i > 0; i--){
-        const j = (Math.random() * (i + 1)) | 0;
-        [spCards.items[i], spCards.items[j]] = [spCards.items[j], spCards.items[i]];
-      }
+  function renderCount(){
+    const n = doneCount();
+    const el = $('Count');
+    if(el) el.innerHTML = 'Выучено: <b>' + n + '</b> из ' + TOTAL;
+    if(mode === mname){
+      const bar = document.getElementById('progBar');
+      if(bar) bar.style.width = Math.round(n / TOTAL * 100) + '%';
     }
-    spCards.idx = 0;
   }
-  spRenderCard();
+  function renderCats(){
+    const box = $('Cats');
+    box.innerHTML = '<button data-cat="all"' + (filter === 'all' ? ' class="active"' : '') + '>Все · ' + TOTAL + '</button>' +
+      SHOWN.map((t, i) => (t.group && t.group !== (SHOWN[i-1] || {}).group && !t.phrases
+          ? '<span class="sp-group-label">' + pbEsc(t.group) + '</span>' : '') +
+        '<button data-cat="' + pbEsc(t.cat) + '"' +
+        (t.cat === filter ? ' class="active"' : '') + '>' + pbEsc(t.phrases ? '★ ' + t.cat : t.cat) + ' · ' + t.items.length + '</button>').join('');
+    box.querySelectorAll('button').forEach(b => {
+      b.onclick = () => { filter = b.dataset.cat; renderCats(); renderList(); };
+    });
+  }
+  function matches(t, it){
+    if(filter === 'all' ? t.phrases : t.cat !== filter) return false;
+    if(!query) return true;
+    const q = query.toLowerCase();
+    return it.en.toLowerCase().includes(q) || it.ru.toLowerCase().includes(q);
+  }
+  function renderList(){
+    const body = $('Body');
+    let html = '';
+    SHOWN.forEach(t => {
+      const items = t.items.filter(it => matches(t, it));
+      if(!items.length) return;
+      html += '<div class="pb-group"><h3>' + pbEsc(t.cat) +
+        ' <span class="sp-topic-ru">· ' + pbEsc(t.ru) + (t.group && !t.phrases ? ' · ' + pbEsc(t.group) : '') + '</span></h3><div class="pb-list">';
+      items.forEach(it => {
+        const k = keyOf(t, it);
+        const done = isDone(k);
+        html += '<label class="pb-item sp-item' + (done ? ' done' : '') + '">' +
+          '<div class="txt"><div class="pen">' + pbEsc(it.en) + '</div>' +
+          (it.ipa ? '<div class="sipa">' + pbEsc(it.ipa) + '</div>' : '') +
+          '<div class="pru">' + pbEsc(it.ru) + '</div>' +
+          (it.note ? '<div class="snote">✎ ' + pbEsc(it.note) + '</div>' : '') +
+          '</div><input type="checkbox" data-k="' + pbEsc(k) + '"' + (done ? ' checked' : '') + '></label>';
+      });
+      html += '</div></div>';
+    });
+    body.innerHTML = html || '<div class="pb-empty">Ничего не найдено — попробуй другой запрос.</div>';
+    body.querySelectorAll('input[type=checkbox]').forEach(c => {
+      c.onchange = ev => {
+        toggle(ev.target.dataset.k, ev.target.checked);
+        ev.target.closest('.pb-item').classList.toggle('done', ev.target.checked);
+      };
+    });
+  }
+  function initCards(reshuffle){
+    if(reshuffle || !cards.items.length){
+      const t = SHOWN.find(x => x.cat === filter);
+      cards.items = filter === 'all' || !t ? ALL.slice()
+        : t.items.map(it => ({...it, cat:t.cat, k:keyOf(t, it)}));
+      if(reshuffle){
+        for(let i = cards.items.length - 1; i > 0; i--){
+          const j = (Math.random() * (i + 1)) | 0;
+          [cards.items[i], cards.items[j]] = [cards.items[j], cards.items[i]];
+        }
+      }
+      cards.idx = 0;
+    }
+    renderCard();
+  }
+  function renderCard(){
+    const c = $('Card');
+    flipReset(c);
+    applyDir(c);
+    const it = cards.items[cards.idx];
+    if(!it) return;
+    $('CardEn').textContent = it.en;
+    $('CardIpa').textContent = it.ipa || '';
+    $('CardRu').textContent = it.ru;
+    const nb = $('CardNote');
+    if(it.note){ nb.style.display = 'block'; nb.innerHTML = '<b>✎ Обрати внимание:</b> ' + pbEsc(it.note); }
+    else nb.style.display = 'none';
+    $('Counter').textContent = (cards.idx + 1) + ' / ' + cards.items.length;
+    $('Prev').disabled = cards.idx === 0;
+    $('Next').disabled = cards.idx === cards.items.length - 1;
+    $('CardStatus').textContent = isDone(it.k) ? '✓ отмечено как выученное' : '';
+  }
+  function setView(v){
+    view = v;
+    $('ModeList').classList.toggle('active', v === 'list');
+    $('ModeCards').classList.toggle('active', v === 'cards');
+    $('ListView').style.display = v === 'list' ? 'block' : 'none';
+    $('CardsView').style.display = v === 'cards' ? 'block' : 'none';
+    if(v === 'cards') initCards(false); else renderList();
+  }
+  $('Search').addEventListener('input', ev => { query = ev.target.value.trim(); renderList(); });
+  $('ModeList').onclick = () => setView('list');
+  $('ModeCards').onclick = () => { cards.items = []; setView('cards'); };
+  $('Card').addEventListener('click', () => $('Card').classList.toggle('flipped'));
+  $('Prev').onclick = () => { if(cards.idx > 0){ cards.idx--; renderCard(); } };
+  $('Next').onclick = () => { if(cards.idx < cards.items.length - 1){ cards.idx++; renderCard(); } };
+  $('Shuffle').onclick = () => initCards(true);
+  $('Know').onclick = () => {
+    const it = cards.items[cards.idx]; if(!it) return;
+    toggle(it.k, true);
+    if(cards.idx < cards.items.length - 1) cards.idx++;
+    renderCard();
+  };
+  $('Skip').onclick = () => {
+    const it = cards.items[cards.idx]; if(!it) return;
+    toggle(it.k, false);
+    if(cards.idx < cards.items.length - 1) cards.idx++;
+    renderCard();
+  };
+  return { topics, total:TOTAL, done:doneCount, init(){ renderCount(); renderCats(); setView(view); } };
 }
-function spRenderCard(){
-  const c = document.getElementById('spCard');
-  flipReset(c);
-  applyDir(c);
-  const it = spCards.items[spCards.idx];
-  if(!it) return;
-  document.getElementById('spCardEn').textContent = it.en;
-  document.getElementById('spCardIpa').textContent = it.ipa || '';
-  document.getElementById('spCardRu').textContent = it.ru;
-  const nb = document.getElementById('spCardNote');
-  if(it.note){ nb.style.display = 'block'; nb.innerHTML = '<b>✎ Обрати внимание:</b> ' + pbEsc(it.note); }
-  else nb.style.display = 'none';
-  document.getElementById('spCounter').textContent = (spCards.idx + 1) + ' / ' + spCards.items.length;
-  document.getElementById('spPrev').disabled = spCards.idx === 0;
-  document.getElementById('spNext').disabled = spCards.idx === spCards.items.length - 1;
-  document.getElementById('spCardStatus').textContent =
-    spIsDone(spKey(it)) ? '✓ отмечено как выученное' : '';
-}
-function spSetView(v){
-  spView = v;
-  document.getElementById('spModeList').classList.toggle('active', v === 'list');
-  document.getElementById('spModeCards').classList.toggle('active', v === 'cards');
-  document.getElementById('spListView').style.display = v === 'list' ? 'block' : 'none';
-  document.getElementById('spCardsView').style.display = v === 'cards' ? 'block' : 'none';
-  if(v === 'cards') spInitCards(false); else spRenderList();
-}
-function initSpeaking(){ spRenderCount(); spRenderCats(); spSetView(spView); }
 
-document.getElementById('spSearch').addEventListener('input', ev => {
-  spQuery = ev.target.value.trim(); spRenderList();
-});
-document.getElementById('spModeList').onclick = () => spSetView('list');
-document.getElementById('spModeCards').onclick = () => { spCards.items = []; spSetView('cards'); };
-document.getElementById('spCard').addEventListener('click', () => {
-  document.getElementById('spCard').classList.toggle('flipped');
-});
-document.getElementById('spPrev').onclick = () => { if(spCards.idx > 0){ spCards.idx--; spRenderCard(); } };
-document.getElementById('spNext').onclick = () => { if(spCards.idx < spCards.items.length - 1){ spCards.idx++; spRenderCard(); } };
-document.getElementById('spShuffle').onclick = () => spInitCards(true);
-document.getElementById('spKnow').onclick = () => {
-  const it = spCards.items[spCards.idx]; if(!it) return;
-  spToggle(spKey(it), true);
-  if(spCards.idx < spCards.items.length - 1){ spCards.idx++; }
-  spRenderCard();
-};
-document.getElementById('spSkip').onclick = () => {
-  const it = spCards.items[spCards.idx]; if(!it) return;
-  spToggle(spKey(it), false);
-  if(spCards.idx < spCards.items.length - 1){ spCards.idx++; }
-  spRenderCard();
-};
+// Speaking: слова с занятий. Gateway B1+: темы с group — отдельный раздел,
+// сверху блок «ВСЕ ФРАЗЫ» — все словосочетания Gateway в одном месте
+// (без пар negative prefixes и одиночных слов).
+const GW_TOPICS = SP_RAW.filter(t => t.group === 'Gateway B1+');
+const isPhrase = en => en.split(/\s*\/\s*/).some(a => /\s/.test(a.trim()));
+const gwSeen = new Set();
+const GW_PHRASES = {cat:'ВСЕ ФРАЗЫ', ru:'Все фразы Gateway B1+ в одном блоке', phrases:true, items:
+  GW_TOPICS.filter(t => t.cat !== 'NEGATIVE PREFIXES').flatMap(t => t.items
+    .filter(it => isPhrase(it.en) && !gwSeen.has(it.en.toLowerCase()) && gwSeen.add(it.en.toLowerCase()))
+    .map(it => ({...it, k:t.cat + '|' + it.en})))};
+const SPK = makeSpeaking('sp', 'speaking', SP_RAW.filter(t => t.group !== 'Gateway B1+'));
+const GWK = makeSpeaking('gw', 'gateway', GW_TOPICS, GW_PHRASES);
+const SP_TOPICS = SPK.topics, SP_TOTAL = SPK.total;
+function initSpeaking(){ SPK.init(); }
+function initGateway(){ GWK.init(); }
 
 /* ================= ЛИНИЯ МЕТРО =================
    Дни курса — станции. Каждые 3 урока + повторение — отдельная «линия» своего цвета.
@@ -2139,12 +2066,7 @@ document.getElementById('tubeLine').addEventListener('click', ev=>{
 /* ================= ТЕМЫ ================= */
 const THEME_LIST = {
   tube:      {c:'#ff3b3b', bg:'#1f3dff', n:'Underground'},
-  noche:     {c:'#e0a93c', bg:'#211d1a', n:'Golden Night'},
-  panaderia: {c:'#8a5a3b', bg:'#f3ecdf', n:'Warm Cream'},
-  soleado:   {c:'#f59e0b', bg:'#ffd94f', n:'Sunny'},
-  pastel:    {c:'#e07a5f', bg:'#a9bd9d', n:'Soft Pastel'},
-  te:        {c:'#a8452e', bg:'#f5f1e8', n:'Ink & Paper'},
-  midnight:  {c:'#3d8bff', bg:'#0b1020', n:'Midnight'}
+  noche:     {c:'#e0a93c', bg:'#211d1a', n:'Golden Night'}
 };
 function buildThemeDots(){
   const box = document.getElementById('themeDots');
@@ -2167,9 +2089,9 @@ function buildThemeDots(){
 }
 
 /* ================= НАВИГАЦИЯ ================= */
-const PANELS = ['learn','flashcards','match','test','review','phrases','phrasebook','speaking','stats'];
+const PANELS = ['learn','flashcards','match','test','review','phrases','phrasebook','gateway','speaking','stats'];
 function groupOf(m){
-  if(m==='learn'||m==='test'||m==='review'||m==='stats'||m==='phrasebook'||m==='speaking') return m;
+  if(m==='learn'||m==='test'||m==='review'||m==='stats'||m==='phrasebook'||m==='speaking'||m==='gateway') return m;
   return 'practice';
 }
 function renderPanel(m){
@@ -2180,6 +2102,7 @@ function renderPanel(m){
   else if(m==='review') startReview();
   else if(m==='phrases') initPhrases();
   else if(m==='phrasebook') initPhrasebook();
+  else if(m==='gateway') initGateway();
   else if(m==='speaking') initSpeaking();
   else if(m==='stats') renderStats();
 }
@@ -2195,6 +2118,8 @@ function syncTabs(m){
   if(hc){
     if(m==='phrasebook'){
       hc.innerHTML = '<b>' + PB_TOTAL + ' разговорных фраз</b><br>' + PB_GROUPS.length + ' тем: быт, small talk, работа, эмоции, идиомы и другое.<br>Отдельный блок — не привязан к дням.';
+    } else if(m==='gateway'){
+      hc.innerHTML = '<b>Gateway B1+ · ' + GWK.total + '</b><br>Учебник: ' + GW_PHRASES.items.length + ' фраз в одном блоке и ' + GWK.topics.length + ' тем по юнитам.<br>Отдельный блок — не привязан к дням.';
     } else if(m==='speaking'){
       hc.innerHTML = '<b>Слова с занятий · ' + SP_TOTAL + '</b><br>' + SP_TOPICS.map(t=>t.cat).join(' · ') + '.<br>Отдельный блок — не привязан к дням.';
     } else {
@@ -2202,7 +2127,7 @@ function syncTabs(m){
     }
   }
   // Фразы живут отдельно от дней — скрываем переключатель дней
-  const dayOnly = m !== 'phrasebook' && m !== 'speaking';
+  const dayOnly = m !== 'phrasebook' && m !== 'speaking' && m !== 'gateway';
   ['prev','next'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = dayOnly ? '' : 'none'; });
   const lbl = document.querySelector('.daynav .label');
   if(lbl) lbl.style.display = dayOnly ? '' : 'none';
@@ -2291,7 +2216,7 @@ try{
 // при каждом пополнении словаря, разговорника или Speaking.
 try{
   document.getElementById('footCounts').textContent =
-    'Английский B1 → B2 · ' + TOTAL_WORDS + ' слов · ' + PB_TOTAL + ' фраз · ' + SP_TOTAL + ' с занятий';
+    'Английский B1 → B2 · ' + TOTAL_WORDS + ' слов · ' + PB_TOTAL + ' фраз · ' + GWK.total + ' Gateway · ' + SP_TOTAL + ' с занятий';
 }catch(e){}
 try{
   setMode(isReviewDay() ? 'flashcards' : 'learn');
